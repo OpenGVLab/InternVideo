@@ -1,6 +1,6 @@
 # InternVideo
 
-This repo gives the official implmentation of '[InternVideo: A New Video Foundation Model]()',
+This repo gives the official implmentation of '[InternVideo: General Video Foundation Models via Generative and Discriminative Learning]()',
 by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
 
 Code will be released.
