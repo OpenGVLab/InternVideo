@@ -36,7 +36,7 @@ If this work is helpful for your research, please consider citing InternVideo.
 
 ```
 @article{wang2022internvideo,
-  title={InternVideo},
+  title={InternVideo: General Video Foundation Models via Generative and Discriminative Learning},
   author={Wang, Yi and Li, Kunchang and Li, Yizhuo and He, Yinan and Huang, Bingkun and Zhao, Zhiyu and Zhang, Hongjie and Xu, Jilan and Liu, Yi and Wang, Zun and Xing, Sen and Chen, Guo and Pan, Junting and Yu, Jiashuo and Wang, Yali and Wang, Limin and Qiao, Yu},
   journal={arXiv preprint arXiv:2212.03191},
   year={2022}
