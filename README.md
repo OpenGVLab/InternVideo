@@ -45,7 +45,7 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
 - [ ] Video foundation model Pretraining.
     - [x] [video masked modeling](Pretrain/VideoMAE).
     - [ ] video-language contrastive learning modeling.
-    - [x] Supervised training of [video masked](Pretrain/VideoMAE) and [video-language contrastive learning models](https://github.com/OpenGVLab/UniFormerV2).
+    - [x] Supervised training of [ViT (from video masked modeling)](Pretrain/VideoMAE#finetune) and [UniformerV2 (from multimodal learning)](https://github.com/OpenGVLab/UniFormerV2/blob/main/INSTRUCTIONS.md#training).
     - [ ] Model interaction.
 - [ ] Downstream tasks.
     - [ ] Action recognition.
