@@ -12,7 +12,7 @@
 ## Introduction
 VideoIntern not only recognizes known classes accurately but also has a strong perception ability for unknown classes that are out of training classes. This repo is one of the generalization tasks——Open Set Action Recognition. Specifically, we finetune VideoMAE backbone with a linear classification head on UCF-101 dataset from the evidential deep learning (EDL) perspective, without any model calibration methods used in [DEAR](https://github.com/Cogito2012/DEAR). Our VideoIntern model achieves significant and consistent performance gains compared to multiple action recognition backbones (i.e., I3D, TSM, SlowFast, TPN), which are trained in the DEAR way, with HMDB-51 or MiT-v2 dataset as the unknown.    
 
-## Installation (已经自查，在服务器集群上没有报错，安装成功)
+## Installation
 This repo is developed from [MMAction2](https://github.com/open-mmlab/mmaction2) codebase.
 
 ### Installation Steps
