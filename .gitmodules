@@ -1,0 +1,6 @@
+[submodule "Pretrain/UniFormerV2"]
+	path = Pretrain/UniFormerV2
+	url = https://github.com/OpenGVLab/UniFormerV2.git
+[submodule "Downstream/Ego-Tasks"]
+	path = Downstream/Ego-Tasks
+	url = https://github.com/OpenGVLab/ego4d-eccv2022-solutions.git
