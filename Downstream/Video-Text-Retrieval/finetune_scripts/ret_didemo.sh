@@ -1,0 +1,23 @@
+# srun -p video --gres=gpu:8 --cpus-per-task=128 --quotatype=spot -N1 --job-name=ret_didemo \
+python -m torch.distributed.launch --nproc_per_node=4 main_task_retrieval.py  \
+    --do_train \
+    --num_thread_reader=8 \
+    --n_display=50 \
+    --epochs=5 \
+    --lr=1e-3 \
+    --coef_lr=1e-2 \
+    --batch_size=64 \
+    --batch_size_val=64 \
+    --data_path="./data/DiDeMo/" \
+    --features_path="" \
+    --datatype="didemo" \
+    --max_words=64 \
+    --max_frames=32 \
+    --feature_framerate=1 \
+    --freeze_layer_num=0 \
+    --pretrained_clip_name="ViT-B/16" \
+    --slice_framepos=2 \
+    --loose_type \
+    --linear_patch=2d \
+    --sim_header=meanP \
+    --output_dir=""

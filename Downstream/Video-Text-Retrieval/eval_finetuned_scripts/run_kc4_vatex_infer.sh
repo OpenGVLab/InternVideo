@@ -1,0 +1,26 @@
+# srun -p video --gres=gpu:1 --cpus-per-task=16 --quotatype=reserved -N1 --job-name=infer_vatex \
+python -u -m inference \
+    --do_eval \
+    --num_thread_reader=8 \
+    --n_display=50 \
+    --coef_lr=5e-3 \
+    --batch_size_val=16 \
+    --features_path="" \
+    --data_path="./data/VATEX/" \
+    --datatype="vatex" \
+    --max_words=77 \
+    --max_frames=8 \
+    --feature_framerate=1 \
+    --pretrained_clip_name="ViT-L/14" \
+    --slice_framepos=2 \
+    --loose_type \
+    --linear_patch=2d \
+    --interaction=no \
+    --sim_header=meanP \
+    --output_dir="./log/vatex_kc4_bs64_vitl14/inference" \
+    --finetuned_path="./log/vatex_kc4_bs64_vitl14/pytorch_model.bin" \
+    --freeze_layer_num=0 \
+    --interaction=no \
+    --clip_evl \
+    --pretrained_path="" \
+    --mergeclip=True \

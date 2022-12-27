@@ -1,0 +1,1 @@
+python -u ./train_eval.py ./configs/thumos.yaml --output th14_mae_h 2>&1 | tee th14_mae_h.log

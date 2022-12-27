@@ -1,0 +1,27 @@
+# srun -p video -N1 -n4 --gres=gpu:4 --job-name=train_msrvtt --quotatype=reserved --cpus-per-task=16 \
+python -u -m main_task_retrieval \
+    --do_train \
+    --num_thread_reader=4 \
+    --epochs=5 \
+    --batch_size=128 \
+    --n_display=50 \
+    --train_csv="data/MSR-VTT/anns/MSRVTT_train.9k.csv" \
+    --val_csv="data/MSR-VTT/anns/MSRVTT_JSFUSION_test.csv" \
+    --data_path="data/MSR-VTT/anns/MSRVTT_data.json" \
+    --lr=1e-3 \
+    --max_words=77 \
+    --max_frames=12 \
+    --batch_size_val=16 \
+    --datatype="msrvtt" \
+    --expand_msrvtt_sentences  \
+    --feature_framerate=1 \
+    --coef_lr=4e-3 \
+    --freeze_layer_num=0 \
+    --slice_framepos=2 \
+    --linear_patch=2d \
+    --sim_header meanP \
+    --loose_type \
+    --pretrained_clip_name="ViT-L/14" \
+    --output_dir="" \
+    --clip_evl \
+    --pretrained_path="" \

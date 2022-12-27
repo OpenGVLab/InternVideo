@@ -1,0 +1,1 @@
+python -u ./train_eval.py ./configs/anet.yaml --output anet_mae_h 2>&1 | tee anet_mae_h.log

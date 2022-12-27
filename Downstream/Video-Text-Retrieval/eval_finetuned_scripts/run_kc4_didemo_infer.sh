@@ -1,0 +1,25 @@
+# srun -p gcc --gres=gpu:1 --cpus-per-task=16 --quotatype=reserved -N1 --job-name=infer_didemo \
+python -u -m inference \
+    --do_eval \
+    --num_thread_reader=8 \
+    --n_display=50 \
+    --batch_size_val=8 \
+    --data_path="./data/DiDeMo/" \
+    --features_path="" \
+    --datatype="didemo" \
+    --max_words=77 \
+    --max_frames=32 \
+    --feature_framerate=1 \
+    --freeze_layer_num=0 \
+    --pretrained_clip_name="ViT-L/14" \
+    --slice_framepos=2 \
+    --loose_type \
+    --linear_patch=2d \
+    --interaction=no \
+    --sim_header=meanP \
+    --output_dir="./log/didemo_kc4_bs64_vitl14/inference" \
+    --finetuned_path="./log/didemo_kc4_bs64_vitl14/pytorch_model.bin" \
+    --interaction=no \
+    --clip_evl \
+    --pretrained_path="" \
+    --mergeclip=True \
