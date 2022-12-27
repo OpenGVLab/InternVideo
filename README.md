@@ -6,10 +6,8 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-classification-on-kinetics-700)](https://paperswithcode.com/sota/action-classification-on-kinetics-700?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-recognition-in-videos-on-something-1)](https://paperswithcode.com/sota/action-recognition-in-videos-on-something-1?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-recognition-in-videos-on-something)](https://paperswithcode.com/sota/action-recognition-in-videos-on-something?p=internvideo-general-video-foundation-models)
-
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/spatio-temporal-action-localization-on-ava)](https://paperswithcode.com/sota/spatio-temporal-action-localization-on-ava?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-recognition-on-ava-v2-2)](https://paperswithcode.com/sota/action-recognition-on-ava-v2-2?p=internvideo-general-video-foundation-models)
-
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-activitynet)](https://paperswithcode.com/sota/video-retrieval-on-activitynet?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-didemo)](https://paperswithcode.com/sota/video-retrieval-on-didemo?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-msr-vtt)](https://paperswithcode.com/sota/video-retrieval-on-msr-vtt?p=internvideo-general-video-foundation-models)
@@ -22,13 +20,9 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/zero-shot-video-retrieval-on-lsmdc)](https://paperswithcode.com/sota/zero-shot-video-retrieval-on-lsmdc?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/zero-shot-video-retrieval-on-msvd)](https://paperswithcode.com/sota/zero-shot-video-retrieval-on-msvd?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/zero-shot-video-retrieval-on-vatex)](https://paperswithcode.com/sota/zero-shot-video-retrieval-on-vatex?p=internvideo-general-video-foundation-models)
-
-
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-msrvtt-qa-1)](https://paperswithcode.com/sota/visual-question-answering-on-msrvtt-qa-1?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-msvd-qa-1)](https://paperswithcode.com/sota/visual-question-answering-on-msvd-qa-1?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-tgif-qa)](https://paperswithcode.com/sota/visual-question-answering-on-tgif-qa?p=internvideo-general-video-foundation-models) 
-
-	
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf101-mitv2)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf101-mitv2?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf-hmdb)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf-hmdb?p=internvideo-general-video-foundation-models)
 
