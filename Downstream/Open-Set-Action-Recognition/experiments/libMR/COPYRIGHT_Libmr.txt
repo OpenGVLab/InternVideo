@@ -1,0 +1,98 @@
+SOURCE CODE LICENSE AGREEMENT
+PREAMBLE
+
+This SOFTWARE implements concepts of statistical Meta-recognition for which Securics/Univ. of Colorado have a pending patent (CU TTO File CU2338C). Securics and University of Colorado, hereafter The Owners, have joint interest in the invention and the software. Securics currently holds the excusive license commercial to both the patent and the code. Securcs, hereafter the Licensor, is offering a non-exclusive right to use for non-commecial use.
+This license agreement allows you to use the source code for personal or non profit purposes. This includes any use that does not involve making money, and does not include uses like:
+• deploying the software for use by a for-profit organization
+• providing a service to a paying customer
+For-profit companies may not use this source code. If you work for a for-profit company, you may only use this software as an individual, for your personal use.
+
+This is a right to use license. It does not not include the right to redistribute copies. Non-profit users can only use the copies obtained from authroized sourcehs which include: securics.com, metarecognition.com or vast.uccs.edu.
+
+This license agreement also allows you to create derivative products for your own use, but does not permit re-distribute
+of modified code in any form. You may choose to destribute patch files, which can be applied to officially distributed code. Any the derivative products, must be distributed under the same conditions as specified in this agreement unless a separate commercial license is obtained from Securics Inc or its designates.
+
+As a condition of using this source code, you agree not to assert any patents or copyrights against the owners or any of the Owners’ licensees for use of derivative products. Any derivative products must include a copy of license and instructions for accessing the orignal source. You must also include attribution to the authors in any publication that results from the use of this code or data derived from the code. Any papers/research/report based on results that uses this software must cite:
+
+@article{Scheirer_2011_TPAMI,
+author = {Walter J. Scheirer and Anderson Rocha and Ross Michaels and Terrance E. Boult},
+title = {Meta-Recognition: The Theory and Practice of Recognition Score Analysis},
+journal = {IEEE Transactions on Pattern Analysis and Machine Intelligence (PAMI)},
+volume = {33},
+issue = {8},
+pages = {1689–1695},
+year = {2011}
+}
+Parts of this technology are subject to SBIR data rights and as described in DFARS 252.227-7018 (June 1995) SBIR Data Rights which apply to Contract Number: N00014-11-C-0243 and STTR N00014-07-M-0421 to Securics Inc, 1870 Austin Bluffs Parkway, Colorado Springs, CO 80918
+
+The Government’s rights to use, modify, reproduce, release, perform, display, or disclose technical data or computer software marked with this legend are restricted during the period shown as provided in paragraph (b)(4) of the Rights in Noncommercial Technical Data and Computer Software-Small Business Innovative Research (SBIR) Program clause contained in the above identified contract. Expiration of SBIR Data Rights: Expires four years after completion of the above cited project work for this or any other follow-on SBIR contract, whichever is later.
+
+No restrictions on government use apply after the expiration date shown above. Any reproduction of technical data, computer software, or portions thereof marked with this legend must also reproduce the markings.
+
+This license includes other conditions that should be read carefully. This SOFWARE usage agreement (the “Agreement”) applies to the libMR and is between YOU and the Licensor
+
+1. DEFINITIONS
+
+“Software” means all or any portion of the human-readable source code files of the software programs including without limitation, associated flow charts, algorithms, comments and other written instructions and technical documentation, and all corrections, updates, and new versions incorporated into such programs.
+
+“Derivative Work” means a work based upon the Software, such as a revision, modification, translation, abridgement, condensation, expansion, collection, compilation, or any other form in which the Software may be recast, transformed, adapted, or distributed as a part of a larger work and which, if prepared without proper authorization would constitute a copyright infringement. If identifiable sections of that work are not derived from the Software, and can be reasonably considered independent and separate works in themselves, then they are not considered Derivative Work.
+
+“Personal Use” means use of Software and/or Derivative Work by an individual solely for his or her personal, private and non-commercial use. An individual’s use in his or her capacity as an officer, employee, member, independent contractor or agent of a corporation, business or organization does not qualify as Personal Use.
+
+“You” or “Your” means an individual or a legal entity exercising rights under this License. For legal entities, “You” or “Your” includes any non-profit entity which controls, is controlled by, or is under common control with, You, where “control” means (a) the power, direct or indirect, to cause the direction or management of such entity, whether by contract or otherwise, or (b) ownership of fifty percent (50%) or more of the beneficial ownership of such entity.
+
+2. GRANT OF LICENSE:
+
+WHEREAS, the Licensor, desires to aid the academic and non-commercial research community and raise awareness of the PATENTED INVENTION and thereby agrees to grant a limited copyright license to the SOFTWARE for research and non-commercial purposes only, with the Owners retaining all ownership rights in the PATENTED INVENTION and the SOFTWARE;
+
+THEREFORE:
+The Licensor grants, and You accept, a personal, nonexclusive, nontransferable license:
+
+a) to use Software, at no charge, in accordance with the terms herein, solely for (i) Personal Use, or (ii) academic or non-commercial research, development and deployment; and
+
+b) to develop Derivative Works that may be used solely for (i) Personal Use or (ii) academic or non-commercial research, development and deployment; and
+
+c) to copy, distribute and sublicense Software and Derivative Works solely in accordance with the terms herein. Any Software or Derivative Works distributed shall be pursuant to a license agreement that contains all of the terms herein; and shall contain prominent notices stating how the Software, Derivative Works, or documentation was changed, the author and date of any such change and require acknowledgement of the orginal software/publicaitons by any users of the Derivative Works.
+
+d) You acknowledge that the Software is a valuable, proprietary asset of The Owners. You shall not market or sell the Software or Derivative Works.
+
+3. LICENSE EXCLUSIONS
+
+a) EXCEPT AS EXPRESSLY PROVIDED HEREIN, YOU SHALL MAKE NO OTHER USE OF THE SOFTWARE.
+
+b) You must obtain permission from The Licensor before receiving payment for distribution of or services using the Software or Derivative Works.
+
+c) You shall not allege or enjoin infringement or misappropriation by The Licensor in any Derivative Works, or by any third party obtaining Derivative Works, prepared by The Licensor and under license from The Licensor.
+4. TITLE AND PROTECTION OF SOFTWARE
+
+a) The Owners retains all title, right and interest to the Software and the underlying patents.
+
+b) Except for the Software, You retain all title, right and interest to the Derivative Works, subject to the terms of this Agreement.
+
+5. NO REPRESENTATIONS
+
+THE OWNERS DISCLAIMS ALL OTHER REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+6. ATTRIBUTION
+
+a) You agree to retain and reproduce in all copies of Software the copyright and other proprietary notices and disclaimers as they appear in the Software, and keep intact all notices in the Software that refer to this License.
+
+b) You agree to provide attribution to the authors of this Software in any article based on research performed using Software or Derivative Works or with any distribution of Software or Derivative works.
+
+7. DEFAULT
+
+If YOU fail to perform any of its obligations under this Agreement, The Licensor, in addition to any other rights available to it under law or equity, may terminate this Agreement and the licenses granted hereunder by written notice to You. Unless otherwise provided in this Agreement, remedies shall be cumulative and there shall be no obligation to exercise a particular remedy.
+
+8. TERMINATION
+
+a) In the event that this Agreement is terminated, any sublicenses granted or Derivative Works distributed by Licensee shall remain in full force and effect.
+
+b) Within thirty (30) days of termination, You shall return to The Licensor or certify in writing to The Licensor that all copies or partial copies of Software in Your possession or control have been destroyed. c) In addition to this section, the sections entitled “Title and Protection of Software “No Representations” and “Limitation of Liability” shall survive termination of this Agreement.
+
+9. GENERAL
+a) No agency, partnership or employment is created by this Agreement.
+
+b) You may not use any of The Owners’ names, the terms in Meta-Recognition, or W-score in any advertising, public relations or media release without the prior written consent of the Owner.
+
+c) This Agreement shall be governed by the laws of the State of Colorado. Venue for any action or proceeding shall be Denver, Colorado. This Agreement constitutes the entire agreement between the parties and may only be modified by a written instrument signed by each parties authorized officers.
+
+If you accept this license please opt-in for and you will receive email with instructions. The email will also be used for update emails on future changes to the code.
