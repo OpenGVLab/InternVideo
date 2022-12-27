@@ -76,11 +76,6 @@ def compute_video(lst):
 
 
 if __name__ == '__main__':
-    # eval_path = '/apdcephfs/share_1290939/elliottong/work_dir/output_dir/MAE_video/hmdb_pretrain_moco_v3_base_patch16_224_lr_1e-3_32_GPUS_e800/eval_0128xxxx'
-    # eval_path = '/apdcephfs/share_1290939/elliottong/work_dir/output_dir/MAE_video/hmdb_pretrain_mae_from_k400/eval_deepspeed_100ep_lr_5e-4'
-    # eval_path = '/apdcephfs/share_1290939/elliottong/work_dir/output_dir/MAE_video/hmdb_pretrain_moco_v3_base_patch16_224_lr_5e-4_e800/eval_deepspeed_799_ep_60'
-    # eval_path = '/apdcephfs/share_1290939/elliottong/work_dir/output_dir/MAE_video/hmdb_pretrain_mae_base_patch16_224_frame_16x2_tc_mask_0.9_lr_3e-4_new_e9600/eval_deepspeed_9599_ep_60'
-    # eval_path = '/apdcephfs/share_1290939/elliottong/work_dir/output_dir/MAE_video/hmdb_pretrain_mae_base_patch16_224_frame_16x2_tc_mask_0.75_lr_3e-4_new_e4800/eval_deepspeed_4799_ep_50'
     eval_path1 = '/mnt/petrelfs/huangbingkun/VideoMAE-clean/work_dir/full_sta_web_k400_finetune'
     eval_path2 = '/mnt/petrelfs/huangbingkun/VideoMAE-clean/work_dir/pred_txts'
     num_tasks = 32
