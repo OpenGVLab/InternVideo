@@ -13,7 +13,7 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-activitynet)](https://paperswithcode.com/sota/video-retrieval-on-activitynet?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-didemo)](https://paperswithcode.com/sota/video-retrieval-on-didemo?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-msr-vtt)](https://paperswithcode.com/sota/video-retrieval-on-msr-vtt?p=internvideo-general-video-foundation-models)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-lsmdc)](https://paperswithcode.com/sota/video-retrieval-on-lsmdc?p=internvideo-general-video-foundation-models)	
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-lsmdc)](https://paperswithcode.com/sota/video-retrieval-on-lsmdc?p=internvideo-general-video-foundation-models) 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-msvd)](https://paperswithcode.com/sota/video-retrieval-on-msvd?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-vatex)](https://paperswithcode.com/sota/video-retrieval-on-vatex?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/zero-shot-video-retrieval-on-activitynet)](https://paperswithcode.com/sota/zero-shot-video-retrieval-on-activitynet?p=internvideo-general-video-foundation-models)
@@ -26,12 +26,29 @@
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-msrvtt-qa-1)](https://paperswithcode.com/sota/visual-question-answering-on-msrvtt-qa-1?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-msvd-qa-1)](https://paperswithcode.com/sota/visual-question-answering-on-msvd-qa-1?p=internvideo-general-video-foundation-models)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-tgif-qa)](https://paperswithcode.com/sota/visual-question-answering-on-tgif-qa?p=internvideo-general-video-foundation-models)	
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-tgif-qa)](https://paperswithcode.com/sota/visual-question-answering-on-tgif-qa?p=internvideo-general-video-foundation-models) 
+
+	
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf101-mitv2)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf101-mitv2?p=internvideo-general-video-foundation-models)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf-hmdb)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf-hmdb?p=internvideo-general-video-foundation-models)
 
 This repo gives the official implmentation of '[InternVideo: General Video Foundation Models via Generative and Discriminative Learning](https://arxiv.org/abs/2212.03191)',
 by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
 
-Code will be released.
+## 🚀🚀 Pretraining
+
+We Provide the scripts of Video Masked Modeling ([VideoMAE](Pretrain/VideoMAE/README_zh-CN.md)) and Video-Language Contrastive Learning Modeling ([UniformerV2](Pretrain/UniFormerV2/README.md)).
+
+## 🚢🚢 Downstram Tasks
+
+The instruction of video-text retrieval is in the [Retrieval.md](Downstream/Video-Text-Retrieval/README.md)
+
+The instruction of temporal action localization is in the [TAL.md](Downstream/Temporal-Action-Localization/README.md)
+
+The instruction of open-set action recognition is in the [OAR.md](Downstream/Open-Set-Action-Recognition/README.md)
+
+The instruction of ego-tasks is in the [EGO.md](Downstream\Ego-Tasks\readme.md)
+
 
 <!--
 
@@ -70,4 +87,3 @@ If this work is helpful for your research, please consider citing InternVideo.
   year={2022}
 }
 ```
-
