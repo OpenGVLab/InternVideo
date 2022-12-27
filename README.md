@@ -47,7 +47,7 @@ The instruction of temporal action localization is in the [TAL.md](Downstream/Te
 
 The instruction of open-set action recognition is in the [OAR.md](Downstream/Open-Set-Action-Recognition/README.md)
 
-The instruction of ego-tasks is in the [EGO.md]([Downstream\Ego-Tasks\readme.md](https://github.com/OpenGVLab/ego4d-eccv2022-solutions/blob/main/readme.md)
+The instruction of ego-tasks is in the [EGO.md](https://github.com/OpenGVLab/ego4d-eccv2022-solutions/blob/main/readme.md)
 
 
 <!--
