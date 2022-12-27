@@ -37,7 +37,7 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
 
 ## 🚀🚀 Pretraining
 
-We Provide the scripts of Video Masked Modeling ([VideoMAE](Pretrain/VideoMAE/README_zh-CN.md)) and Video-Language Contrastive Learning Modeling ([UniformerV2](Pretrain/UniFormerV2/README.md)).
+We Provide the scripts of Video Masked Modeling ([VideoMAE](Pretrain/VideoMAE/README_zh-CN.md)) and Video-Language Contrastive Learning Modeling ([UniformerV2]([Pretrain/UniFormerV2/README.md](https://github.com/OpenGVLab/UniFormerV2/blob/d390105e588665af5029bfcceed5b9975d4b13bb/README.md))).
 
 ## 🚢🚢 Downstram Tasks
 
@@ -47,7 +47,7 @@ The instruction of temporal action localization is in the [TAL.md](Downstream/Te
 
 The instruction of open-set action recognition is in the [OAR.md](Downstream/Open-Set-Action-Recognition/README.md)
 
-The instruction of ego-tasks is in the [EGO.md](Downstream\Ego-Tasks\readme.md)
+The instruction of ego-tasks is in the [EGO.md]([Downstream\Ego-Tasks\readme.md](https://github.com/OpenGVLab/ego4d-eccv2022-solutions/blob/main/readme.md))
 
 
 <!--
