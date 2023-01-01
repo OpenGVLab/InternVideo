@@ -1,0 +1,1 @@
+sbatch -N 1 --gres=gpu:1 --qos=gpugpu akeval.sh

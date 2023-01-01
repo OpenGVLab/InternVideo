@@ -1,0 +1,20 @@
+{
+    "Token":"qrgh5vShjDx4lP4rHIVI8A",
+    "business_flag": "TEG_AILab_CVC_chongqing",
+    "model_local_file_path": "/apdcephfs/share_1290939/miletchen/work_dir/clip/VideoMAE_ava",
+    "host_num": 1,
+    "host_gpu_num": 8,
+    "task_flag": "ava_videomae_vit_base16_T16x4_bs64_lr_5e-4_ep20_ft_v100",
+    "image_full_name": "mirrors.tencent.com/video_ai_lab/video_v100_deepspeed:v1",
+    "GPUName": "V100",
+    "cuda_version": "10.1",
+    "enable_ceph_metadata_cache": true,
+    "exec_start_in_all_mpi_pods": true,
+    "enable_rdma": true,
+    "is_elasticity": false,
+    "is_store_core_file": true,
+    "accelerate_params": {
+        "enable_optimizations": true,
+        "application_scenario": "Torch-CV"
+    }
+}

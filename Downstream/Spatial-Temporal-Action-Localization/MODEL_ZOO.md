@@ -1,0 +1,24 @@
+# VideoMAE Model Zoo
+
+### Kinetics-400
+
+|  Method  | Extra Data | Backbone | Epoch | \#Frame |                          Pre-train                           |                          Fine-tune                           | Top-1 | Top-5 |
+| :------: | :--------: | :------: | :---: | :-----: | :----------------------------------------------------------: | :----------------------------------------------------------: | :---: | :---: |
+| VideoMAE |  ***no***  |  ViT-B   |  800  | 16x5x3  | [script](scripts/kinetics/videomae_vit_base_patch16_224_tubemasking_ratio_0.9_epoch_800/pretrain.sh)/[log](https://drive.google.com/file/d/1kP3_-465jCL7PRNFq1JcAghPo2BONRWY/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1JfrhN144Hdg7we213H1WxwR3lGYOlmIn/view?usp=sharing) | [script](scripts/kinetics/videomae_vit_base_patch16_224_tubemasking_ratio_0.9_epoch_800/finetune.sh)/[log](https://drive.google.com/file/d/1lI9qtgrTUw9Fi96-2WkB8aJu3iyPyTxA/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/18EEgdXY9347yK3Yb28O-GxFMbk41F6Ne/view?usp=sharing)<br />(w/o repeated aug) | 79.4  | 94.1  |
+| VideoMAE |  ***no***  |  ViT-B   |  800  | 16x5x3  |                        same as above                         |                             TODO                             | 80.4  | 94.4  |
+| VideoMAE |  ***no***  |  ViT-B   | 1600  | 16x5x3  | [script](scripts/kinetics/videomae_vit_base_patch16_224_tubemasking_ratio_0.9_epoch_1600/pretrain.sh)/[log](https://drive.google.com/file/d/1ftVHzzCupEGV4bCHC5JWIUsEwOEeAQcg/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1tEhLyskjb755TJ65ptsrafUG2llSwQE1/view?usp=sharing) | [script](scripts/kinetics/videomae_vit_large_patch16_224_tubemasking_ratio_0.9_epoch_1600/finetune.sh)/[log](https://drive.google.com/file/d/154ygeIO5TwFa5I76908RmkiuroCnHHNr/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1MzwteHH-1yuMnFb8vRBQDvngV1Zl-d3z/view?usp=sharing) | 80.9  | 94.7  |
+| VideoMAE |  ***no***  |  ViT-L   | 1600  | 16x5x3  | [script](scripts/kinetics/videomae_vit_large_patch16_224_tubemasking_ratio_0.9_epoch_1600/pretrain.sh)/[log](https://drive.google.com/file/d/1X7WBzn_yG4lDWuvBMBBgrtgqDLZVHrc2/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1qLOXWb_MGEvaI7tvuAe94CV7S2HXRwT3/view?usp=sharing) | [script](scripts/kinetics/videomae_vit_large_patch16_224_tubemasking_ratio_0.9_epoch_1600/finetune.sh)/[log](https://drive.google.com/file/d/1SRKgFfAoVoSgwqqijQbaG8c88UC4GY9v/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1jX1CiqxSkCfc94y8FRW1YGHy-GNvHCuD/view?usp=sharing) | 84.7  | 96.5  |
+
+### Something-Something V2
+
+|  Method  | Extra Data | Backbone | Epoch | \#Frame |                          Pre-train                           |                          Fine-tune                           | Top-1 | Top-5 |
+| :------: | :--------: | :------: | :---: | :-----: | :----------------------------------------------------------: | :----------------------------------------------------------: | :---: | :---: |
+| VideoMAE |  ***no***  |  ViT-B   |  800  | 16x2x3  | [script](scripts/ssv2/videomae_vit_base_patch16_224_tubemasking_ratio_0.9_epoch_800/pretrain.sh)/[log](https://drive.google.com/file/d/1MPK1FHnGsAMHTfPyVzc66gwPKdKcq90b/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1my7vfn6LA23DPMUJtfD_sJmyki5yM1Ev/view?usp=sharing) | [script](scripts/ssv2/videomae_vit_base_patch16_224_tubemasking_ratio_0.9_epoch_800/finetune.sh)/[log](https://drive.google.com/file/d/1UyiuW1OKoC-g6mR-66WB42tqZBVA1qOI/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1RuMgcK4EIxHQYdfOKGLfv0cT5Obtfx9E/view?usp=sharing) | 69.3  | 92.2  |
+| VideoMAE |  ***no***  |  ViT-B   | 2400  | 16x2x3  | [script](scripts/ssv2/videomae_vit_base_patch16_224_tubemasking_ratio_0.9_epoch_2400/pretrain.sh)/[log](https://drive.google.com/file/d/148nURgfcIFBQd3IQH5YhJ9dTwNCc2jkU/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1I18dY_7rSalGL8fPWV82c0-foRUDzJJk/view?usp=sharing) | [script](scripts/ssv2/videomae_vit_base_patch16_224_tubemasking_ratio_0.9_epoch_2400/finetune.sh)/[log](https://drive.google.com/file/d/1euq1IyKtiZvPT3iTHmKd4_hUugvqxNp7/view?usp=sharing)/[checkpoint](https://drive.google.com/file/d/1DV-zjyWMcTCkLJWOPPIR_nCznzYzGR--/view?usp=sharing) | 70.3  | 92.7  |
+
+### Note:
+
+- \#Frame = #input_frame x #clip x #crop.
+- \#input_frame means how many frames are input for model during the test phase.
+- \#crop means spatial crops (e.g., 3 for left/right/center crop).
+- \#clip means temporal clips (e.g., 5 means repeted temporal sampling five clips with different start indices).
