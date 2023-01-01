@@ -1,0 +1,1 @@
+The evaluation code of AVA is modified from [https://github.com/activitynet/ActivityNet](https://github.com/activitynet/ActivityNet).
