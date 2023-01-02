@@ -30,7 +30,7 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
 
 ## Updates
-
+- `Jan  1, 2023`: The code & model of spatio-temporal action localiztion are released.
 - `Dec 27, 2022`: The code & model of partial pretraining (VideoMAE) and downstream applications (video-text retrieval, temporal action localization, open-set action recognition, and ego4d related tasks) are released.
 - `Dec  6, 2022`: The technical report of InternVideo is released.
 - `Sep  2, 2022`: Press releases ([official](https://www.shlab.org.cn/news/5443279)|[163 news](https://www.163.com/dy/article/HG939TNR0530QRMB.html)|[qq news](https://new.qq.com/rain/a/20220902A053JP00)).
@@ -44,7 +44,7 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
 - [ ] Downstream tasks.
     - [ ] Action recognition.
     - [x] [Temporal action localization](Downstream/Temporal-Action-Localization).
-    - [ ] Spatio-temporal action localization.
+    - [x] [Spatio-temporal action localization](Downstream/Spatial-Temporal-Action-Localization).
     - [x] [Video-text retrieval](Downstream/Video-Text-Retrieval).
     - [ ] Video question answering.
     - [ ] Visual language negativation.
