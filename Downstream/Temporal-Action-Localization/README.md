@@ -23,7 +23,7 @@ Note that, our InternVideo achieves huge improvements in temporal action localiz
 
 
 ## To Reproduce Our Results of InternVideo
-**Download Features and Annotations**
+**Download VideoMAE Features and Annotations**
 * Download *thumos_feature* [this BaiduYun link](https://pan.baidu.com/s/1IVcnPWsZyF6rHEPkSzH5Bw). code：qzb1 
 <!-- * The file includes VideoMAE features, action annotations in json format (similar to ActivityNet annotation format), and external classification scores. -->
   
@@ -40,6 +40,9 @@ Note that, our InternVideo achieves huge improvements in temporal action localiz
 
 * Download *fineaction_feature* [this BaiduYun link](https://pan.baidu.com/s/1P5QQMuxcPiE2tn4ojQW7pA). code：v45q 
 <!-- * The file includes VideoMAE features, action annotations in json format (similar to ActivityNet annotation format), and external classification scores. -->
+
+
+**Download UniformerV2 Features (soon)**
 
 **Details**: 
 The THUMOS-14 features are extracted from Video_MAE models pretrained on Kinetics using clips of `16 frames` at the video frame rate (`~30 fps`) and a stride of `4 frames`. This gives one feature vector per `4/30 ~= 0.1333` seconds.
