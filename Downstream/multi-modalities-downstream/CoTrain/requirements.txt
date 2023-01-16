@@ -1,0 +1,4 @@
+numpy==1.21.6
+setuptools==61.2.0
+torch==1.9.0+cu111
+torchvision==0.10.0+cu111
