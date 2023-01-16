@@ -30,10 +30,11 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
 
 ## Updates
+- `Jan  16, 2023`: The code of video question answering, zero-shot action recognition, and zero-shot multiple choice is released.
 - `Jan  1, 2023`: The code & model of spatio-temporal action localiztion are released.
 - `Dec 27, 2022`: The code & model of partial pretraining (VideoMAE) and downstream applications (video-text retrieval, temporal action localization, open-set action recognition, and ego4d related tasks) are released.
 - `Dec  6, 2022`: The technical report of InternVideo is released.
-- `Sep  2, 2022`: Press releases ([official](https://www.shlab.org.cn/news/5443279)|[163 news](https://www.163.com/dy/article/HG939TNR0530QRMB.html)|[qq news](https://new.qq.com/rain/a/20220902A053JP00)).
+- `Sep  2, 2022`: Press releases ([official](https://www.shlab.org.cn/news/5443279) | [163 news](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq news](https://new.qq.com/rain/a/20220902A053JP00)).
 
 ## Code & model
 - [ ] Video foundation model Pretraining.
@@ -46,11 +47,11 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
     - [x] [Temporal action localization](Downstream/Temporal-Action-Localization).
     - [x] [Spatio-temporal action localization](Downstream/Spatial-Temporal-Action-Localization).
     - [x] [Video-text retrieval](Downstream/Video-Text-Retrieval).
-    - [ ] Video question answering.
+    - [x] [Video question answering](Downstream/multi-modalities-downstream#video-question-answering).
     - [ ] Visual language negativation.
     - [x] [Open-set action recognition](Downstream/Open-Set-Action-Recognition).
-    - [ ] Zero-shot action recognition.
-    - [ ] Zero-shot Multiple Choice.
+    - [x] [Zero-shot action recognition](Downstream/multi-modalities-downstream#zero-shot-action-recognition).
+    - [x] [Zero-shot multiple choice](Downstream/multi-modalities-downstream#zero-shot-multiple-choice).
     - [x] [Ego4D related tasks](https://github.com/OpenGVLab/ego4d-eccv2022-solutions).
 - [ ] Pretrained foundation model weights.
 - [ ] Demos for training usages and evaluations.
