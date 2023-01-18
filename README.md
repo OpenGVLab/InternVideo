@@ -48,7 +48,7 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
     - [x] [Spatio-temporal action localization](Downstream/Spatial-Temporal-Action-Localization).
     - [x] [Video-text retrieval](Downstream/Video-Text-Retrieval).
     - [x] [Video question answering](Downstream/multi-modalities-downstream#video-question-answering).
-    - [ ] Visual language negativation.
+    - [x] [Visual-language navigation](Downstream/Visual-Language-Navigation).
     - [x] [Open-set action recognition](Downstream/Open-Set-Action-Recognition).
     - [x] [Zero-shot action recognition](Downstream/multi-modalities-downstream#zero-shot-action-recognition).
     - [x] [Zero-shot multiple choice](Downstream/multi-modalities-downstream#zero-shot-multiple-choice).

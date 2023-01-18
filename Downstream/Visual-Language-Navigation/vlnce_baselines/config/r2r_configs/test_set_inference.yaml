@@ -1,0 +1,23 @@
+BASE_TASK_CONFIG_PATH: habitat_extensions/config/vlnce_task.yaml
+SIMULATOR_GPU_ID: 0
+TORCH_GPU_ID: 0
+NUM_PROCESSES: 1
+
+INFERENCE:
+  SPLIT: test
+  USE_CKPT_CONFIG: False
+  SAMPLE: False
+  CKPT_PATH: data/checkpoints/CMA_PM_DA_Aug.pth
+  PREDICTIONS_FILE: predictions.json
+
+MODEL:
+  policy_name: CMAPolicy
+
+  INSTRUCTION_ENCODER:
+    bidirectional: True
+
+  CMA:
+    use: True
+
+  PROGRESS_MONITOR:
+    use: True

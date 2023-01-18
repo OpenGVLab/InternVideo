@@ -1,0 +1,35 @@
+BASE_TASK_CONFIG_PATH: habitat_extensions/config/vlnce_task.yaml
+TRAINER_NAME: dagger # recollect_trainer
+SIMULATOR_GPU_IDS: [0]
+TORCH_GPU_ID: 0
+GPU_NUMBERS: 1
+NUM_ENVIRONMENTS: 1
+TENSORBOARD_DIR: data/tensorboard_dirs/cma
+CHECKPOINT_FOLDER: data/checkpoints/cma
+EVAL_CKPT_PATH_DIR: data/checkpoints/cma
+
+EVAL:
+  USE_CKPT_CONFIG: False
+  SPLIT: val_unseen
+  EPISODE_COUNT: -1
+
+IL:
+  epochs: 45
+  batch_size: 5
+
+  RECOLLECT_TRAINER:
+    gt_file:
+      data/datasets/R2R_VLNCE_v1-2_preprocessed/{split}/{split}_gt.json.gz
+
+  DAGGER:
+    iterations: 1
+    update_size: 10819
+    p: 1.0
+    preload_lmdb_features: False
+    lmdb_features_dir: data/trajectories_dirs/cma/trajectories.lmdb
+
+MODEL:
+  policy_name: CMAPolicy
+
+  INSTRUCTION_ENCODER:
+    bidirectional: True

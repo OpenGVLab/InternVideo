@@ -1,0 +1,48 @@
+BASE_TASK_CONFIG_PATH: habitat_extensions/config/r2r_vlnce.yaml
+SIMULATOR_GPU_IDS: [0]
+TORCH_GPU_ID: 0
+TORCH_GPU_IDS: [0]
+TRAINER_NAME: schedulesampler-VLNBERT
+GPU_NUMBERS: 1
+NUM_ENVIRONMENTS: 1
+TENSORBOARD_DIR: data/logs/tensorboard_dirs/
+CHECKPOINT_FOLDER: data/logs/checkpoints/
+EVAL_CKPT_PATH_DIR: data/logs/checkpoints/
+RESULTS_DIR: data/logs/eval_results/
+VIDEO_DIR: data/logs/video/
+
+INFERENCE:
+  SPLIT: test
+  USE_CKPT_CONFIG: False
+  SAMPLE: False
+  CKPT_PATH: '' # REPLACE THIS
+  PREDICTIONS_FILE: ''
+  FORMAT: r2r
+
+EVAL:
+  USE_CKPT_CONFIG: False
+  SPLIT: val_unseen
+  EPISODE_COUNT: -1
+
+IL:
+  epochs: 50
+  batch_size: 16
+  schedule_ratio: 0.75
+  decay_time: 10
+  max_traj_len: 20
+  max_text_len: 300
+
+MODEL:
+  policy_name: PolicyViewSelectionVLNBERT
+  NUM_ANGLES: 12
+  spatial_output: False
+  RGB_ENCODER:
+    output_size: 512
+  DEPTH_ENCODER:
+    output_size: 256    
+  VISUAL_DIM:
+    vis_hidden: 768
+    directional: 128
+  INSTRUCTION_ENCODER:
+    bidirectional: True
+
