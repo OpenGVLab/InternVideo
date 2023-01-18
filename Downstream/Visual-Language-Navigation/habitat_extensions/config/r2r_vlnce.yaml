@@ -1,0 +1,60 @@
+ENVIRONMENT:
+  MAX_EPISODE_STEPS: 20
+
+SIMULATOR:
+  ACTION_SPACE_CONFIG: v0
+  AGENT_0:
+    SENSORS: [RGB_SENSOR, DEPTH_SENSOR]
+  FORWARD_STEP_SIZE: 0.25
+  TURN_ANGLE: 45
+  HABITAT_SIM_V0:
+    GPU_DEVICE_ID: 0
+    ALLOW_SLIDING: True
+  RGB_SENSOR:
+    WIDTH: 224
+    HEIGHT: 224
+    HFOV: 90
+    TYPE: HabitatSimRGBSensor
+  DEPTH_SENSOR:
+    WIDTH: 256  # pretrained DDPPO resnet needs 256x256
+    HEIGHT: 256
+    HFOV: 90
+  TYPE:
+    Sim-v1
+    
+TASK:
+  TYPE: VLN-v0
+  SUCCESS_DISTANCE: 3.0
+  SENSORS: [
+    INSTRUCTION_SENSOR,
+    # SHORTEST_PATH_SENSOR,
+    # VLN_ORACLE_PROGRESS_SENSOR
+  ]
+  INSTRUCTION_SENSOR_UUID: instruction
+  POSSIBLE_ACTIONS: [STOP, MOVE_FORWARD, TURN_LEFT, TURN_RIGHT, HIGHTOLOW]
+  MEASUREMENTS: [
+    # DISTANCE_TO_GOAL,
+    # SUCCESS,
+    # SPL,
+    # NDTW,
+    # PATH_LENGTH,
+    # ORACLE_SUCCESS,
+    # STEPS_TAKEN
+  ]
+  SUCCESS:
+    SUCCESS_DISTANCE: 3.0
+  SPL:
+    SUCCESS_DISTANCE: 3.0
+  NDTW:
+    SUCCESS_DISTANCE: 3.0
+    GT_PATH: data/datasets/R2R_VLNCE_v1-2_preprocessed/{split}/{split}_gt.json.gz
+  SDTW:
+    SUCCESS_DISTANCE: 3.0
+    GT_PATH: data/datasets/R2R_VLNCE_v1-2_preprocessed/{split}/{split}_gt.json.gz
+  ORACLE_SUCCESS:
+    SUCCESS_DISTANCE: 3.0
+DATASET:
+  TYPE: VLN-CE-v1
+  SPLIT: train
+  DATA_PATH: data/datasets/R2R_VLNCE_v1-2_preprocessed_BERTidx/{split}/{split}_bertidx.json.gz
+  SCENES_DIR: data/scene_datasets/

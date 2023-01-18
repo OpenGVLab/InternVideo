@@ -1,0 +1,29 @@
+BASE_TASK_CONFIG_PATH: habitat_extensions/config/vlnce_task_aug.yaml
+SIMULATOR_GPU_ID: 0
+TORCH_GPU_ID: 0
+NUM_ENVIRONMENTS: 1
+TENSORBOARD_DIR: data/tensorboard_dirs/seq2seq_pm_aug
+CHECKPOINT_FOLDER: data/checkpoints/seq2seq_pm_aug
+EVAL_CKPT_PATH_DIR: data/checkpoints/seq2seq_pm_aug
+
+EVAL:
+  USE_CKPT_CONFIG: False
+  SPLIT: val_unseen
+  EPISODE_COUNT: -1
+
+IL:
+  epochs: 15
+  batch_size: 5
+
+  DAGGER:
+    iterations: 1
+    update_size: 157232
+    p: 1.0
+    preload_lmdb_features: False
+    lmdb_features_dir: data/trajectories_dirs/seq2seq_aug/trajectories.lmdb
+
+MODEL:
+  policy_name: Seq2SeqPolicy
+
+  PROGRESS_MONITOR:
+    use: True

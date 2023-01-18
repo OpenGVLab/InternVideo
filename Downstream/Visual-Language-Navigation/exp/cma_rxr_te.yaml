@@ -1,0 +1,58 @@
+BASE_TASK_CONFIG_PATH: habitat_extensions/config/rxr_vlnce_te.yaml
+SIMULATOR_GPU_IDS: [0]
+TORCH_GPU_ID: 0
+TORCH_GPU_IDS: [0]
+TRAINER_NAME: schedulesampler-CMA
+GPU_NUMBERS: 1
+NUM_ENVIRONMENTS: 1
+TENSORBOARD_DIR: data/logs/tensorboard_dirs/
+CHECKPOINT_FOLDER: data/logs/checkpoints/
+EVAL_CKPT_PATH_DIR: data/logs/checkpoints/
+RESULTS_DIR: data/logs/eval_results/
+VIDEO_DIR: data/logs/video/
+
+INFERENCE:
+  SPLIT: test_challenge
+  LANGUAGES: [te-IN]
+  SAMPLE: True
+  USE_CKPT_CONFIG: False
+  CKPT_PATH: ''  # REPLACE THIS
+  PREDICTIONS_FILE: ''
+  FORMAT: rxr
+
+EVAL:
+  USE_CKPT_CONFIG: False
+  SPLIT: val_unseen
+  LANGUAGES: [te-IN]
+  EPISODE_COUNT: -1
+  SAMPLE: True
+
+RL:
+  POLICY:
+    OBS_TRANSFORMS:
+      ENABLED_TRANSFORMS: [ResizerPerSensor, CenterCropperPerSensor]
+
+IL:
+  epochs: 30
+  batch_size: 16
+  schedule_ratio: 0.75
+  decay_time: 10
+  max_traj_len: 30
+  max_text_len: 512
+
+MODEL:
+  policy_name: PolicyViewSelectionCMA
+  spatial_output: False
+  RGB_ENCODER:
+    output_size: 512
+  DEPTH_ENCODER:
+    output_size: 256
+  VISUAL_DIM:
+    vis_hidden: 512
+    directional: 64
+  INSTRUCTION_ENCODER:
+    sensor_uuid: rxr_instruciton # instruction
+    bidirectional: True
+    use_pretrained_embeddings: False
+    embedding_size: 768 # 256
+    hidden_size: 256

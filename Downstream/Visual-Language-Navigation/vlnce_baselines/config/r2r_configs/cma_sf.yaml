@@ -1,0 +1,28 @@
+BASE_TASK_CONFIG_PATH: habitat_extensions/config/vlnce_task.yaml
+SIMULATOR_GPU_IDS: [0]
+TORCH_GPU_ID: 0
+TORCH_GPU_IDS: [0]
+GPU_NUMBERS: 1
+NUM_ENVIRONMENTS: 1
+TENSORBOARD_DIR: data/tensorboard_dirs/cma_sf
+CHECKPOINT_FOLDER: data/checkpoints/cma_sf
+EVAL_CKPT_PATH_DIR: data/checkpoints/cma_sf
+
+EVAL:
+  USE_CKPT_CONFIG: False
+  SPLIT: val_unseen
+  EPISODE_COUNT: -1
+
+IL:
+  epochs: 50
+  batch_size: 8
+  schedule_ratio: 0.75
+  decay_time: 10
+
+  max_traj_len: 130
+
+MODEL:
+  policy_name: CMAPolicyO
+
+  INSTRUCTION_ENCODER:
+    bidirectional: True
