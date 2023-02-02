@@ -15,12 +15,12 @@ The code is modified from [VideoMAE](https://github.com/MCG-NJU/VideoMAE), and t
 - opencv-python
 - (optional) petrel sdk (for reading the data on ceph)
 
-# ModelZoo
+## ModelZoo
 
 | Backbone | Pretrain Data | Finetune Data | Epoch | \#Frame | Pre-train | Fine-tune | Top-1 | Top-5 |
 | :------: | :-----: | :-----:| :---: | :-------: | :----------------------: | :--------------------: | :---: | :---: |
 | ViT-B | UnlabeledHybrid | Kinetics-400 | 800 | 16 x 5 x 3 | [vit_b_hybrid_pt_800e.pth](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e.pth) | [vit_b_hybrid_pt_800e_k400_ft.pth](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k400_ft.pth) | 81.52 | 94.88 |
 | ViT-B | UnlabeledHybrid | Something-Something V2 | 800 | 16 x 2 x 3 | same as above | [vit_b_hybrid_pt_800e_ssv2_ft.pth](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_ssv2_ft.pth) | 71.22 | 93.31 |
 
-# Others
+## Others
 Please refer to [VideoMAE](https://github.com/MCG-NJU/VideoMAE) for Data, Pretrain and Finetune sections.
