@@ -4,6 +4,272 @@
 
 A model achieves the state-of-the-art video-text retrieval performance on two settings, six datasets, and ten metrics.
 
+### Results
+**Zero-Shot Video Retrieval**
+<table>
+   <tr>
+      <td></td>
+      <td></td>
+      <td>R@1 ↑</td>
+      <td>R@5 ↑</td>
+      <td>R@10 ↑</td>
+      <td></td>
+      <td>MedR↓</td>
+      <td>MeanR↓</td>
+   </tr>
+   <tr>
+      <td>MSRVTT</td>
+      <td>v2t</td>
+      <td>37.5</td>
+      <td>63.3</td>
+      <td>71.3</td>
+      <td></td>
+      <td>3.0</td>
+      <td>24.2</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>40</td>
+      <td>65.3</td>
+      <td>74.1</td>
+      <td></td>
+      <td>2.0</td>
+      <td>23.9</td>
+   </tr>
+   <tr>
+      <td>MSVD</td>
+      <td>v2t</td>
+      <td>67.6</td>
+      <td>90.6</td>
+      <td>94.6</td>
+      <td></td>
+      <td>1.0</td>
+      <td>2.9</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>43.4</td>
+      <td>69.9</td>
+      <td>79.1</td>
+      <td></td>
+      <td>2.0</td>
+      <td>17.0</td>
+   </tr>
+   <tr>
+      <td>LSMDC</td>
+      <td>v2t</td>
+      <td>13.2</td>
+      <td>27.8</td>
+      <td>34.9</td>
+      <td></td>
+      <td>33.0</td>
+      <td>113.6</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>17.6</td>
+      <td>32.4</td>
+      <td>40.2</td>
+      <td></td>
+      <td>23.0</td>
+      <td>101.7</td>
+   </tr>
+   <tr>
+      <td>ActivityNet</td>
+      <td>v2t</td>
+      <td>31.4</td>
+      <td>59.4</td>
+      <td>73.1</td>
+      <td></td>
+      <td>3.0</td>
+      <td>15.6</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>30.7</td>
+      <td>57.4</td>
+      <td>70.2</td>
+      <td></td>
+      <td>4.0</td>
+      <td>23.0</td>
+   </tr>
+   <tr>
+      <td>DiDeMo</td>
+      <td>v2t</td>
+      <td>33.5</td>
+      <td>60.3</td>
+      <td>71.1</td>
+      <td></td>
+      <td>3.0</td>
+      <td>21.5</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>31.5</td>
+      <td>57.6</td>
+      <td>68.2</td>
+      <td></td>
+      <td>3.0</td>
+      <td>35.7</td>
+   </tr>
+   <tr>
+      <td>VATEX</td>
+      <td>v2t</td>
+      <td>69.5</td>
+      <td>95</td>
+      <td>98.1</td>
+      <td></td>
+      <td>1.0</td>
+      <td>2.1</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>49.5</td>
+      <td>79.7</td>
+      <td>87</td>
+      <td></td>
+      <td>2.0</td>
+      <td>9.7</td>
+   </tr>
+</table>
+<!--
+|Dataset| Setting | R@1 | R@5 | R@10 | MedR | MeanR |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
+| MSRVTT | video-to-text | 224x224 | 83.5 | 30M | 5G |
+| MSVD | ImageNet-1K | 224x224 | 84.2 | 50M | 8G |
+| LSMDC | ImageNet-1K | 224x224 | 84.9 | 97M | 16G |
+| ActivityNet | ImageNet-22K | 384x384 | 87.7 | 223M | 108G |
+| DiDeMo | ImageNet-22K | 384x384 | 88.0 | 335M | 163G |
+| VATEX | ImageNet-22K | 384x384 | 88.0 | 335M | 163G |
+-->
+
+**Video Retrieval with Full Finetuning**
+<table>
+   <tr>
+      <td></td>
+      <td></td>
+      <td>R@1 ↑</td>
+      <td>R@5 ↑</td>
+      <td>R@10 ↑</td>
+      <td></td>
+      <td>MedR↓</td>
+   </tr>
+   <tr>
+      <td>MSRVTT</td>
+      <td>v2t</td>
+      <td>57.9</td>
+      <td>79.2</td>
+      <td>86.4</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>55.2</td>
+      <td>79.6</td>
+      <td>87.5</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td>MSVD</td>
+      <td>v2t</td>
+      <td>76.3</td>
+      <td>96.8</td>
+      <td>98.7</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>58.4</td>
+      <td>84.5</td>
+      <td>90.4</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td>LSMDC</td>
+      <td>v2t</td>
+      <td>34.9</td>
+      <td>54.6</td>
+      <td>63.1</td>
+      <td></td>
+      <td>4.0</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>34.0</td>
+      <td>53.7</td>
+      <td>62.9</td>
+      <td></td>
+      <td>4.0</td>
+   </tr>
+   <tr>
+      <td>ActivityNet</td>
+      <td>v2t</td>
+      <td>62.8</td>
+      <td>86.2</td>
+      <td>93.3</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>62.2</td>
+      <td>85.9</td>
+      <td>93.2</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td>DiDeMo</td>
+      <td>v2t</td>
+      <td>59.1</td>
+      <td>81.8</td>
+      <td>89.0</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>57.9</td>
+      <td>82.4</td>
+      <td>88.9</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td>VATEX</td>
+      <td>v2t</td>
+      <td>86.0</td>
+      <td>99.2</td>
+      <td>99.6</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+   <tr>
+      <td></td>
+      <td>t2v</td>
+      <td>72.0</td>
+      <td>95.1</td>
+      <td>97.8</td>
+      <td></td>
+      <td>1.0</td>
+   </tr>
+</table>
+
 ## Main Dependencies  
 
 - CUDA Version 11.1   
