@@ -38,7 +38,7 @@ A model achieves the state-of-the-art video-text retrieval performance on two se
 | MSRVTT | video-to-text | 57.9|79.2|86.4|1.0|7.5|
 | | text-to-video | 55.2|79.6|87.5|1.0|10.7|
 | MSVD | video-to-text | 76.3|96.8|98.7	|1.0|2.1|
-| | text-to-video | 58.4|84.5|90.4|1.08.2|
+| | text-to-video | 58.4|84.5|90.4|1.0|8.2|
 | LSMDC | video-to-text | 34.9|54.6|63.1|4.0|32.9|
 | | text-to-video | 34.0|53.7|62.9|4.0|38.7|
 | ActivityNet | video-to-text | 62.8|86.2|93.3|1.0|3.5|
