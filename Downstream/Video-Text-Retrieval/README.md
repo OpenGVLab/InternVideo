@@ -6,138 +6,21 @@ A model achieves the state-of-the-art video-text retrieval performance on two se
 
 ### Results
 **Zero-Shot Video Retrieval**
-<table>
-   <tr>
-      <td></td>
-      <td></td>
-      <td>R@1 ↑</td>
-      <td>R@5 ↑</td>
-      <td>R@10 ↑</td>
-      <td></td>
-      <td>MedR↓</td>
-      <td>MeanR↓</td>
-   </tr>
-   <tr>
-      <td>MSRVTT</td>
-      <td>v2t</td>
-      <td>37.5</td>
-      <td>63.3</td>
-      <td>71.3</td>
-      <td></td>
-      <td>3.0</td>
-      <td>24.2</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>40</td>
-      <td>65.3</td>
-      <td>74.1</td>
-      <td></td>
-      <td>2.0</td>
-      <td>23.9</td>
-   </tr>
-   <tr>
-      <td>MSVD</td>
-      <td>v2t</td>
-      <td>67.6</td>
-      <td>90.6</td>
-      <td>94.6</td>
-      <td></td>
-      <td>1.0</td>
-      <td>2.9</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>43.4</td>
-      <td>69.9</td>
-      <td>79.1</td>
-      <td></td>
-      <td>2.0</td>
-      <td>17.0</td>
-   </tr>
-   <tr>
-      <td>LSMDC</td>
-      <td>v2t</td>
-      <td>13.2</td>
-      <td>27.8</td>
-      <td>34.9</td>
-      <td></td>
-      <td>33.0</td>
-      <td>113.6</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>17.6</td>
-      <td>32.4</td>
-      <td>40.2</td>
-      <td></td>
-      <td>23.0</td>
-      <td>101.7</td>
-   </tr>
-   <tr>
-      <td>ActivityNet</td>
-      <td>v2t</td>
-      <td>31.4</td>
-      <td>59.4</td>
-      <td>73.1</td>
-      <td></td>
-      <td>3.0</td>
-      <td>15.6</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>30.7</td>
-      <td>57.4</td>
-      <td>70.2</td>
-      <td></td>
-      <td>4.0</td>
-      <td>23.0</td>
-   </tr>
-   <tr>
-      <td>DiDeMo</td>
-      <td>v2t</td>
-      <td>33.5</td>
-      <td>60.3</td>
-      <td>71.1</td>
-      <td></td>
-      <td>3.0</td>
-      <td>21.5</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>31.5</td>
-      <td>57.6</td>
-      <td>68.2</td>
-      <td></td>
-      <td>3.0</td>
-      <td>35.7</td>
-   </tr>
-   <tr>
-      <td>VATEX</td>
-      <td>v2t</td>
-      <td>69.5</td>
-      <td>95</td>
-      <td>98.1</td>
-      <td></td>
-      <td>1.0</td>
-      <td>2.1</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>49.5</td>
-      <td>79.7</td>
-      <td>87</td>
-      <td></td>
-      <td>2.0</td>
-      <td>9.7</td>
-   </tr>
-</table>
+|Dataset| Setting | R@1↑ | R@5↑ | R@10↑ | MedR↓ | MeanR↓ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
+| MSRVTT | video-to-text | 37.5 | 63.3 | 71.3 | 3.0 | 24.2 |
+| | text-to-video | 40 | 65.3 | 74.1 | 2.0 | 23.9 |
+| MSVD | video-to-text | 67.6 | 90.6 | 94.6 | 1.0 | 2.9 |
+| | text-to-video | 43.4|69.9|79.1|2.0|17.0|
+| LSMDC | video-to-text | 13.2|27.8|34.9|33.0|113.6|
+| | text-to-video | 17.6|32.4|40.2|23.0|101.7|
+| ActivityNet | video-to-text | 31.4|59.4|73.1|3.0|15.6|
+| | text-to-video | 30.7 | 57.4 | 70.2| 4.0 | 23.0|
+| DiDeMo | video-to-text | 33.5 | 60.3|71.1|3.0|21.5|
+| | text-to-video | 31.5 | 57.6 | 68.2 | 3.0 | 35.7 |
+| VATEX | video-to-text | 69.5 | 95|98.1|1.0|2.1|
+| | text-to-video | 49.5|79.7|87|2.0|9.7|
+
 <!--
 |Dataset| Setting | R@1 | R@5 | R@10 | MedR | MeanR |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
@@ -150,125 +33,20 @@ A model achieves the state-of-the-art video-text retrieval performance on two se
 -->
 
 **Video Retrieval with Full Finetuning**
-<table>
-   <tr>
-      <td></td>
-      <td></td>
-      <td>R@1 ↑</td>
-      <td>R@5 ↑</td>
-      <td>R@10 ↑</td>
-      <td></td>
-      <td>MedR↓</td>
-   </tr>
-   <tr>
-      <td>MSRVTT</td>
-      <td>v2t</td>
-      <td>57.9</td>
-      <td>79.2</td>
-      <td>86.4</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>55.2</td>
-      <td>79.6</td>
-      <td>87.5</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td>MSVD</td>
-      <td>v2t</td>
-      <td>76.3</td>
-      <td>96.8</td>
-      <td>98.7</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>58.4</td>
-      <td>84.5</td>
-      <td>90.4</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td>LSMDC</td>
-      <td>v2t</td>
-      <td>34.9</td>
-      <td>54.6</td>
-      <td>63.1</td>
-      <td></td>
-      <td>4.0</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>34.0</td>
-      <td>53.7</td>
-      <td>62.9</td>
-      <td></td>
-      <td>4.0</td>
-   </tr>
-   <tr>
-      <td>ActivityNet</td>
-      <td>v2t</td>
-      <td>62.8</td>
-      <td>86.2</td>
-      <td>93.3</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>62.2</td>
-      <td>85.9</td>
-      <td>93.2</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td>DiDeMo</td>
-      <td>v2t</td>
-      <td>59.1</td>
-      <td>81.8</td>
-      <td>89.0</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>57.9</td>
-      <td>82.4</td>
-      <td>88.9</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td>VATEX</td>
-      <td>v2t</td>
-      <td>86.0</td>
-      <td>99.2</td>
-      <td>99.6</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-   <tr>
-      <td></td>
-      <td>t2v</td>
-      <td>72.0</td>
-      <td>95.1</td>
-      <td>97.8</td>
-      <td></td>
-      <td>1.0</td>
-   </tr>
-</table>
+|Dataset| Setting | R@1↑ | R@5↑ | R@10↑ | MedR↓ | MeanR↓ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
+| MSRVTT | video-to-text | 57.9|79.2|86.4|1.0|7.5|
+| | text-to-video | 55.2|79.6|87.5|1.0|10.7|
+| MSVD | video-to-text | 76.3|96.8|98.7	|1.0|2.1|
+| | text-to-video | 58.4|84.5|90.4|1.08.2|
+| LSMDC | video-to-text | 34.9|54.6|63.1|4.0|32.9|
+| | text-to-video | 34.0|53.7|62.9|4.0|38.7|
+| ActivityNet | video-to-text | 62.8|86.2|93.3|1.0|3.5|
+| | text-to-video | 62.2|85.9|93.2|1.0|3.9|
+| DiDeMo | video-to-text | 59.1|81.8|89.0|1.0|7.2|
+| | text-to-video | 57.9|82.4|88.9|1.0|9.2 |
+| VATEX | video-to-text | 86.0|99.2|99.6|1.0|1.3|
+| | text-to-video | 72.0|95.1|97.8|1.0|2.4|
 
 ## Main Dependencies  
 
@@ -318,65 +96,6 @@ All the test scripts for evaluating the finetuned checkpoints are provided in th
 ./eval_finetuned_scripts/eval_finetuned_msrvtt.sh
 ```
 
-### Performance 
-#### MSRVTT Finetune
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|55.2|79.6|87.5|57.9|79.2|86.4|
-#### MSRVTT ZeroShot
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|40.7|67.3|76.0|39.6|63.7|73.1|
-
-#### MSVD Finetune
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|58.4|84.5|90.4|76.3|96.8|98.7|
-#### MSVD ZeroShot
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|43.4|69.9|79.1|67.6|90.6|94.6|
-
-#### LSMDC Finetune
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|34.0|53.7|62.9|34.9|54.6|63.1|
-#### LSMDC ZeroShot
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|17.6|32.4|40.2|13.2|27.8|34.9|
-
-#### ActivityNet Finetune
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|62.2|85.9|93.2|62.8|86.2|93.3|
-#### ActivityNet ZeroShot
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|30.7|57.4|70.2|31.4|59.4|73.1|
-
-
-#### DiDeMO Finetune
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|57.9|82.4|88.9|59.1|81.8|89.0|
-#### DiDeMo ZeroShot
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|31.5|57.6|68.2|33.5|60.3|71.1|
-
-#### VATEX Finetune
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|71.1|94.7|97.6|87.2|99.2|100.0|
-#### VATEX ZeroShot
-|R@1(t2v)|R@5(t2v)|R@10(t2v)|R@1(v2t)|R@5(v2t)|R@10(v2t)|
-|----|----|----|----|----|----|
-|49.5|79.7|87.0|69.5|95.0|98.1|
-
-
-
-
 
 ## License  
 
@@ -385,3 +104,4 @@ This project is released under the MIT license.
 ## Acknowledgments  
 
 Our codebase is based on [CLIP4clip](https://github.com/ArrowLuo/CLIP4Clip).
+
