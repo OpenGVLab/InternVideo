@@ -4,7 +4,7 @@
 
 A model achieves the state-of-the-art video-text retrieval performance on two settings, six datasets, and ten metrics.
 
-### Results
+### Our Results
 **Zero-Shot Video Retrieval**
 |Dataset| Setting | R@1↑ | R@5↑ | R@10↑ | MedR↓ | MeanR↓ |
 | :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
