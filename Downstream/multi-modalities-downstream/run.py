@@ -130,7 +130,6 @@ def main(_config):
         fast_dev_run=_config["fast_dev_run"],
         val_check_interval=_config["val_check_interval"],
         strategy=strategy,
-        detect_anomaly=True,
         # show_progress_bar=False,
         # progress_bar_refresh_rate=0
     )
