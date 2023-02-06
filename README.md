@@ -30,6 +30,7 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
 
 ## Updates
+- `Feb  5, 2023`: The code & model of multimodal learning are released.
 - `Jan 18, 2023`: The code of vision-language navigation is released.
 - `Jan 16, 2023`: The code of video question answering, zero-shot action recognition, and zero-shot multiple choice is released.
 - `Jan  1, 2023`: The code & model of spatio-temporal action localiztion are released.
@@ -40,7 +41,7 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
 ## Code & model
 - [ ] Video foundation model Pretraining.
     - [x] [video masked modeling](Pretrain/VideoMAE).
-    - [ ] video-language contrastive learning modeling.
+    - [x] [video-language contrastive learning modeling](Pretrain/Multi-Modalities-Pretraining).
     - [x] Supervised training of [ViT (from video masked modeling)](Pretrain/VideoMAE#finetune) and [UniformerV2 (from multimodal learning)](https://github.com/OpenGVLab/UniFormerV2/blob/main/INSTRUCTIONS.md#training).
     - [ ] Model interaction.
 - [ ] Downstream tasks.
