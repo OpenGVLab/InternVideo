@@ -44,6 +44,7 @@ def config():
 
     draw_false_image = 1
     # video setting
+    current_tasks = []
     train_transform_keys = ["pixelbert"]
     val_transform_keys = ["pixelbert"]
     image_size = 224  # 384/224
@@ -601,6 +602,7 @@ def clip_kc_new_L14_336_vtc_cap_4plusM_choice():
 def clip_finetune_msrvttqa():
     exp_name = "clip_finetune_msrvtt_qa"
     video_datasets = ["msrvttqa"]
+    current_tasks = ['openend_vqa']
     image_datasets = []
     loss_names = _loss_names({"openend_vqa": 1})
     batch_size = 512

@@ -41,11 +41,8 @@ class MSRVTTQADataset(BaseDataset):
         }
         answer_fp = os.path.join(metadata_dir, 'msrvtt_train_ans2label.json')  # 1500 in total (all classes in train)
         # answer_fp = os.path.join(metadata_dir, 'msrvtt_qa_ans2label.json')  # 4539 in total (all classes in train+val+test)
-        answer_clip_id = os.path.join(metadata_dir, 'msrvtt_clip_id.json')
         with open(answer_fp, 'r') as JSON:
             self.ans_lab_dict = json.load(JSON)
-        with open(answer_clip_id, 'r') as JSON:
-            self.ans_clip_id = json.load(JSON)
         for name in self.names:
             split = name.split('_')[-1]
             target_split_fp = split_files[split]
@@ -103,7 +100,6 @@ class MSRVTTQADataset(BaseDataset):
             "vqa_labels": labels,
             "vqa_scores": scores,
             "qid": qid,
-            "ans_clip_id": self.ans_clip_id,
         }
 
     def __len__(self):

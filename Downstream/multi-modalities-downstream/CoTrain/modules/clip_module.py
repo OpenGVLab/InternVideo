@@ -2,9 +2,9 @@ from copy import deepcopy
 import torch
 import torch.nn as nn
 import pytorch_lightning as pl
-from CoTrain.modules import heads, cotrain_utils
+from CoTrain.modules import cotrain_utils
 from CoTrain.modules import objectives as objectives
-from CoTrain.modules import base_vision_transformer as vit
+# from CoTrain.modules import base_vision_transformer as vit
 import os
 import matplotlib.pyplot as plt
 import math
@@ -128,7 +128,7 @@ class CLIP(pl.LightningModule):
             )
 
         cotrain_utils.set_metrics(self)
-        self.current_tasks = list()
+        self.current_tasks = config['ans_clip_id']
 
         vision_width = self.clip.visual.conv1.weight.shape[0]
         transformer_width = self.clip.transformer.width
