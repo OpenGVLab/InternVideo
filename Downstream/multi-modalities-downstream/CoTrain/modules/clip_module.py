@@ -128,7 +128,7 @@ class CLIP(pl.LightningModule):
             )
 
         cotrain_utils.set_metrics(self)
-        self.current_tasks = config['ans_clip_id']
+        self.current_tasks = config['current_tasks']
 
         vision_width = self.clip.visual.conv1.weight.shape[0]
         transformer_width = self.clip.transformer.width
