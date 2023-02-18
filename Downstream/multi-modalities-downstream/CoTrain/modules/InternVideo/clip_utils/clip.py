@@ -25,7 +25,7 @@ if packaging.version.parse(torch.__version__) < packaging.version.parse("1.7.1")
 
 
 __all__ = ["available_models", "load", "tokenize"]
-# _tokenizer = _Tokenizer()
+_tokenizer = _Tokenizer()
 
 _MODELS = {
     "ViT-B/32": "https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af/ViT-B-32.pt",

@@ -5,7 +5,6 @@ import pytorch_lightning as pl
 from CoTrain.modules import heads, cotrain_utils
 from CoTrain.modules import objectives as objectives
 from CoTrain.modules import base_vision_transformer as vit
-from CoTrain.modules.text_prompt import text_prompt
 import os
 import matplotlib.pyplot as plt
 import math
@@ -122,13 +121,6 @@ class CLIP(pl.LightningModule):
                 device=self.device,
                 use_checkpoint=config["clip_use_checkpoint"],
                 checkpoint_num=config["clip_checkpoint_num"],
-                # mask_text=(
-                #     self.hparams.config["loss_names"]["mlm"] > 0
-                #     or (
-                #         self.hparams.config["loss_names"]["openend_vqa"] > 0
-                #         and self.qa_type in ["zs", "mlm", "vtc_mlm"]
-                #     )
-                # ),
             )
         else:
             raise NotImplementedError(
@@ -659,25 +651,8 @@ class CLIP(pl.LightningModule):
             else:
                 ret.update(objectives.compute_cap(self, batch, mode=mode))
 
-        if "zs_classify" in self.current_tasks:
-            if self.text_ret is None:
-                # print(f"Generate text features for in batch-{batch_idx}")
-                self.text_ret = self.forward_text()
-            ret.update(objectives.compute_zs_classify(self, batch, self.text_ret))
-
         return ret
 
-    def forward_text(self):
-        classes, num_text_aug, _ = text_prompt(prompt_type=self.prompt_type)
-        text_inputs = classes.to(self.device)
-        text_feats = self.clip.encode_text(text_inputs)
-        # text_feats /= text_feats.norm(dim=-1, keepdim=True)
-
-        ret = {
-            "text_feats": text_feats,  # num_text_aug * num_classes, C
-            "num_text_aug": num_text_aug,
-        }
-        return ret
 
     def forward_video(self, batch):
         img = batch["video"][0]
