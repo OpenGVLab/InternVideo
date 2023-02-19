@@ -1,0 +1,1 @@
+wget https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/InternVideo-MM-B-16.ckpt
