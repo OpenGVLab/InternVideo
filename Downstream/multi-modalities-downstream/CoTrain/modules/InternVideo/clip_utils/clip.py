@@ -9,6 +9,7 @@ import torch
 from PIL import Image
 from torchvision.transforms import Compose, Resize, CenterCrop, ToTensor, Normalize
 from tqdm import tqdm
+import copy
 
 from .model import build_model
 from .simple_tokenizer import SimpleTokenizer as _Tokenizer
@@ -126,21 +127,19 @@ def load(
     else:
         raise RuntimeError(f"Model {name} not found; available models = {available_models()}")
     
-    with open(model_path, 'rb') as opened_file:
-        try:
-            # loading JIT archive
-            model = torch.jit.load(opened_file, map_location=device if jit else "cpu").eval()
-            state_dict = None
-        except RuntimeError:
-            # loading saved state dict
-            if jit:
-                warnings.warn(f"File {model_path} is not a JIT archive. Loading as a state dict instead")
-                jit = False
-            state_dict = torch.load(model_path, map_location="cpu")
-
+    state_dict = torch.load(model_path, map_location="cpu")
+    state_dict= state_dict['state_dict']
+    state_dict_v2 = copy.deepcopy(state_dict)
+    for key in state_dict:
+        if 'caption_decoder' in key:
+            del state_dict_v2[key]
+            continue
+        if 'clip.' in key:
+            post = key.replace('clip.', '')
+            state_dict_v2[post] = state_dict_v2.pop(key)
     if not jit:
         model = build_model(
-            state_dict or model.state_dict(),
+            state_dict_v2 or model.state_dict(),
             n_layers=n_layers, n_dim=n_dim, n_head=n_head, mlp_factor=mlp_factor, drop_path_rate=drop_path_rate,
             mlp_dropout=mlp_dropout, cls_dropout=cls_dropout, t_size=t_size, spatial_size=spatial_size,
             use_t_conv=use_t_conv, use_image_attnmap=use_image_attnmap, use_t_pos_embed=use_t_pos_embed, no_pretrain=no_pretrain,
