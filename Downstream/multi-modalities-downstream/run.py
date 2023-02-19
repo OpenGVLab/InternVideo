@@ -1,6 +1,5 @@
 import warnings
 
-from sklearn import ensemble
 # This ignore the scheduler warning, see https://github.com/Lightning-AI/lightning/issues/5558
 warnings.filterwarnings("ignore", "Detected call of", UserWarning)
 
@@ -15,7 +14,6 @@ from pytorch_lightning.utilities.cloud_io import get_filesystem
 from pytorch_lightning.utilities.cloud_io import load as pl_load
 
 import torch
-import numpy as np
 from pytorch_lightning.strategies import DDPStrategy
 torch.manual_seed(0)
 
@@ -24,16 +22,6 @@ class CustomDDPStrategy(DDPStrategy):
     def configure_ddp(self):
         super().configure_ddp()
         self._model._set_static_graph() # THIS IS THE MAGIC LINE
-
-
-def deterministic_index_select(x, dim, indices):
-    """
-    input_tensor: Tensor
-    dim: dim
-    indices: 1D tensor
-    """
-    tensor_transpose = torch.transpose(x, 0, dim)
-    return tensor_transpose[indices].transpose(dim, 0)
 
 @ex.automain
 def main(_config):
