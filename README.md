@@ -65,7 +65,7 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
 ## Model Zoo
 To access the pretrained foundation model weights and task ones, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) and then you will find the download link.
 <img src="Media/download.png" width="200" height="260" alt="survey_icon"/>
-<!--![survey_icon](/Media/download.png){:height="50%" width="50%"}-->
+<!--![survey_icon](Media/download.png){:height="50%" width="50%"}-->
 
 <!--
 ## 🚀🚀 Pretraining
