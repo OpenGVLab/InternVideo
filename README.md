@@ -30,6 +30,7 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
 
 ## Updates
+- `Feb 19, 2023`: Some pretrained foundation model weights (-L) are released.
 - `Feb  5, 2023`: The code & model of multimodal learning are released.
 - `Jan 18, 2023`: The code of vision-language navigation is released.
 - `Jan 16, 2023`: The code of video question answering, zero-shot action recognition, and zero-shot multiple choice is released.
@@ -55,8 +56,15 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
     - [x] [Zero-shot action recognition](Downstream/multi-modalities-downstream#zero-shot-action-recognition).
     - [x] [Zero-shot multiple choice](Downstream/multi-modalities-downstream#zero-shot-multiple-choice).
     - [x] [Ego4D related tasks](https://github.com/OpenGVLab/ego4d-eccv2022-solutions).
-- [ ] Pretrained foundation model weights.
+- [x] [Pretrained foundation model weights]().
 - [ ] Demos for training usages and evaluations.
+
+## Performance
+- [Video Retrieval](Downstream/Video-Text-Retrieval#our-results)
+
+## Model Zoo
+To access the pretrained foundation model weights and task ones, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) and then you will find the download link.
+![survey_icon](/Media/download.png)
 
 <!--
 ## 🚀🚀 Pretraining
