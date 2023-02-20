@@ -56,7 +56,7 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
     - [x] [Zero-shot action recognition](Downstream/multi-modalities-downstream#zero-shot-action-recognition).
     - [x] [Zero-shot multiple choice](Downstream/multi-modalities-downstream#zero-shot-multiple-choice).
     - [x] [Ego4D related tasks](https://github.com/OpenGVLab/ego4d-eccv2022-solutions).
-- [x] [Pretrained foundation model weights]().
+- [x] [Pretrained foundation model weights](https://github.com/OpenGVLab/InternVideo#model-zoo).
 - [ ] Demos for training usages and evaluations.
 
 ## Performance
@@ -64,7 +64,7 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
 
 ## Model Zoo
 To access the pretrained foundation model weights and task ones, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) and then you will find the download link.
-![survey_icon](/Media/download.png)
+![survey_icon](/Media/download.png =256x256)
 
 <!--
 ## 🚀🚀 Pretraining
