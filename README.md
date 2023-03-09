@@ -30,6 +30,7 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
 
 ## Updates
+- `Mar  8, 2023`: All pretrained foundation model weights are released. Downloading from [here](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u).
 - `Feb 19, 2023`: Some pretrained foundation model weights (-L) are released.
 - `Feb  5, 2023`: The code & model of multimodal learning are released.
 - `Jan 18, 2023`: The code of vision-language navigation is released.
