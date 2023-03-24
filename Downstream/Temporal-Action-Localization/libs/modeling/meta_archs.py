@@ -742,18 +742,18 @@ class PtTransformer(nn.Module):
             labels = results_per_vid['labels'].detach().cpu()
 
 
-            # if self.test_nms_method != 'none':
-            #     # 2: batched nms (only implemented on CPU)
-            #     segs, scores, labels = batched_nms(
-            #         segs, scores, labels,
-            #         self.test_iou_threshold,
-            #         self.test_min_score,
-            #         self.test_max_seg_num,
-            #         use_soft_nms = (self.test_nms_method == 'soft'),
-            #         multiclass = self.test_multiclass_nms,
-            #         sigma = self.test_nms_sigma,
-            #         voting_thresh = self.test_voting_thresh
-            #     )
+            if self.test_nms_method != 'none':
+                # 2: batched nms (only implemented on CPU)
+                segs, scores, labels = batched_nms(
+                    segs, scores, labels,
+                    self.test_iou_threshold,
+                    self.test_min_score,
+                    self.test_max_seg_num,
+                    use_soft_nms = (self.test_nms_method == 'soft'),
+                    multiclass = self.test_multiclass_nms,
+                    sigma = self.test_nms_sigma,
+                    voting_thresh = self.test_voting_thresh
+                )
 
 
             # 3: convert from feature grids to seconds

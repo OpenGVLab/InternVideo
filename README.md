@@ -30,16 +30,23 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
 
 ## Updates
+- `Mar  8, 2023`: All pretrained foundation model weights are released. Access them from [here](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u).
+- `Feb 19, 2023`: Some pretrained foundation model weights (-L) are released.
+- `Feb  5, 2023`: The code & model of multimodal learning are released.
+- `Jan 18, 2023`: The code of vision-language navigation is released.
 - `Jan 16, 2023`: The code of video question answering, zero-shot action recognition, and zero-shot multiple choice is released.
 - `Jan  1, 2023`: The code & model of spatio-temporal action localiztion are released.
 - `Dec 27, 2022`: The code & model of partial pretraining (VideoMAE) and downstream applications (video-text retrieval, temporal action localization, open-set action recognition, and ego4d related tasks) are released.
 - `Dec  6, 2022`: The technical report of InternVideo is released.
 - `Sep  2, 2022`: Press releases ([official](https://www.shlab.org.cn/news/5443279) | [163 news](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq news](https://new.qq.com/rain/a/20220902A053JP00)).
 
+## Introduction
+The foundation models have recently shown excellent performance on a variety of downstream tasks in computer vision. However, most existing vision foundation models simply focus on image-level pretraining and adpation, which are limited for dynamic and complex video-level understanding tasks. To fill the gap, we present general video foundation models, *InternVideo*, by taking advantage of both generative and discriminative self-supervised video learning. Specifically, InternVideo efficiently explores masked video modeling and video-language contrastive learning as the pretraining objectives, and selectively coordinates video representations of these two complementary frameworks in a learnable manner to boost various video applications. Without bells and whistles, InternVideo achieves state-of-the-art performance on 39 video datasets from extensive tasks including video action recognition/detection, video-language alignment, and open-world video applications. Especially, our methods can obtain 91.1% and 77.2% top-1 accuracy on the challenging Kinetics-400 and Something-Something V2 benchmarks, respectively.
+
 ## Code & model
 - [ ] Video foundation model Pretraining.
     - [x] [video masked modeling](Pretrain/VideoMAE).
-    - [ ] video-language contrastive learning modeling.
+    - [x] [video-language contrastive learning modeling](Pretrain/Multi-Modalities-Pretraining).
     - [x] Supervised training of [ViT (from video masked modeling)](Pretrain/VideoMAE#finetune) and [UniformerV2 (from multimodal learning)](https://github.com/OpenGVLab/UniFormerV2/blob/main/INSTRUCTIONS.md#training).
     - [ ] Model interaction.
 - [ ] Downstream tasks.
@@ -53,8 +60,18 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
     - [x] [Zero-shot action recognition](Downstream/multi-modalities-downstream#zero-shot-action-recognition).
     - [x] [Zero-shot multiple choice](Downstream/multi-modalities-downstream#zero-shot-multiple-choice).
     - [x] [Ego4D related tasks](https://github.com/OpenGVLab/ego4d-eccv2022-solutions).
-- [ ] Pretrained foundation model weights.
+- [x] [Pretrained foundation model weights](https://github.com/OpenGVLab/InternVideo#model-zoo).
 - [ ] Demos for training usages and evaluations.
+
+## Performance
+- [Video Retrieval](Downstream/Video-Text-Retrieval#our-results)
+
+## Model Zoo
+To access the pretrained foundation model weights and task ones, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) and then you will find the download link.
+
+
+<img src="Media/download.png" width="200" height="260" alt="survey_icon"/>
+<!--![survey_icon](Media/download.png){:height="50%" width="50%"}-->
 
 <!--
 ## 🚀🚀 Pretraining
