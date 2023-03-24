@@ -57,7 +57,7 @@ class ResidualAttentionBlock(nn.Module):
         
         self.n_head = n_head
         self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
-        logger.info(f'Drop path rate: {drop_path}')
+        # logger.info(f'Drop path rate: {drop_path}')
 
         # spatial
         self.attn = MultiheadAttention(d_model, n_head)
@@ -99,7 +99,7 @@ class Extractor(nn.Module):
         super().__init__()
 
         self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
-        logger.info(f'Drop path rate: {drop_path}')
+        # logger.info(f'Drop path rate: {drop_path}')
         self.attn = nn.MultiheadAttention(d_model, n_head)
         self.ln_1 = nn.LayerNorm(d_model)
         d_mlp = round(mlp_factor * d_model)
@@ -172,8 +172,8 @@ class Transformer(nn.Module):
         # checkpoint
         self.use_checkpoint = use_checkpoint
         self.checkpoint_num = checkpoint_num
-        logger.info(f'Use checkpoint: {self.use_checkpoint}')
-        logger.info(f'Checkpoint number: {self.checkpoint_num}')
+        # logger.info(f'Use checkpoint: {self.use_checkpoint}')
+        # logger.info(f'Checkpoint number: {self.checkpoint_num}')
 
         # Extractor
         assert n_layers == len(return_list)
