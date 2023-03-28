@@ -16,7 +16,7 @@ The code is mostly based on [All-In-One](https://github.com/showlab/all-in-one).
 
 #### Zero-shot action recognition
 
-Please follow `scripts/zs_classify.sh`. We provide results on Kinetics-400.
+Please follow `scripts/zs_classify.sh`. We provide results on Kinetics-400 **test set**.
 
 | | B/16 | L/14 |
 |:---| ----------- | ----------- |
