@@ -27,7 +27,7 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf-hmdb)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf-hmdb?p=internvideo-general-video-foundation-models)
 
 This repo gives the official implmentation of '[InternVideo: General Video Foundation Models via Generative and Discriminative Learning](https://arxiv.org/abs/2212.03191)',
-by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao. 
+by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao.
 
 ## Updates
 - `Mar  8, 2023`: All pretrained foundation model weights are released. Access them from [here](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u).
@@ -67,8 +67,73 @@ The foundation models have recently shown excellent performance on a variety of 
 - [Video Retrieval](Downstream/Video-Text-Retrieval#our-results)
 
 ## Model Zoo
-To access the pretrained foundation model weights and task ones, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) and then you will find the download link.
 
+<details>
+<summary> Pretrained Models </summary>
+<br>
+<div>
+
+|      Model      |   Training Data   |                                               download                                                |
+| :-----------------: | :----------: | :----------------------: | :----: | :---------------------------------------------------------------------------------------------------: |
+| InternVideo-MM-L-14 | WebVid10M+Self-collected (14M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/InternVideo-MM-L-14.ckpt) |
+| VideoMAE-B | UnlabeledHybrid (1M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e.pth)   |
+| VideoMAE-L | UnlabeledHybrid (1M)|   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e.pth)   |
+</div>
+</details>
+
+<details>
+<summary> Downstream Tasks</summary>
+<br>
+<div>
+
+**Classification**
+|      Model      |   Finetuning Data   |                                               download                                                |
+| :-----------------: | :----------: | :----------------------: | :----: | :---------------------------------------------------------------------------------------------------: |
+| VideoMAE-B | K400 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k400_ft.pth) |
+| VideoMAE-B | K710 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k710_ft.pth)   |
+| VideoMAE-B | SSv2 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_ssv2_ft.pth)   |
+| VideoMAE-L | K400 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_k400_ft.pth) |
+| VideoMAE-L | K700 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_k700_ft.pth)   |
+| VideoMAE-L | SSv2 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_ssv2_ft.pth)   |
+| VideoMAE-H | K400 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/K400/VideoMAE/ViT-H_f32_res384_89.54.pth) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/K400/VideoMAE/ViT-H_f32_res384_89.54.log)|
+| VideoMAE-H | SSv1 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/SSV1/VideoMAE/ViT-H.pth) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/SSV1/VideoMAE/log.txt)|
+| VideoMAE-H | HMDB51 |   [ckpt_split1](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split1_89.64/ViT-H.pth) | [ckpt_split2](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split2_89.92/ViT-H.pth) | [ckpt_split3](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split3_88.35/ViT-H.pth)|
+
+**Retrieval**
+|      Model      |   Training Data   |                                               download                                                |
+| :-----------------: | :----------: | :----------------------: | :----: | :---------------------------------------------------------------------------------------------------: |
+| InternVideo-MM-L-14 | ActivityNet |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/log.txt)|
+| InternVideo-MM-L-14 | DiDeMo |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/log.txt)|
+| InternVideo-MM-L-14 | LSMDC |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/log.txt)|
+| InternVideo-MM-L-14 | MSR-VTT |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msrvtt/kc4_finetune_1e-32e-3_77words_12frames_128_16_bothdsl/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msrvtt/kc4_finetune_1e-32e-3_77words_12frames_128_16_bothdsl/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msrvtt/kc4_finetune_1e-32e-3_77words_12frames_128_16_bothdsl/log.txt)|
+| InternVideo-MM-L-14 | MSVD |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/log.txt)|
+| InternVideo-MM-L-14 | VATEX |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/log.txt)|
+
+**VideoQA**
+|      Model      |   Finetuning Data   |                                               download                                                |
+| :-----------------: | :----------: | :----------------------: | :----: | :---------------------------------------------------------------------------------------------------: |
+| InternVideo-MM-L-14 | MSR-VTT |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msrvtt.ckpt) |
+| InternVideo-MM-L-14 | MSVD |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msvd.ckpt)   |
+| InternVideo-MM-L-14 | TGIFQA |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/tqifqa.ckpt)   |
+</div>
+</details>
+
+|Dataset| Setting | R@1↑ | R@5↑ | R@10↑ | MedR↓ | MeanR↓ |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
+| MSRVTT | video-to-text | 37.5 | 63.3 | 71.3 | 3.0 | 24.2 |
+| | text-to-video | 40 | 65.3 | 74.1 | 2.0 | 23.9 |
+| MSVD | video-to-text | 67.6 | 90.6 | 94.6 | 1.0 | 2.9 |
+| | text-to-video | 43.4|69.9|79.1|2.0|17.0|
+| LSMDC | video-to-text | 13.2|27.8|34.9|33.0|113.6|
+| | text-to-video | 17.6|32.4|40.2|23.0|101.7|
+| ActivityNet | video-to-text | 31.4|59.4|73.1|3.0|15.6|
+| | text-to-video | 30.7 | 57.4 | 70.2| 4.0 | 23.0|
+| DiDeMo | video-to-text | 33.5 | 60.3|71.1|3.0|21.5|
+| | text-to-video | 31.5 | 57.6 | 68.2 | 3.0 | 35.7 |
+| VATEX | video-to-text | 69.5 | 95|98.1|1.0|2.1|
+| | text-to-video | 49.5|79.7|87|2.0|9.7|
+
+To further improve our work, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) if you had time.
 
 <img src="Media/download.png" width="200" height="260" alt="survey_icon"/>
 <!--![survey_icon](Media/download.png){:height="50%" width="50%"}-->
