@@ -178,4 +178,25 @@ If this work is helpful for your research, please consider citing InternVideo.
   journal={arXiv preprint arXiv:2212.03191},
   year={2022}
 }
+
+@article{wang2023videomae,
+  title={VideoMAE V2: Scaling Video Masked Autoencoders with Dual Masking},
+  author={Wang, Limin and Huang, Bingkun and Zhao, Zhiyu and Tong, Zhan and He, Yinan and Wang, Yi and Wang, Yali and Qiao, Yu},
+  journal={arXiv preprint arXiv:2303.16727},
+  year={2023}
+}
+
+@article{li2022uniformerv2,
+  title={UniFormerV2: Spatiotemporal Learning by Arming Image ViTs with Video UniFormer},
+  author={Li, Kunchang and Wang, Yali and He, Yinan and Li, Yizhuo and Wang, Yi and Wang, Limin and Qiao, Yu},
+  journal={arXiv preprint arXiv:2211.09552},
+  year={2022}
+}
+
+@article{li2023unmasked,
+  title={Unmasked Teacher: Towards Training-Efficient Video Foundation Models},
+  author={Li, Kunchang and Wang, Yali and Li, Yizhuo and Wang, Yi and He, Yinan and Wang, Limin and Qiao, Yu},
+  journal={arXiv preprint arXiv:2303.16058},
+  year={2023}
+}
 ```
