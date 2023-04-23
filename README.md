@@ -26,11 +26,14 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf101-mitv2)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf101-mitv2?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf-hmdb)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf-hmdb?p=internvideo-general-video-foundation-models)
 
-This repo gives the official implmentation of '[InternVideo: General Video Foundation Models via Generative and Discriminative Learning](https://arxiv.org/abs/2212.03191)',
-by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan Xu, Yi Liu, Zun Wang, Sen Xing, Guo Chen, Junting Pan, Jashuo Yu, Hongjie Zhang, Yali Wang, Limin Wang, and Yu Qiao.
+This repo gives the official implmentation of '[InternVideo: General Video Foundation Models via Generative and Discriminative Learning](https://arxiv.org/abs/2212.03191)'
+
+- **Achieved `91.1%` Top1 accuracy in Kinetics 400, surpassing the `90%` milestone for `the first time`.**
+- **Achieved `77.2%` Top1 accuracy in Something-Something V2.**
+- **Achieved `SOTA` performance on `39` video datasets (including action recognition, temporal localization, retrieval, etc) when released in 2022.**
 
 ## Updates
-- `Mar  8, 2023`: All pretrained foundation model weights are released. Access them from [here](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u).
+- `Mar  8, 2023`: All pretrained foundation model weights are released. See them from [here](#model-zoo).
 - `Feb 19, 2023`: Some pretrained foundation model weights (-L) are released.
 - `Feb  5, 2023`: The code & model of multimodal learning are released.
 - `Jan 18, 2023`: The code of vision-language navigation is released.
@@ -41,6 +44,8 @@ by Yi Wang, Kunchang Li, Yizhuo Li, Yinan He, Bingkun Huang, Zhiyu Zhao, Jilan X
 - `Sep  2, 2022`: Press releases ([official](https://www.shlab.org.cn/news/5443279) | [163 news](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq news](https://new.qq.com/rain/a/20220902A053JP00)).
 
 ## Introduction
+We present the first video foundation model to achieve high-performance on both video and video-text tasks.
+
 The foundation models have recently shown excellent performance on a variety of downstream tasks in computer vision. However, most existing vision foundation models simply focus on image-level pretraining and adpation, which are limited for dynamic and complex video-level understanding tasks. To fill the gap, we present general video foundation models, *InternVideo*, by taking advantage of both generative and discriminative self-supervised video learning. Specifically, InternVideo efficiently explores masked video modeling and video-language contrastive learning as the pretraining objectives, and selectively coordinates video representations of these two complementary frameworks in a learnable manner to boost various video applications. Without bells and whistles, InternVideo achieves state-of-the-art performance on 39 video datasets from extensive tasks including video action recognition/detection, video-language alignment, and open-world video applications. Especially, our methods can obtain 91.1% and 77.2% top-1 accuracy on the challenging Kinetics-400 and Something-Something V2 benchmarks, respectively.
 
 ## Code & model
