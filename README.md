@@ -74,7 +74,7 @@ The foundation models have recently shown excellent performance on a variety of 
 <div>
 
 |      Model      |   Training Data   |                                               download                                                |
-| :-----------------: | :----------: | :----------------------: | :----: | :---------------------------------------------------------------------------------------------------: |
+| :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
 | InternVideo-MM-L-14 | WebVid10M+Self-collected (14M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/InternVideo-MM-L-14.ckpt) |
 | VideoMAE-B | UnlabeledHybrid (1M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e.pth)   |
 | VideoMAE-L | UnlabeledHybrid (1M)|   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e.pth)   |
@@ -88,7 +88,7 @@ The foundation models have recently shown excellent performance on a variety of 
 
 **Classification**
 |      Model      |   Finetuning Data   |                                               download                                                |
-| :-----------------: | :----------: | :----------------------: | :----: | :---------------------------------------------------------------------------------------------------: |
+| :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
 | VideoMAE-B | K400 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k400_ft.pth) |
 | VideoMAE-B | K710 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k710_ft.pth)   |
 | VideoMAE-B | SSv2 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_ssv2_ft.pth)   |
@@ -101,7 +101,7 @@ The foundation models have recently shown excellent performance on a variety of 
 
 **Retrieval**
 |      Model      |   Training Data   |                                               download                                                |
-| :-----------------: | :----------: | :----------------------: | :----: | :---------------------------------------------------------------------------------------------------: |
+| :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
 | InternVideo-MM-L-14 | ActivityNet |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/log.txt)|
 | InternVideo-MM-L-14 | DiDeMo |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/log.txt)|
 | InternVideo-MM-L-14 | LSMDC |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/log.txt)|
@@ -111,27 +111,12 @@ The foundation models have recently shown excellent performance on a variety of 
 
 **VideoQA**
 |      Model      |   Finetuning Data   |                                               download                                                |
-| :-----------------: | :----------: | :----------------------: | :----: | :---------------------------------------------------------------------------------------------------: |
+| :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
 | InternVideo-MM-L-14 | MSR-VTT |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msrvtt.ckpt) |
 | InternVideo-MM-L-14 | MSVD |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msvd.ckpt)   |
 | InternVideo-MM-L-14 | TGIFQA |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/tqifqa.ckpt)   |
 </div>
 </details>
-
-|Dataset| Setting | R@1↑ | R@5↑ | R@10↑ | MedR↓ | MeanR↓ |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: | 
-| MSRVTT | video-to-text | 37.5 | 63.3 | 71.3 | 3.0 | 24.2 |
-| | text-to-video | 40 | 65.3 | 74.1 | 2.0 | 23.9 |
-| MSVD | video-to-text | 67.6 | 90.6 | 94.6 | 1.0 | 2.9 |
-| | text-to-video | 43.4|69.9|79.1|2.0|17.0|
-| LSMDC | video-to-text | 13.2|27.8|34.9|33.0|113.6|
-| | text-to-video | 17.6|32.4|40.2|23.0|101.7|
-| ActivityNet | video-to-text | 31.4|59.4|73.1|3.0|15.6|
-| | text-to-video | 30.7 | 57.4 | 70.2| 4.0 | 23.0|
-| DiDeMo | video-to-text | 33.5 | 60.3|71.1|3.0|21.5|
-| | text-to-video | 31.5 | 57.6 | 68.2 | 3.0 | 35.7 |
-| VATEX | video-to-text | 69.5 | 95|98.1|1.0|2.1|
-| | text-to-video | 49.5|79.7|87|2.0|9.7|
 
 To further improve our work, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) if you had time.
 
