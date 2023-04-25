@@ -83,6 +83,7 @@ The foundation models have recently shown excellent performance on a variety of 
 | InternVideo-MM-L-14 | WebVid10M+Self-collected (14M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/InternVideo-MM-L-14.ckpt) |
 | VideoMAE-B | UnlabeledHybrid (1M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e.pth)   |
 | VideoMAE-L | UnlabeledHybrid (1M)|   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e.pth)   |
+| VideoMAE-H | UnlabeledHybrid (1M)|   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_h_hybrid_pt_1200e.pth)  |
 </div>
 </details>
 
