@@ -121,6 +121,11 @@ The foundation models have recently shown excellent performance on a variety of 
 | InternVideo-MM-L-14 | MSR-VTT |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msrvtt.ckpt) |
 | InternVideo-MM-L-14 | MSVD |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msvd.ckpt)   |
 | InternVideo-MM-L-14 | TGIFQA |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/tqifqa.ckpt)   |
+
+**Spatio-Temporal Action Localization**
+|      Model      |   Finetuning Data   |                                               download                                                |
+| :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
+| VideoMAE-H | AVA-Kinetics |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/stal/vit_h_hybrid_pt_k710_ft_ak_ft.sh) |
 </div>
 </details>
 
