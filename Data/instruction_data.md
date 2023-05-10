@@ -10,16 +10,16 @@
 
  We build a video-centric multimodal instruction data based on WebVid-10M. The corresponding detailed descriptions and question-answer generations are produced by ChatGPT based on video text (aided by [**VideoChat-Text**](https://github.com/OpenGVLab/Ask-Anything/tree/main/video_chat_with_ChatGPT)) with several prompts concerning **spatiotemporal features**. Compared with detailed video descriptions, video conversations are introduced to further improve the diversity, **temporal and casual features** in the video instruction data.
 
-<center>
+<div align="center">
 Example of detailed video description
-</center>
+</div>
 <div align="center">
 <img src="assert/detailed_description.png" width="60%">
 </div>
 
-<center>
+<div align="center">
 Example of video conversation
-</center>
+</div>
 <div align="center">
 <img src="assert/conversation.png" width="60%">
 </div>
