@@ -1,4 +1,4 @@
-# InternVideo [Paper](https://arxiv.org/pdf/2212.03191.pdf)
+# InternVideo \[[Paper\]](https://arxiv.org/pdf/2212.03191.pdf)
 
 [中文 README](README_cn.md)
 
