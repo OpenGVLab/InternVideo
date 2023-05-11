@@ -1,4 +1,4 @@
-# InternVideo [论文](https://arxiv.org/pdf/2212.03191.pdf)
+# InternVideo \[[论文\]](https://arxiv.org/pdf/2212.03191.pdf)
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-classification-on-kinetics-400)](https://paperswithcode.com/sota/action-classification-on-kinetics-400?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-classification-on-kinetics-600)](https://paperswithcode.com/sota/action-classification-on-kinetics-600?p=internvideo-general-video-foundation-models)
