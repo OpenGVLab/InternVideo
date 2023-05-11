@@ -34,6 +34,7 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 - **Achieved `SOTA` performance on `39` video datasets (including action recognition, temporal localization, retrieval, etc) when released in 2022.**
 
 ## Updates
+- `May 11, 2023`: **Video instruction data** are released at [here](Data/instruction_data) for tuning end-to-end video-centric multimodal dialogue systems like [VideoChat](https://github.com/OpenGVLab/Ask-Anything).
 - `Mar  8, 2023`: All pretrained foundation model weights are released. See them from [here](#model-zoo).
 - `Feb 19, 2023`: Some pretrained foundation model weights (-L) are released.
 - `Feb  5, 2023`: The code & model of multimodal learning are released.
