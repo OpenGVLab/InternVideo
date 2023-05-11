@@ -1,6 +1,4 @@
-# InternVideo [Paper](https://arxiv.org/pdf/2212.03191.pdf)
-
-[中文 README](README_cn.md)
+# InternVideo [论文](https://arxiv.org/pdf/2212.03191.pdf)
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-classification-on-kinetics-400)](https://paperswithcode.com/sota/action-classification-on-kinetics-400?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-classification-on-kinetics-600)](https://paperswithcode.com/sota/action-classification-on-kinetics-600?p=internvideo-general-video-foundation-models)
@@ -27,59 +25,53 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf101-mitv2)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf101-mitv2?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf-hmdb)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf-hmdb?p=internvideo-general-video-foundation-models)
 
-This repo gives the official implmentation of '[InternVideo: General Video Foundation Models via Generative and Discriminative Learning](https://arxiv.org/abs/2212.03191)'
+在这个代码仓库中，我们给出InternVideo的官方实现，'[InternVideo: General Video Foundation Models via Generative and Discriminative Learning](https://arxiv.org/abs/2212.03191)'。
 
-- **Achieved `91.1%` Top1 accuracy in Kinetics 400, surpassing the `90%` milestone for `the first time`.**
-- **Achieved `77.2%` Top1 accuracy in Something-Something V2.**
-- **Achieved `SOTA` performance on `39` video datasets (including action recognition, temporal localization, retrieval, etc) when released in 2022.**
+- **在Kinetics 400数据集上获取`91.1%`top-1准确率, `首次`突破`90%`里程碑。**
+- **在Something-Something V2数据集上获取`77.2%`top-1准确率。**
+- **在`39`个视频数据集（包括动作识别，时序定位，检索等）上获取`世界领先`性能（于2022年发布时）。**
 
-## Updates
-- `Mar  8, 2023`: All pretrained foundation model weights are released. See them from [here](#model-zoo).
-- `Feb 19, 2023`: Some pretrained foundation model weights (-L) are released.
-- `Feb  5, 2023`: The code & model of multimodal learning are released.
-- `Jan 18, 2023`: The code of vision-language navigation is released.
-- `Jan 16, 2023`: The code of video question answering, zero-shot action recognition, and zero-shot multiple choice is released.
-- `Jan  1, 2023`: The code & model of spatio-temporal action localiztion are released.
-- `Dec 27, 2022`: The code & model of partial pretraining (VideoMAE) and downstream applications (video-text retrieval, temporal action localization, open-set action recognition, and ego4d related tasks) are released.
-- `Dec  6, 2022`: The technical report of InternVideo is released.
-- `Sep  2, 2022`: Press releases ([official](https://www.shlab.org.cn/news/5443279) | [163 news](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq news](https://new.qq.com/rain/a/20220902A053JP00)).
+## 更新
+- `2023年 3月 8日`: 所有预训练的基础模型权重已经发布。请从[这里](#model-zoo)查看。
+- `2023年12月 6日`: InternVideo技术报告发布。
+- `2023年 9月 2日`: 媒体发布 ([官方](https://www.shlab.org.cn/news/5443279) | [163新闻](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq新闻](https://new.qq.com/rain/a/20220902A053JP00))。
 
-## Introduction
-*We present the first video foundation model to achieve high-performance on both video and video-text tasks*.
+## 引言
+*我们展示了首个在视频和视频-文本任务上均取得高性能的视频基础模型。*
 
-The foundation models have recently shown excellent performance on a variety of downstream tasks in computer vision. However, most existing vision foundation models simply focus on image-level pretraining and adpation, which are limited for dynamic and complex video-level understanding tasks. To fill the gap, we present general video foundation models, *InternVideo*, by taking advantage of both generative and discriminative self-supervised video learning. Specifically, InternVideo efficiently explores masked video modeling and video-language contrastive learning as the pretraining objectives, and selectively coordinates video representations of these two complementary frameworks in a learnable manner to boost various video applications. Without bells and whistles, InternVideo achieves state-of-the-art performance on 39 video datasets from extensive tasks including video action recognition/detection, video-language alignment, and open-world video applications. Especially, our methods can obtain 91.1% and 77.2% top-1 accuracy on the challenging Kinetics-400 and Something-Something V2 benchmarks, respectively.
+最近，基础模型在计算机视觉领域的诸多下游任务中表现出了优异的性能。然而，大多数现有的视觉基础模型仅关注图像级别的预训练和适应，这对于动态且复杂的视频级理解任务来说是不够的。为了填补这一空白，我们提出了一种通用视频基础模型*InternVideo*，它利用生成和判别自监督视频学习的优势。具体来说，InternVideo有效地探索了蒙版视频建模与视频-语言对比学习作为预训练目标，并以可学习的方式选择性地协调这两个互补框架中的视频表示，从而提升各种视频应用的性能。InternVideo 在包括视频动作识别/检测、视频-语言对齐、开放式视频应用等众多任务的 39 个视频数据集上实现了最先进的性能。尤其值得一提的是，我们的方法分别在具有挑战性的 Kinetics-400 和 Something-Something V2 基准测试中获得了 *91.1%* 和 *77.2%* 的 top-1 准确率。
 
-## Code & model
-- [ ] Video foundation model Pretraining.
-    - [x] [video masked modeling](Pretrain/VideoMAE).
-    - [x] [video-language contrastive learning modeling](Pretrain/Multi-Modalities-Pretraining).
-    - [x] Supervised training of [ViT (from video masked modeling)](Pretrain/VideoMAE#finetune) and [UniformerV2 (from multimodal learning)](https://github.com/OpenGVLab/UniFormerV2/blob/main/INSTRUCTIONS.md#training).
-    - [ ] Model interaction.
-- [ ] Downstream tasks.
-    - [ ] Action recognition.
-    - [x] [Temporal action localization](Downstream/Temporal-Action-Localization).
-    - [x] [Spatio-temporal action localization](Downstream/Spatial-Temporal-Action-Localization).
-    - [x] [Video-text retrieval](Downstream/Video-Text-Retrieval).
-    - [x] [Video question answering](Downstream/multi-modalities-downstream#video-question-answering).
-    - [x] [Visual-language navigation](Downstream/Visual-Language-Navigation).
-    - [x] [Open-set action recognition](Downstream/Open-Set-Action-Recognition).
-    - [x] [Zero-shot action recognition](Downstream/multi-modalities-downstream#zero-shot-action-recognition).
-    - [x] [Zero-shot multiple choice](Downstream/multi-modalities-downstream#zero-shot-multiple-choice).
-    - [x] [Ego4D related tasks](https://github.com/OpenGVLab/ego4d-eccv2022-solutions).
-- [x] [Pretrained foundation model weights](https://github.com/OpenGVLab/InternVideo#model-zoo).
-- [ ] Demos for training usages and evaluations.
+## 代码 & 模型
+- [ ] 预训练.
+    - [x] [视频掩码建模](Pretrain/VideoMAE)。
+    - [x] [视频语言对比学习](Pretrain/Multi-Modalities-Pretraining)。
+    - [x] [ViT (来自掩码学习)](Pretrain/VideoMAE#finetune) and [UniformerV2 (来自多模态学习)](https://github.com/OpenGVLab/UniFormerV2/blob/main/INSTRUCTIONS.md#training)的监督学习。
+    - [ ] 模型交互。
+- [ ] 下游任务.
+    - [ ] 动作识别。
+    - [x] [时序定位](Downstream/Temporal-Action-Localization)。
+    - [x] [时空定位](Downstream/Spatial-Temporal-Action-Localization)。
+    - [x] [视频文本检索](Downstream/Video-Text-Retrieval)。
+    - [x] [视频问答](Downstream/multi-modalities-downstream#video-question-answering)。
+    - [x] [视觉-语言导航](Downstream/Visual-Language-Navigation)。
+    - [x] [动作开集识别](Downstream/Open-Set-Action-Recognition)。
+    - [x] [动作零样本识别](Downstream/multi-modalities-downstream#zero-shot-action-recognition)。
+    - [x] [零样本多项选择](Downstream/multi-modalities-downstream#zero-shot-multiple-choice)。
+    - [x] [Ego4D相关工作](https://github.com/OpenGVLab/ego4d-eccv2022-solutions)。
+- [x] [预训练模型权重](https://github.com/OpenGVLab/InternVideo#model-zoo)。
+- [ ] 训练和测试的展示。
 
-## Performance
-- [Video Retrieval](Downstream/Video-Text-Retrieval#our-results)
+## 性能
+- [视频检索](Downstream/Video-Text-Retrieval#our-results)
 
-## Model Zoo
+## 模型库
 
 <details>
-<summary> Pretrained Models </summary>
+<summary> 预训练模型 </summary>
 <br>
 <div>
 
-|      Model      |   Training Data   |                                               download                                                |
+|      模型      |   训练数据   |                                               下载                                                |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
 | InternVideo-MM-L-14 | WebVid10M+Self-collected (14M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/InternVideo-MM-L-14.ckpt) |
 | VideoMAE-B | UnlabeledHybrid (1M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e.pth)   |
@@ -89,12 +81,12 @@ The foundation models have recently shown excellent performance on a variety of 
 </details>
 
 <details>
-<summary> Downstream Tasks</summary>
+<summary> 下游任务 </summary>
 <br>
 <div>
 
-**Classification**
-|      Model      |   Finetuning Data   |                                               download                                                |
+**分类**
+|      模型      |   微调数据   |                                               下载                                                |
 | :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
 | VideoMAE-B | K400 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k400_ft.pth) |
 | VideoMAE-B | K710 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k710_ft.pth)   |
@@ -106,8 +98,8 @@ The foundation models have recently shown excellent performance on a variety of 
 | VideoMAE-H | SSv1 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/SSV1/VideoMAE/ViT-H.pth) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/SSV1/VideoMAE/log.txt)|
 | VideoMAE-H | HMDB51 |   [ckpt_split1](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split1_89.64/ViT-H.pth) | [ckpt_split2](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split2_89.92/ViT-H.pth) | [ckpt_split3](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split3_88.35/ViT-H.pth)|
 
-**Retrieval**
-|      Model      |   Training Data   |                                               download                                                |
+**检索**
+|      模型      |   训练数据   |                                               下载                                                |
 | :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
 | InternVideo-MM-L-14 | ActivityNet |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/log.txt)|
 | InternVideo-MM-L-14 | DiDeMo |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/log.txt)|
@@ -116,21 +108,21 @@ The foundation models have recently shown excellent performance on a variety of 
 | InternVideo-MM-L-14 | MSVD |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/log.txt)|
 | InternVideo-MM-L-14 | VATEX |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/log.txt)|
 
-**VideoQA**
-|      Model      |   Finetuning Data   |                                               download                                                |
+**视频问答**
+|      模型      |   微调数据   |                                               下载                                                |
 | :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
 | InternVideo-MM-L-14 | MSR-VTT |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msrvtt.ckpt) |
 | InternVideo-MM-L-14 | MSVD |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msvd.ckpt)   |
 | InternVideo-MM-L-14 | TGIFQA |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/tqifqa.ckpt)   |
 
-**Spatio-Temporal Action Localization**
-|      Model      |   Finetuning Data   |                                               download                                                |
+**时空定位**
+|      模型      |   微调数据   |                                               下载                                                |
 | :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
 | VideoMAE-H | AVA-Kinetics |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/stal/vit_h_hybrid_pt_k710_ft_ak_ft.sh) |
 </div>
 </details>
 
-To further improve our work, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) if you had time.
+为了进一步提升我们的工作或者便于我们交流, 如果有空请填写[问卷](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (或者扫描下面的QR码).
 
 <img src="Media/download.png" width="200" height="260" alt="survey_icon"/>
 <!--![survey_icon](Media/download.png){:height="50%" width="50%"}-->
@@ -174,9 +166,9 @@ We present the code of video masked modeling ([VideoMAE](Pretrain/VideoMAE/READM
 ## Acknowledgment
 -->
 
-## Citation
+## 引用
 
-If this work is helpful for your research, please consider citing InternVideo.
+如果这项工作对您的研究有帮助，请考虑引用InternVideo和相关工作。
 
 ```
 @article{wang2022internvideo,
