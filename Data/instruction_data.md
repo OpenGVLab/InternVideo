@@ -23,3 +23,15 @@ Example of video conversation
 <div align="center">
 <img src="assert/conversation.png" width="60%">
 </div>
+
+# :page_facing_up: Citation
+
+If you find this project useful in your research, please consider cite:
+```BibTeX
+@article{2023videochat,
+  title={VideoChat: Chat-Centric Video Understanding},
+  author={KunChang Li, Yinan He, Yi Wang, Yizhuo Li, Wenhai Wang, Ping Luo, Yali Wang, Limin Wang, and Yu Qiao},
+  journal={arXiv preprint arXiv:2305.06355},
+  year={2023}
+}
+```
