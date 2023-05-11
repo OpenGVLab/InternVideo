@@ -61,7 +61,7 @@ A model achieves the state-of-the-art video-text retrieval performance on two se
 
 Download Original Dataset: [MSR-VTT](http://ms-multimedia-challenge.com/2017/dataset), [MSVD](https://www.cs.utexas.edu/users/ml/clamp/videoDescription/), [LSMDC](https://sites.google.com/site/describingmovies/download), [DiDeMo](https://github.com/LisaAnne/LocalizingMoments), [ActivityNet](http://activity-net.org/download.html), [VATEX](https://eric-xw.github.io/vatex-website/about.html).  
 
-All annotation files are provided in the *data/* folder.  
+All annotation files can be downloaded from [here](https://pjlab-my.sharepoint.cn/:u:/g/personal/wangyi_pjlab_org_cn/EREJFyTbpwFPppzv3tBlHp4B5ym31zYNyUknDdiLaAt8Vw?e=jHhMdj). Unzip them and put them in the *data/* folder.
 
 ### Pre-processing (optional)  
 
