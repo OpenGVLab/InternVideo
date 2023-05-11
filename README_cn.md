@@ -32,6 +32,7 @@
 - **在`39`个视频数据集（包括动作识别，时序定位，检索等）上获取`世界领先`性能（于2022年发布时）。**
 
 ## 更新
+- `2023年 5月11日`: **视频指令微调数据**发布于[这儿](Data/instruction_data)，可用于微调端到端的视频对话系统，比如[VideoChat](https://github.com/OpenGVLab/Ask-Anything)。
 - `2023年 3月 8日`: 所有预训练的基础模型权重已经发布。请从[这里](#model-zoo)查看。
 - `2023年12月 6日`: InternVideo技术报告发布。
 - `2023年 9月 2日`: 媒体发布 ([官方](https://www.shlab.org.cn/news/5443279) | [163新闻](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq新闻](https://new.qq.com/rain/a/20220902A053JP00))。
