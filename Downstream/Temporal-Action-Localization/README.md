@@ -19,7 +19,7 @@ Note that, our InternVideo achieves huge improvements in temporal action localiz
 
 ## Installation
 * Follow INSTALL.md for installing necessary dependencies and compiling the code.
-
+* The annotations for the used data can be downloaded from [here](https://pjlab-my.sharepoint.cn/:u:/g/personal/wangyi_pjlab_org_cn/EbMrA1ltSdBPttMho9pe0cYBshPWec7IKmYFTNMGvdmT1A?e=jsmerl). Unzip and put them in the folder `./data`.
 
 
 ## To Reproduce Our Results of InternVideo
