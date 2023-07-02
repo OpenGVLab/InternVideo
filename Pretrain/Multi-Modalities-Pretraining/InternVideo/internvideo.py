@@ -26,7 +26,7 @@ def load_video(path):
     video_reader = decord.VideoReader(path, num_threads=1, ctx=decord.cpu(0))
     decord.bridge.set_bridge('torch')
     video_len = len(video_reader)
-    video = video_reader.get_batch(np.linspace(0, video_len - 1, 8).astype(np.int)).byte()
+    video = video_reader.get_batch(np.linspace(0, video_len - 1, 8).astype(np.intc)).byte()
     video = video.permute(3, 0, 1, 2)
 
     input_mean = [0.48145466, 0.4578275, 0.40821073]
