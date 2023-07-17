@@ -1,5 +1,7 @@
 # InternVid
 
+[![Hugging Face Demo](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue)](https://huggingface.co/datasets/OpenGVLab/InternVid)
+
 # :fire: News
 We are excited to announce the upcoming release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. A subset of this dataset, consisting of 10 million video clips, will be made available in the next week. Stay tuned for updates!
 
