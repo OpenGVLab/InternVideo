@@ -34,6 +34,7 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 - **Achieved `SOTA` performance on `39` video datasets (including action recognition, temporal localization, retrieval, etc) when released in 2022.**
 
 ## Updates
+- `July 16, 2023`: A **video-text dataset InternVid** is partially released at [here](Data/InternVid) for facilitating multimodal understanding and generation. A subset of this dataset, consisting of 10 million video clips, is available at [Hugging Face](https://huggingface.co/datasets/OpenGVLab/InternVid).
 - `May 11, 2023`: **Video instruction data** are released at [here](Data/instruction_data) for tuning end-to-end video-centric multimodal dialogue systems like [VideoChat](https://github.com/OpenGVLab/Ask-Anything).
 - `Mar  8, 2023`: All pretrained foundation model weights are released. See them from [here](#model-zoo).
 - `Feb 19, 2023`: Some pretrained foundation model weights (-L) are released.
@@ -205,6 +206,13 @@ If this work is helpful for your research, please consider citing InternVideo.
   title={Unmasked Teacher: Towards Training-Efficient Video Foundation Models},
   author={Li, Kunchang and Wang, Yali and Li, Yizhuo and Wang, Yi and He, Yinan and Wang, Limin and Qiao, Yu},
   journal={arXiv preprint arXiv:2303.16058},
+  year={2023}
+}
+
+@article{wang2023internvid,
+  title={InternVid: A Large-scale Video-Text Dataset for Multimodal Understanding and Generation},
+  author={Wang, Yi and He, Yinan and Li, Yizhuo and Li, Kunchang and Yu, Jiashuo and Ma, Xin and Chen, Xinyuan and Wang, Yaohui and Luo, Ping and Liu, Ziwei and Wang, Yali and Wang, Limin and Qiao, Yu},
+  journal={arXiv preprint arXiv:2307.06942},
   year={2023}
 }
 ```

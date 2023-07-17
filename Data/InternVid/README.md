@@ -3,6 +3,19 @@
 # :fire: News
 We are excited to announce the upcoming release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. A subset of this dataset, consisting of 10 million video clips, will be made available in the next week. Stay tuned for updates!
 
+# Data & Model Zoo
+
+<details>
+<summary> Pretrained Data & Model </summary>
+<br>
+<div>
+
+|      Model      |   Training Data   |                                               Descriptions                                                |
+| :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
+| ViCLIP-L-14 [ckpt]() | InternVid-10-FLT [HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) |    |
+</div>
+</details>
+
 ## Citation
 
 If you find this work useful for your research, please consider citing InternVid. Your acknowledgement would greatly help us in continuing to contribute resources to the research community.
