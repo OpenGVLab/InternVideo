@@ -12,7 +12,7 @@ We are excited to announce the upcoming release of a large-scale video-text data
 
 |      Model      |   Training Data   |                                               Descriptions                                                |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
-| ViCLIP-L-14 [ckpt]() | InternVid-10-FLT [HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) |    |
+| ViCLIP-L-14 \[[ckpt]()\] | InternVid-10-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid)\] |    |
 </div>
 </details>
 
