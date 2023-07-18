@@ -1,4 +1,4 @@
-# InternVid
+# InternVid \[[Paper](https://arxiv.org/pdf/2307.06942.pdf)\]
 
 [![Hugging Face Demo](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue)](https://huggingface.co/datasets/OpenGVLab/InternVid)
 
