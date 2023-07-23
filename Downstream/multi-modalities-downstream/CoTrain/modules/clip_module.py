@@ -322,8 +322,8 @@ class CLIP(pl.LightningModule):
         for n, p in self.named_parameters():
             if (
                 "clip.visual" in n
-                and "clip.visual.ln_post" not in n
-                and "clip.visual.proj" not in n
+                and "clip.visual_ln_post" not in n
+                and "clip.visual_proj" not in n
             ):
                 p.requires_grad = False
             elif "clip.transformer" in n:
