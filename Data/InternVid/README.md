@@ -3,7 +3,7 @@
 [![Hugging Face Demo](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-blue)](https://huggingface.co/datasets/OpenGVLab/InternVid)
 
 # :fire: News
-We are excited to announce the partial release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. As part of this release, we are making available a [subset](https://huggingface.co/datasets/OpenGVLab/InternVid) of the dataset, which comprises 10 million video clips. Additionally, we have provided a [ViCLIP]() model trained on this subset, using the ViT-L architecture. It achieves SOTA zero-shot action recognition performance on Kinetics.
+We are excited to announce the partial release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. As part of this release, we are making available a [subset](https://huggingface.co/datasets/OpenGVLab/InternVid) of the dataset, which comprises 10 million video clips. Additionally, we have provided a [ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP) model trained on this subset, using the ViT-L architecture. It achieves SOTA zero-shot action recognition performance on Kinetics.
 
 Stay tuned for updates!
 
@@ -21,7 +21,7 @@ InternVid exhibits diverse clip durations and caption lengths in the segmented c
 
 **ViCLIP: a simple video CLIP for transferrable video-text representation**
 
-Built upon <a href="">CLIP</a>, we make a simple video-text pretraining baseline ViCLIP. It consists of a video encoder (ViT) and a text encoder, as given below. Both modules are initialized from the corresponding CLIP components. We update the native attention in the video encoder to spatiotemporal attention while maintaining other design elements. For efficient learning, we apply masking to videos in pre-training.
+Built upon <a href="https://github.com/openai/CLIP">CLIP</a>, we make a simple video-text pretraining baseline ViCLIP. It consists of a video encoder (ViT) and a text encoder, as given below. Both modules are initialized from the corresponding CLIP components. We update the native attention in the video encoder to spatiotemporal attention while maintaining other design elements. For efficient learning, we apply masking to videos in pre-training.
 
 <img width="633" alt="87c6263cc4aceee72cc8e37085a8109" src="https://github.com/OpenGVLab/InternVideo/assets/43169235/1e540a2b-f503-4036-b2a8-ba99401fc5b0">
 
@@ -35,7 +35,7 @@ Built upon <a href="">CLIP</a>, we make a simple video-text pretraining baseline
 
 |      Model      |   Training Data   |                                               Descriptions                                                |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
-| ViCLIP-L-14 \[[ckpt]()\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid)\] |    |
+| ViCLIP-L-14 \[[ckpt](https://huggingface.co/OpenGVLab/ViCLIP)\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid)\] |    |
 </div>
 </details>
 
