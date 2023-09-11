@@ -34,6 +34,7 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 - **Achieved `SOTA` performance on `39` video datasets (including action recognition, temporal localization, retrieval, etc) when released in 2022.**
 
 ## Updates
+- `Sep  7, 2023`: [**ViCLIP**](https://huggingface.co/OpenGVLab/ViCLIP): a simple video CLIP for transferrable video-text representation is available at [Hugging Face](https://huggingface.co/OpenGVLab/ViCLIP)
 - `July 16, 2023`: A **video-text dataset InternVid** is partially released at [here](Data/InternVid) for facilitating multimodal understanding and generation. A subset of this dataset, consisting of 10 million video clips, is available at [Hugging Face](https://huggingface.co/datasets/OpenGVLab/InternVid).
 - `May 11, 2023`: **Video instruction data** are released at [here](Data/instruction_data) for tuning end-to-end video-centric multimodal dialogue systems like [VideoChat](https://github.com/OpenGVLab/Ask-Anything).
 - `Mar  8, 2023`: All pretrained foundation model weights are released. See them from [here](#model-zoo).
