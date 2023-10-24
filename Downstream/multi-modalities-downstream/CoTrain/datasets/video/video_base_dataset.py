@@ -282,111 +282,6 @@ class BaseDataset(torch.utils.data.Dataset):
         
         return dict_batch
 
-    # def collate(self, batch, mlm_collator):
-    #     batch_size = len(batch)
-    #     keys = set([key for b in batch for key in b.keys()])
-    #     dict_batch = {k: [dic[k] if k in dic else None for dic in batch] for k in keys}
-    #
-    #     video_keys = [k for k in list(dict_batch.keys()) if "video" in k]
-    #     video_sizes = list()
-    #
-    #     # global & local video
-    #     for video_key in video_keys:
-    #         video_sizes += [ii.shape for i in dict_batch[video_key][0] if i is not None for ii in i]
-    #         # print(global_video_sizes, local_video_sizes)
-    #
-    #     for size in video_sizes:
-    #         # print(size)
-    #         assert (
-    #             len(size) == 4
-    #         ), f"Collate error, an video should be in shape of (T, N, H, W), instead of given {size}"
-    #
-    #     if len(video_keys) != 0:
-    #         global_max_height = max([i[2] for i in video_sizes])
-    #         global_max_width = max([i[3] for i in video_sizes])
-    #         local_max_height = min([i[2] for i in video_sizes])
-    #         local_max_width = min([i[3] for i in video_sizes])
-    #     for video_key in video_keys:
-    #         video = dict_batch[video_key]
-    #         global_view_size = len(dict_batch[video_key][0][0])
-    #         local_view_size = len(dict_batch[video_key][0][1])
-    #         # print(global_view_size, local_view_size)
-    #
-    #         new_videos = [
-    #         [
-    #             torch.zeros(batch_size, self.num_frames, 3, global_max_height, global_max_width)
-    #             for _ in range(global_view_size)
-    #         ],
-    #         [
-    #             torch.zeros(batch_size, self.num_frames, 3, local_max_height, local_max_width)
-    #             for _ in range(local_view_size)
-    #         ]
-    #         ]
-    #         # print(len(img))
-    #         for bi in range(batch_size):
-    #             orig_batch = video[bi]
-    #             for vi in range(global_view_size):
-    #                 if orig_batch is None:
-    #                     # new_videos[vi][bi] = None
-    #                     # modify by alex
-    #                     continue
-    #                 else:
-    #                     orig = video[bi][0][vi]
-    #                     # print(orig.size())
-    #                     new_videos[0][vi][bi, :, :, : orig.shape[-2], : orig.shape[-1]] = orig
-    #
-    #         for bi in range(batch_size):
-    #             orig_batch = video[bi]
-    #             for vi in range(local_view_size):
-    #                 if orig_batch is None:
-    #                     # new_videos[vi][bi] = None
-    #                     # modify by alex
-    #                     continue
-    #                 else:
-    #                     orig = video[bi][1][vi]
-    #                     # print(orig.size())
-    #                     new_videos[1][vi][bi, :, :, : orig.shape[-2], : orig.shape[-1]] = orig
-    #         dict_batch[video_key] = new_videos
-    #
-    #     txt_keys = [k for k in list(dict_batch.keys()) if "text" in k]
-    #     # print(txt_keys)
-    #     if len(txt_keys) != 0:
-    #         texts = [[d[0] for d in dict_batch[txt_key]] for txt_key in txt_keys]
-    #         encodings = [[d[1] for d in dict_batch[txt_key]] for txt_key in txt_keys]
-    #         draw_text_len = len(encodings)
-    #         flatten_encodings = [e for encoding in encodings for e in encoding]
-    #         flatten_mlms = mlm_collator(flatten_encodings)
-    #
-    #         for i, txt_key in enumerate(txt_keys):
-    #             texts, encodings = (
-    #                 [d[0] for d in dict_batch[txt_key]],
-    #                 [d[1] for d in dict_batch[txt_key]],
-    #             )
-    #
-    #             mlm_ids, mlm_labels = (
-    #                 flatten_mlms["input_ids"][batch_size * (i) : batch_size * (i + 1)],
-    #                 flatten_mlms["labels"][batch_size * (i) : batch_size * (i + 1)],
-    #             )
-    #
-    #             input_ids = torch.zeros_like(mlm_ids)
-    #             attention_mask = torch.zeros_like(mlm_ids)
-    #             for _i, encoding in enumerate(encodings):
-    #                 _input_ids, _attention_mask = (
-    #                     torch.tensor(encoding["input_ids"]),
-    #                     torch.tensor(encoding["attention_mask"]),
-    #                 )
-    #                 input_ids[_i, : len(_input_ids)] = _input_ids
-    #                 attention_mask[_i, : len(_attention_mask)] = _attention_mask
-    #
-    #             dict_batch[txt_key] = texts
-    #             dict_batch[f"{txt_key}_ids"] = input_ids
-    #             dict_batch[f"{txt_key}_labels"] = torch.full_like(input_ids, -100)
-    #             dict_batch[f"{txt_key}_ids_mlm"] = mlm_ids
-    #             dict_batch[f"{txt_key}_labels_mlm"] = mlm_labels
-    #             dict_batch[f"{txt_key}_masks"] = attention_mask
-    #
-    #     return dict_batch
-
 
 def sample_frames(num_frames, vlen, sample='rand', fix_start=None):
     acc_samples = min(num_frames, vlen)
@@ -464,21 +359,18 @@ def read_frames_cv2(video_path, num_frames, sample='rand', fix_start=None):
     return frames, success_idxs, vlen
 
 
-def read_frames_decord(video_path, num_frames, mode='train', fix_start=None):
+def read_frames_decord(video_path, num_frames, mode='train', fix_start=None, width=256, height=256):
     if "s3://" in video_path:
         video_bytes = client.get(video_path)
         assert video_bytes is not None, "Get video failed from {}".format(video_path)
         video_path = video_bytes
-        if isinstance(video_path, bytes):  # I really have no idea why I have to do this
+        if isinstance(video_path, bytes):  # create a readable and writable binary data stream object in memory
             video_path = io.BytesIO(video_bytes)
-    # print("video path: {}".format(video_path))
     if mode in ['train']:
         sample = 'rand'
     else:
         sample = 'uniform'
-    # video_reader = decord.VideoReader(video_path, width=512, height=512, num_threads=1, ctx=cpu(0))
-    video_reader = decord.VideoReader(video_path, width=256, height=256, num_threads=1, ctx=cpu(0))
-    # video_reader = decord.VideoReader(video_path, num_threads=1, ctx=cpu(0))
+    video_reader = decord.VideoReader(video_path, width=width, height=height, num_threads=1, ctx=cpu(0))
     decord.bridge.set_bridge('torch')
     vlen = len(video_reader)
     frame_idxs = sample_frames(num_frames, vlen, sample=sample, fix_start=fix_start)
