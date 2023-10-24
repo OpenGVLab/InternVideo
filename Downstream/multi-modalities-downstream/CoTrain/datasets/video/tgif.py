@@ -31,7 +31,7 @@ class TGIFDataset(BaseDataset):
         )
         # self.num_frames = 4
         self._load_metadata()
-        self.data_dir = "/mnt/lustre/share_data/heyinan/data/tgif"  # TODO: Remove this piece of shit
+        self.data_dir = "{your_tgif_dir}"
 
     def _load_metadata(self):
         metadata_dir = './meta_data/tgif'
