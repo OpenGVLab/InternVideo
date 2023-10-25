@@ -30,16 +30,14 @@ Built upon <a href="https://github.com/openai/CLIP">CLIP</a>, we make a simple v
 
 # Data & Model Zoo
 
-<details>
-<summary> Pretrained Data & Model </summary>
-<br>
+### Pretrained Data & Model
 <div>
 
 |      Model      |   Training Data   |                                               Descriptions                                                |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
-| ViCLIP-L-14 \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP) | [Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViClip-InternVid-10M-FLT.pth )\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) | [OpenDataLab](https://opendatalab.com/shepshep/InternVid)\] |    |
+| ViCLIP-L-14 \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP) \| [Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViClip-InternVid-10M-FLT.pth )\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) \| [OpenDataLab](https://opendatalab.com/shepshep/InternVid)\] |    |
 </div>
-</details>
+
 
 ## Citation
 
