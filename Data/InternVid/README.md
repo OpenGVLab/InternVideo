@@ -5,7 +5,7 @@
 # :fire: News
 We are excited to announce the partial release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. As part of this release, we are making available a [subset](https://huggingface.co/datasets/OpenGVLab/InternVid) of the dataset, which comprises 10 million video clips. Additionally, we have provided a [ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP) model trained on this subset, using the ViT-L architecture. It achieves SOTA zero-shot action recognition performance on Kinetics.
 
-We give a step-by-step instructions and clarify the process of accessing and utilizing ViClip in demo.ipynb.
+We give a step-by-step instructions and clarify the process of accessing and utilizing ViClip in [demo.ipynb](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb).
 
 Stay tuned for updates!
 
