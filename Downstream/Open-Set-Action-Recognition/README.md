@@ -100,10 +100,6 @@ bash finetune_mae_edlnokl_ucf101.sh 8
 The pre-trained weights (checkpoints) are available below.
 | Model | Checkpoint | Train Config | Test Config |  Open Set AUC (%) | Closed Set ACC (%) |
 |:--|:--:|:--:|:--:|:--:|:--:|
-|I3D + DEAR |[ckpt](https://drive.google.com/file/d/1oRNBH0aAhFpcJSBqWlT4x0ru7iHfdndW/view?usp=sharing)| [train](configs/recognition/i3d/finetune_ucf101_i3d_edlnokl_avuc_debias.py) | [test](configs/recognition/i3d/inference_i3d_enn.py) | 77.08 / 81.54 | 93.89 |
-|TSM + DEAR | [ckpt](https://drive.google.com/file/d/1TM1c28jRyZpOrWqwaQPYXFBZJXHQp__9/view?usp=sharing)| [train](configs/recognition/tsm/finetune_ucf101_tsm_edlnokl_avuc_debias.py) | [test](configs/recognition/tsm/inference_tsm_enn.py) | 78.65 / 83.92 | 94.48 |
-|TPN + DEAR | [ckpt](https://drive.google.com/file/d/1jorfFMMzWd5xDCfZsemoWD8Rg7DbH16u/view?usp=sharing)| [train](configs/recognition/tpn/tpn_slowonly_edlloss_nokl_avuc_debias_r50_8x8x1_150e_kinetics_rgb.py) | [test](configs/recognition/tpn/inference_tpn_slowonly_enn.py) | 79.23 / 81.80 | 96.30 |
-|SlowFast + DEAR |[ckpt](https://drive.google.com/file/d/13LNRv0BYkVfzCA95RB5dCp53MmErRL5D/view?usp=sharing)| [train](configs/recognition/slowfast/finetune_ucf101_slowfast_edlnokl_avuc_debias.py) | [test](configs/recognition/slowfast/inference_slowfast_enn.py)  | 82.94 / 86.99 | 96.48 |
 |InternVideo-B + EDL |[ckpt](https://drive.google.com/file/d/1lW1mHCbyfi0tvIxAjVzjr3g-AgK61ND3/view?usp=share_link)| [train](configs/recognition/mae/finetune_ucf101_mae_edlnokl.py) | [test](configs/recognition/mae/inference_mae_enn.py)  | 83.21 / 88.98 | 96.91 |
 |InternVideo-L + EDL |[ckpt](https://drive.google.com/file/d/1lW1mHCbyfi0tvIxAjVzjr3g-AgK61ND3/view?usp=share_link)| [train](configs/recognition/mae/finetune_ucf101_mae_edlnokl.py) | [test](configs/recognition/mae/inference_mae_enn.py)  | 83.82 / 91.13 | 97.36 |
 |InternVideo-H + EDL |[ckpt](https://drive.google.com/file/d/1lW1mHCbyfi0tvIxAjVzjr3g-AgK61ND3/view?usp=share_link)| [train](configs/recognition/mae/finetune_ucf101_mae_edlnokl.py) | [test](configs/recognition/mae/inference_mae_enn.py)  | 85.48 / 91.85 | 97.89 |
