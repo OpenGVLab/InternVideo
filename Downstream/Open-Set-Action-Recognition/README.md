@@ -110,18 +110,3 @@ The pre-trained weights (checkpoints) are available below.
 
 For the pretrained MAE model, please download it in the [Google Drive](https://drive.google.com/file/d/1iVb7c3onYPjIv5ResMRbIoxCVlsp5YCr/view?usp=share_link).
 
-
-## License
-
-See [Apache-2.0 License](/LICENSE)
-
-## Acknowledgement
-
-In addition to the MMAction2 codebase, this repo contains modified codes from:
- - [pytorch-classification-uncertainty](https://github.com/dougbrion/pytorch-classification-uncertainty): for implementation of the [EDL (NeurIPS-2018)](https://arxiv.org/abs/1806.01768).
- - [ARPL](https://github.com/iCGY96/ARPL): for implementation of baseline method [RPL (ECCV-2020)](https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123480511.pdf).
- - [OSDN](https://github.com/abhijitbendale/OSDN): for implementation of baseline method [OpenMax (CVPR-2016)](https://vast.uccs.edu/~abendale/papers/0348.pdf).
- - [bayes-by-backprop](https://github.com/nitarshan/bayes-by-backprop/blob/master/Weight%20Uncertainty%20in%20Neural%20Networks.ipynb): for implementation of the baseline method Bayesian Neural Networks (BNNs).
- - [rebias](https://github.com/clovaai/rebias): for implementation of HSIC regularizer used in [ReBias (ICML-2020)](https://arxiv.org/abs/1910.02806)
-
-We sincerely thank the owners of all these great repos!
