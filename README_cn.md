@@ -32,6 +32,7 @@
 - **在`39`个视频数据集（包括动作识别，时序定位，检索等）上获取`世界领先`性能（于2022年发布时）。**
 
 ## 更新
+- `2023年 9月 7日`: [**ViCLIP**](https://huggingface.co/OpenGVLab/ViCLIP): 一个用于可迁移的视频-文本表征的视频版CLIP可从[Hugging Face](https://huggingface.co/OpenGVLab/ViCLIP)和[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViClip-InternVid-10M-FLT.pth)下载。它给出了鲁棒的零样本视频识别性能。可从[这儿](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb)进行尝试。
 - `2023年 5月11日`: **视频指令微调数据**发布于[这儿](Data/instruction_data)，可用于微调端到端的视频对话系统，比如[VideoChat](https://github.com/OpenGVLab/Ask-Anything)。
 - `2023年 3月 8日`: 所有预训练的基础模型权重已经发布。请从[这里](#model-zoo)查看。
 - `2023年12月 6日`: InternVideo技术报告发布。
