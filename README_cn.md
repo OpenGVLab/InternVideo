@@ -35,8 +35,8 @@
 - `2023年 9月 7日`: [**ViCLIP**](https://huggingface.co/OpenGVLab/ViCLIP): 一个用于可迁移的视频-文本表征的视频版CLIP可从[Hugging Face](https://huggingface.co/OpenGVLab/ViCLIP)和[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViClip-InternVid-10M-FLT.pth)下载。它给出了鲁棒的零样本视频识别性能。可从[这儿](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb)进行尝试。
 - `2023年 5月11日`: **视频指令微调数据**发布于[这儿](Data/instruction_data)，可用于微调端到端的视频对话系统，比如[VideoChat](https://github.com/OpenGVLab/Ask-Anything)。
 - `2023年 3月 8日`: 所有预训练的基础模型权重已经发布。请从[这里](#model-zoo)查看。
-- `2023年12月 6日`: InternVideo技术报告发布。
-- `2023年 9月 2日`: 媒体发布 ([官方](https://www.shlab.org.cn/news/5443279) | [163新闻](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq新闻](https://new.qq.com/rain/a/20220902A053JP00))。
+- `2022年12月 6日`: InternVideo技术报告发布。
+- `2022年 9月 2日`: 媒体发布 ([官方](https://www.shlab.org.cn/news/5443279) | [163新闻](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq新闻](https://new.qq.com/rain/a/20220902A053JP00))。
 
 ## 引言
 *我们展示了首个在视频和视频-文本任务上均取得高性能的视频基础模型。*
