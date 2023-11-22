@@ -69,8 +69,6 @@ class RLTrainer(BaseVLNCETrainer):
             conf_path = '~/petreloss.conf'
             self.client = Client(conf_path)
 
-
-
     def _make_dirs(self) -> None:
         if self.config.local_rank == 0:
             self._make_ckpt_dir()
@@ -369,6 +367,360 @@ class RLTrainer(BaseVLNCETrainer):
 
         return hist_rgb_fts, hist_depth_fts, hist_pano_rgb_fts, hist_pano_depth_fts, hist_pano_ang_fts
 
+    def _train_iter(self, train_ml=None, sample_ratio=None, train_rl=True):
+        if train_ml is not None:
+            feedback = 'teacher'
+            assert sample_ratio is not None
+        elif train_rl:
+            feedback = 'sample'
+            assert sample_ratio is None
+        else:
+            raise NotImplementedError
+
+        
+        self.envs.resume_all()
+        observations = self.envs.reset()
+        instr_max_len = self.config.IL.max_text_len # r2r 80, rxr 200
+        instr_pad_id = 1 if self.config.MODEL.task_type == 'rxr' else 0
+        observations = extract_instruction_tokens(observations, self.config.TASK_CONFIG.TASK.INSTRUCTION_SENSOR_UUID,
+                                                  max_length=instr_max_len, pad_id=instr_pad_id)
+        batch = batch_obs(observations, self.device)
+        batch = apply_obs_transforms_batch(batch, self.obs_transforms)
+        keys = ['rgb', 'rgb_30', 'rgb_60', 'rgb_90', 'rgb_120', 'rgb_150', 'rgb_180', 'rgb_210', 'rgb_240', 'rgb_270', 'rgb_300', 'rgb_330']
+        # states = [[self.envs.call_at(i,"get_agent_state",{})] for i in range(self.envs.num_envs)]
+        history_images = [{k:observations[i][k][None,...] for k in keys} for i in range(self.envs.num_envs)]
+        video_inputs = [{k:observations[i][k][None,...].repeat(16,0) for k in keys} for i in range(self.envs.num_envs)]
+        batch['video_rgbs'] = video_inputs
+
+
+        # encode instructions
+        all_txt_ids = batch['instruction']
+        all_txt_masks = (all_txt_ids != instr_pad_id)
+        all_txt_embeds = self.policy.net(
+            mode='language',
+            txt_ids=all_txt_ids,
+            txt_masks=all_txt_masks,
+        )
+
+        il_loss = 0.
+        total_actions = 0.
+        not_done_index = list(range(self.envs.num_envs))
+        
+        # for rl
+        last_dist = np.zeros(self.envs.num_envs, np.float32)
+        last_ndtw = np.zeros(self.envs.num_envs, np.float32)
+        for i in range(self.envs.num_envs):
+            info = self.envs.call_at(i, "get_metrics", {})
+            last_dist[i] = info['distance_to_goal']
+            last_ndtw[i] = info['ndtw']
+        rewards = []
+        entropys = []
+        hidden_states = []
+        policy_log_probs = []
+        not_done_index_bank = []
+        init_num_envs = self.envs.num_envs
+
+        hist_lens = np.ones(self.envs.num_envs, dtype=np.int64)
+        hist_embeds = [self.policy.net('history').expand(self.envs.num_envs, -1)]
+        
+        for stepk in range(self.max_len):
+            total_actions += self.envs.num_envs
+            txt_embeds = all_txt_embeds[not_done_index]
+            txt_masks = all_txt_masks[not_done_index]
+            
+            # cand waypoint prediction
+            wp_outputs = self.policy.net(
+                mode = "waypoint",
+                waypoint_predictor = self.waypoint_predictor,
+                observations = batch,
+                in_train = self.config.IL.waypoint_aug,
+            )
+            ob_rgb_fts, ob_dep_fts, ob_ang_fts, ob_dis_fts, \
+            ob_nav_types, ob_lens, ob_cand_lens = self._cand_pano_feature_variable(wp_outputs)
+            ob_masks = length2mask(ob_lens).logical_not()
+
+            # navigation
+            visual_inputs = {
+                'mode': 'navigation',
+                'txt_embeds': txt_embeds,
+                'txt_masks': txt_masks,
+                'hist_embeds': hist_embeds,    # history before t step
+                'hist_lens': hist_lens,
+                'ob_rgb_fts': ob_rgb_fts,
+                'ob_dep_fts': ob_dep_fts,
+                'ob_ang_fts': ob_ang_fts,
+                'ob_dis_fts': ob_dis_fts,
+                'ob_nav_types': ob_nav_types,
+                'ob_masks': ob_masks,
+                'return_states': True if feedback == 'sample' or self.config.IL.progress_monitor else False,
+            }
+            with autocast():
+                t_outputs = self.policy.net(**visual_inputs)
+                logits = t_outputs[0]
+
+                if feedback == 'sample':
+                    h_t = t_outputs[1]
+                    hidden_states.append(h_t)
+
+                if train_ml is not None:
+                    if self.config.MODEL.task_type == 'r2r':
+                        oracle_cand_idx = self._teacher_action(wp_outputs['cand_angles'], wp_outputs['cand_distances'], ob_cand_lens)
+                    elif self.config.MODEL.task_type == 'rxr':
+                        oracle_cand_idx, gt_pm = self._teacher_action(wp_outputs['cand_angles'], wp_outputs['cand_distances'], ob_cand_lens)
+                    oracle_actions = torch.tensor(oracle_cand_idx, device=self.device)
+                    il_loss += F.cross_entropy(logits, oracle_actions, reduction='sum')
+                    if self.config.IL.progress_monitor:
+                        h_t = t_outputs[1]
+                        language_attention =  t_outputs[2]
+                        progresses = self.policy.net(mode='progress',h_t=h_t,language_attention=language_attention)
+                        gt_pm = torch.tensor(gt_pm,device=self.device,dtype=torch.float32).unsqueeze(1)
+                        pm_loss = F.mse_loss(progresses, gt_pm)
+                        il_loss += torch.sum(pm_loss)
+
+            # determine action
+            if feedback == 'teacher':
+                # a_t = oracle_actions
+                a_t = logits.argmax(dim=-1)
+                a_t = torch.where(torch.rand_like(a_t, dtype=torch.float)<=sample_ratio, oracle_actions, a_t)
+            elif feedback == 'sample':
+                probs = F.softmax(logits, 1)  # sampling an action from model
+                c = torch.distributions.Categorical(probs)
+                self.logs['entropy'].append(c.entropy().mean().item())            # For log
+                entropys.append(c.entropy())                                     # For optimization
+                a_t = c.sample().detach()
+                policy_log_probs.append(c.log_prob(a_t))
+            else:
+                raise NotImplementedError
+            cpu_a_t = a_t.cpu().numpy()
+
+            # update history
+            if stepk != self.max_len-1:
+                hist_rgb_fts, hist_depth_fts, hist_pano_rgb_fts, hist_pano_depth_fts, hist_pano_ang_fts = self._history_variable(wp_outputs)
+                prev_act_ang_fts = torch.zeros([self.envs.num_envs, 4]).cuda()
+                for i, next_id in enumerate(cpu_a_t):
+                    prev_act_ang_fts[i] = ob_ang_fts[i, next_id]
+                t_hist_inputs = {
+                    'mode': 'history',
+                    'hist_rgb_fts': hist_rgb_fts,
+                    'hist_depth_fts': hist_depth_fts,
+                    'hist_ang_fts': prev_act_ang_fts,
+                    'hist_pano_rgb_fts': hist_pano_rgb_fts,
+                    'hist_pano_depth_fts': hist_pano_depth_fts,
+                    'hist_pano_ang_fts': hist_pano_ang_fts,
+                    'ob_step': stepk,
+                }
+                with autocast():
+                    t_hist_embeds = self.policy.net(**t_hist_inputs)
+                    hist_embeds.append(t_hist_embeds)
+                hist_lens = hist_lens + 1
+
+            # make equiv action
+            env_actions = []
+            for j in range(self.envs.num_envs):
+                if cpu_a_t[j].item()==ob_cand_lens[j]-1 or stepk==self.max_len-1:
+                    env_actions.append({'action':{'action': 0, 'action_args':{}}})
+                else:
+                    t_angle = wp_outputs['cand_angles'][j][cpu_a_t[j]]
+                    t_distance = wp_outputs['cand_distances'][j][cpu_a_t[j]]
+                    env_actions.append({'action':{'action': 4, 'action_args':{'angle': t_angle, 'distance': t_distance}}})
+            outputs = self.envs.step(env_actions)
+            observations, _, dones, infos = [list(x) for x in zip(*outputs)]
+
+            # calculate reward
+            if train_rl:
+                dist = np.zeros(self.envs.num_envs, np.float32)
+                ndtw_score = np.zeros(self.envs.num_envs, np.float32)
+                reward = np.zeros(self.envs.num_envs, np.float32)
+                last_dist_ = last_dist[not_done_index].copy()
+                last_ndtw_ = last_ndtw[not_done_index].copy()
+                not_done_index_bank.append(deepcopy(not_done_index))
+                for i, info in enumerate(infos):
+                    dist[i] = info['distance_to_goal']
+                    ndtw_score[i] = info['ndtw']
+                    if env_actions[i]['action']['action'] == 0: #stop
+                        if dist[i] < 3.0:
+                            reward[i] = 2.0 + ndtw_score[i] * 2.0
+                        else:
+                            reward[i] = -2.0
+                    else:
+                        reward[i] = - (dist[i] - last_dist_[i])
+                        ndtw_reward = ndtw_score[i] - last_ndtw_[i]
+                        if reward[i] > 0.0:                          
+                                reward[i] = 1.0 + ndtw_reward
+                        elif reward[i] < 0.0:
+                            reward[i] = -1.0 + ndtw_reward
+                        else:
+                            reward[i] = -0.5  # get stuck
+
+                        if (last_dist_[i] <= 1.0) and (dist[i]-last_dist_[i] > 0.0):
+                            reward[i] -= (1.0 - last_dist_[i]) * 2.0
+                rewards.append(reward)
+                last_dist[not_done_index] = dist.copy()
+                last_ndtw[not_done_index] = ndtw_score.copy()
+
+            # pause env
+            if sum(dones) > 0:
+                for i in reversed(list(range(self.envs.num_envs))):
+                    if dones[i]:
+                        not_done_index.pop(i)
+                        self.envs.pause_at(i)
+                        observations.pop(i)
+                        # states.pop(i)
+                        video_inputs.pop(i)
+                        # images_to_video([im for im in history_images[i][k]],'hamt_vis/','history_%s'%(i),4)
+                        history_images.pop(i)
+            if self.envs.num_envs == 0:
+                break
+            
+            for i in range(len(observations)):
+                states_i = observations[i].pop('states')
+                # states[i] += states_i
+                new_images_i = {k:[] for k in keys}
+                for position, rotation in states_i[:-1]:
+                    new_image = self.envs.call_at(i,'get_pano_rgbs_observations_at', {'source_position':position,'source_rotation':rotation})
+                    for k in keys:
+                        new_images_i[k].append(new_image[k][None,...])
+                for k in keys:
+                    new_images_i[k].append(observations[i][k][None,...])
+                    history_images[i][k] = np.vstack((history_images[i][k], np.vstack(new_images_i[k])))
+                    if len(history_images[i][k]) < 16:
+                        video_inputs[i][k][16-len(history_images[i][k]):] = history_images[i][k]
+                    else:
+                        video_inputs[i][k] = history_images[i][k][-16:]
+                # print(i,stepk,len(new_images_i[k]))
+                position, rotation = states_i[-1]
+                self.envs.call_at(i,'set_agent_state', {'position':position,'rotation':rotation})
+            
+            # for i in range(len(observations)):
+            #     # for k in video_inputs[i].keys():
+            #         k = 'rgb'
+            #         images_to_video([im for im in video_inputs[i][k]],'hamt_vis/','%s_%s_%s'%(i,stepk,k),4)
+
+            hist_lens = hist_lens[np.array(dones)==False]
+            for j in range(len(hist_embeds)):
+                hist_embeds[j] = hist_embeds[j][np.array(dones)==False]
+            observations = extract_instruction_tokens(observations,self.config.TASK_CONFIG.TASK.INSTRUCTION_SENSOR_UUID)
+            batch = batch_obs(observations, self.device)
+            batch = apply_obs_transforms_batch(batch, self.obs_transforms)
+            batch['video_rgbs'] = video_inputs
+
+        if train_rl:
+            rl_loss = 0.
+            discount_reward = np.zeros(init_num_envs, np.float32)
+            max_length = len(rewards)
+            for t in range(max_length-1, -1, -1):
+                index_ = not_done_index_bank[t]
+                discount_reward[index_] = discount_reward[index_] * 0.9 + rewards[t]
+                clip_reward = discount_reward[index_].copy()
+                r_ = torch.from_numpy(clip_reward).cuda()
+                v_ = self.policy.net(mode='critic', critic_states=hidden_states[t])
+                a_ = (r_ - v_).detach()
+
+                t_policy_loss = (-policy_log_probs[t] * a_).sum()
+                t_critic_loss = ((r_ - v_) ** 2).sum() * 0.5 # 1/2 L2 loss
+                t_entropy_loss = -0.01 * entropys[t].sum()
+                rl_loss += (t_policy_loss + t_critic_loss + t_entropy_loss)
+
+                self.logs['policy_loss'].append(t_policy_loss.mean().item())
+                self.logs['critic_loss'].append(t_critic_loss.mean().item())
+            rl_loss /= total_actions
+            self.loss += rl_loss
+            self.logs['RL_loss'].append(rl_loss.item())
+        
+        if train_ml is not None:
+            il_loss = train_ml * il_loss / total_actions
+            self.loss += il_loss
+            self.logs['IL_loss'].append(il_loss.item())
+    
+    def _train_interval(self, interval, ml_weight=1., sample_ratio=None, feedback='teacher'):
+        self.policy.train()
+        if self.world_size > 1:
+            self.policy.net.module.rgb_encoder.eval()
+            self.policy.net.module.depth_encoder.eval()
+        else:
+            self.policy.net.rgb_encoder.eval()
+            self.policy.net.depth_encoder.eval()
+        self.waypoint_predictor.eval()
+
+        if self.local_rank < 1:
+            pbar = tqdm.trange(interval, leave=False, dynamic_ncols=True)
+        else:
+            pbar = range(interval)
+        self.logs = defaultdict(list)
+
+        for idx in pbar:
+            self.optimizer.zero_grad()
+            self.loss = 0.
+
+            if feedback == 'teacher':
+                self._train_iter(train_ml=1., sample_ratio=sample_ratio, train_rl=False)
+            elif feedback == 'sample':
+                if ml_weight != 0:
+                    self._train_iter(train_ml=ml_weight, sample_ratio=sample_ratio, train_rl=False)
+                self._train_iter(train_ml=None, sample_ratio=None, train_rl=True)
+            else:
+                raise NotImplementedError
+
+            self.scaler.scale(self.loss).backward() #self.loss.backward()
+            self.scaler.unscale_(self.optimizer)
+            if self.world_size > 1: 
+                torch.nn.utils.clip_grad_norm_(self.policy.net.module.vln_bert.parameters(), 40.)
+            else:
+                torch.nn.utils.clip_grad_norm_(self.policy.net.vln_bert.parameters(), 40.)
+            self.scaler.step(self.optimizer) #self.optimizer.step()
+            self.scaler.update()
+
+            if self.local_rank < 1:
+                pbar.set_postfix({'iter': f'{idx+1}/{interval}'})
+            
+        return deepcopy(self.logs)
+
+    def train(self) -> None:
+        self._set_config()
+        if self.config.MODEL.task_type == 'rxr':
+            self.gt_data = {}
+            for role in self.config.TASK_CONFIG.DATASET.ROLES:
+                with gzip.open(
+                    self.config.TASK_CONFIG.TASK.NDTW.GT_PATH.format(
+                        split=self.split, role=role
+                    ), "rt") as f:
+                    self.gt_data.update(json.load(f))
+
+        observation_space, action_space = self._init_envs()
+        start_iter = self._initialize_policy(
+            self.config,
+            self.config.IL.load_from_ckpt,
+            observation_space=observation_space,
+            action_space=action_space,
+        )
+
+        total_iter = self.config.IL.iters
+        log_every  = self.config.IL.log_every
+        writer     = TensorboardWriter(self.config.TENSORBOARD_DIR if self.local_rank < 1 else None)
+
+        self.scaler = GradScaler()
+        logger.info('Traning Starts... GOOD LUCK!')
+        for idx in range(start_iter, total_iter, log_every):
+            interval = min(log_every, max(total_iter-idx, 0))
+            cur_iter = idx + interval
+
+            sample_ratio = self.config.IL.sample_ratio ** (idx // self.config.IL.decay_interval + 1)
+            logs = self._train_interval(interval, ml_weight=self.config.IL.ml_weight,
+                                                  sample_ratio=sample_ratio, 
+                                                  feedback=self.config.IL.feedback,)
+
+            if self.local_rank < 1:
+                loss_str = f'iter {cur_iter}: '
+                for k, v in logs.items():
+                    logs[k] = np.mean(v)
+                    loss_str += f'{k}: {logs[k]:.3f}, '
+                    writer.add_scalar(f'loss/{k}', logs[k], cur_iter)
+                logger.info(loss_str)
+                self.save_checkpoint(cur_iter)
+        
+        print("**************** END ****************")
+        import pdb;pdb.set_trace()
+        
     @staticmethod
     def _pause_envs(envs, batch, envs_to_pause, *args):
         if len(envs_to_pause) > 0:
@@ -603,15 +955,6 @@ class RLTrainer(BaseVLNCETrainer):
                     nDTW = np.exp(-dtw_distance / (len(gt_con_path) * config.TASK_CONFIG.TASK.SUCCESS_DISTANCE))
                     metric['ndtw'] = nDTW
                     state_episodes[current_episodes[i].episode_id] = metric
-
-                    if len(state_episodes)%300 == 0:
-                        aggregated_states = {}
-                        num_episodes = len(state_episodes)
-                        for stat_key in next(iter(state_episodes.values())).keys():
-                            aggregated_states[stat_key] = (
-                                sum(v[stat_key] for v in state_episodes.values()) / num_episodes
-                            )
-                        print(aggregated_states)
 
                     if config.use_pbar:
                         pbar.update()
