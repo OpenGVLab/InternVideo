@@ -15,4 +15,4 @@ We currently provide evaluation of our pretrained model.
 3. Download pretrained models from  https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vln/pretrained.zip to `pretrained`. It should have 6 folders: `pretrained/pretrained_models`, `pretrained/VideoMAE`, `pretrained/wp_pred`, `pretrained/ddppo-models`, `pretrained/Prevalent`, `pretrained/wp_pred`.
 
 ### Running the code
-Simply run `bash eval_**.sh` to start evaluating the agent.
+Simply run `bash eval_**.sh` to start evaluating the agent. Run `bash train.bash` to start training (6 gpus).
