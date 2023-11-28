@@ -7,7 +7,7 @@
 # :fire: 新闻
 我们很高兴宣布部分发布一个大规模的视频文本数据集，旨在促进多模态理解和生成。作为此次发布的一部分，我们提供了该数据集的[子集](https://huggingface.co/datasets/OpenGVLab/InternVid)包含1000万个视频剪辑。此外，我们还提供了一个使用ViT-L架构在这个子集上训练的[ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP)。该模型在Kinetics上实现了SOTA的零样本动作识别性能。
 
-W我们提供了逐步的指示，并阐明了如何访问和利用ViClip的过程，在[demo.ipynb](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb)中有详述。
+我们提供了示例代码，阐明如何使用ViClip的过程，在[demo.ipynb](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb)中有详述。
 
 请关注我们的更新！
 
