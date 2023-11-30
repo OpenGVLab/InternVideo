@@ -5,15 +5,17 @@
 \[[中文版本](README_CN.md)\]
 
 # :fire: News
-We are excited to announce the partial release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. As part of this release, we are making available a [subset](https://huggingface.co/datasets/OpenGVLab/InternVid) of the dataset, which comprises 10 million video clips. Additionally, we have provided a [ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP) model trained on this subset, using the ViT-L architecture. It achieves SOTA zero-shot action recognition performance on Kinetics.
+- We are excited to announce the partial release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. As part of this release, we are making available a [subset](https://huggingface.co/datasets/OpenGVLab/InternVid) of the dataset, which comprises 10 million video clips. Additionally, we have provided a [ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP) model trained on this subset, using the ViT-L architecture. It achieves SOTA zero-shot action recognition performance on Kinetics.
 
-We give a step-by-step instructions and clarify the process of accessing and utilizing ViClip in [demo.ipynb](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb).
+- We give a step-by-step instructions and clarify the process of accessing and utilizing ViClip in [demo.ipynb](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb).
+
+- Some model weights and the corresponding data are released at [Pretrained Data & Model](#pretrained-data--model). Their performance is given at [Model Performance](#model-performance).
 
 Stay tuned for updates!
 
 # Introduction
 
-**Data**
+### Data
 
 We collected videos from 16 popular categories with varying percentages. We ensured diversity by selecting videos from countries with different languages instead of relying on a dominant language environment. The countries we sampled from include the UK, USA, Australia, Japan, Korea, China, Russia, and France, among others. In terms of duration, every video lasts 351.9s on average. Almost half (49%) of the videos are five minutes or less, while a quarter (26%) fall between five and ten minutes. Only 8% of the videos are over 20 minutes long. Among the curated videos, 85% were high-resolution (720P), while the remaining 15% had lower resolutions ranging from 360P to 720P. Although the lower-resolution videos may not perform as well as the high-resolution ones in content generation tasks, they can still be useful in video-language representation learning, provided that they have appropriate captions.
 
@@ -23,12 +25,40 @@ InternVid exhibits diverse clip durations and caption lengths in the segmented c
 
 ![429af4993adb77478c000c865ae5a1b](https://github.com/OpenGVLab/InternVideo/assets/43169235/f64588c3-81e8-43de-b771-46500474d2ff)
 
-**ViCLIP: a simple video CLIP for transferrable video-text representation**
+### ViCLIP: a simple video CLIP for transferrable video-text representation
 
 Built upon <a href="https://github.com/openai/CLIP">CLIP</a>, we make a simple video-text pretraining baseline ViCLIP. It consists of a video encoder (ViT) and a text encoder, as given below. Both modules are initialized from the corresponding CLIP components. We update the native attention in the video encoder to spatiotemporal attention while maintaining other design elements. For efficient learning, we apply masking to videos in pre-training.
 
 <img width="633" alt="87c6263cc4aceee72cc8e37085a8109" src="https://github.com/OpenGVLab/InternVideo/assets/43169235/1e540a2b-f503-4036-b2a8-ba99401fc5b0">
 
+### Model Performance
+
+**Table 1: Zero-shot action recognition results on Kinetics 400/600/700. We report the top-1 accuracy of the compared methods on each dataset.**
+|Method | Training Data | K400 |  | K600 |  | K700 |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| | |top-1 | AVG | top-1 | AVG | top-1 | AVG |
+CLIP |	CLIP400M | 58.42 | 70.14 |	55.11|	67.16|	46.12|	58.38
+CLIP |	DataComp-1B	|56.14|	67.67|	54.15|	65.83|	45.36|	57.01
+EVA-CLIP-L |	Merged-2B |	- |	65.00|	-	|64.90|	-	|59.10
+EVA-CLIP-E |	LAION-2B	|-	|69.80|-|	69.30|	-|	63.40
+ViCLIP-L|	+WebVid10M	|59.88|	71.03|	58.66|	69.84|	50.23|	61.86
+ViCLIP-L|	+InternVid-10M-DIV|	63.00|	74.15|	60.68|	72.07|	52.50|	64.59
+ViCLIP-B | +InternVid-10M-FLT | 58.52 | 71.11 | 55.37 | 68.27 | 47.09 | 59.98 
+ViCLIP-L|	+InternVid-10M-FLT|	**64.80**|	**75.70**| **62.20** | **73.53** | **54.30** | **66.38**
+ViCLIP-B | +InternVid-200M | 56.58 | 69.20 | 53.57 | 66.20 | 45.82 | 58.28 
+ViCLIP-L | +InternVid-200M | 59.80 | 71.09 | 57.80 | 69.34 | 49.30 | 61.25 
+
+**Table 2: Fine-tuned action recognition results on Kinetics 400 and SomethingSomethingV2.**
+|Method | Training Data | K400 |  | SthSthV2 |  |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| | |top-1 | top-5 | top-1 | top-5|
+CLIP |	CLIP400M | 86.7 | 97.2 | 70.1 | 92.5
+CLIP |	DataComp-1B	|85.6| 96.8| 68.9| 91.8
+ViCLIP-L|	+WebVid10M	|85.0| 96.8| 68.7| 91.9
+ViCLIP-L|	+InternVid-10M-FLT|	86.8 |97.5| 71.2| 93.2
+ViCLIP-L|	+InternVid-10M-FLT+K710|	88.0| 97.8| 71.8| 93.6
+ViCLIP-L | +InternVid-200M | 87.9 |97.9| 73.6| 94.9
+ViCLIP-L | +InternVid-200M+K710 | **88.7** | **98.2** | **74.2** | **95.0**
 
 # Data & Model Zoo
 
