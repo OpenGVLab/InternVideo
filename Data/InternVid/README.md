@@ -5,6 +5,8 @@
 \[[中文版本](README_CN.md)\]
 
 # :fire: News
+- We release ViCLIP models trained on different subsets of InternVid. Check their performance [here](#model-performance) and download them [here](#pretrained-data--model).
+
 - We are excited to announce the partial release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. As part of this release, we are making available a [subset](https://huggingface.co/datasets/OpenGVLab/InternVid) of the dataset, which comprises 10 million video clips. Additionally, we have provided a [ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP) model trained on this subset, using the ViT-L architecture. It achieves SOTA zero-shot action recognition performance on Kinetics.
 
 - We give a step-by-step instructions and clarify the process of accessing and utilizing ViClip in [demo.ipynb](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb).
@@ -41,11 +43,11 @@ CLIP |	CLIP400M | 58.42 | 70.14 |	55.11|	67.16|	46.12|	58.38
 CLIP |	DataComp-1B	|56.14|	67.67|	54.15|	65.83|	45.36|	57.01
 EVA-CLIP-L |	Merged-2B |	- |	65.00|	-	|64.90|	-	|59.10
 EVA-CLIP-E |	LAION-2B	|-	|69.80|-|	69.30|	-|	63.40
+ViCLIP-B | +InternVid-10M-FLT | 58.52 | 71.11 | 55.37 | 68.27 | 47.09 | 59.98 
+ViCLIP-B | +InternVid-200M | 56.58 | 69.20 | 53.57 | 66.20 | 45.82 | 58.28 
 ViCLIP-L|	+WebVid10M	|59.88|	71.03|	58.66|	69.84|	50.23|	61.86
 ViCLIP-L|	+InternVid-10M-DIV|	63.00|	74.15|	60.68|	72.07|	52.50|	64.59
-ViCLIP-B | +InternVid-10M-FLT | 58.52 | 71.11 | 55.37 | 68.27 | 47.09 | 59.98 
-ViCLIP-L|	+InternVid-10M-FLT|	**64.80**|	**75.70**| **62.20** | **73.53** | **54.30** | **66.38**
-ViCLIP-B | +InternVid-200M | 56.58 | 69.20 | 53.57 | 66.20 | 45.82 | 58.28 
+ViCLIP-L|	+InternVid-10M-FLT|	**64.80** |	**75.70** | **62.20** | **73.53** | **54.30** | **66.38**
 ViCLIP-L | +InternVid-200M | 59.80 | 71.09 | 57.80 | 69.34 | 49.30 | 61.25 
 
 **Table 2: Fine-tuned action recognition results on Kinetics 400 and SomethingSomethingV2.**
@@ -67,7 +69,12 @@ ViCLIP-L | +InternVid-200M+K710 | **88.7** | **98.2** | **74.2** | **95.0**
 
 |      Model      |   Training Data   |                                               Descriptions                                                |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
-| ViCLIP-L-14 \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP) \| [Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViClip-InternVid-10M-FLT.pth)\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) \| [OpenDataLab](https://opendatalab.com/shepshep/InternVid)\] |    |
+| ViCLIP-L-14 \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP) \| [Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViClip-InternVid-10M-FLT.pth)\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) \| [OpenDataLab](https://opendatalab.com/shepshep/InternVid)\] |   - |
+| ViCLIP-L-14 \[[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViCLIP-L_InternVid-DIV-10M.pth)\] | InternVid-10M-DIV  |   - |
+| ViCLIP-L-14 \[[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViCLIP-L_WebVid-10M.pth)\] | WebVid-10M  |   - |
+| ViCLIP-L-14 \[[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViCLIP-L_InternVid-10M.pth)\] | InternVid-10M  |   - |
+| ViCLIP-L-14 \[[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViCLIP-L_InternVid-50M.pth)\] | InternVid-50M  |   - |
+| ViCLIP-L-14 \[[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViCLIP-L_InternVid-200M.pth)\] | InternVid-200M  |   - |
 </div>
 
 
