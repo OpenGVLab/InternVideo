@@ -5,9 +5,14 @@
 \[[中文版本](README_CN.md)\]
 
 # :fire: News
+
+- We release a subset [InternVid-Aesthetics-18M](https://huggingface.co/datasets/OpenGVLab/InternVid/viewer/InternVid-10M/AES). It consists of 18 million video clips that have been assigned high aesthetic scores. For more details on the aesthetic scoring, please refer to [laion aesthetic predictor](https://github.com/LAION-AI/aesthetic-predictor).
+
+- We enhance InternVid-10M-FLT dataset annotations by incorporating video language and type information sourced from YouTube's metainfo. You can find the updated annotations at [this link](https://huggingface.co/datasets/OpenGVLab/InternVid-10M-FLT-INFO).
+
 - We release ViCLIP models trained on different subsets of InternVid. Check their performance [here](#model-performance) and download them [here](#pretrained-data--model).
 
-- We are excited to announce the partial release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. As part of this release, we are making available a [subset](https://huggingface.co/datasets/OpenGVLab/InternVid) of the dataset, which comprises 10 million video clips. Additionally, we have provided a [ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP) model trained on this subset, using the ViT-L architecture. It achieves SOTA zero-shot action recognition performance on Kinetics.
+- We are excited to announce the partial release of a large-scale video-text dataset aimed at facilitating multimodal understanding and generation. As part of this release, we are making available a subset [InternVid-10M-FLT](https://huggingface.co/datasets/OpenGVLab/InternVid) of the dataset, which comprises 10 million video clips. Additionally, we have provided a [ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP) model trained on this subset, using the ViT-L architecture. It achieves SOTA zero-shot action recognition performance on Kinetics.
 
 - We give a step-by-step instructions and clarify the process of accessing and utilizing ViClip in [demo.ipynb](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb).
 
