@@ -45,7 +45,8 @@ def load_temp_embed_with_mismatch(temp_embed_old, temp_embed_new, add_zero=True)
 # On P1, model extracted from https://huggingface.co/laion/CLIP-ViT-L-14-DataComp.XL-s13B-b90K
 MODEL_PATH = ''
 _MODELS = {
-    "ViT-L/14": os.path.join(MODEL_PATH, "ViClip-InternVid-10M-FLT.pth"),
+    "ViT-L/14": os.path.join(MODEL_PATH, "ViCLIP-L_InternVid-FLT-10M.pth"),
+    "ViT-B/16": os.path.join(MODEL_PATH, "ViCLIP-B-InternVid-FLT-10M.pth"),
 }
 
 
@@ -244,19 +245,26 @@ def load_state_dict(model, state_dict, input_resolution=224, patch_size=16, cent
 
 @register_model
 def clip_joint_b16(
-    pretrained=True, input_resolution=224, kernel_size=1,
-    center=True, num_frames=8, drop_path=0.
+    pretrained=False, input_resolution=224, kernel_size=1,
+    center=True, num_frames=8, drop_path=0., checkpoint_num=0,
+    dropout=0.,
 ):
     model = VisionTransformer(
         input_resolution=input_resolution, patch_size=16, 
         width=768, layers=12, heads=12, output_dim=512,
         kernel_size=kernel_size, num_frames=num_frames, 
-        drop_path=drop_path,
+        drop_path=drop_path, checkpoint_num=checkpoint_num,
+        dropout=dropout,
     )
-    raise NotImplementedError
+    # raise NotImplementedError
     if pretrained:
+        if isinstance(pretrained, str):
+            model_name = pretrained
+        else:
+            model_name = "ViT-B/16"
+        
         logger.info('load pretrained weights')
-        state_dict = torch.load(_MODELS["ViT-B/16"], map_location='cpu')
+        state_dict = torch.load(_MODELS[model_name], map_location='cpu')
         load_state_dict(model, state_dict, input_resolution=input_resolution, patch_size=16, center=center)
     return model.eval()
 

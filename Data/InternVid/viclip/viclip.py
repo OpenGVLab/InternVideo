@@ -8,8 +8,8 @@ import math
 
 # from .criterions import VTC_VTM_Loss
 from .simple_tokenizer import SimpleTokenizer as _Tokenizer
-from .viclip_vision import clip_joint_l14
-from .viclip_text import clip_text_l14
+from .viclip_vision import clip_joint_l14, clip_joint_b16
+from .viclip_text import clip_text_l14, clip_text_b16
 
 logger = logging.getLogger(__name__)
 
@@ -17,15 +17,24 @@ logger = logging.getLogger(__name__)
 class ViCLIP(nn.Module):
     """docstring for ViCLIP"""
 
-    def __init__(self,  tokenizer=None, pretrain=os.path.join(os.path.dirname(os.path.abspath(__file__)), "ViClip-InternVid-10M-FLT.pth"), freeze_text=True):
+    def __init__(self,  
+                 tokenizer=None, 
+                 size='l',
+                 pretrain=os.path.join(os.path.dirname(os.path.abspath(__file__)), "ViClip-InternVid-10M-FLT.pth"),
+                 freeze_text=True):
         super(ViCLIP, self).__init__()
         if tokenizer:
             self.tokenizer = tokenizer
         else:
             self.tokenizer = _Tokenizer()
         self.max_txt_l = 32
-        
-        self.vision_encoder_name = 'vit_l14'
+
+        if size.lower() == 'l':
+            self.vision_encoder_name = 'vit_l14'
+        elif size.lower() == 'b':
+            self.vision_encoder_name = 'vit_b16'
+        else:
+            raise NotImplementedError(f"Size {size} not implemented")
     
         self.vision_encoder_pretrained = False
         self.inputs_image_res = 224
@@ -40,12 +49,17 @@ class ViCLIP(nn.Module):
         self.embed_dim = 768 
         self.masking_prob = 0.9
         
-        self.text_encoder_name = 'vit_l14'
+        if size.lower() == 'l':
+            self.text_encoder_name = 'vit_l14'
+        elif size.lower() == 'b':
+            self.text_encoder_name = 'vit_b16'
+        else:
+            raise NotImplementedError(f"Size {size} not implemented")
+        
         self.text_encoder_pretrained = False#'bert-base-uncased'
         self.text_encoder_d_model = 768
 
         self.text_encoder_vocab_size = 49408
-        
         
         # create modules.
         self.vision_encoder = self.build_vision_encoder()
@@ -62,7 +76,6 @@ class ViCLIP(nn.Module):
         # Freeze weights
         if freeze_text:
             self.freeze_text()
-            
 
 
     def freeze_text(self):
@@ -166,17 +179,29 @@ class ViCLIP(nn.Module):
 
         """
         encoder_name = self.vision_encoder_name
-        if encoder_name != "vit_l14":
-            raise ValueError(f"Not implemented: {encoder_name}")
-        vision_encoder = clip_joint_l14(
-            pretrained=self.vision_encoder_pretrained,
-            input_resolution=self.inputs_image_res,
-            kernel_size=self.vision_encoder_kernel_size,
-            center=self.vision_encoder_center,
-            num_frames=self.video_input_num_frames,
-            drop_path=self.vision_encoder_drop_path_rate,
-            checkpoint_num=self.vision_encoder_checkpoint_num,
-        )
+        if encoder_name == "vit_l14":
+            vision_encoder = clip_joint_l14(
+                pretrained=self.vision_encoder_pretrained,
+                input_resolution=self.inputs_image_res,
+                kernel_size=self.vision_encoder_kernel_size,
+                center=self.vision_encoder_center,
+                num_frames=self.video_input_num_frames,
+                drop_path=self.vision_encoder_drop_path_rate,
+                checkpoint_num=self.vision_encoder_checkpoint_num,
+            )
+        elif encoder_name == "vit_b16":
+            vision_encoder = clip_joint_b16(
+                pretrained=self.vision_encoder_pretrained,
+                input_resolution=self.inputs_image_res,
+                kernel_size=self.vision_encoder_kernel_size,
+                center=self.vision_encoder_center,
+                num_frames=self.video_input_num_frames,
+                drop_path=self.vision_encoder_drop_path_rate,
+                checkpoint_num=self.vision_encoder_checkpoint_num,
+            )
+        else:
+            raise NotImplementedError(f"Not implemented: {encoder_name}")
+            
         return vision_encoder
 
     def build_text_encoder(self):
@@ -185,15 +210,23 @@ class ViCLIP(nn.Module):
 
         """
         encoder_name = self.text_encoder_name
-        if encoder_name != "vit_l14":
-            raise ValueError(f"Not implemented: {encoder_name}")
-        text_encoder = clip_text_l14(
-            pretrained=self.text_encoder_pretrained,
-            embed_dim=self.text_encoder_d_model,
-            context_length=self.max_txt_l,
-            vocab_size=self.text_encoder_vocab_size,
-            checkpoint_num=0,
-        )
+        
+        if encoder_name == "vit_l14":
+            text_encoder = clip_text_l14(
+                pretrained=self.text_encoder_pretrained,
+                context_length=self.max_txt_l,
+                vocab_size=self.text_encoder_vocab_size,
+                checkpoint_num=0,
+            )
+        elif encoder_name == "vit_b16":
+            text_encoder = clip_text_b16(
+                pretrained=self.text_encoder_pretrained,
+                context_length=self.max_txt_l,
+                vocab_size=self.text_encoder_vocab_size,
+                checkpoint_num=0,
+            )
+        else:
+            raise NotImplementedError(f"Not implemented: {encoder_name}")
 
         return text_encoder
 

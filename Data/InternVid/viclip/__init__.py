@@ -3,20 +3,15 @@ from .viclip import ViCLIP
 import torch
 import numpy as np
 import cv2
+import os
 
-clip_candidates = {'viclip':None, 'clip':None}
 
-def get_clip(name='viclip'):
-    global clip_candidates
-    m = clip_candidates[name]
-    if m is None:
-        if name == 'viclip':
-            tokenizer = _Tokenizer()
-            vclip = ViCLIP(tokenizer)
-            # m = vclip
-            m = (vclip, tokenizer)
-        else:
-            raise Exception('the target clip model is not found.')
+def get_viclip(size='l', 
+               pretrain=os.path.join(os.path.dirname(os.path.abspath(__file__)), "ViClip-InternVid-10M-FLT.pth")):
+    
+    tokenizer = _Tokenizer()
+    vclip = ViCLIP(tokenizer=tokenizer, size=size, pretrain=pretrain)
+    m = {'viclip':vclip, 'tokenizer':tokenizer}
     
     return m
 
@@ -53,8 +48,15 @@ def frames2tensor(vid_list, fnum=8, target_size=(224, 224), device=torch.device(
     vid_tube = torch.from_numpy(vid_tube).to(device, non_blocking=True).float()
     return vid_tube
 
-def retrieve_text(frames, texts, name='viclip', topk=5, device=torch.device('cuda')):
-    clip, tokenizer = get_clip(name)
+def retrieve_text(frames, 
+                  texts, 
+                  models={'viclip':None, 
+                          'tokenizer':None},
+                  topk=5, 
+                  device=torch.device('cuda')):
+    # clip, tokenizer = get_clip(name, model_cfg['size'], model_cfg['pretrained'], model_cfg['reload'])
+    assert(type(models)==dict and models['viclip'] is not None and models['tokenizer'] is not None)
+    clip, tokenizer = models['viclip'], models['tokenizer']
     clip = clip.to(device)
     frames_tensor = frames2tensor(frames, device=device)
     vid_feat = get_vid_feat(frames_tensor, clip)
@@ -68,4 +70,3 @@ def retrieve_text(frames, texts, name='viclip', topk=5, device=torch.device('cud
 
     ret_texts = [texts[i] for i in idxs.numpy()[0].tolist()]
     return ret_texts, probs.numpy()[0]
-
