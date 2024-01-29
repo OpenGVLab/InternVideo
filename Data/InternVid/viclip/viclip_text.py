@@ -1,81 +1,297 @@
-from .simple_tokenizer import SimpleTokenizer as _Tokenizer
-from .viclip import ViCLIP
-import torch
-import numpy as np
-import cv2
 import os
+import logging
+from collections import OrderedDict
+from pkg_resources import packaging
+from .simple_tokenizer import SimpleTokenizer as _Tokenizer
 
-clip_candidates = {'viclip':None, 'clip':None}
+import numpy as np
+import torch
+import torch.nn.functional as F
+from torch import nn
+import torch.utils.checkpoint as checkpoint
+import functools
 
-def get_clip(name='viclip', 
-             size='l', 
-             pretrain=os.path.join(os.path.dirname(os.path.abspath(__file__)), "ViClip-InternVid-10M-FLT.pth"),
-             force_reload=False):
-    global clip_candidates
-    m = clip_candidates[name]
-    if m is None or force_reload:
-        if name == 'viclip':
-            tokenizer = _Tokenizer()
-            vclip = ViCLIP(tokenizer=tokenizer, size=size, pretrain=pretrain)
-            # m = vclip
-            m = (vclip, tokenizer)
+logger = logging.getLogger(__name__)
+
+
+# On P1, model extracted from https://huggingface.co/laion/CLIP-ViT-L-14-DataComp.XL-s13B-b90K
+MODEL_PATH = 'https://huggingface.co/laion'
+_MODELS = {
+    "ViT-L/14": os.path.join(MODEL_PATH, "CLIP-ViT-L-14-DataComp.XL-s13B-b90K", "vit_l14_text.pth"),
+    "ViT-B/16": os.path.join(MODEL_PATH, "CLIP-ViT-B-16-DataComp.XL-s13B-b90K", "vit_b16_text.pth"),
+}
+
+
+class LayerNorm(nn.LayerNorm):
+    """Subclass torch's LayerNorm to handle fp16."""
+
+    def forward(self, x: torch.Tensor):
+        orig_type = x.dtype
+        ret = super().forward(x.type(torch.float32))
+        return ret.type(orig_type)
+
+
+class QuickGELU(nn.Module):
+    def forward(self, x: torch.Tensor):
+        return x * torch.sigmoid(1.702 * x)
+
+
+class ResidualAttentionBlock(nn.Module):
+    def __init__(self, d_model: int, n_head: int, attn_mask: torch.Tensor = None):
+        super().__init__()
+
+        self.attn = nn.MultiheadAttention(d_model, n_head)
+        self.ln_1 = LayerNorm(d_model)
+        self.mlp = nn.Sequential(OrderedDict([
+            ("c_fc", nn.Linear(d_model, d_model * 4)),
+            ("gelu", QuickGELU()),
+            ("c_proj", nn.Linear(d_model * 4, d_model))
+        ]))
+        self.ln_2 = LayerNorm(d_model)
+        self.attn_mask = attn_mask
+
+    def attention(self, x: torch.Tensor):
+        self.attn_mask = self.attn_mask.to(dtype=x.dtype, device=x.device) if self.attn_mask is not None else None
+        return self.attn(x, x, x, need_weights=False, attn_mask=self.attn_mask)[0]
+
+    def forward(self, x: torch.Tensor):
+        x = x + self.attention(self.ln_1(x))
+        x = x + self.mlp(self.ln_2(x))
+        return x
+
+
+class Transformer(nn.Module):
+    def __init__(self, width: int, layers: int, heads: int, attn_mask: torch.Tensor = None,
+                 checkpoint_num: int = 0):
+        super().__init__()
+        self.width = width
+        self.layers = layers
+        self.resblocks = nn.Sequential(*[ResidualAttentionBlock(width, heads, attn_mask) for _ in range(layers)])
+
+        self.checkpoint_num = checkpoint_num
+
+    def forward(self, x: torch.Tensor):
+        if self.checkpoint_num > 0:
+            segments = min(self.checkpoint_num, len(self.resblocks))
+            return checkpoint.checkpoint_sequential(self.resblocks, segments, x)
         else:
-            raise Exception('the target clip model is not found.')
+            return self.resblocks(x)
+
+
+class CLIP_TEXT(nn.Module):
+    def __init__(
+            self,
+            embed_dim: int,
+            context_length: int,
+            vocab_size: int,
+            transformer_width: int,
+            transformer_heads: int,
+            transformer_layers: int,
+            checkpoint_num: int,
+        ):
+        super().__init__()
+
+        self.context_length = context_length
+        self._tokenizer = _Tokenizer()
+
+        self.transformer = Transformer(
+            width=transformer_width,
+            layers=transformer_layers,
+            heads=transformer_heads,
+            attn_mask=self.build_attention_mask(),
+            checkpoint_num=checkpoint_num,
+        )
+
+        self.vocab_size = vocab_size
+        self.token_embedding = nn.Embedding(vocab_size, transformer_width)
+        self.positional_embedding = nn.Parameter(torch.empty(self.context_length, transformer_width))
+        self.ln_final = LayerNorm(transformer_width)
+
+        self.text_projection = nn.Parameter(torch.empty(transformer_width, embed_dim))
     
-    return m
+    def no_weight_decay(self):
+        return {'token_embedding', 'positional_embedding'}
 
-def get_text_feat_dict(texts, clip, tokenizer, text_feat_d={}):
-    for t in texts:
-        feat = clip.get_text_features(t, tokenizer, text_feat_d)
-        text_feat_d[t] = feat
-    return text_feat_d
+    @functools.lru_cache(maxsize=None)
+    def build_attention_mask(self):
+        # lazily create causal attention mask, with full attention between the vision tokens
+        # pytorch uses additive attention mask; fill with -inf
+        mask = torch.empty(self.context_length, self.context_length)
+        mask.fill_(float("-inf"))
+        mask.triu_(1)  # zero out the lower diagonal
+        return mask
 
-def get_vid_feat(frames, clip):
-    return clip.get_vid_features(frames)
+    def tokenize(self, texts, context_length=77, truncate=True):
+        """
+        Returns the tokenized representation of given input string(s)
+        Parameters
+        ----------
+        texts : Union[str, List[str]]
+            An input string or a list of input strings to tokenize
+        context_length : int
+            The context length to use; all CLIP models use 77 as the context length
+        truncate: bool
+            Whether to truncate the text in case its encoding is longer than the context length
+        Returns
+        -------
+        A two-dimensional tensor containing the resulting tokens, shape = [number of input strings, context_length].
+        We return LongTensor when torch version is <1.8.0, since older index_select requires indices to be long.
+        """
+        if isinstance(texts, str):
+            texts = [texts]
 
-def _frame_from_video(video):
-    while video.isOpened():
-        success, frame = video.read()
-        if success:
-            yield frame
+        sot_token = self._tokenizer.encoder["<|startoftext|>"]
+        eot_token = self._tokenizer.encoder["<|endoftext|>"]
+        all_tokens = [[sot_token] + self._tokenizer.encode(text) + [eot_token] for text in texts]
+        if packaging.version.parse(torch.__version__) < packaging.version.parse("1.8.0"):
+            result = torch.zeros(len(all_tokens), context_length, dtype=torch.long)
         else:
-            break
+            result = torch.zeros(len(all_tokens), context_length, dtype=torch.int)
 
-v_mean = np.array([0.485, 0.456, 0.406]).reshape(1,1,3)
-v_std = np.array([0.229, 0.224, 0.225]).reshape(1,1,3)
-def normalize(data):
-    return (data/255.0-v_mean)/v_std
+        for i, tokens in enumerate(all_tokens):
+            if len(tokens) > context_length:
+                if truncate:
+                    tokens = tokens[:context_length]
+                    tokens[-1] = eot_token
+                else:
+                    raise RuntimeError(f"Input {texts[i]} is too long for context length {context_length}")
+            result[i, :len(tokens)] = torch.tensor(tokens)
 
-def frames2tensor(vid_list, fnum=8, target_size=(224, 224), device=torch.device('cuda')):
-    assert(len(vid_list) >= fnum)
-    step = len(vid_list) // fnum
-    vid_list = vid_list[::step][:fnum]
-    vid_list = [cv2.resize(x[:,:,::-1], target_size) for x in vid_list]
-    vid_tube = [np.expand_dims(normalize(x), axis=(0, 1)) for x in vid_list]
-    vid_tube = np.concatenate(vid_tube, axis=1)
-    vid_tube = np.transpose(vid_tube, (0, 1, 4, 2, 3))
-    vid_tube = torch.from_numpy(vid_tube).to(device, non_blocking=True).float()
-    return vid_tube
+        return result
 
-def retrieve_text(frames, 
-                  texts, 
-                  name='viclip', 
-                  model_cfg={'size':'l', 
-                             'pretrained': 'os.path.join(os.path.dirname(os.path.abspath(__file__)), "ViClip-InternVid-10M-FLT.pth")', 
-                             'reload':False}, 
-                  topk=5, 
-                  device=torch.device('cuda')):
-    clip, tokenizer = get_clip(name, model_cfg['size'], model_cfg['pretrained'], model_cfg['reload'])
-    clip = clip.to(device)
-    frames_tensor = frames2tensor(frames, device=device)
-    vid_feat = get_vid_feat(frames_tensor, clip)
+    def forward(self, text):
+        x = self.token_embedding(text)  # [batch_size, n_ctx, d_model]
 
-    text_feat_d = {}
-    text_feat_d = get_text_feat_dict(texts, clip, tokenizer, text_feat_d)
-    text_feats = [text_feat_d[t] for t in texts]
-    text_feats_tensor = torch.cat(text_feats, 0)
-    
-    probs, idxs = clip.get_predict_label(vid_feat, text_feats_tensor, top=topk)
+        x = x + self.positional_embedding
+        x = x.permute(1, 0, 2)  # NLD -> LND
+        x = self.transformer(x)
+        x = x.permute(1, 0, 2)  # LND -> NLD
+        x = self.ln_final(x)
 
-    ret_texts = [texts[i] for i in idxs.numpy()[0].tolist()]
-    return ret_texts, probs.numpy()[0]
+        # x.shape = [batch_size, n_ctx, transformer.width]
+        # take features from the eot embedding (eot_token is the highest number in each sequence)
+        x = x[torch.arange(x.shape[0]), text.argmax(dim=-1)] @ self.text_projection
+
+        return x
+
+
+def clip_text_b16(
+    embed_dim=512,
+    context_length=77,
+    vocab_size=49408,
+    transformer_width=512,
+    transformer_heads=8,
+    transformer_layers=12,
+    checkpoint_num=0,
+    pretrained=True,
+):
+    # raise NotImplementedError
+    model = CLIP_TEXT(
+        embed_dim,
+        context_length,
+        vocab_size,
+        transformer_width,
+        transformer_heads,
+        transformer_layers,
+        checkpoint_num,
+    )
+    # pretrained = _MODELS["ViT-B/16"]
+    # logger.info(f"Load pretrained weights from {pretrained}")
+    # state_dict = torch.load(pretrained, map_location='cpu')
+    # model.load_state_dict(state_dict, strict=False)
+    # return model.eval()
+    if pretrained:
+        if isinstance(pretrained, str) and pretrained != "bert-base-uncased":
+            pretrained = _MODELS[pretrained]
+        else:
+            pretrained = _MODELS["ViT-B/16"]
+        logger.info(f"Load pretrained weights from {pretrained}")
+        state_dict = torch.load(pretrained, map_location='cpu')
+        if context_length != state_dict["positional_embedding"].size(0):
+            # assert context_length < state_dict["positional_embedding"].size(0), "Cannot increase context length."
+            print(f"Resize positional embedding from {state_dict['positional_embedding'].size(0)} to {context_length}")
+            if context_length < state_dict["positional_embedding"].size(0):
+                state_dict["positional_embedding"] = state_dict["positional_embedding"][:context_length]
+            else:
+                state_dict["positional_embedding"] = F.pad(
+                    state_dict["positional_embedding"],
+                    (0, 0, 0, context_length - state_dict["positional_embedding"].size(0)),
+                    value=0,
+                )
+
+        message = model.load_state_dict(state_dict, strict=False)
+        print(f"Load pretrained weights from {pretrained}: {message}")
+    return model.eval()
+
+
+def clip_text_l14(
+    embed_dim=768,
+    context_length=77,
+    vocab_size=49408,
+    transformer_width=768,
+    transformer_heads=12,
+    transformer_layers=12,
+    checkpoint_num=0,
+    pretrained=True,
+):
+    model = CLIP_TEXT(
+        embed_dim,
+        context_length,
+        vocab_size,
+        transformer_width,
+        transformer_heads,
+        transformer_layers,
+        checkpoint_num,
+    )
+    if pretrained:
+        if isinstance(pretrained, str) and pretrained != "bert-base-uncased":
+            pretrained = _MODELS[pretrained]
+        else:
+            pretrained = _MODELS["ViT-L/14"]
+        logger.info(f"Load pretrained weights from {pretrained}")
+        state_dict = torch.load(pretrained, map_location='cpu')
+        if context_length != state_dict["positional_embedding"].size(0):
+            # assert context_length < state_dict["positional_embedding"].size(0), "Cannot increase context length."
+            print(f"Resize positional embedding from {state_dict['positional_embedding'].size(0)} to {context_length}")
+            if context_length < state_dict["positional_embedding"].size(0):
+                state_dict["positional_embedding"] = state_dict["positional_embedding"][:context_length]
+            else:
+                state_dict["positional_embedding"] = F.pad(
+                    state_dict["positional_embedding"],
+                    (0, 0, 0, context_length - state_dict["positional_embedding"].size(0)),
+                    value=0,
+                )
+
+        message = model.load_state_dict(state_dict, strict=False)
+        print(f"Load pretrained weights from {pretrained}: {message}")
+    return model.eval()
+
+
+def clip_text_l14_336(
+    embed_dim=768,
+    context_length=77,
+    vocab_size=49408,
+    transformer_width=768,
+    transformer_heads=12,
+    transformer_layers=12,
+):
+    raise NotImplementedError
+    model = CLIP_TEXT(
+        embed_dim,
+        context_length,
+        vocab_size,
+        transformer_width,
+        transformer_heads,
+        transformer_layers
+    )
+    pretrained = _MODELS["ViT-L/14_336"]
+    logger.info(f"Load pretrained weights from {pretrained}")
+    state_dict = torch.load(pretrained, map_location='cpu')
+    model.load_state_dict(state_dict, strict=False)
+    return model.eval()
+
+
+def build_clip(config):
+    model_cls = config.text_encoder.clip_teacher
+    model = eval(model_cls)()
+    return model
