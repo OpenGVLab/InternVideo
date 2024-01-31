@@ -1,10 +1,11 @@
-# InternVid \[[Paper](https://arxiv.org/pdf/2307.06942.pdf)\]
+# InternVid: A Large-scale Video-Text Dataset for Multimodal Understanding and Generation \[[Paper](https://arxiv.org/pdf/2307.06942.pdf)\]
 
 [![Dataset meta](https://img.shields.io/badge/%F0%9F%A4%97%20InternVid-Dataset-blue)](https://huggingface.co/datasets/OpenGVLab/InternVid) | [![Model Checkpoint](https://img.shields.io/badge/%F0%9F%A4%97%20ViCLIP-Model-purple)](https://huggingface.co/OpenGVLab/ViCLIP)
 
 \[[中文版本](README_CN.md)\]
 
 # :fire: News
+- InternVid has been accepted for spotlight presentation of ICLR 2024.
 
 - We release a subset [InternVid-Aesthetics-18M](https://huggingface.co/datasets/OpenGVLab/InternVid/viewer/InternVid-10M/AES). It consists of 18 million video clips that have been assigned high aesthetic scores. For more details on the aesthetic scoring, please refer to [laion aesthetic predictor](https://github.com/LAION-AI/aesthetic-predictor).
 
