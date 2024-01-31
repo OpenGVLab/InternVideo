@@ -58,7 +58,7 @@ This repo uses standard video action datasets, i.e., UCF-101 for closed set trai
 
 ## Testing
 
-To test our pre-trained models (see the [Model Zoo](#model-zoo)), you need to download a model file and unzip it under `work_dir`. Let's take the `I3D`-based DEAR model as an example. First, download the [pre-trained I3D-based models](https://drive.google.com/drive/folders/1TguABfmy0PE6jx9fflePQySe3jXWnsc0?usp=sharing), where the full DEAR model is saved in the folder `finetune_ucf101_i3d_edlnokl_avuc_debias`. The following directory tree is for your reference to place the downloaded files.
+To test our pre-trained models (see the [Model Zoo](#model-zoo)), you need to download a model file and unzip it under `work_dir`. The following directory tree is for your reference to place the downloaded files.
 ```shell
 work_dirs    
 ├── mae
