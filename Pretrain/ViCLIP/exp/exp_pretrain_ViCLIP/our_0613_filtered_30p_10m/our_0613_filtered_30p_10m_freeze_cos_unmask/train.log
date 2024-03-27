@@ -1,0 +1,1440 @@
+2024-02-23T16:25:29 | INFO | vindlu : Logging to: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask/train.log
+2024-02-23T16:25:29 | INFO | utils.config_utils : config: {
+  data_dir: /mnt/petrelfs/share/videointern/annotations
+  data_root: /mnt/petrelfs/share/videointern/annotations/videos_images
+  anno_root_pt: /mnt/petrelfs/share/videointern/annotations/anno_pretrain
+  anno_root_downstream: /mnt/petrelfs/share/videointern/annotations/anno_downstream
+  available_corpus: {
+      cc3m: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC']
+      cc12m: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']
+      sbu: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images']
+      vg: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images']
+      coco: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption']
+      imagenet1k: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train']
+      webvid: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video']
+      webvid_10m: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']
+      kinetics400: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics400_train.json', '/mnt/petrelfs/videointern/k400', 'video']
+      kinetics710: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']
+      kinetics710_raw: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json', '', 'only_video']
+      webvid_dummy: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_dummy.json', 'pssd:s3://WebVid10M', 'video']
+      internvid_10m_flt: ['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video']
+      coco_vg: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images']]
+      in1k_k710: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']]
+      webvid_cc3m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC']]
+      webvid_cc3m_in1k_k710: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']]
+      webvid_cc3m_k710raw: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json', '', 'only_video']]
+      webvid_14m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      webvid12m_14m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      webvid10m_14m: [['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      simple_17m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      simple_25m: [['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      viclip_20m: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+      msrvtt_1k_test: ['/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json', 'pssd:s3://MSR-VTT/MSRVTT_Videos', 'video']
+      k400_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics400_validate.json', 'pssd:s3://k400/', 'video']
+      k600_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics600_validate.json', '', 'video']
+      k700_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics700_validate.json', '', 'video']
+      sthsthv1_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv1_validate_clean2.json', '', 'video']
+      sthsthv2_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv2_validate_clean2.json', '', 'video'] }
+  VisionEncoders: {
+      beit: {
+          name: beit_base
+          pretrained: microsoft/beit-base-patch16-224-pt22k-ft22k
+          d_model: 768 }
+      beit_large: {
+          name: beit_large
+          pretrained: microsoft/beit-large-patch16-224-pt22k-ft22k
+          d_model: 1024 } }
+  TextEncoders: {
+      bert: {
+          name: bert_base
+          pretrained: bert-base-uncased
+          config: configs/config_bert.json
+          d_model: 768
+          fusion_layer: 9 }
+      bert_large: {
+          name: bert_large
+          pretrained: bert-large-uncased
+          config: configs/config_bert_large.json
+          d_model: 1024
+          fusion_layer: 19 } }
+  train_corpus: viclip_20m
+  train_file: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+  test_file: {
+      msrvtt_1k_test: ['/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json', 'pssd:s3://MSR-VTT/MSRVTT_Videos', 'video'] }
+  test_types: ['msrvtt_1k_test']
+  num_workers: 8
+  stop_key: None
+  num_frames: 8
+  num_frames_test: 8
+  batch_size: 32
+  batch_size_test: 4
+  max_txt_l: 32
+  inputs: {
+      image_res: 224
+      video_input: {
+          num_frames: 8
+          sample_type: rand
+          num_frames_test: 8
+          sample_type_test: middle
+          random_aug: False }
+      max_txt_l: {
+          image: 32
+          video: 32 }
+      batch_size: {
+          image: 32
+          video: 32 }
+      batch_size_test: {
+          image: 4
+          video: 4 } }
+  text_enc: bert_large
+  model: {
+      model_cls: VindLU_VideoCLIP
+      vision_encoder: {
+          name: vit_l14
+          pretrained: CLIP-ViT-L/14
+          d_model: 1024
+          kernel_size: 1
+          center: True
+          drop_path_rate: 0.1
+          masking_prob: 0.0
+          checkpoint_num: 24
+          dropout: 0.0 }
+      text_encoder: {
+          pretrained: CLIP-ViT-L/14
+          name: vit_l14
+          d_model: 768
+          vocab_size: 49408 }
+      requires_raw_text: True
+      embed_dim: 768
+      temp: 0.01
+      temp_min: 0.01
+      freeze_text: True }
+  criterion: {
+      loss_weight: {
+          vtc: 0.0
+          cos: 1.0 } }
+  optimizer: {
+      opt: adamW
+      lr: 4e-06
+      opt_betas: [0.9, 0.98]
+      weight_decay: 0.2
+      max_grad_norm: -1
+      different_lr: {
+          enable: False
+          module_names: []
+          lr: 0.001 } }
+  scheduler: {
+      sched: cosine
+      epochs: 0.5
+      min_lr_multi: 0.01
+      warmup_epochs: 0.1 }
+  evaluate: False
+  deep_fusion: False
+  evaluation: {
+      eval_frame_ensemble: concat
+      eval_x_only: False
+      k_test: 128
+      eval_offload: True }
+  fp16: True
+  gradient_checkpointing: True
+  wandb: {
+      enable: False
+      entity: likunchang
+      project: vindlu_videoclip }
+  dist_url: env://
+  device: cuda
+  mode: pt
+  output_dir: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask
+  resume: False
+  debug: False
+  log_freq: 10
+  seed: 42
+  save_latest: False
+  auto_resume: True
+  pretrained_path: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos/ckpt_best.pth
+  deepspeed: {
+      enable: False
+      stage: 2 }
+  rank: 0
+  world_size: 8
+  gpu: 0
+  distributed: True
+  dist_backend: nccl }
+2024-02-23T16:25:29 | INFO | torch.distributed.distributed_c10d : Added key: store_based_barrier_key:2 to store for rank: 0
+2024-02-23T16:25:29 | INFO | torch.distributed.distributed_c10d : Rank 0: Completed store-based barrier for key:store_based_barrier_key:2 with 8 nodes.
+2024-02-23T16:25:29 | INFO | __main__ : train_file: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+2024-02-23T16:25:29 | INFO | __main__ : Creating dataset for pt
+2024-02-23T16:25:29 | INFO | dataset.sqlite_dataset : Loading json file phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json
+2024-02-23T16:26:26 | INFO | dataset.sqlite_dataset : Num samples: 10647458
+2024-02-23T16:26:27 | INFO | dataset.sqlite_dataset : Num samples too short: 0
+2024-02-23T16:26:27 | INFO | dataset.sqlite_dataset : Num_epochs is set to 0.5, randomly sampling the dataset
+2024-02-23T16:26:46 | INFO | dataset.sqlite_dataset : Loading json file /mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json
+2024-02-23T16:27:47 | INFO | dataset.sqlite_dataset : Num samples: 10688377
+2024-02-23T16:27:48 | INFO | dataset.sqlite_dataset : Num samples too short: 40919
+2024-02-23T16:27:48 | INFO | dataset.sqlite_dataset : Num_epochs is set to 0.5, randomly sampling the dataset
+2024-02-23T16:28:08 | INFO | __main__ : Num_epochs is set to 0.5, scale warmup_epochs accordingly, and set num_epochs to 1
+2024-02-23T16:28:08 | INFO | tasks.shared_utils : Creating model
+2024-02-23T17:20:54 | INFO | vindlu : Logging to: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask/train.log
+2024-02-23T17:20:54 | INFO | utils.config_utils : config: {
+  data_dir: /mnt/petrelfs/share/videointern/annotations
+  data_root: /mnt/petrelfs/share/videointern/annotations/videos_images
+  anno_root_pt: /mnt/petrelfs/share/videointern/annotations/anno_pretrain
+  anno_root_downstream: /mnt/petrelfs/share/videointern/annotations/anno_downstream
+  available_corpus: {
+      cc3m: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC']
+      cc12m: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']
+      sbu: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images']
+      vg: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images']
+      coco: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption']
+      imagenet1k: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train']
+      webvid: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video']
+      webvid_10m: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']
+      kinetics400: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics400_train.json', '/mnt/petrelfs/videointern/k400', 'video']
+      kinetics710: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']
+      kinetics710_raw: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json', '', 'only_video']
+      webvid_dummy: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_dummy.json', 'pssd:s3://WebVid10M', 'video']
+      internvid_10m_flt: ['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video']
+      coco_vg: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images']]
+      in1k_k710: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']]
+      webvid_cc3m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC']]
+      webvid_cc3m_in1k_k710: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']]
+      webvid_cc3m_k710raw: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json', '', 'only_video']]
+      webvid_14m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      webvid12m_14m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      webvid10m_14m: [['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      simple_17m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      simple_25m: [['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      viclip_20m: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+      msrvtt_1k_test: ['/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json', 'pssd:s3://MSR-VTT/MSRVTT_Videos', 'video']
+      k400_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics400_validate.json', 'pssd:s3://k400/', 'video']
+      k600_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics600_validate.json', '', 'video']
+      k700_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics700_validate.json', '', 'video']
+      sthsthv1_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv1_validate_clean2.json', '', 'video']
+      sthsthv2_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv2_validate_clean2.json', '', 'video'] }
+  VisionEncoders: {
+      beit: {
+          name: beit_base
+          pretrained: microsoft/beit-base-patch16-224-pt22k-ft22k
+          d_model: 768 }
+      beit_large: {
+          name: beit_large
+          pretrained: microsoft/beit-large-patch16-224-pt22k-ft22k
+          d_model: 1024 } }
+  TextEncoders: {
+      bert: {
+          name: bert_base
+          pretrained: bert-base-uncased
+          config: configs/config_bert.json
+          d_model: 768
+          fusion_layer: 9 }
+      bert_large: {
+          name: bert_large
+          pretrained: bert-large-uncased
+          config: configs/config_bert_large.json
+          d_model: 1024
+          fusion_layer: 19 } }
+  train_corpus: viclip_20m
+  train_file: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+  test_file: {
+      msrvtt_1k_test: ['/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json', 'pssd:s3://MSR-VTT/MSRVTT_Videos', 'video'] }
+  test_types: ['msrvtt_1k_test']
+  num_workers: 8
+  stop_key: None
+  num_frames: 8
+  num_frames_test: 8
+  batch_size: 32
+  batch_size_test: 4
+  max_txt_l: 32
+  inputs: {
+      image_res: 224
+      video_input: {
+          num_frames: 8
+          sample_type: rand
+          num_frames_test: 8
+          sample_type_test: middle
+          random_aug: False }
+      max_txt_l: {
+          image: 32
+          video: 32 }
+      batch_size: {
+          image: 32
+          video: 32 }
+      batch_size_test: {
+          image: 4
+          video: 4 } }
+  text_enc: bert_large
+  model: {
+      model_cls: VindLU_VideoCLIP
+      vision_encoder: {
+          name: vit_l14
+          pretrained: CLIP-ViT-L/14
+          d_model: 1024
+          kernel_size: 1
+          center: True
+          drop_path_rate: 0.1
+          masking_prob: 0.0
+          checkpoint_num: 24
+          dropout: 0.0 }
+      text_encoder: {
+          pretrained: CLIP-ViT-L/14
+          name: vit_l14
+          d_model: 768
+          vocab_size: 49408 }
+      requires_raw_text: True
+      embed_dim: 768
+      temp: 0.01
+      temp_min: 0.01
+      freeze_text: True }
+  criterion: {
+      loss_weight: {
+          vtc: 0.0
+          cos: 1.0 } }
+  optimizer: {
+      opt: adamW
+      lr: 4e-06
+      opt_betas: [0.9, 0.98]
+      weight_decay: 0.2
+      max_grad_norm: -1
+      different_lr: {
+          enable: False
+          module_names: []
+          lr: 0.001 } }
+  scheduler: {
+      sched: cosine
+      epochs: 0.5
+      min_lr_multi: 0.01
+      warmup_epochs: 0.1 }
+  evaluate: False
+  deep_fusion: False
+  evaluation: {
+      eval_frame_ensemble: concat
+      eval_x_only: False
+      k_test: 128
+      eval_offload: True }
+  fp16: True
+  gradient_checkpointing: True
+  wandb: {
+      enable: False
+      entity: likunchang
+      project: vindlu_videoclip }
+  dist_url: env://
+  device: cuda
+  mode: pt
+  output_dir: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask
+  resume: False
+  debug: False
+  log_freq: 10
+  seed: 42
+  save_latest: False
+  auto_resume: True
+  pretrained_path: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos/ckpt_best.pth
+  deepspeed: {
+      enable: False
+      stage: 2 }
+  rank: 0
+  world_size: 8
+  gpu: 0
+  distributed: True
+  dist_backend: nccl }
+2024-02-23T17:20:54 | INFO | torch.distributed.distributed_c10d : Added key: store_based_barrier_key:2 to store for rank: 0
+2024-02-23T17:20:54 | INFO | torch.distributed.distributed_c10d : Rank 0: Completed store-based barrier for key:store_based_barrier_key:2 with 8 nodes.
+2024-02-23T17:20:54 | INFO | __main__ : train_file: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+2024-02-23T17:20:54 | INFO | __main__ : Creating dataset for pt
+2024-02-23T17:20:54 | INFO | dataset.sqlite_dataset : Loading json file phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json
+2024-02-23T17:21:52 | INFO | dataset.sqlite_dataset : Num samples: 10647458
+2024-02-23T17:21:53 | INFO | dataset.sqlite_dataset : Num samples too short: 0
+2024-02-23T17:21:53 | INFO | dataset.sqlite_dataset : Num_epochs is set to 0.5, randomly sampling the dataset
+2024-02-23T17:22:12 | INFO | dataset.sqlite_dataset : Loading json file /mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json
+2024-02-23T17:23:12 | INFO | dataset.sqlite_dataset : Num samples: 10688377
+2024-02-23T17:23:13 | INFO | dataset.sqlite_dataset : Num samples too short: 40919
+2024-02-23T17:23:13 | INFO | dataset.sqlite_dataset : Num_epochs is set to 0.5, randomly sampling the dataset
+2024-02-23T17:23:32 | INFO | __main__ : Num_epochs is set to 0.5, scale warmup_epochs accordingly, and set num_epochs to 1
+2024-02-23T17:23:32 | INFO | tasks.shared_utils : Creating model
+2024-02-23T17:23:34 | INFO | models.backbones.clip.clip_vision : load pretrained weights
+2024-02-23T17:23:36 | INFO | models.backbones.clip.clip_vision : Inflate: conv1.weight, torch.Size([1024, 3, 14, 14]) => torch.Size([1024, 3, 1, 14, 14])
+2024-02-23T17:23:36 | INFO | models.backbones.clip.clip_vision : Init center: True
+2024-02-23T17:23:36 | INFO | models.backbones.clip.clip_vision : Load pretrained weights: _IncompatibleKeys(missing_keys=['temporal_positional_embedding'], unexpected_keys=[])
+2024-02-23T18:21:21 | INFO | vindlu : Logging to: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask/train.log
+2024-02-23T18:21:21 | INFO | utils.config_utils : config: {
+  data_dir: /mnt/petrelfs/share/videointern/annotations
+  data_root: /mnt/petrelfs/share/videointern/annotations/videos_images
+  anno_root_pt: /mnt/petrelfs/share/videointern/annotations/anno_pretrain
+  anno_root_downstream: /mnt/petrelfs/share/videointern/annotations/anno_downstream
+  available_corpus: {
+      cc3m: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC']
+      cc12m: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']
+      sbu: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images']
+      vg: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images']
+      coco: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption']
+      imagenet1k: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train']
+      webvid: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video']
+      webvid_10m: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']
+      kinetics400: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics400_train.json', '/mnt/petrelfs/videointern/k400', 'video']
+      kinetics710: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']
+      kinetics710_raw: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json', '', 'only_video']
+      webvid_dummy: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_dummy.json', 'pssd:s3://WebVid10M', 'video']
+      internvid_10m_flt: ['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video']
+      coco_vg: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images']]
+      in1k_k710: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']]
+      webvid_cc3m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC']]
+      webvid_cc3m_in1k_k710: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']]
+      webvid_cc3m_k710raw: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json', '', 'only_video']]
+      webvid_14m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      webvid12m_14m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      webvid10m_14m: [['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      simple_17m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      simple_25m: [['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      viclip_20m: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+      msrvtt_1k_test: ['/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json', 'pssd:s3://MSR-VTT/MSRVTT_Videos', 'video']
+      k400_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics400_validate.json', 'pssd:s3://k400/', 'video']
+      k600_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics600_validate.json', '', 'video']
+      k700_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics700_validate.json', '', 'video']
+      sthsthv1_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv1_validate_clean2.json', '', 'video']
+      sthsthv2_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv2_validate_clean2.json', '', 'video'] }
+  VisionEncoders: {
+      beit: {
+          name: beit_base
+          pretrained: microsoft/beit-base-patch16-224-pt22k-ft22k
+          d_model: 768 }
+      beit_large: {
+          name: beit_large
+          pretrained: microsoft/beit-large-patch16-224-pt22k-ft22k
+          d_model: 1024 } }
+  TextEncoders: {
+      bert: {
+          name: bert_base
+          pretrained: bert-base-uncased
+          config: configs/config_bert.json
+          d_model: 768
+          fusion_layer: 9 }
+      bert_large: {
+          name: bert_large
+          pretrained: bert-large-uncased
+          config: configs/config_bert_large.json
+          d_model: 1024
+          fusion_layer: 19 } }
+  train_corpus: viclip_20m
+  train_file: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+  test_file: {
+      msrvtt_1k_test: ['/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json', 'pssd:s3://MSR-VTT/MSRVTT_Videos', 'video'] }
+  test_types: ['msrvtt_1k_test']
+  num_workers: 8
+  stop_key: None
+  num_frames: 8
+  num_frames_test: 8
+  batch_size: 32
+  batch_size_test: 4
+  max_txt_l: 32
+  inputs: {
+      image_res: 224
+      video_input: {
+          num_frames: 8
+          sample_type: rand
+          num_frames_test: 8
+          sample_type_test: middle
+          random_aug: False }
+      max_txt_l: {
+          image: 32
+          video: 32 }
+      batch_size: {
+          image: 32
+          video: 32 }
+      batch_size_test: {
+          image: 4
+          video: 4 } }
+  text_enc: bert_large
+  model: {
+      model_cls: VindLU_VideoCLIP
+      vision_encoder: {
+          name: vit_l14
+          pretrained: CLIP-ViT-L/14
+          d_model: 1024
+          kernel_size: 1
+          center: True
+          drop_path_rate: 0.1
+          masking_prob: 0.0
+          checkpoint_num: 24
+          dropout: 0.0 }
+      text_encoder: {
+          pretrained: CLIP-ViT-L/14
+          name: vit_l14
+          d_model: 768
+          vocab_size: 49408 }
+      requires_raw_text: True
+      embed_dim: 768
+      temp: 0.01
+      temp_min: 0.01
+      freeze_text: True }
+  criterion: {
+      loss_weight: {
+          vtc: 0.0
+          cos: 1.0 } }
+  optimizer: {
+      opt: adamW
+      lr: 4e-06
+      opt_betas: [0.9, 0.98]
+      weight_decay: 0.2
+      max_grad_norm: -1
+      different_lr: {
+          enable: False
+          module_names: []
+          lr: 0.001 } }
+  scheduler: {
+      sched: cosine
+      epochs: 0.5
+      min_lr_multi: 0.01
+      warmup_epochs: 0.1 }
+  evaluate: False
+  deep_fusion: False
+  evaluation: {
+      eval_frame_ensemble: concat
+      eval_x_only: False
+      k_test: 128
+      eval_offload: True }
+  fp16: True
+  gradient_checkpointing: True
+  wandb: {
+      enable: False
+      entity: likunchang
+      project: vindlu_videoclip }
+  dist_url: env://
+  device: cuda
+  mode: pt
+  output_dir: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask
+  resume: False
+  debug: False
+  log_freq: 10
+  seed: 42
+  save_latest: False
+  auto_resume: True
+  pretrained_path: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos/ckpt_best.pth
+  deepspeed: {
+      enable: False
+      stage: 2 }
+  rank: 0
+  world_size: 8
+  gpu: 0
+  distributed: True
+  dist_backend: nccl }
+2024-02-23T18:21:21 | INFO | torch.distributed.distributed_c10d : Added key: store_based_barrier_key:2 to store for rank: 0
+2024-02-23T18:21:21 | INFO | torch.distributed.distributed_c10d : Rank 0: Completed store-based barrier for key:store_based_barrier_key:2 with 8 nodes.
+2024-02-23T18:21:21 | INFO | __main__ : train_file: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+2024-02-23T18:21:21 | INFO | __main__ : Creating dataset for pt
+2024-02-23T18:21:21 | INFO | dataset.sqlite_dataset : Loading json file phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json
+2024-02-23T18:22:19 | INFO | dataset.sqlite_dataset : Num samples: 10647458
+2024-02-23T18:22:20 | INFO | dataset.sqlite_dataset : Num samples too short: 0
+2024-02-23T18:22:20 | INFO | dataset.sqlite_dataset : Num_epochs is set to 0.5, randomly sampling the dataset
+2024-02-23T18:22:40 | INFO | dataset.sqlite_dataset : Loading json file /mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json
+2024-02-23T18:23:41 | INFO | dataset.sqlite_dataset : Num samples: 10688377
+2024-02-23T18:23:41 | INFO | dataset.sqlite_dataset : Num samples too short: 40919
+2024-02-23T18:23:42 | INFO | dataset.sqlite_dataset : Num_epochs is set to 0.5, randomly sampling the dataset
+2024-02-23T18:24:01 | INFO | __main__ : Num_epochs is set to 0.5, scale warmup_epochs accordingly, and set num_epochs to 1
+2024-02-23T18:24:01 | INFO | tasks.shared_utils : Creating model
+2024-02-23T18:24:03 | INFO | models.backbones.clip.clip_vision : load pretrained weights
+2024-02-23T18:24:05 | INFO | models.backbones.clip.clip_vision : Inflate: conv1.weight, torch.Size([1024, 3, 14, 14]) => torch.Size([1024, 3, 1, 14, 14])
+2024-02-23T18:24:05 | INFO | models.backbones.clip.clip_vision : Init center: True
+2024-02-23T18:24:06 | INFO | models.backbones.clip.clip_vision : Load pretrained weights: _IncompatibleKeys(missing_keys=['temporal_positional_embedding'], unexpected_keys=[])
+2024-02-23T18:24:06 | INFO | models.backbones.clip.clip_text : Load pretrained weights from /mnt/petrelfs/share_data/likunchang/model/clip_text_encoder/vit_l14_text.pth
+2024-02-23T18:24:09 | INFO | utils.optimizer : diff_names: [], diff_lr: None
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.temp: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.class_embedding: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.positional_embedding: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.temporal_positional_embedding: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.proj: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.conv1.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.ln_pre.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.ln_pre.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.ln_post.weight: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : param module.vision_encoder.ln_post.bias: wd: 0, lr: 4e-06
+2024-02-23T18:24:09 | INFO | utils.optimizer : optimizer -- lr=4e-06 wd=0 len(p)=200
+2024-02-23T18:24:09 | INFO | utils.optimizer : optimizer -- lr=4e-06 wd=0.2 len(p)=98
+2024-02-23T18:24:09 | INFO | tasks.shared_utils : Auto resuming
+2024-02-23T18:24:09 | INFO | tasks.shared_utils : Not found checkpoint in exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask
+2024-02-23T18:24:09 | WARNING | tasks.shared_utils : No pretrained checkpoint provided, training from scratch
+2024-02-23T18:24:09 | INFO | __main__ : Start training
+2024-02-23T18:24:11 | INFO | dataset.dataloader : MetaLoader has 1 dataloaders, 41591 batches in total
+dataloader index=0 name=video, batch-size=32 length(#batches)=41591 
+2024-02-23T18:26:13 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:13 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:13 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:13 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:15 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:15 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:17 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:17 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:18 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:18 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:20 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:20 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:21 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:26:21 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:27:12 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:27:12 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:30:07 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: torch.distributed.reduce_op is deprecated, please use torch.distributed.ReduceOp instead
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T18:30:07 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: torch.distributed.reduce_op is deprecated, please use torch.distributed.ReduceOp instead
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:38:28 | INFO | vindlu : Logging to: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask/train.log
+2024-02-23T19:38:28 | INFO | utils.config_utils : config: {
+  data_dir: /mnt/petrelfs/share/videointern/annotations
+  data_root: /mnt/petrelfs/share/videointern/annotations/videos_images
+  anno_root_pt: /mnt/petrelfs/share/videointern/annotations/anno_pretrain
+  anno_root_downstream: /mnt/petrelfs/share/videointern/annotations/anno_downstream
+  available_corpus: {
+      cc3m: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC']
+      cc12m: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']
+      sbu: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images']
+      vg: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images']
+      coco: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption']
+      imagenet1k: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train']
+      webvid: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video']
+      webvid_10m: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']
+      kinetics400: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics400_train.json', '/mnt/petrelfs/videointern/k400', 'video']
+      kinetics710: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']
+      kinetics710_raw: ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json', '', 'only_video']
+      webvid_dummy: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_dummy.json', 'pssd:s3://WebVid10M', 'video']
+      internvid_10m_flt: ['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video']
+      coco_vg: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images']]
+      in1k_k710: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']]
+      webvid_cc3m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC']]
+      webvid_cc3m_in1k_k710: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json', '/mnt/petrelfs/share/images/train'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json', '', 'video']]
+      webvid_cc3m_k710raw: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json', '', 'only_video']]
+      webvid_14m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      webvid12m_14m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      webvid10m_14m: [['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json', '/mnt/petrelfs/videointern/coco_caption'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json', '/mnt/petrelfs/videointern/VG/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json', '/mnt/petrelfs/videointern/SBU/images'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      simple_17m: [['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json', 'pssd:s3://WebVid2M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      simple_25m: [['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json', 'pssd:s3://GCC'], ['/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json', 'pssd:s3://GCC/GCC12m']]
+      viclip_20m: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+      msrvtt_1k_test: ['/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json', 'pssd:s3://MSR-VTT/MSRVTT_Videos', 'video']
+      k400_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics400_validate.json', 'pssd:s3://k400/', 'video']
+      k600_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics600_validate.json', '', 'video']
+      k700_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics700_validate.json', '', 'video']
+      sthsthv1_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv1_validate_clean2.json', '', 'video']
+      sthsthv2_act_val: ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv2_validate_clean2.json', '', 'video'] }
+  VisionEncoders: {
+      beit: {
+          name: beit_base
+          pretrained: microsoft/beit-base-patch16-224-pt22k-ft22k
+          d_model: 768 }
+      beit_large: {
+          name: beit_large
+          pretrained: microsoft/beit-large-patch16-224-pt22k-ft22k
+          d_model: 1024 } }
+  TextEncoders: {
+      bert: {
+          name: bert_base
+          pretrained: bert-base-uncased
+          config: configs/config_bert.json
+          d_model: 768
+          fusion_layer: 9 }
+      bert_large: {
+          name: bert_large
+          pretrained: bert-large-uncased
+          config: configs/config_bert_large.json
+          d_model: 1024
+          fusion_layer: 19 } }
+  train_corpus: viclip_20m
+  train_file: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+  test_file: {
+      msrvtt_1k_test: ['/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json', 'pssd:s3://MSR-VTT/MSRVTT_Videos', 'video'] }
+  test_types: ['msrvtt_1k_test']
+  num_workers: 8
+  stop_key: None
+  num_frames: 8
+  num_frames_test: 8
+  batch_size: 32
+  batch_size_test: 4
+  max_txt_l: 32
+  inputs: {
+      image_res: 224
+      video_input: {
+          num_frames: 8
+          sample_type: rand
+          num_frames_test: 8
+          sample_type_test: middle
+          random_aug: False }
+      max_txt_l: {
+          image: 32
+          video: 32 }
+      batch_size: {
+          image: 32
+          video: 32 }
+      batch_size_test: {
+          image: 4
+          video: 4 } }
+  text_enc: bert_large
+  model: {
+      model_cls: VindLU_VideoCLIP
+      vision_encoder: {
+          name: vit_l14
+          pretrained: CLIP-ViT-L/14
+          d_model: 1024
+          kernel_size: 1
+          center: True
+          drop_path_rate: 0.1
+          masking_prob: 0.0
+          checkpoint_num: 24
+          dropout: 0.0 }
+      text_encoder: {
+          pretrained: CLIP-ViT-L/14
+          name: vit_l14
+          d_model: 768
+          vocab_size: 49408 }
+      requires_raw_text: True
+      embed_dim: 768
+      temp: 0.01
+      temp_min: 0.01
+      freeze_text: True }
+  criterion: {
+      loss_weight: {
+          vtc: 0.0
+          cos: 1.0 } }
+  optimizer: {
+      opt: adamW
+      lr: 4e-06
+      opt_betas: [0.9, 0.98]
+      weight_decay: 0.2
+      max_grad_norm: -1
+      different_lr: {
+          enable: False
+          module_names: []
+          lr: 0.001 } }
+  scheduler: {
+      sched: cosine
+      epochs: 0.5
+      min_lr_multi: 0.01
+      warmup_epochs: 0.1 }
+  evaluate: False
+  deep_fusion: False
+  evaluation: {
+      eval_frame_ensemble: concat
+      eval_x_only: False
+      k_test: 128
+      eval_offload: True }
+  fp16: True
+  gradient_checkpointing: True
+  wandb: {
+      enable: False
+      entity: likunchang
+      project: vindlu_videoclip }
+  dist_url: env://
+  device: cuda
+  mode: pt
+  output_dir: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask
+  resume: False
+  debug: False
+  log_freq: 10
+  seed: 42
+  save_latest: False
+  auto_resume: True
+  pretrained_path: exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos/ckpt_best.pth
+  deepspeed: {
+      enable: False
+      stage: 2 }
+  rank: 0
+  world_size: 8
+  gpu: 0
+  distributed: True
+  dist_backend: nccl }
+2024-02-23T19:38:28 | INFO | torch.distributed.distributed_c10d : Added key: store_based_barrier_key:2 to store for rank: 0
+2024-02-23T19:38:28 | INFO | torch.distributed.distributed_c10d : Rank 0: Completed store-based barrier for key:store_based_barrier_key:2 with 8 nodes.
+2024-02-23T19:38:28 | INFO | __main__ : train_file: [['phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json', '', 'video'], ['/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json', 'pssd:s3://WebVid10M', 'video']]
+2024-02-23T19:38:28 | INFO | __main__ : Creating dataset for pt
+2024-02-23T19:38:28 | INFO | dataset.sqlite_dataset : Loading json file phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json
+2024-02-23T19:39:25 | INFO | dataset.sqlite_dataset : Num samples: 10647458
+2024-02-23T19:39:25 | INFO | dataset.sqlite_dataset : Num samples too short: 0
+2024-02-23T19:39:26 | INFO | dataset.sqlite_dataset : Num_epochs is set to 0.5, randomly sampling the dataset
+2024-02-23T19:39:45 | INFO | dataset.sqlite_dataset : Loading json file /mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json
+2024-02-23T19:40:46 | INFO | dataset.sqlite_dataset : Num samples: 10688377
+2024-02-23T19:40:47 | INFO | dataset.sqlite_dataset : Num samples too short: 40919
+2024-02-23T19:40:47 | INFO | dataset.sqlite_dataset : Num_epochs is set to 0.5, randomly sampling the dataset
+2024-02-23T19:41:07 | INFO | __main__ : Num_epochs is set to 0.5, scale warmup_epochs accordingly, and set num_epochs to 1
+2024-02-23T19:41:07 | INFO | tasks.shared_utils : Creating model
+2024-02-23T19:41:09 | INFO | models.backbones.clip.clip_vision : load pretrained weights
+2024-02-23T19:41:10 | INFO | models.backbones.clip.clip_vision : Inflate: conv1.weight, torch.Size([1024, 3, 14, 14]) => torch.Size([1024, 3, 1, 14, 14])
+2024-02-23T19:41:10 | INFO | models.backbones.clip.clip_vision : Init center: True
+2024-02-23T19:41:11 | INFO | models.backbones.clip.clip_vision : Load pretrained weights: _IncompatibleKeys(missing_keys=['temporal_positional_embedding'], unexpected_keys=[])
+2024-02-23T19:41:11 | INFO | models.backbones.clip.clip_text : Load pretrained weights from /mnt/petrelfs/share_data/likunchang/model/clip_text_encoder/vit_l14_text.pth
+2024-02-23T19:41:13 | INFO | utils.optimizer : diff_names: [], diff_lr: None
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.temp: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.class_embedding: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.positional_embedding: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.temporal_positional_embedding: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.proj: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.conv1.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.ln_pre.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.ln_pre.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.0.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.1.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.2.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.3.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.4.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.5.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.6.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.7.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.8.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.9.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.10.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.11.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.12.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.13.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.14.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.15.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.16.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.17.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.18.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.19.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.20.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.21.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.22.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.attn.in_proj_weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.attn.in_proj_bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.attn.out_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.attn.out_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.ln_1.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.ln_1.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.mlp.c_fc.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.mlp.c_fc.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.mlp.c_proj.weight: wd: 0.2, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.mlp.c_proj.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.ln_2.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.transformer.resblocks.23.ln_2.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.ln_post.weight: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : param module.vision_encoder.ln_post.bias: wd: 0, lr: 4e-06
+2024-02-23T19:41:13 | INFO | utils.optimizer : optimizer -- lr=4e-06 wd=0 len(p)=200
+2024-02-23T19:41:13 | INFO | utils.optimizer : optimizer -- lr=4e-06 wd=0.2 len(p)=98
+2024-02-23T19:41:13 | INFO | tasks.shared_utils : Auto resuming
+2024-02-23T19:41:13 | INFO | tasks.shared_utils : Not found checkpoint in exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask
+2024-02-23T19:41:13 | WARNING | tasks.shared_utils : No pretrained checkpoint provided, training from scratch
+2024-02-23T19:41:13 | INFO | __main__ : Start training
+2024-02-23T19:41:15 | INFO | dataset.dataloader : MetaLoader has 1 dataloaders, 41591 batches in total
+dataloader index=0 name=video, batch-size=32 length(#batches)=41591 
+2024-02-23T19:43:16 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:16 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:17 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:17 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:18 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:18 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:19 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:19 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:19 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:19 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:20 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:20 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:21 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:43:21 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:44:12 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:44:12 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: The default value of the antialias parameter of all the resizing transforms (Resize(), RandomResizedCrop(), etc.) will change from None to True in v0.17, in order to be consistent across the PIL and Tensor backends. To suppress this warning, directly pass antialias=True (recommended, future default), antialias=None (current default, which means False for Tensors and True for PIL), or antialias=False (only works on Tensors - PIL will still use antialiasing). This also applies if you are using the inference transforms from the models weights: update the call to weights.transforms(antialias=True).
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:47:08 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: torch.distributed.reduce_op is deprecated, please use torch.distributed.ReduceOp instead
+  builtin_warn(*args, **kwargs)
+
+2024-02-23T19:47:08 | WARNING | py.warnings : /mnt/petrelfs/heyinan/exps/ViCLIP/utils/distributed.py:21: UserWarning: torch.distributed.reduce_op is deprecated, please use torch.distributed.ReduceOp instead
+  builtin_warn(*args, **kwargs)
+

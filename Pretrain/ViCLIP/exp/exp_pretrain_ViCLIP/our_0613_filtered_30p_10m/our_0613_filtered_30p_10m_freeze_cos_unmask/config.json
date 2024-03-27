@@ -1,0 +1,461 @@
+{
+  "data_dir": "/mnt/petrelfs/share/videointern/annotations",
+  "data_root": "/mnt/petrelfs/share/videointern/annotations/videos_images",
+  "anno_root_pt": "/mnt/petrelfs/share/videointern/annotations/anno_pretrain",
+  "anno_root_downstream": "/mnt/petrelfs/share/videointern/annotations/anno_downstream",
+  "available_corpus": {
+    "cc3m": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+      "pssd:s3://GCC"
+    ],
+    "cc12m": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json",
+      "pssd:s3://GCC/GCC12m"
+    ],
+    "sbu": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json",
+      "/mnt/petrelfs/videointern/SBU/images"
+    ],
+    "vg": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json",
+      "/mnt/petrelfs/videointern/VG/images"
+    ],
+    "coco": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json",
+      "/mnt/petrelfs/videointern/coco_caption"
+    ],
+    "imagenet1k": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json",
+      "/mnt/petrelfs/share/images/train"
+    ],
+    "webvid": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json",
+      "pssd:s3://WebVid2M",
+      "video"
+    ],
+    "webvid_10m": [
+      "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json",
+      "pssd:s3://WebVid10M",
+      "video"
+    ],
+    "kinetics400": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics400_train.json",
+      "/mnt/petrelfs/videointern/k400",
+      "video"
+    ],
+    "kinetics710": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json",
+      "",
+      "video"
+    ],
+    "kinetics710_raw": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json",
+      "",
+      "only_video"
+    ],
+    "webvid_dummy": [
+      "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_dummy.json",
+      "pssd:s3://WebVid10M",
+      "video"
+    ],
+    "internvid_10m_flt": [
+      "phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json",
+      "",
+      "video"
+    ],
+    "coco_vg": [
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json",
+        "/mnt/petrelfs/videointern/coco_caption"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json",
+        "/mnt/petrelfs/videointern/VG/images"
+      ]
+    ],
+    "in1k_k710": [
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json",
+        "/mnt/petrelfs/share/images/train"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json",
+        "",
+        "video"
+      ]
+    ],
+    "webvid_cc3m": [
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json",
+        "pssd:s3://WebVid2M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+        "pssd:s3://GCC"
+      ]
+    ],
+    "webvid_cc3m_in1k_k710": [
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json",
+        "pssd:s3://WebVid2M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+        "pssd:s3://GCC"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/imagenet1k_train.json",
+        "/mnt/petrelfs/share/images/train"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_train.json",
+        "",
+        "video"
+      ]
+    ],
+    "webvid_cc3m_k710raw": [
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json",
+        "pssd:s3://WebVid2M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+        "pssd:s3://GCC"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/kinetics710_raw_train.json",
+        "",
+        "only_video"
+      ]
+    ],
+    "webvid_14m": [
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json",
+        "pssd:s3://WebVid2M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+        "pssd:s3://GCC"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json",
+        "/mnt/petrelfs/videointern/coco_caption"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json",
+        "/mnt/petrelfs/videointern/VG/images"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json",
+        "/mnt/petrelfs/videointern/SBU/images"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json",
+        "pssd:s3://GCC/GCC12m"
+      ]
+    ],
+    "webvid12m_14m": [
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json",
+        "pssd:s3://WebVid2M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json",
+        "pssd:s3://WebVid10M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+        "pssd:s3://GCC"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json",
+        "/mnt/petrelfs/videointern/coco_caption"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json",
+        "/mnt/petrelfs/videointern/VG/images"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json",
+        "/mnt/petrelfs/videointern/SBU/images"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json",
+        "pssd:s3://GCC/GCC12m"
+      ]
+    ],
+    "webvid10m_14m": [
+      [
+        "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json",
+        "pssd:s3://WebVid10M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+        "pssd:s3://GCC"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/coco.json",
+        "/mnt/petrelfs/videointern/coco_caption"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/vg.json",
+        "/mnt/petrelfs/videointern/VG/images"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/sbu.json",
+        "/mnt/petrelfs/videointern/SBU/images"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json",
+        "pssd:s3://GCC/GCC12m"
+      ]
+    ],
+    "simple_17m": [
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/webvid_train.json",
+        "pssd:s3://WebVid2M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+        "pssd:s3://GCC"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json",
+        "pssd:s3://GCC/GCC12m"
+      ]
+    ],
+    "simple_25m": [
+      [
+        "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json",
+        "pssd:s3://WebVid10M",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc3m_train.json",
+        "pssd:s3://GCC"
+      ],
+      [
+        "/mnt/petrelfs/share/videointern/annotations/anno_pretrain/cc12m_train.json",
+        "pssd:s3://GCC/GCC12m"
+      ]
+    ],
+    "viclip_20m": [
+      [
+        "phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json",
+        "",
+        "video"
+      ],
+      [
+        "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json",
+        "pssd:s3://WebVid10M",
+        "video"
+      ]
+    ],
+    "msrvtt_1k_test": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json",
+      "pssd:s3://MSR-VTT/MSRVTT_Videos",
+      "video"
+    ],
+    "k400_act_val": [
+      "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics400_validate.json",
+      "pssd:s3://k400/",
+      "video"
+    ],
+    "k600_act_val": [
+      "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics600_validate.json",
+      "",
+      "video"
+    ],
+    "k700_act_val": [
+      "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/kinetics700_validate.json",
+      "",
+      "video"
+    ],
+    "sthsthv1_act_val": [
+      "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv1_validate_clean2.json",
+      "",
+      "video"
+    ],
+    "sthsthv2_act_val": [
+      "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_downstream/sthsthv2_validate_clean2.json",
+      "",
+      "video"
+    ]
+  },
+  "VisionEncoders": {
+    "beit": {
+      "name": "beit_base",
+      "pretrained": "microsoft/beit-base-patch16-224-pt22k-ft22k",
+      "d_model": 768
+    },
+    "beit_large": {
+      "name": "beit_large",
+      "pretrained": "microsoft/beit-large-patch16-224-pt22k-ft22k",
+      "d_model": 1024
+    }
+  },
+  "TextEncoders": {
+    "bert": {
+      "name": "bert_base",
+      "pretrained": "bert-base-uncased",
+      "config": "configs/config_bert.json",
+      "d_model": 768,
+      "fusion_layer": 9
+    },
+    "bert_large": {
+      "name": "bert_large",
+      "pretrained": "bert-large-uncased",
+      "config": "configs/config_bert_large.json",
+      "d_model": 1024,
+      "fusion_layer": 19
+    }
+  },
+  "train_corpus": "viclip_20m",
+  "train_file": [
+    [
+      "phdd:s3://video_caption_summarized_list/resized_0613_filtered_30p_10m.json",
+      "",
+      "video"
+    ],
+    [
+      "/mnt/petrelfs/share_data/liyizhuo/datasets/annotations/anno_pretrain/webvid_10m_train_clean_230413.json",
+      "pssd:s3://WebVid10M",
+      "video"
+    ]
+  ],
+  "test_file": {
+    "msrvtt_1k_test": [
+      "/mnt/petrelfs/share/videointern/annotations/anno_downstream/msrvtt_test1k.json",
+      "pssd:s3://MSR-VTT/MSRVTT_Videos",
+      "video"
+    ]
+  },
+  "test_types": [
+    "msrvtt_1k_test"
+  ],
+  "num_workers": 8,
+  "stop_key": null,
+  "num_frames": 8,
+  "num_frames_test": 8,
+  "batch_size": 32,
+  "batch_size_test": 4,
+  "max_txt_l": 32,
+  "inputs": {
+    "image_res": 224,
+    "video_input": {
+      "num_frames": 8,
+      "sample_type": "rand",
+      "num_frames_test": 8,
+      "sample_type_test": "middle",
+      "random_aug": false
+    },
+    "max_txt_l": {
+      "image": 32,
+      "video": 32
+    },
+    "batch_size": {
+      "image": 32,
+      "video": 32
+    },
+    "batch_size_test": {
+      "image": 4,
+      "video": 4
+    }
+  },
+  "text_enc": "bert_large",
+  "model": {
+    "model_cls": "VindLU_VideoCLIP",
+    "vision_encoder": {
+      "name": "vit_l14",
+      "pretrained": "CLIP-ViT-L/14",
+      "d_model": 1024,
+      "kernel_size": 1,
+      "center": true,
+      "drop_path_rate": 0.1,
+      "masking_prob": 0.0,
+      "checkpoint_num": 24,
+      "dropout": 0.0
+    },
+    "text_encoder": {
+      "pretrained": "CLIP-ViT-L/14",
+      "name": "vit_l14",
+      "d_model": 768,
+      "vocab_size": 49408
+    },
+    "requires_raw_text": true,
+    "embed_dim": 768,
+    "temp": 0.01,
+    "temp_min": 0.01,
+    "freeze_text": true
+  },
+  "criterion": {
+    "loss_weight": {
+      "vtc": 0.0,
+      "cos": 1.0
+    }
+  },
+  "optimizer": {
+    "opt": "adamW",
+    "lr": 4e-06,
+    "opt_betas": [
+      0.9,
+      0.98
+    ],
+    "weight_decay": 0.2,
+    "max_grad_norm": -1,
+    "different_lr": {
+      "enable": false,
+      "module_names": [],
+      "lr": 0.001
+    }
+  },
+  "scheduler": {
+    "sched": "cosine",
+    "epochs": 0.5,
+    "min_lr_multi": 0.01,
+    "warmup_epochs": 0.1
+  },
+  "evaluate": false,
+  "deep_fusion": false,
+  "evaluation": {
+    "eval_frame_ensemble": "concat",
+    "eval_x_only": false,
+    "k_test": 128,
+    "eval_offload": true
+  },
+  "fp16": true,
+  "gradient_checkpointing": true,
+  "wandb": {
+    "enable": false,
+    "entity": "likunchang",
+    "project": "vindlu_videoclip"
+  },
+  "dist_url": "env://",
+  "device": "cuda",
+  "mode": "pt",
+  "output_dir": "exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos_unmask",
+  "resume": false,
+  "debug": false,
+  "log_freq": 10,
+  "seed": 42,
+  "save_latest": false,
+  "auto_resume": true,
+  "pretrained_path": "exp/exp_pretrain_videoclip/our_0613_filtered_30p_10m/our_0613_filtered_30p_10m_freeze_cos/ckpt_best.pth",
+  "deepspeed": {
+    "enable": false,
+    "stage": 2
+  },
+  "rank": 0,
+  "world_size": 8,
+  "gpu": 0,
+  "distributed": true,
+  "dist_backend": "nccl"
+}
