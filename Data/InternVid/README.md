@@ -5,6 +5,8 @@
 \[[中文版本](README_CN.md)\]
 
 # :fire: News
+- The implementation of ViCLIP is given [here](https://github.com/OpenGVLab/InternVideo/tree/main/Pretrain/ViCLIP).
+
 - InternVid has been accepted for spotlight presentation of ICLR 2024.
 
 - We release a subset [InternVid-Aesthetics-18M](https://huggingface.co/datasets/OpenGVLab/InternVid/viewer/InternVid-10M/AES). It consists of 18 million video clips that have been assigned high aesthetic scores. For more details on the aesthetic scoring, please refer to [laion aesthetic predictor](https://github.com/LAION-AI/aesthetic-predictor).
