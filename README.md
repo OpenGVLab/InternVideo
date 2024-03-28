@@ -5,7 +5,7 @@
 ---
 
 <div align='center'>
-<img src="./InternVideo2/figs/teaser-internvideo2.png" class="interpolation-image" alt="internvideo2_performance." height="80%" width="80%" />
+<img src="./InternVideo2/figs/teaser-internvideo2.png" class="interpolation-image" alt="internvideo2_performance." height="96%" width="96%" />
 </div>
 
 This repo contains InternVideo series and related works in video foundation models.
