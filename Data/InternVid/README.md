@@ -5,7 +5,7 @@
 \[[中文版本](README_CN.md)\]
 
 # :fire: News
-- The implementation of ViCLIP is given [here](https://github.com/OpenGVLab/InternVideo/tree/main/Pretrain/ViCLIP).
+- The implementation of ViCLIP is given [here](https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo1/Pretrain/ViCLIP).
 
 - InternVid has been accepted for spotlight presentation of ICLR 2024.
 
