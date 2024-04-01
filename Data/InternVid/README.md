@@ -93,10 +93,10 @@ ViCLIP-L | +InternVid-200M+K710 | **88.7** | **98.2** | **74.2** | **95.0**
 If you find this work useful for your research, please consider citing InternVid. Your acknowledgement would greatly help us in continuing to contribute resources to the research community.
 
 ```
-@article{wang2023internvid,
+@inproceedings{wang2023internvid,
   title={InternVid: A Large-scale Video-Text Dataset for Multimodal Understanding and Generation},
-  author={Wang, Yi and He, Yinan and Li, Yizhuo and Li, Kunchang and Yu, Jiashuo and Ma, Xin and Chen, Xinyuan and Wang, Yaohui and Luo, Ping and Liu, Ziwei and Wang, Yali and Wang, Limin and Qiao, Yu},
-  journal={arXiv preprint arXiv:2307.06942},
+  author={Wang, Yi and He, Yinan and Li, Yizhuo and Li, Kunchang and Yu, Jiashuo and Ma, Xin and Li, Xinhao and Chen, Guo and Chen, Xinyuan and Wang, Yaohui and others},
+  booktitle={The Twelfth International Conference on Learning Representations},
   year={2023}
 }
 
