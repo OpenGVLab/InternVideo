@@ -1,7 +1,7 @@
 # Temporal-Action-Localization
 The codebase  of  one downstream task (Temporal Action Localization ) based on our InternVideo.
 
- [**InternVideo: General Video Foundation Models via Generative and Discriminative Learning**](https://arxiv.org/abs/2212.03191) 
+ [**InternVideo: General Video Foundation Models via Generative and Discriminative Learning**]https://arxiv.org/abs/2212.03191) 
 
 We use ViT-H from our InternVideo as backbones for feature extraction. In our experiment, ViT-H models are pretrained from Hybrid datasets. 
 As shown in Table, our InternVideo outperforms best than all the preview methods on these four TAL datasets. 
@@ -24,21 +24,21 @@ Note that, our InternVideo achieves huge improvements in temporal action localiz
 
 ## To Reproduce Our Results of InternVideo
 **Download VideoMAE Features and Annotations**
-* Download *thumos_feature* [this BaiduYun link](https://pan.baidu.com/s/1IVcnPWsZyF6rHEPkSzH5Bw). code：qzb1 
+* Download *thumos_feature* [this BaiduYun link](https://pan.baidu.com/s/1zMV12HNukbD3SEAkDR0wuA). code：7da5 
 <!-- * The file includes VideoMAE features, action annotations in json format (similar to ActivityNet annotation format), and external classification scores. -->
   
 
-* Download *anet_feature* [this BaiduYun link](https://pan.baidu.com/s/1Vjvnesm7WCGHwjrqQWNVDg). code：0elv 
+* Download *anet_feature* [this BaiduYun link](https://pan.baidu.com/s/1bYLQLexADkC2CzEqH8FMpw). code：h8f9  
 <!-- * The file includes VideoMAE features, action annotations in json format (similar to ActivityNet annotation format), and external classification scores. -->
 
 
 
-* Download *hacs_feature* [this BaiduYun link](https://pan.baidu.com/s/1j6GABMj0tY1OUxU2xzyB6g). code：qcnz
+* Download *hacs_feature* [this BaiduYun link](https://pan.baidu.com/s/1jlOMaEbkjUkCfLmkrftKGw). code：u31f
 <!-- * The file includes VideoMAE features, action annotations in json format (similar to ActivityNet annotation format), and external classification scores. -->
 
 
 
-* Download *fineaction_feature* [this BaiduYun link](https://pan.baidu.com/s/1P5QQMuxcPiE2tn4ojQW7pA). code：v45q 
+* Download *fineaction_feature* [this BaiduYun link](https://pan.baidu.com/s/1vcxAvKLVghLdidDKn9br8Q). code：d2l5  
 <!-- * The file includes VideoMAE features, action annotations in json format (similar to ActivityNet annotation format), and external classification scores. -->
 
 
