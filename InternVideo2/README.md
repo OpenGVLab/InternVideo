@@ -40,7 +40,8 @@ This repo will give the code and models of '[InternVideo2: Scaling Video Foundat
 - **Achieved `SOTA` performance on over `60` video/audio-related tasks (including action recognition, temporal localization, retrieval, etc) when released.**
 
 ## Updates
-- `Mar  22, 2024`: The technical report of InternVideo2 is released.
+- `2024/04/13`: Update the code and scripts for InternVideo2 Stage1.
+- `2024/03/22`: The technical report of InternVideo2 is released.
 
 ## Citation
 

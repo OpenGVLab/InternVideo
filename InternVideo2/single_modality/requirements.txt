@@ -1,0 +1,17 @@
+apex==0.9.10dev
+auto_augment==1.0.0
+decord==0.6.0
+deepspeed==0.10.1
+einops==0.7.0
+flash_attn==2.0.8
+fvcore==0.1.5.post20221221
+numpy==1.24.4
+opencv_python==4.8.0.76
+pandas==2.0.3
+Pillow==10.0.0
+scipy==1.13.0
+skimage==0.0
+tensorboardX==2.6.2
+timm==0.5.4
+torch==1.13.1+cu117
+torchvision==0.14.1+cu117
