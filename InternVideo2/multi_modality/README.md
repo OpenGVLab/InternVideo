@@ -44,13 +44,13 @@ bash scripts/pretraining/stage2/1B/run.sh
 
 ## Zero-shot Evaluation
 
-For zero-shot evaluation, you can simply run the pretraining scripts in `scripts/evaluation/zero_shot` as follows:
+For zero-shot evaluation, you can simply run the pretraining scripts in `scripts/evaluation` as follows:
 ```shell
-bash scripts/evaluation/zero_shot/stage2_align/internvideo2_stage2_1B_eval_msrvtt.sh
+bash scripts/evaluation/stage2/zero_shot/1B/eval_msrvtt.sh
 ```
 When evaluating, you can choose to turn off deepspeed and the performance will fluctuate slightly from the reported result (around 0.2):
 ```shell
-bash scripts/evaluation/zero_shot/stage2_align/internvideo2_stage2_1B_eval_msrvtt_no_deepspeed.sh
+bash scripts/evaluation/stage2/zero_shot/1B/eval_msrvtt_no_deepspeed.sh
 ```
 
 :warning: **Notes:**
