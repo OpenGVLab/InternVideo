@@ -47,7 +47,7 @@ model = dict(
     audio_encoder=dict(
         name='beats',
         d_model=768,
-        audio_model_path=pretrained_paths["BEATs_PATH"],
+        audio_model_path="your_model_path/beats.pth",
     ),
     vision_encoder=dict(
         # backbone
