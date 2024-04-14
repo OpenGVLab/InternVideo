@@ -8,7 +8,7 @@ from fvcore.nn import flop_count_table
 
 from . import evl_utils
 
-PATH_PREFIX = '/mnt/lustre/share_data/likunchang.vendor/code/EVL/clip_kc/model'
+PATH_PREFIX = 'your_model_path/model'
 
 
 class EVL(nn.Module):

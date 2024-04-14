@@ -409,193 +409,6 @@ def vit32_base():
     num_heads = 12
     num_layers = 12
 
-# ============================= begin: clip_kc pretrain ===================
-# = for msrvtt multiple choice
-@ex.named_config
-def clip_kc_finetune_msrvttchoice():
-    exp_name = "clip_kc_finetune_msrvtt_choice"
-    video_datasets = ["msrvtt_choice"]
-    image_datasets = []
-    loss_names = _loss_names({"multiple_choice": 1})
-    batch_size = 512
-    max_epoch = 10
-    max_steps = None
-    warmup_steps = 0.1
-    draw_false_text = 5 # 5 choices
-    learning_rate = 1e-4
-    val_check_interval = 0.5
-    lr_mult = 10
-    max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
-    clip_type = "kc"
-
-
-@ex.named_config
-def clip_kc_contrastive_howto_cc3m_choice():
-    exp_name = "clip_kc_contrastive_howto_cc3m_choice"
-    video_datasets = ["howto100m"]
-    image_datasets = ["cc3m"]
-    train_transform_keys = ["open_clip"]
-    val_transform_keys = ["open_clip"]
-    loss_names = _loss_names({"contrastive": 1})
-    batch_size = 1024
-    max_epoch = 10
-    max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
-    clip_type = "kc"
-    vocab_size = 49408
-    draw_false_text = 5
-    val_datasets = ["msrvtt_choice", "lsmdc"]
-    val_loss_names = _loss_names({"multiple_choice": 1})
-
-
-@ex.named_config
-def clip_kc_contrastive_2plus3_choice():
-    exp_name = "clip_kc_contrastive_2plus3_choice"
-    video_datasets = ["webvid", "howto100m"]
-    image_datasets = ["cc3m", "cc12m", "yfcc15m"]
-    train_transform_keys = ["open_clip"]
-    val_transform_keys = ["open_clip"]
-    loss_names = _loss_names({"contrastive": 1})
-    batch_size = 1024
-    max_epoch = 10
-    max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
-    clip_type = "kc"
-    vocab_size = 49408
-    draw_false_text = 5
-    val_datasets = ["msrvtt_choice", "lsmdc_choice"]
-    val_loss_names = _loss_names({"multiple_choice": 1})
-
-
-@ex.named_config
-def clip_kc_contrastive_3plus4_choice():
-    exp_name = "clip_kc_contrastive_3plus4_choice"
-    video_datasets = ["webvid", "howto100m", "webvid10m"]
-    image_datasets = ["cc3m", "cc12m", "yfcc15m", "laion400m"]
-    train_transform_keys = ["open_clip"]
-    val_transform_keys = ["open_clip"]
-    loss_names = _loss_names({"contrastive": 1})
-    batch_size = 1024
-    max_epoch = 10
-    max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
-    clip_type = "kc"
-    vocab_size = 49408
-    draw_false_text = 5
-    val_datasets = ["msrvtt_choice", "lsmdc_choice"]
-    val_loss_names = _loss_names({"multiple_choice": 1})
-
-
-@ex.named_config
-def clip_kc_contrastive_cap_3plus4_choice():
-    exp_name = "clip_kc_contrastive_3plus4_choice"
-    video_datasets = ["webvid", "howto100m", "webvid10m"]
-    image_datasets = ["cc3m", "cc12m", "yfcc15m", "laion400m"]
-    train_transform_keys = ["open_clip"]
-    val_transform_keys = ["open_clip"]
-    loss_names = _loss_names({"contrastive": 1, "cap": 1})
-    batch_size = 1024
-    max_epoch = 10
-    max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
-    clip_type = "kc"
-    vocab_size = 49408
-    draw_false_text = 5
-    val_datasets = ["msrvtt_choice", "lsmdc_choice"]
-    val_loss_names = _loss_names({"multiple_choice": 1})
-
-
-@ex.named_config
-def clip_kc_new_B16_vtc_cap_3plusM_choice():
-    exp_name = "clip_kc_new_L14_vtc_cap_3plusM_choice"
-    video_datasets = ["webvid", "howto100m", "webvid10m"]
-    image_datasets = ["mix100m"]
-    train_transform_keys = ["open_clip"]
-    val_transform_keys = ["open_clip"]
-    loss_names = _loss_names({"contrastive": 1, "cap": 1})
-    per_gpu_batchsize = 32
-    num_frames = 8
-    max_epoch = 10
-    max_text_len = 77
-    learning_rate = 1e-4
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
-    clip_type = "kc_new"
-    vocab_size = 49408
-    draw_false_text = 5
-    val_datasets = ["msrvtt_choice", "lsmdc_choice"]
-    decay_power = "cosine"
-    clip_lr_mult = 0.1
-    weight_decay = 0.2
-    clip_evl_dropout = 0.0
-    clip_cap_decoder_n_layers = 6
-    warmup_steps = 4000
-    clip_alt_data = True
-    image_data_mult = 6
-    val_loss_names = _loss_names({"multiple_choice": 1})
-
-
-@ex.named_config
-def clip_kc_new_L14_vtc_cap_3plusM_choice():
-    exp_name = "clip_kc_new_L14_vtc_cap_3plusM_choice"
-    video_datasets = ["webvid", "howto100m", "webvid10m"]
-    image_datasets = ["mix100m"]
-    train_transform_keys = ["open_clip"]
-    val_transform_keys = ["open_clip"]
-    loss_names = _loss_names({"contrastive": 1, "cap": 1})
-    per_gpu_batchsize = 14
-    num_frames = 8
-    max_epoch = 10
-    max_text_len = 77
-    learning_rate = 8e-5
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-L-14.pt"
-    clip_type = "kc_new"
-    vocab_size = 49408
-    draw_false_text = 5
-    val_datasets = ["msrvtt_choice", "lsmdc_choice"]
-    decay_power = "cosine"
-    clip_lr_mult = 0.1
-    weight_decay = 0.2
-    clip_evl_dropout = 0.0
-    clip_cap_decoder_n_layers = 6
-    warmup_steps = 4000
-    clip_alt_data = True
-    image_data_mult = 6
-    val_loss_names = _loss_names({"multiple_choice": 1})
-
-
-@ex.named_config
-def clip_kc_new_L14_336_vtc_cap_4plusM_choice():
-    exp_name = "clip_kc_new_L14_336_vtc_cap_4plusM_choice"
-    video_datasets = ["webvid", "howto100m", "webvid10m", "youtube"]
-    image_datasets = ["mix100m"]
-    train_transform_keys = ["open_clip"]
-    val_transform_keys = ["open_clip"]
-    loss_names = _loss_names({"contrastive": 1, "cap": 1})
-    image_size = 336
-    per_gpu_batchsize = 24
-    clip_use_checkpoint = True
-    clip_checkpoint_num = [23, 100, 100]
-    num_frames = 8
-    max_epoch = 2
-    max_steps = None
-    max_text_len = 77
-    learning_rate = 4e-6
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-L-14-336px.pt"
-    clip_type = "kc_new"
-    vocab_size = 49408
-    draw_false_text = 5
-    val_datasets = ["msrvtt_choice", "lsmdc_choice"]
-    decay_power = "cosine"
-    weight_decay = 0.2
-    clip_evl_dropout = 0.0
-    clip_cap_decoder_n_layers = 6
-    warmup_steps = 2000
-    clip_alt_data = True
-    image_data_mult = 6
-    val_loss_names = _loss_names({"multiple_choice": 1})
-# ============================== end: clip_kc pretrain ====================
-
 
 @ex.named_config
 def clip_finetune_msrvttqa():
@@ -614,7 +427,7 @@ def clip_finetune_msrvttqa():
     val_check_interval = 1.0
     lr_mult = 10
     max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
 
 
@@ -634,7 +447,7 @@ def clip_finetune_tgifqa():
     val_check_interval = 1.0
     lr_mult = 10
     max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
 
 
@@ -654,7 +467,7 @@ def clip_finetune_msvdqa():
     val_check_interval = 1.0
     lr_mult = 10
     max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
 
 
@@ -667,7 +480,7 @@ def clip_finetune_zs_k400():
     batch_size = 256
     test_only = True
     max_text_len = 77
-    clip = "/mnt/lustre/share_data/likunchang.vendor/code/EVL/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
 
 
@@ -687,7 +500,7 @@ def clip_vtc_choice():
     max_epoch = 10
     max_text_len = 77
     learning_rate = 1e-4
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
     vocab_size = 49408
     draw_false_video = 0
@@ -713,7 +526,7 @@ def clip_vtc_mim_choice():
     max_epoch = 10
     max_text_len = 77
     learning_rate = 1e-4
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
     vocab_size = 49408
     draw_false_video = 0
@@ -741,7 +554,7 @@ def clip_vtc_mim_mlm_choice():
     max_epoch = 10
     max_text_len = 77
     learning_rate = 1e-4
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
     vocab_size = 49408
     draw_false_video = 0
@@ -769,7 +582,7 @@ def clip_vtc_mlm_choice():
     max_epoch = 10
     max_text_len = 77
     learning_rate = 1e-4
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
     vocab_size = 49408
     draw_false_video = 0
@@ -796,7 +609,7 @@ def clip_finetune_msrvttchoice():
     learning_rate = 1e-4
     val_check_interval = 0.5
     max_text_len = 77
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "ori"
 
 # ============================== end: clip_kc new nc pretrain ====================
@@ -814,7 +627,7 @@ def clip_kc_nc_vtc_choice():
     max_epoch = 10
     max_text_len = 77
     learning_rate = 1e-5
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "kc_new"
     vocab_size = 49408
     draw_false_video = 0
@@ -842,7 +655,7 @@ def clip_kc_nc_vtc_mim_nd_choice():
     max_epoch = 10
     max_text_len = 77
     learning_rate = 1e-5
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "kc_new"
     vocab_size = 49408
     draw_false_video = 0
@@ -872,7 +685,7 @@ def clip_kc_nc_vtc_mlm_choice():
     max_epoch = 10
     max_text_len = 77
     learning_rate = 1e-5
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "kc_new"
     vocab_size = 49408
     draw_false_video = 0
@@ -901,7 +714,7 @@ def clip_kc_nc_vtc_mim_nd_mlm_choice():
     max_epoch = 10
     max_text_len = 77
     learning_rate = 1e-5
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "kc_new"
     vocab_size = 49408
     draw_false_video = 0
@@ -931,6 +744,6 @@ def clip_kc_nc_finetune_msrvttchoice():
     learning_rate = 1e-4
     val_check_interval = 0.5
     max_text_len = 77
-    clip = "/mnt/petrelfs/share_data/liyizhuo/pretrained/clip_pretrained_models/ViT-B-16.pt"
+    clip = "your_model_path/ViT-B-16.pt"
     clip_type = "kc_new"
     test_only = True

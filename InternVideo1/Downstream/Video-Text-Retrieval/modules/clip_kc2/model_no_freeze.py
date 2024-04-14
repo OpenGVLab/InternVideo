@@ -9,7 +9,7 @@ from fvcore.nn import flop_count_table
 import evl_utils
 from evl_utils import TransformerDecoder
 
-PATH_PREFIX = '/mnt/lustre/share_data/likunchang.vendor/code/EVL/clip_kc/model'
+PATH_PREFIX = 'your_model_path/model'
 
 
 class EVL(nn.Module):

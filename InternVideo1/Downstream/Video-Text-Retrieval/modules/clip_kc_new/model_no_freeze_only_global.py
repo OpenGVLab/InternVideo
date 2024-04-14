@@ -8,7 +8,7 @@ import torch.nn as nn
 
 from modules.clip_kc_new import evl_utils
 
-PATH_PREFIX = '/mnt/lustre/share_data/likunchang.vendor/code/EVL/clip_kc/model'
+PATH_PREFIX = 'your_model_path/model'
 
 
 class EVL(nn.Module):

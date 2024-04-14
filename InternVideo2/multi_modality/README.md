@@ -19,9 +19,7 @@ We give a short instructions of accessing and utilizing InternVideo2-stage2 in [
 
 ## Pre-Training
 
-We use [CLIP](https://github.com/openai/CLIP) pretrained models as the unmasked teachers by default:
-- Follow [extract.ipynb](../single_modality/models/extract_clip/extract.ipynb) to extract visual encoder from CLIP.
-- Change `MODEL_PATH` in [clip.py](./models/backbones/vit/clip.py).
+We use [InternVL](https://github.com/OpenGVLab/InternVL/) pretrained model as the teacher by default
 
 For training, you can simply run the pretraining scripts in `scripts/pretraining` as follows:
 ```shell

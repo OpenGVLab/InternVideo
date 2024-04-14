@@ -380,7 +380,6 @@ class VideoClsDataset(Dataset):
         self.dataset_samples = list(cleaned.values[:, 0])
         self.label_array = list(cleaned.values[:, 1])
 
-        # conf_path = '/mnt/lustre/huangbingkun/petreloss.conf'
         conf_path = '~/petreloss2.conf'
         self.client = Client(conf_path)
 
