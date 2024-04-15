@@ -40,7 +40,7 @@ For $\text{InternVideo2}_{clip}$, we load those models of $\text{InternVideo2}_{
 | $\text{InternVideo2}_{clip}$-1B | MSRVTT | 50.0 | 48.4 | [script](scripts/evaluation/clip/zero_shot/1B/eval_msrvtt.sh) |
 |                               | LSMDC  | 26.4 | 23.1 | [script](scripts/evaluation/clip/zero_shot/1B/eval_lsmdc.sh) |
 |                               | DiDeMo | 47.8 | 46.4 | [script](scripts/evaluation/clip/zero_shot/1B/eval_didemo.sh) |
-|                               | ANet   | 60.4 | 54.8 | [script](scripts/evaluation/clip/zero_shot/1B/eval_anet.sh) |
+|                               | ANet   | 49.4 | 46.2 | [script](scripts/evaluation/clip/zero_shot/1B/eval_anet.sh) |
 |                               | VATEX_en  | 63.5 | 81.2 | [script](scripts/evaluation/clip/zero_shot/1B/eval_vatex_en.sh) |
 |                               | VATEX_ch  | 54.9 | 76.4 | [script](scripts/evaluation/clip/zero_shot/1B/eval_vatex_ch.sh) |
 | $\text{InternVideo2}_{clip}$-6B | MSRVTT | 50.9 | 50.6 | [script](scripts/evaluation/clip/zero_shot/6B/eval_msrvtt.sh) |
@@ -73,4 +73,4 @@ For $\text{InternVideo2}_{clip}$, we load those models of $\text{InternVideo2}_{
 | Model    | Dataset     |  mAP  | Script  |
 | -------- | ----------- | ------ | ------- |
 | $\text{InternVideo2}_{clip}$-1B | Charades | 32.9 | [script](scripts/evaluation/clip/zero_shot/1B/eval_charades_mc.sh) |
-| $\text{InternVideo2}_{clip}$-1B | Charades | 34.6 | [script](scripts/evaluation/clip/zero_shot/6B/eval_charades_mc.sh) |
+| $\text{InternVideo2}_{clip}$-6B | Charades | 34.6 | [script](scripts/evaluation/clip/zero_shot/6B/eval_charades_mc.sh) |

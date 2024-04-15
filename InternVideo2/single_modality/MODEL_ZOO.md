@@ -12,8 +12,8 @@
 
 | Model    | Setting     | Model  | Shell  |
 | -------- | ----------- | ------ | ------ |
-| $\text{InternVideo2}_{s1}$-1B | K-Mash$_{1.1M}$ 300e   |  TBD | [run.sh](./scripts/pretraining/1B_pt.sh) |
-| $\text{InternVideo2}_{s1}$-6B | K-Mash$_{2M}$ 300e   |  TBD | [run.sh](./scripts/pretraining/6B_pt.sh) |
+| $\text{InternVideo2}_{s1}$-1B | K-Mash-1.1M 300e   |  TBD | [run.sh](./scripts/pretraining/1B_pt.sh) |
+| $\text{InternVideo2}_{s1}$-6B | K-Mash-2M 300e   |  TBD | [run.sh](./scripts/pretraining/6B_pt.sh) |
 
 
 ## Finetuning
