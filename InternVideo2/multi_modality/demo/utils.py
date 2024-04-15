@@ -26,6 +26,7 @@ v_std = np.array([0.229, 0.224, 0.225]).reshape(1,1,3)
 def normalize(data):
     return (data/255.0-v_mean)/v_std
 
+
 def frames2tensor(vid_list, fnum=8, target_size=(224, 224), device=torch.device('cuda')):
     assert(len(vid_list) >= fnum)
     step = len(vid_list) // fnum
@@ -37,14 +38,17 @@ def frames2tensor(vid_list, fnum=8, target_size=(224, 224), device=torch.device(
     vid_tube = torch.from_numpy(vid_tube).to(device, non_blocking=True).float()
     return vid_tube
 
+
 def get_text_feat_dict(texts, clip, text_feat_d={}):
     for t in texts:
         feat = clip.get_txt_feat(t)
         text_feat_d[t] = feat
     return text_feat_d
 
+
 def get_vid_feat(frames, vlm):
     return vlm.get_vid_features(frames)
+
 
 def retrieve_text(frames, 
                   texts, 
@@ -70,6 +74,7 @@ def retrieve_text(frames,
 
     ret_texts = [texts[i] for i in idxs.long().numpy()[0].tolist()]
     return ret_texts, probs.float().numpy()[0]
+
 
 def setup_internvideo2(config: dict):
     if "bert" in config.model.text_encoder.name:
@@ -112,6 +117,7 @@ def setup_internvideo2(config: dict):
         model_without_ddp = model_without_ddp.to(torch.float32)
         
     return (model_without_ddp, tokenizer,)
+
 
 class InternVideo2_Stage2(nn.Module):
     """docstring for InternVideo2_Stage2"""

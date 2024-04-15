@@ -134,6 +134,54 @@ def get_1d_sincos_pos_embed_from_grid(embed_dim, pos):
     return emb
 
 
+def interpolate_pos_embed(checkpoint_model, model, orig_t_size=4, pos_name='vision_encoder.pos_embed'):
+    if pos_name in checkpoint_model:
+        pos_embed_checkpoint = checkpoint_model[pos_name]
+        embedding_size = pos_embed_checkpoint.shape[-1] # channel dim
+        num_patches = model.patch_embed.num_patches # 
+        num_extra_tokens = model.pos_embed.shape[-2] - num_patches # 0/1
+
+        # we use 4 frames for pretraining
+        new_t_size = model.T
+        # height (== width) for the checkpoint position embedding
+        orig_size = int(((pos_embed_checkpoint.shape[-2] - num_extra_tokens)//(orig_t_size)) ** 0.5)
+        # height (== width) for the new position embedding
+        new_size = int((num_patches // (new_t_size))** 0.5)
+        
+        # class_token and dist_token are kept unchanged
+        if orig_t_size != new_t_size:
+            logger.info(f"Temporal interpolate from {orig_t_size} to {new_t_size} ({pos_name})")
+            extra_tokens = pos_embed_checkpoint[:, :num_extra_tokens]
+            # only the position tokens are interpolated
+            pos_tokens = pos_embed_checkpoint[:, num_extra_tokens:]
+            # B, L, C -> B， T, HW, C -> BHW, C, T  (B = 1)
+            pos_tokens = pos_tokens.view(1, orig_t_size, -1, embedding_size)
+            pos_tokens = pos_tokens.permute(0, 2, 3, 1).reshape(-1, embedding_size, orig_t_size)
+            pos_tokens = torch.nn.functional.interpolate(pos_tokens, size=new_t_size, mode='linear')
+            pos_tokens = pos_tokens.view(1, -1, embedding_size, new_t_size)
+            pos_tokens = pos_tokens.permute(0, 3, 1, 2).reshape(1, -1, embedding_size)
+            new_pos_embed = torch.cat((extra_tokens, pos_tokens), dim=1)
+            checkpoint_model[pos_name] = new_pos_embed
+            pos_embed_checkpoint = new_pos_embed
+
+        # class_token and dist_token are kept unchanged
+        if orig_size != new_size:
+            logger.info(f"Position interpolate from {orig_size}x{orig_size} to {new_size}x{new_size} ({pos_name})")
+            extra_tokens = pos_embed_checkpoint[:, :num_extra_tokens]
+            # only the position tokens are interpolated
+            pos_tokens = pos_embed_checkpoint[:, num_extra_tokens:]
+            # B, L, C -> BT, H, W, C -> BT, C, H, W
+            pos_tokens = pos_tokens.reshape(-1, new_t_size, orig_size, orig_size, embedding_size)
+            pos_tokens = pos_tokens.reshape(-1, orig_size, orig_size, embedding_size).permute(0, 3, 1, 2)
+            pos_tokens = torch.nn.functional.interpolate(
+                pos_tokens, size=(new_size, new_size), mode='bicubic', align_corners=False)
+            # BT, C, H, W -> BT, H, W, C ->  B, T, H, W, C
+            pos_tokens = pos_tokens.permute(0, 2, 3, 1).reshape(-1, new_t_size, new_size, new_size, embedding_size) 
+            pos_tokens = pos_tokens.flatten(1, 3) # B, L, C
+            new_pos_embed = torch.cat((extra_tokens, pos_tokens), dim=1)
+            checkpoint_model[pos_name] = new_pos_embed
+
+
 def interpolate_pos_embed_internvideo2(checkpoint_model, model, orig_t_size = 8):
     # interpolate position embedding
     for pos_name in ['pos_embed', 'clip_pos_embed']:

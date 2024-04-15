@@ -35,14 +35,12 @@ available_corpus = dict(
     laion_2b=dict(
         anno_path="your_path",
         data_root="",
-        data_root_prefix="shdd:",
         media_type="image",
         jump_filter=True
     ),
     laion_coco=dict(
         anno_path="your_path",
         data_root="",
-        data_root_prefix="phdd:",
         media_type="image",
         jump_filter=True
     ),
@@ -56,14 +54,12 @@ available_corpus = dict(
     webvid_fuse_10m=dict(
         anno_path="your_path", 
         data_root="",
-        data_root_prefix="pssd:",
         media_type="video",
         jump_filter=True
     ),
     internvid_v1=dict(
         anno_path="your_path",
         data_root="",
-        data_root_prefix="phdd:",
         media_type="video",
         jump_filter=True
     ),
@@ -92,25 +88,91 @@ available_corpus = dict(
         anno_path="your_path",
         data_root="",
         media_type="audio"
+    ),
+    # debug
+    cc3m_debug=dict(
+        anno_path="your_path",
+        data_root="",
+        media_type="image"
+    ),
+    webvid_debug=dict(
+        anno_path="your_path",
+        data_root="",
+        media_type="video"
     )
 )
 
-available_corpus["pretrain_example_data_1B"] = [available_corpus['cc3m'], available_corpus['webvid']]
-available_corpus["pretrain_example_data_6B"] = [available_corpus['cc3m'], available_corpus['webvid'], available_corpus['internvid_v2_avs_private']]
+available_corpus["pretrain_example_data_1B"] = [
+    available_corpus['cc3m'], 
+    available_corpus['webvid']
+]
+
+available_corpus["pretrain_example_data_6B"] = [
+    available_corpus['cc3m'], 
+    available_corpus['webvid'], 
+    available_corpus['internvid_v2_avs_private']
+]
+
+available_corpus["data_25m"] = [
+    available_corpus["webvid_10m"],
+    available_corpus["cc3m"],
+    available_corpus["coco"],
+    available_corpus["vg"],
+    available_corpus["sbu"],
+    available_corpus["cc12m"],
+]
+
+available_corpus["debug"] = [
+    available_corpus["cc3m_debug"],
+    available_corpus["webvid_debug"],
+]
 
 
 # ============== for validation =================
 available_corpus["msrvtt_1k_test"] = dict(
-    anno_path="your_path", 
+    anno_path="your_path",
     data_root="",
     media_type="video"
 )
 
-
-available_corpus["k400_act_val"] = dict(
-    anno_path="your_path", 
+available_corpus["didemo_ret_test"] = dict(
+    anno_path="your_path",
     data_root="",
     media_type="video",
+    is_paragraph_retrieval=True,
+    trimmed30=True,
+    max_txt_l=64
+)
+
+available_corpus["anet_ret_val"] = dict(
+    anno_path="your_path",
+    data_root="",
+    media_type="video",
+    is_paragraph_retrieval=True,
+    max_txt_l = 150
+)
+
+available_corpus["lsmdc_ret_test_1000"] = dict(
+    anno_path="your_path",
+    data_root="",
+    media_type="video"
+)
+
+available_corpus["vatex_ch_ret_val"] = dict(
+    anno_path="your_path",
+    data_root="",
+    media_type="video"
+)
+
+available_corpus["vatex_en_ret_val"] = dict(
+    anno_path="your_path",
+    data_root="",
+    media_type="video"
+)
+
+available_corpus["k400_act_val"] = dict(
+    anno_path="your_path",
+    data_root="",
     is_act_rec=True,
 )
 
@@ -120,6 +182,7 @@ available_corpus["k600_act_val"] = dict(
     media_type="video",
     is_act_rec=True,
 )
+
 available_corpus["k700_act_val"] = dict(
     anno_path="your_path", 
     data_root="",
@@ -127,6 +190,38 @@ available_corpus["k700_act_val"] = dict(
     is_act_rec=True,
 )
 
+available_corpus["mit_act_val"] = dict(
+    anno_path="your_path", 
+    data_root="",
+    media_type="video",
+    is_act_rec=True,
+)
+
+available_corpus["ucf101_act_val"] = dict(
+    anno_path="your_path", 
+    data_root="",
+    media_type="video",
+    is_act_rec=True,
+)
+
+available_corpus["hmdb51_act_val"] = dict(
+    anno_path="your_path", 
+    data_root="",
+    media_type="video",
+    is_act_rec=True,
+)
+
+available_corpus["ssv2_mc_val"] = dict(
+    anno_path="your_path",
+    data_root="",
+    media_type="video",
+)
+
+available_corpus["charades_mc_test"] = dict(
+    anno_path="your_path",
+    data_root="",
+    media_type="video",
+)
 
 
 available_corpus["anet_ret_train"] = dict(
@@ -137,15 +232,6 @@ available_corpus["anet_ret_train"] = dict(
     max_txt_l = 150
 )
 
-available_corpus["anet_ret_val"] = dict(
-    anno_path="your_path", 
-    data_root="",
-    media_type="video",
-    is_paragraph_retrieval=True,
-    max_txt_l = 150
-)
-
-
 available_corpus["didemo_ret_train"] = dict(
     anno_path="your_path", 
     data_root="",
@@ -155,8 +241,6 @@ available_corpus["didemo_ret_train"] = dict(
     max_txt_l=64 
 )
 
-
-
 available_corpus["didemo_ret_val"] = dict(
     anno_path="your_path", 
     data_root="",
@@ -165,17 +249,6 @@ available_corpus["didemo_ret_val"] = dict(
     trimmed30=True,
     max_txt_l=64
 )
-
-available_corpus["didemo_ret_test"] = dict(
-    anno_path="your_path", 
-    data_root="",
-    media_type="video",
-    is_paragraph_retrieval=True,
-    trimmed30=True,
-    max_txt_l=64
-)
-
-
 
 available_corpus["lsmdc_ret_train"] = dict(
     anno_path="your_path", 
@@ -191,19 +264,11 @@ available_corpus["lsmdc_ret_val"] = dict(
     max_txt_l=96
 )
 
-available_corpus["lsmdc_ret_test_1000"] = dict(
-    anno_path="your_path", 
-    data_root="",
-    media_type="video",
-    max_txt_l=96
-)
-
 available_corpus["msrvtt_ret_train9k"] = dict(
     anno_path="your_path",
     data_root="",
     media_type="video",
 )
-
 
 available_corpus["msrvtt_ret_test1k"] = dict(
     anno_path="your_path", 
@@ -237,18 +302,10 @@ available_corpus["msvd_ret_test"] = dict(
 available_corpus["vatex_en_ret_train"] = dict(
     anno_path="your_path", 
     data_root="",
-    data_root_prefix="",
     media_type="video",
     has_multi_txt_gt=True
 )
 
-
-available_corpus["vatex_en_ret_val"] = dict(
-    anno_path="your_path", 
-    data_root="",
-    data_root_prefix="",
-    media_type="video"
-)
 
 # audio-text
 

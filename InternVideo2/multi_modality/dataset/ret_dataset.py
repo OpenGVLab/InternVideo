@@ -25,9 +25,6 @@ class AudioTxtRetTrainDataset(BaseDataset):
         self.has_multi_audio_gt = ann_file.get("has_multi_audio_gt", False)
         self.trimmed30 = ann_file.get("trimmed30", False)
         
-        # self.read_audio_from_video = read_audio_from_video
-        # if self.read_audio_from_video:
-        #     raise NotImplementedError
         self.max_audio_length = max_audio_length
         self.audio_sample_rate = audio_sample_rate
         self.match_ids = {}
@@ -77,9 +74,7 @@ class AudioTxtRetEvalDataset(BaseDataset):
         self.audio = None
         self.txt2img = None
         self.img2txt = None
-        # self.read_audio_from_video = read_audio_from_video
-        # if self.read_audio_from_video:
-        #     raise NotImplementedError
+
         self.build_data()
 
     def build_data(self):
@@ -91,7 +86,6 @@ class AudioTxtRetEvalDataset(BaseDataset):
             self.build_data_multi_audio_gt()
         else:
             self.build_data_multi_txt_gt()
-        # self.anno_list = [dict(audio=e) for e in self.audio]
 
     def build_data_multi_audio_gt(self):
         """each text may have multiple ground_truth audio, e.g., ssv2"""
@@ -161,8 +155,6 @@ class ImgTxtRetTrainDataset(BaseDataset):
             if key not in self.match_ids:
                 self.match_ids[key] = n
                 n += 1
-
-        
 
     def __len__(self):
         return len(self.anno_list)
@@ -373,9 +365,6 @@ class VidTxtRetEvalDataset(ImgTxtRetEvalDataset):
         ann = self.anno_list[index]
         if self.read_clip_from_video:
             raise NotImplementedError("key for match_ids is not implemented!")
-            data_path = {"video": ann["video"],
-                            "video_start_frame": ann["video_start_frame"],
-                            "video_end_frame": ann["video_end_frame"]}
         else:
             data_path = ann["image"]
         image, index = self.load_and_transform_media_data(index, data_path)
@@ -429,6 +418,35 @@ class VidTxtRetMCEvalDataset(BaseDataset):
         caption = [pre_text(e) for e in ann["caption"]]  # len=5
         answer = ann["answer"]
         return image, caption, answer, ann
+    
+
+class VidTxtRetMCNewEvalDataset(BaseDataset):
+    """For SSV2-MC and Charades-MC test task"""
+    media_type = "video"
+
+    def __init__(self, ann_file, transform, num_frames=4,
+                 video_reader_type="decord", sample_type="rand", num_tries=1):
+        super(VidTxtRetMCNewEvalDataset, self).__init__()
+        self.anno_list = load_anno(ann_file)
+        self.transform = transform
+        # video args
+        self.num_frames = num_frames
+        self.video_reader_type = video_reader_type
+        self.video_reader = VIDEO_READER_FUNCS[video_reader_type]
+        self.sample_type = sample_type
+        self.num_tries = num_tries
+
+    def __len__(self):
+        return len(self.anno_list)
+
+    def __getitem__(self, index):
+        ann = self.anno_list[index]
+        image, index = self.load_and_transform_media_data(index, ann["image"])
+        option = [pre_text(e) for e in ann["option"]]  # len=174
+        answer = ann["answer"]
+        if isinstance(answer, list):
+            answer = torch.Tensor(answer)
+        return image, option, answer, ann
 
 
 class AudioVidTxtRetEvalDataset(VidTxtRetEvalDataset):
@@ -457,13 +475,10 @@ class AudioVidTxtRetEvalDataset(VidTxtRetEvalDataset):
 
         if self.read_clip_from_video:
             raise NotImplementedError("Need to modify load_anno!")
-            # data_path["video_start_frame"] = ann["video_start_frame"]
-            # data_path["video_end_frame"] = ann["video_end_frame"]
         
         if not self.read_audio_from_video:
             raise NotImplementedError("Need to modify load_anno!")
-            data_path["audio"] = ann["audio"]
-
+        
         data_path["read_clip_from_video"] = self.read_clip_from_video
         data_path["read_audio_from_video"] = self.read_audio_from_video
 

@@ -7,12 +7,13 @@ from torchvision.transforms import InterpolationMode
 import copy
 
 from dataset.sampler import StatefulDistributedSampler
-from dataset.dataloader import MetaLoader, MetaLoader_rs, MetaLoader_rs2 # NOTE keep it
+from dataset.dataloader import MetaLoader, MetaLoader_rs # NOTE keep it
 from dataset.ret_dataset import (ImgTxtRetTrainDataset,
                                  VidTxtRetTrainDataset,
                                  ImgTxtRetEvalDataset,
                                  VidTxtRetEvalDataset,
-                                 VidTxtRetMCEvalDataset,)
+                                 VidTxtRetMCEvalDataset,
+                                 VidTxtRetMCNewEvalDataset)
 # from dataset.ret_dataset import (ImgTxtRetTrainDataset,
 #                                  VidTxtRetTrainDataset,
 #                                  ImgTxtRetEvalDataset,
@@ -125,7 +126,7 @@ def get_train_transform(config, train_file):
 
 def get_test_transform(config, test_file):
     vision_enc_name = config.model.vision_encoder.name
-    if "internvideo2" in vision_enc_name or "vit" in vision_enc_name or "umt" in vision_enc_name:
+    if "internvideo" in vision_enc_name or "vit" in vision_enc_name or "umt" in vision_enc_name:
         mean = (0.485, 0.456, 0.406)
         std = (0.229, 0.224, 0.225)
     elif "clip" in vision_enc_name:
@@ -139,7 +140,6 @@ def get_test_transform(config, test_file):
     # loaded images and videos are torch.Tensor of torch.uint8 format,
     # ordered as (T, 1 or 3, H, W) where T=1 for image
     type_transform = transforms.Lambda(lambda x: x.float().div(255.0))
-
 
     test_transform = transforms.Compose(
         [
@@ -337,6 +337,8 @@ def create_dataset(dataset_type, config):
                         ann_file=data_cfg,
                         transform=test_transform
                     )
+                    if "hmdb" in name or 'frame' in name: # read image for video
+                        dataset_kwargs["video_reader_type"] = 'img'
                     dataset_kwargs.update(video_only_dataset_kwargs_eval)
                 elif media_type == "audio":
                     dataset_kwargs = dict(
@@ -371,6 +373,18 @@ def create_dataset(dataset_type, config):
         logger.info(str(test_transform))
         
         return VidTxtRetMCEvalDataset(**dataset_kwargs)
+    
+    elif dataset_type == "mc_new_test":
+        test_transform = get_test_transform(config, config.test_file.mc_test)
+        dataset_kwargs = dict(ann_file=[config.test_file.mc_test], transform=test_transform)
+        dataset_kwargs.update(video_only_dataset_kwargs_eval)
+
+        logger.info(f"dataset_type={dataset_type}, test_file={config.test_file}")
+        logger.info(dataset_kwargs)
+        logger.info('test_transform:')
+        logger.info(str(test_transform))
+        
+        return VidTxtRetMCNewEvalDataset(**dataset_kwargs)
     
     else:
         raise NotImplementedError(f"dataset_type={dataset_type}")

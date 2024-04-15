@@ -1,6 +1,7 @@
 """
 Modified from https://github.com/m-bain/frozen-in-time/blob/22a91d78405ec6032fdf521ae1ff5573358e632f/base/base_dataset.py
 """
+import os
 import random
 import io
 import av
@@ -162,8 +163,47 @@ def read_frames_decord(
     return frames, frame_indices, duration
 
 
+def read_frames_img(
+        video_path, num_frames, sample='rand', fix_start=None, 
+        max_num_frames=-1, client=None, trimmed30=False
+    ):
+    img_list=[]
+    if "s3://" in video_path:
+        for path in client.list(video_path):
+            if path.startswith('img'):
+                img_list.append(path)
+    else:
+        for path in os.listdir(video_path):
+            if path.startswith('img'):
+                img_list.append(path)
+
+    vlen = len(img_list)
+
+    frame_indices = get_frame_indices(
+        num_frames, vlen, sample=sample, fix_start=fix_start,
+        max_num_frames=max_num_frames
+    )
+
+    imgs = []
+    for idx in frame_indices:
+        frame_fname = os.path.join(video_path, img_list[idx])
+        if "s3://" in video_path:
+            img_bytes = client.get(frame_fname)
+        else:
+            with open(frame_fname, 'rb') as f:
+                img_bytes = f.read()
+        img_np = np.frombuffer(img_bytes, np.uint8)
+        img = cv2.imdecode(img_np, cv2.IMREAD_COLOR)
+        cv2.cvtColor(img, cv2.COLOR_BGR2RGB, img)
+        imgs.append(img)
+
+    frames = torch.tensor(np.array(imgs), dtype=torch.uint8).permute(0, 3, 1, 2)  # (T, C, H, W), torch.uint8
+    return frames, frame_indices, None
+
+
 VIDEO_READER_FUNCS = {
     'av': read_frames_av,
     'decord': read_frames_decord,
     'gif': read_frames_gif,
+    'img': read_frames_img,
 }
