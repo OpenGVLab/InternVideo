@@ -40,7 +40,8 @@ class LayerNorm(nn.LayerNorm):
 
     def forward(self, x):
         orig_type = x.dtype
-        ret = super().forward(x.type(torch.float32))
+        layer_dtype = self.bias.dtype
+        ret = super().forward(x.type(layer_dtype))
         return ret.type(orig_type)
 
 
@@ -51,10 +52,10 @@ class QuickGELU(nn.Module):
 
 class ResidualAttentionBlock(nn.Module):
     def __init__(
-            self, d_model, n_head, attn_mask=None, drop_path=0.0, 
+            self, d_model, n_head, attn_mask=None, drop_path=0.0,
         ):
-        super().__init__() 
-        
+        super().__init__()
+
         self.n_head = n_head
         self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
         logger.info(f'Drop path rate: {drop_path}')
@@ -151,11 +152,11 @@ class Extractor(nn.Module):
 
 class Transformer(nn.Module):
     def __init__(
-            self, width, layers, heads, attn_mask=None, backbone_drop_path_rate=0., 
+            self, width, layers, heads, attn_mask=None, backbone_drop_path_rate=0.,
             use_checkpoint=False, checkpoint_num=[0], t_size=8,
             return_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
             n_layers=12, n_dim=768, n_head=12, mlp_factor=4.0, drop_path_rate=0.,
-            mlp_dropout=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], 
+            mlp_dropout=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
             cls_dropout=0.5, num_classes=400,
         ):
         super().__init__()
@@ -165,7 +166,7 @@ class Transformer(nn.Module):
         b_dpr = [x.item() for x in torch.linspace(0, backbone_drop_path_rate, layers)]
         self.resblocks = nn.ModuleList([
             ResidualAttentionBlock(
-                width, heads, attn_mask, 
+                width, heads, attn_mask,
                 drop_path=b_dpr[i],
             ) for i in range(layers)
         ])
@@ -187,7 +188,7 @@ class Transformer(nn.Module):
         dpr = [x.item() for x in torch.linspace(0, drop_path_rate, n_layers)]
         self.dec = nn.ModuleList([
             Extractor(
-                n_dim, n_head, mlp_factor=mlp_factor, 
+                n_dim, n_head, mlp_factor=mlp_factor,
                 dropout=mlp_dropout[i], drop_path=dpr[i],
             ) for i in range(n_layers)
         ])
@@ -224,7 +225,7 @@ class Transformer(nn.Module):
                 _, tmp_feats = tmp_x[:1], tmp_x[1:]
                 tmp_feats = tmp_feats.permute(1, 3, 2, 0).reshape(N, C, T_down, H, W)
                 tmp_feats = self.dpe[j](tmp_feats).view(N, C, T_down, L - 1).permute(3, 0, 2, 1)
-                # tmp_x[1:] = tmp_x[1:] + tmp_feats # memory leak        
+                # tmp_x[1:] = tmp_x[1:] + tmp_feats # memory leak
                 tmp_x = torch.cat([tmp_x[:1], tmp_x[1:] + tmp_feats], dim=0) # no memory leak
                 # enhancer
                 tmp_x = tmp_x.permute(2, 0, 1, 3).flatten(0, 1)  # T * L, N, C
@@ -242,16 +243,16 @@ class Transformer(nn.Module):
 
 class VisionTransformer(nn.Module):
     def __init__(
-        self, 
+        self,
         # backbone
         input_resolution, patch_size, width, layers, heads, output_dim, backbone_drop_path_rate=0.,
         use_checkpoint=False, checkpoint_num=[0], t_size=8,
         # extractor
         return_list=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
         n_layers=12, n_dim=768, n_head=12, mlp_factor=4.0, drop_path_rate=0.,
-        mlp_dropout=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5], 
+        mlp_dropout=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
         cls_dropout=0.5, num_classes=400,
-        
+
     ):
         super().__init__()
         self.input_resolution = input_resolution
@@ -265,10 +266,10 @@ class VisionTransformer(nn.Module):
 
         self.transformer = Transformer(
             width, layers, heads,
-            backbone_drop_path_rate=backbone_drop_path_rate, 
+            backbone_drop_path_rate=backbone_drop_path_rate,
             use_checkpoint=use_checkpoint, checkpoint_num=checkpoint_num, t_size=t_size,
-            return_list=return_list, n_layers=n_layers, n_dim=n_dim, n_head=n_head, 
-            mlp_factor=mlp_factor, drop_path_rate=drop_path_rate, mlp_dropout=mlp_dropout, 
+            return_list=return_list, n_layers=n_layers, n_dim=n_dim, n_head=n_head,
+            mlp_factor=mlp_factor, drop_path_rate=drop_path_rate, mlp_dropout=mlp_dropout,
             cls_dropout=cls_dropout, num_classes=num_classes,
         )
 
@@ -276,7 +277,7 @@ class VisionTransformer(nn.Module):
         x = self.conv1(x)  # shape = [*, width, grid, grid]
         N, C, T, H, W = x.shape
         x = x.permute(0, 2, 3, 4, 1).reshape(N * T, H * W, C)
-        
+
         x = torch.cat([self.class_embedding.to(x.dtype) + torch.zeros(x.shape[0], 1, x.shape[-1], dtype=x.dtype, device=x.device), x], dim=1)  # shape = [*, grid ** 2 + 1, width]
         x = x + self.positional_embedding.to(x.dtype)
         x = self.ln_pre(x)
@@ -313,10 +314,10 @@ def load_state_dict(model, state_dict):
 
 def vit_only_global_b32(
         pretrained=True, use_checkpoint=False, checkpoint_num=[0],
-        t_size=16, backbone_drop_path_rate=0., 
+        t_size=16, backbone_drop_path_rate=0.,
         return_list=[8, 9, 10, 11],
         n_layers=4, n_dim=768, n_head=12, mlp_factor=4.0, drop_path_rate=0.,
-        mlp_dropout=[0.5, 0.5, 0.5, 0.5], 
+        mlp_dropout=[0.5, 0.5, 0.5, 0.5],
         cls_dropout=0.5, num_classes=400,
     ):
     model = VisionTransformer(
@@ -329,15 +330,15 @@ def vit_only_global_b32(
         use_checkpoint=use_checkpoint,
         checkpoint_num=checkpoint_num,
         t_size=t_size,
-        backbone_drop_path_rate=backbone_drop_path_rate, 
-        return_list=return_list, 
-        n_layers=n_layers, 
-        n_dim=n_dim, 
-        n_head=n_head, 
-        mlp_factor=mlp_factor, 
-        drop_path_rate=drop_path_rate, 
-        mlp_dropout=mlp_dropout, 
-        cls_dropout=cls_dropout, 
+        backbone_drop_path_rate=backbone_drop_path_rate,
+        return_list=return_list,
+        n_layers=n_layers,
+        n_dim=n_dim,
+        n_head=n_head,
+        mlp_factor=mlp_factor,
+        drop_path_rate=drop_path_rate,
+        mlp_dropout=mlp_dropout,
+        cls_dropout=cls_dropout,
         num_classes=num_classes,
     )
 
@@ -350,10 +351,10 @@ def vit_only_global_b32(
 
 def vit_only_global_b16(
     pretrained=True, use_checkpoint=False, checkpoint_num=[0],
-    t_size=16, backbone_drop_path_rate=0., 
+    t_size=16, backbone_drop_path_rate=0.,
     return_list=[8, 9, 10, 11],
     n_layers=4, n_dim=768, n_head=12, mlp_factor=4.0, drop_path_rate=0.,
-    mlp_dropout=[0.5, 0.5, 0.5, 0.5], 
+    mlp_dropout=[0.5, 0.5, 0.5, 0.5],
     cls_dropout=0.5, num_classes=400,
 ):
     model = VisionTransformer(
@@ -366,15 +367,15 @@ def vit_only_global_b16(
         use_checkpoint=use_checkpoint,
         checkpoint_num=checkpoint_num,
         t_size=t_size,
-        backbone_drop_path_rate=backbone_drop_path_rate, 
-        return_list=return_list, 
-        n_layers=n_layers, 
-        n_dim=n_dim, 
-        n_head=n_head, 
-        mlp_factor=mlp_factor, 
-        drop_path_rate=drop_path_rate, 
-        mlp_dropout=mlp_dropout, 
-        cls_dropout=cls_dropout, 
+        backbone_drop_path_rate=backbone_drop_path_rate,
+        return_list=return_list,
+        n_layers=n_layers,
+        n_dim=n_dim,
+        n_head=n_head,
+        mlp_factor=mlp_factor,
+        drop_path_rate=drop_path_rate,
+        mlp_dropout=mlp_dropout,
+        cls_dropout=cls_dropout,
         num_classes=num_classes,
     )
 
@@ -387,10 +388,10 @@ def vit_only_global_b16(
 
 def vit_only_global_l14(
     pretrained=True, use_checkpoint=False, checkpoint_num=[0],
-    t_size=16, backbone_drop_path_rate=0., 
+    t_size=16, backbone_drop_path_rate=0.,
     return_list=[20, 21, 22, 23],
     n_layers=4, n_dim=1024, n_head=16, mlp_factor=4.0, drop_path_rate=0.,
-    mlp_dropout=[0.5, 0.5, 0.5, 0.5], 
+    mlp_dropout=[0.5, 0.5, 0.5, 0.5],
     cls_dropout=0.5, num_classes=400,
 ):
     model = VisionTransformer(
@@ -403,15 +404,15 @@ def vit_only_global_l14(
         use_checkpoint=use_checkpoint,
         checkpoint_num=checkpoint_num,
         t_size=t_size,
-        backbone_drop_path_rate=backbone_drop_path_rate, 
-        return_list=return_list, 
-        n_layers=n_layers, 
-        n_dim=n_dim, 
-        n_head=n_head, 
-        mlp_factor=mlp_factor, 
-        drop_path_rate=drop_path_rate, 
-        mlp_dropout=mlp_dropout, 
-        cls_dropout=cls_dropout, 
+        backbone_drop_path_rate=backbone_drop_path_rate,
+        return_list=return_list,
+        n_layers=n_layers,
+        n_dim=n_dim,
+        n_head=n_head,
+        mlp_factor=mlp_factor,
+        drop_path_rate=drop_path_rate,
+        mlp_dropout=mlp_dropout,
+        cls_dropout=cls_dropout,
         num_classes=num_classes,
     )
 
@@ -424,10 +425,10 @@ def vit_only_global_l14(
 
 def vit_only_global_l14_336(
     pretrained=True, use_checkpoint=False, checkpoint_num=[0],
-    t_size=16, backbone_drop_path_rate=0., 
+    t_size=16, backbone_drop_path_rate=0.,
     return_list=[20, 21, 22, 23],
     n_layers=4, n_dim=1024, n_head=16, mlp_factor=4.0, drop_path_rate=0.,
-    mlp_dropout=[0.5, 0.5, 0.5, 0.5], 
+    mlp_dropout=[0.5, 0.5, 0.5, 0.5],
     cls_dropout=0.5, num_classes=400,
 ):
     model = VisionTransformer(
@@ -440,15 +441,15 @@ def vit_only_global_l14_336(
         use_checkpoint=use_checkpoint,
         checkpoint_num=checkpoint_num,
         t_size=t_size,
-        backbone_drop_path_rate=backbone_drop_path_rate, 
-        return_list=return_list, 
-        n_layers=n_layers, 
-        n_dim=n_dim, 
-        n_head=n_head, 
-        mlp_factor=mlp_factor, 
-        drop_path_rate=drop_path_rate, 
-        mlp_dropout=mlp_dropout, 
-        cls_dropout=cls_dropout, 
+        backbone_drop_path_rate=backbone_drop_path_rate,
+        return_list=return_list,
+        n_layers=n_layers,
+        n_dim=n_dim,
+        n_head=n_head,
+        mlp_factor=mlp_factor,
+        drop_path_rate=drop_path_rate,
+        mlp_dropout=mlp_dropout,
+        cls_dropout=cls_dropout,
         num_classes=num_classes,
     )
 
@@ -473,7 +474,7 @@ if __name__ == '__main__':
     num_frames = 8
 
     model = vit_only_global_l14(
-        pretrained=False, 
+        pretrained=False,
         t_size=num_frames, backbone_drop_path_rate=0.2, drop_path_rate=0.4,
         use_checkpoint=True, checkpoint_num=[0],
     )
