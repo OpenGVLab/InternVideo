@@ -8,7 +8,6 @@ from PIL import Image
 from torchvision import transforms
 
 from .rand_augment import rand_augment_transform
-from .auto_augment import auto_augment_transform
 from .random_erasing import RandomErasing
 
 import numbers

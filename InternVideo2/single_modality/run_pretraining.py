@@ -15,7 +15,7 @@ from optim_factory import (
     get_parameter_groups,
 )
 from datasets import build_multi_pretraining_dataset
-from single_modality.engines.engine_for_pretraining import train_one_epoch
+from engines.engine_for_pretraining import train_one_epoch
 from utils import NativeScalerWithGradNormCount as NativeScaler
 from utils import multiple_pretrain_samples_collate
 import utils

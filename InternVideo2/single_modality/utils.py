@@ -811,7 +811,7 @@ def create_internvideo2_lp_ds_config(args):
 
 
 # stolen from https://github.com/baaivision/EVA/blob/7389aeeec97c056fc8424fa6b78f35c6f1b07d0d/EVA-02/asuka/utils.py#L529C5-L599C54
-def create_internvideo_ds_config(args):
+def create_internvideo2_ds_config(args):
     args.deepspeed_config = os.path.join(args.output_dir, "deepspeed_config.json")
     with open(args.deepspeed_config, mode="w") as writer:
         ds_config = {
