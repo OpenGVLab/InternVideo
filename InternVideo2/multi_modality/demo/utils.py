@@ -79,9 +79,9 @@ def retrieve_text(frames,
 def setup_internvideo2(config: dict):
     if "bert" in config.model.text_encoder.name:
         tokenizer = BertTokenizer.from_pretrained(config.model.text_encoder.pretrained, local_files_only=True)
-        model = InternVideo2_Stage2(config=config, tokenizer=tokenizer, is_pretrain=False)
+        model = InternVideo2_Stage2(config=config, tokenizer=tokenizer, is_pretrain=True)
     else:
-        model = InternVideo2_Stage2(config=config, is_pretrain=False)
+        model = InternVideo2_Stage2(config=config, is_pretrain=True)
         tokenizer = model.tokenizer
 
     if config.get('compile_model', False):
