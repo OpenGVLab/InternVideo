@@ -46,9 +46,12 @@ For zero-shot evaluation, you can simply run the pretraining scripts in `scripts
 ```shell
 bash scripts/evaluation/stage2/zero_shot/1B/eval_msrvtt.sh
 ```
-When evaluating, you can choose to turn off deepspeed and the performance will fluctuate slightly from the reported result (around 0.2):
+When evaluating, you can choose to turn off deepspeed and the performance will fluctuate slightly from the reported result (around 0.2), modify the value in the corresponding config file (e.g. scripts\evaluation\stage2\zero_shot\1B\config_msrvtt.py):
 ```shell
-bash scripts/evaluation/stage2/zero_shot/1B/eval_msrvtt_no_deepspeed.sh
+deepspeed = dict(
+    enable=False,
+    stage=1,
+)
 ```
 
 :warning: **Notes:**
