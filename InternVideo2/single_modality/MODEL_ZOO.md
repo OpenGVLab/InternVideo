@@ -12,7 +12,7 @@
 
 | Model    | Setting     | Model  | Shell  |
 | -------- | ----------- | ------ | ------ |
-| $\text{InternVideo2}_{s1}$-1B | K-Mash-1.1M 300e   |  TBD | [run.sh](./scripts/pretraining/1B_pt.sh) |
+| $\text{InternVideo2}_{s1}$-1B | K-Mash-1.1M 300e   |  [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2-Stage1-1B-224p-f8/blob/main/pretrain.pth) | [run.sh](./scripts/pretraining/1B_pt.sh) |
 | $\text{InternVideo2}_{s1}$-6B | K-Mash-2M 300e   |  TBD | [run.sh](./scripts/pretraining/6B_pt.sh) |
 
 
@@ -22,7 +22,7 @@
 
 | Model    | Setting  | #Frame   | Top-1  | Model  | Shell  |
 | -------- | -------  | -------- | ------ | ------ | ------ |
-| $\text{InternVideo2}_{s1}$-1B | K-Mash PT  | 8x3x4    | 87.6 | TBD | [run.sh](./scripts/finetuning/full_tuning/k710/1B_ft_k710_f8.sh) |
+| $\text{InternVideo2}_{s1}$-1B | K-Mash PT  | 8x3x4    | 87.6 | [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2-Stage1-1B-224p-f8-k710/blob/main/1B_ft_k710_f8.pth) | [run.sh](./scripts/pretraining/1B_pt.sh) | [run.sh](./scripts/finetuning/full_tuning/k710/1B_ft_k710_f8.sh) |
 | $\text{InternVideo2}_{s1}$-6B | K-Mash PT  | 8x3x4    | 88.1 | TBD | [run.sh](./scripts/finetuning/full_tuning/k710/6B_ft_k710_f8.sh) |
 
 
@@ -30,8 +30,8 @@
 
 | Model    | Setting       | #Frame   | Top-1  | Model  | Shell  |
 | -------- | ------------- | -------- | ------ | ------ | ------ |
-| $\text{InternVideo2}_{s1}$-1B | K-Mash PT + K710 FT  | 8x3x4    | 91.3 | TBD | [run.sh](./scripts/finetuning/full_tuning/k400/1B_ft_k710_ft_k400_f8.sh) |
-| $\text{InternVideo2}_{s1}$-1B | K-Mash PT + K710 FT  | 16x3x4    | 91.6 | TBD | [run.sh](./scripts/finetuning/full_tuning/k400/1B_ft_k710_ft_k400_f16.sh) |
+| $\text{InternVideo2}_{s1}$-1B | K-Mash PT + K710 FT  | 8x3x4    | 91.3 | [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2-Stage1-1B-224p-f8-K400/blob/main/1B_ft_k710_ft_k400_f8.pth) | [run.sh](./scripts/finetuning/full_tuning/k400/1B_ft_k710_ft_k400_f8.sh) |
+| $\text{InternVideo2}_{s1}$-1B | K-Mash PT + K710 FT  | 16x3x4    | 91.6 | [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2-Stage1-1B-224p-f8-K400/blob/main/1B_ft_k710_ft_k400_f16.pth) | [run.sh](./scripts/finetuning/full_tuning/k400/1B_ft_k710_ft_k400_f16.sh) |
 | $\text{InternVideo2}_{s1}$-6B | K-Mash PT + K710 FT  | 8x3x4    | 91.9 | TBD | [run.sh](./scripts/finetuning/full_tuning/k400/6B_ft_k710_ft_k400_f8.sh) |
 | $\text{InternVideo2}_{s1}$-6B | K-Mash PT + K710 FT  | 16x3x4    | 92.1 | TBD | [run.sh](./scripts/finetuning/full_tuning/k400/6B_ft_k710_ft_k400_f16.sh) |
 
@@ -40,8 +40,8 @@
 
 | Model    | Setting       | #Frame   | Top-1  | Model  | Shell  |
 | -------- | ------------- | -------- | ------ | ------ | ------ |
-| $\text{InternVideo2}_{s1}$-1B | K-Mash PT + K710 FT  | 8x3x4    | 91.4 | TBD | [run.sh](./scripts/finetuning/full_tuning/k600/1B_ft_k710_ft_k600_f8.sh) |
-| $\text{InternVideo2}_{s1}$-1B | K-Mash PT + K710 FT  | 16x3x4    | 91.6 | TBD | [run.sh](./scripts/finetuning/full_tuning/k600/1B_ft_k710_ft_k600_f16.sh) |
+| $\text{InternVideo2}_{s1}$-1B | K-Mash PT + K710 FT  | 8x3x4    | 91.4 | [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2-Stage1-1B-224p-f8-K400/blob/main/1B_ft_k710_ft_k400_f8.pth) | [run.sh](./scripts/finetuning/full_tuning/k600/1B_ft_k710_ft_k600_f8.sh) |
+| $\text{InternVideo2}_{s1}$-1B | K-Mash PT + K710 FT  | 16x3x4    | 91.6 | [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2-Stage1-1B-224p-f8-K600/blob/main/1B_ft_k710_ft_k600_f16.pth) | [run.sh](./scripts/finetuning/full_tuning/k600/1B_ft_k710_ft_k600_f16.sh) |
 | $\text{InternVideo2}_{s1}$-6B | K-Mash PT + K710 FT  | 8x3x4    | 91.7 | TBD | [run.sh](./scripts/finetuning/full_tuning/k600/6B_ft_k710_ft_k600_f8.sh) |
 | $\text{InternVideo2}_{s1}$-6B | K-Mash PT + K710 FT  | 16x3x4    | 91.9 | TBD | [run.sh](./scripts/finetuning/full_tuning/k600/6B_ft_k710_ft_k600_f16.sh) |
 
