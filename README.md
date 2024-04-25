@@ -15,6 +15,7 @@ This repo contains InternVideo series and related works in video foundation mode
 - [InternVid](Data/InternVid): a large-scale video-text dataset for multimodal understanding and generation
 
 ## Updates
+- `2024.04`: The [Checkpoints](https://huggingface.co/collections/OpenGVLab/internvideo2-6618ccb574bd2f91410df5cd) and scripts of Intenrvideo2 are released.
 - `2024.03`: The [technical report](https://arxiv.org/abs/2403.15377) of InternVideo2 is released.
 - `2024.01`: [InternVid](Data/InternVid) (a video-text dataset for video understanding and generation) has been accepted for spotlight presentation of ICLR 2024.
 - `2023.07`: A **video-text dataset InternVid** is released at [here](Data/InternVid) for facilitating multimodal understanding and generation.
