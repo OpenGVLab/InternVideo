@@ -10,7 +10,7 @@ For $\text{InternVideo2}_{clip}$, we load those models of $\text{InternVideo2}_{
 | Model    | Setting     | Model  | Pretraining Script  |
 | -------- | ----------- | ------ | ------------- |
 | $\text{InternVideo2}_{s2}$-1B | IV-25.5M          | [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2/blob/main/InternVideo2-stage2_1b-224p-f4.pt) | [script](scripts/pretraining/stage2/1B/run.sh)  |
-| $\text{InternVideo2}_{clip}$-1B | IV-25.5M        |  TBD | [script](scripts/pretraining/clip/1B/run.sh)  |
+| $\text{InternVideo2}_{clip}$-1B | IV-25.5M        |  [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2-CLIP-1B-224p-f8) | [script](scripts/pretraining/clip/1B/run.sh)  |
 | $\text{InternVideo2}_{s2}$-6B | IV-400M         |  TBD | [script](scripts/pretraining/stage2/6B/run.sh) |
 | $\text{InternVideo2}_{clip}$-6B | IV-400M         |  TBD | [script](scripts/pretraining/clip/6B/run.sh) |
 
