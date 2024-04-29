@@ -10,7 +10,7 @@ librosa==0.10.1
 numpy==1.24.4
 opencv_python==4.8.0.76
 pandas==2.0.3
-petrel_oss_sdk==v2.2.1_2_g1505ef3_master
+# petrel_oss_sdk==v2.2.1_2_g1505ef3_master
 Pillow==10.0.0
 psutil==5.9.5
 PyYAML==6.0.1

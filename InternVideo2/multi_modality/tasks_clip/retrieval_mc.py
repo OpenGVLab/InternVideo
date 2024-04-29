@@ -304,7 +304,7 @@ def main(config):
                         del state_dict[k]
 
                 save_obj = {
-                    "model": model_without_ddp.state_dict(),
+                    "model": state_dict,
                     "optimizer": optimizer.state_dict(),
                     "scheduler": scheduler.state_dict(),
                     "scaler": scaler.state_dict(),
