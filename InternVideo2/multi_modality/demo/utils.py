@@ -115,7 +115,8 @@ def setup_internvideo2(config: dict):
         model_without_ddp = model_without_ddp.to(torch.float16)
     else:
         model_without_ddp = model_without_ddp.to(torch.float32)
-        
+    
+    model_without_ddp.eval()
     return (model_without_ddp, tokenizer,)
 
 
