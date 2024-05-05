@@ -14,7 +14,7 @@ from importlib import import_module
 
 import yaml
 
-from .easydict import EasyDict
+from easydict import EasyDict
 
 __all__ = ["Config", "pretty_text"]
 
