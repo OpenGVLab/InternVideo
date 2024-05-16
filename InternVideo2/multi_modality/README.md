@@ -39,6 +39,20 @@ bash scripts/pretraining/stage2/1B/run.sh
 4. `save_latest=True` will automatically save the latest checkpoint while training.
 5. `auto_resume=True` will automatically loaded the best or latest checkpoint while training.
 
+## CLIP Post-pretraining
+
+We use the text encoder from [InternVL-CLIP](https://github.com/OpenGVLab/InternVL/tree/main/clip_benchmark).
+
+For training, you can simply run the pretraining scripts in `scripts/pretraining` as follows:
+```shell
+bash scripts/pretraining/clip/1B/run.sh
+```
+
+:warning: **Notes:**
+1. Download [chinese_alpaca_lora_7b](https://huggingface.co/hfl/chinese-alpaca-lora-7b) and set the `llama_path` and `tokenizer_path` in `config.py`.
+2. Download [InternVideo2-stage2_1b-224p-f4.pt](https://huggingface.co/OpenGVLab/InternVideo2/blob/main/InternVideo2-stage2_1b-224p-f4.pt) and set `vision_ckpt_path` in `config.py`.
+3. Download [internvl_c_13b_224px](https://huggingface.co/OpenGVLab/InternVL/blob/main/internvl_c_13b_224px.pth) and set `text_ckpt_path` in `config.py`.
+
 
 ## Zero-shot Evaluation
 
