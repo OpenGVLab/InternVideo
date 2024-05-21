@@ -29,8 +29,9 @@ class LLaMA(nn.Module):
         llama_config = LlamaConfig.from_pretrained(llama_path, local_files_only=True)
         llama_config.causal = True
         llama_config.use_flash_attention = use_flash_attn
-        model = LlamaForCausalLM.from_pretrained(  # LLAMA model
-            llama_path, torch_dtype=torch.float16, config=llama_config, local_files_only=True)
+        # model = LlamaForCausalLM.from_pretrained(  # LLAMA model
+        #     llama_path, torch_dtype=torch.float16, config=llama_config, local_files_only=True)
+        model = LlamaForCausalLM(config=llama_config)
         if not use_lora:
             self.transformer = model.model
         else:
