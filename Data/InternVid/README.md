@@ -5,6 +5,8 @@
 \[[中文版本](README_CN.md)\]
 
 # :fire: News
+- We release the full version of the video annotation for InternVid ([OpenDataLab](https://opendatalab.com/shepshep/InternVidFull)). The corresponding clip-text similarities and aesthetics will be updated.
+
 - The implementation of ViCLIP is given [here](https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo1/Pretrain/ViCLIP).
 
 - InternVid has been accepted for spotlight presentation of ICLR 2024.
