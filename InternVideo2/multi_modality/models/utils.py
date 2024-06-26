@@ -4,7 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from scipy import interpolate
+#from scipy import interpolate
 from typing import List
 
 from torch import nn
@@ -296,4 +296,3 @@ def tie_encoder_decoder_weights(
     tie_encoder_to_decoder_recursively(
         decoder, encoder, base_model_prefix, uninitialized_encoder_weights, skip_key
     )
-

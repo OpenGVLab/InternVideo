@@ -15,12 +15,12 @@ from .flash_attention_class import FlashAttention
 logger = logging.getLogger(__name__)
 
 try:
-    from flash_attn.modules.mlp import FusedMLP
+    from flash_attn.ops.fused_dense import FusedMLP
 except:
     logger.warn(f'FusedMLP of flash_attn is not installed!!!')
 
 try:
-    from flash_attn.ops.rms_norm import DropoutAddRMSNorm
+    from flash_attn.ops.triton.layer_norm import RMSNorm as FusedRMSNorm
 except:
     logger.warn(f'DropoutAddRMSNorm of flash_attn is not installed!!!')
 
@@ -209,8 +209,8 @@ class Attention(nn.Module):
         if self.qk_normalization:
             q, k, v = qkv.unbind(2)
             if self.use_fused_rmsnorm:
-                q = self.q_norm(q.flatten(-2, -1))[0].view(q.shape)
-                k = self.k_norm(k.flatten(-2, -1))[0].view(k.shape)
+                q = self.q_norm(q.flatten(-2, -1), prenorm=True)[0].view(q.shape)
+                k = self.k_norm(k.flatten(-2, -1), prenorm=True)[0].view(k.shape)
             else:
                 q = self.q_norm(q.flatten(-2, -1)).view(q.shape)
                 k = self.k_norm(k.flatten(-2, -1)).view(k.shape)
@@ -291,9 +291,9 @@ class Block(nn.Module):
 
         def _inner_forward(x, residual=None):
             if self.use_fused_rmsnorm:
-                x, residual = self.norm1(x, residual)
+                x, residual = self.norm1(x, residual, prenorm=True)
                 x = self.drop_path1(self.ls1(self.attn(x)))
-                x, residual = self.norm2(x, residual)
+                x, residual = self.norm2(x, residual, prenorm=True)
                 x = self.drop_path2(self.ls2(self.mlp(x)))
                 return x, residual
             else:
@@ -416,7 +416,7 @@ class PretrainInternVideo2(nn.Module):
 
         self.num_frames = num_frames
         self.tubelet_size = tubelet_size
-        assert use_flash_attn == use_fused_rmsnorm == use_fused_mlp, 'use_flash_attn, use_fused_rmsnorm and use_fused_mlp should be consistent'
+        #assert use_flash_attn == use_fused_rmsnorm == use_fused_mlp, 'use_flash_attn, use_fused_rmsnorm and use_fused_mlp should be consistent'
 
         self.use_flash_attn = use_flash_attn
         self.embed_dim = embed_dim
@@ -430,7 +430,7 @@ class PretrainInternVideo2(nn.Module):
         logger.info(f'Strudent Return Index: {self.return_index}')
 
         if use_fused_rmsnorm:
-            norm_layer_for_blocks = partial(DropoutAddRMSNorm, eps=1e-6, prenorm=True)
+            norm_layer_for_blocks = partial(FusedRMSNorm, eps=1e-6)
         else:
             norm_layer_for_blocks = partial(RMSNorm, eps=1e-6)
         self.norm_layer_for_blocks = norm_layer_for_blocks

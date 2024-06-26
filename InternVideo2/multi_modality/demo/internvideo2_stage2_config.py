@@ -15,8 +15,8 @@ max_txt_l = 40
 
 origin_num_frames = 4
 
-use_half_precision = False
-use_bf16 = False
+use_half_precision = True
+use_bf16 = True
 
 inputs = dict(
     image_res=224,
@@ -55,7 +55,7 @@ model = dict(
         checkpoint_num=40,
         use_flash_attn=use_half_precision,
         use_fused_rmsnorm=use_half_precision,
-        use_fused_mlp=use_half_precision,
+        use_fused_mlp=False,
         # clip teacher
         clip_teacher=None,
         clip_input_resolution=224,

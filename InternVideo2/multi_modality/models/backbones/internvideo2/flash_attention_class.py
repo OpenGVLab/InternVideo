@@ -1,10 +1,10 @@
 import torch
 import torch.nn as nn
-
+import ipdb
 from einops import rearrange
 
-# from flash_attn.flash_attn_interface import flash_attn_varlen_qkvpacked_func
-# from flash_attn.bert_padding import unpad_input, pad_input
+from flash_attn.flash_attn_interface import flash_attn_varlen_qkvpacked_func
+from flash_attn.bert_padding import unpad_input, pad_input
 
 
 class FlashAttention(nn.Module):
@@ -33,7 +33,7 @@ class FlashAttention(nn.Module):
             key_padding_mask: a bool tensor of shape (B, S)
         """
         assert not need_weights
-        assert qkv.dtype in [torch.float16, torch.bfloat16]
+        assert qkv.dtype in [torch.float16, torch.bfloat16], "qkv type is :" + str(qkv.dtype)
         assert qkv.is_cuda
 
         if cu_seqlens is None:
