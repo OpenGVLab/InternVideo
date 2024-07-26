@@ -30,6 +30,7 @@ This repo contains InternVideo series and related works in video foundation mode
 - If you have any questions during the trial, running or deployment, feel free to join our WeChat group discussion! If you have any ideas or suggestions for the project, you are also welcome to join our WeChat group discussion!
 <div align='center'>
 <img src="./InternVideo2/figs/wechatgrp.png" class="interpolation-image" alt="wechatgroup" height="15%" width="15%" />
+<img src="./InternVideo2/figs/internvideo_grp.png" class="interpolation-image" alt="wechatgroup" height="15.27%" width="15.27%" />
 </div>
 
 
