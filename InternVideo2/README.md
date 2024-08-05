@@ -52,6 +52,13 @@ If this work is helpful for your research, please consider citing InternVideo.
 
 ```
 @article{wang2024internvideo2,
+  title={Internvideo2: Scaling video foundation models for multimodal video understanding},
+  author={Wang, Yi and Li, Kunchang and Li, Xinhao and Yu, Jiashuo and He, Yinan and Wang, Chenting and Chen, Guo and Pei, Baoqi and Zheng, Rongkun and Xu, Jilan and Wang, Zun and others},
+  journal={arXiv preprint arXiv:2403.15377},
+  year={2024}
+}
+
+@article{wang2024internvideo2,
   title={InternVideo2: Scaling Video Foundation Models for Multimodal Video Understanding},
   author={Wang, Yi and Li, Kunchang and Li, Xinhao and Yu, Jiashuo and He, Yinan and Chen, Guo and Pei, Baoqi and Zheng, Rongkun and Xu, Jilan and Wang, Zun and Shi, Yansong and Jiang, Tianxiang and Li, Songze and Zhang, Hongjie and Huang, Yifei and Qiao, Yu and Wang, Yali and Wang, Limin},
   journal={arXiv preprint arXiv:2403.15377},
