@@ -30,9 +30,7 @@ This repo contains InternVideo series and related works in video foundation mode
 - If you have any questions during the trial, running or deployment, feel free to join our WeChat group discussion! If you have any ideas or suggestions for the project, you are also welcome to join our WeChat group discussion!
 <div align='center'>
 <img src="./InternVideo2/figs/wechatgrp.png" class="interpolation-image" alt="wechatgroup" height="15%" width="15%" />
-![e73824eb20c648d1158a32368b47589](https://github.com/user-attachments/assets/734cfdbf-07da-4656-b37c-6c2f601425b3)
+<img src=https://github.com/user-attachments/assets/734cfdbf-07da-4656-b37c-6c2f601425b3 class="interpolation-image" alt="wechatgroup" height="15%" width="15%" />
 </div>
-
-
 
 - We are hiring researchers, engineers and interns in General Vision Group, Shanghai AI Lab. If you are interested in working with us on video foundation models and related topics, please contact Yi Wang (wangyi@pjlab.org.cn).
