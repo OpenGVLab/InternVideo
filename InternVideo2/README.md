@@ -32,9 +32,9 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo2-scaling-video-foundation-models/temporal-action-localization-on-thumos14)](https://paperswithcode.com/sota/temporal-action-localization-on-thumos14?p=internvideo2-scaling-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo2-scaling-video-foundation-models/temporal-action-localization-on-activitynet)](https://paperswithcode.com/sota/temporal-action-localization-on-activitynet?p=internvideo2-scaling-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo2-scaling-video-foundation-models/zero-shot-video-question-answer-on-egoschema-1)](https://paperswithcode.com/sota/zero-shot-video-question-answer-on-egoschema-1?p=internvideo2-scaling-video-foundation-models)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo2-scaling-video-foundation-models/video-instance-segmentation-on-youtube-vis-1)](https://paperswithcode.com/sota/video-instance-segmentation-on-youtube-vis-1?p=internvideo2-scaling-video-foundation-models)
+<!-- [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo2-scaling-video-foundation-models/video-instance-segmentation-on-youtube-vis-1)](https://paperswithcode.com/sota/video-instance-segmentation-on-youtube-vis-1?p=internvideo2-scaling-video-foundation-models) -->
 
-This repo will give the code and models of '[InternVideo2: Scaling Video Foundation Models for Multimodal Video Understanding](https://arxiv.org/abs/2403.15377)' soon.
+This repo gives the code and models of '[InternVideo2: Scaling Video Foundation Models for Multimodal Video Understanding](https://arxiv.org/abs/2403.15377)'.
 
 - **Achieved `92.1%` Top1 accuracy in Kinetics 400.**
 - **Achieved `SOTA` performance on over `60` video/audio-related tasks (including action recognition, temporal localization, retrieval, etc) when released.**
