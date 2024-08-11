@@ -19,8 +19,8 @@
 
 | Model    | Setting     | Teacher | Model  | Shell  |
 | -------- | ----------- | ------- | ------ | ------ |
-| $\text{InternVideo2}_{dist}$-S/14 | K-Mash-1.1M 100e | $\text{InternVideo2}_{s2}$-1B |  [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/resolve/main/stage1/B14/B14_dist_1B_stage2/pytorch_model.bin) | [run.sh](./scripts/distillation/B14_dist_1B_stage2.sh) |
-| $\text{InternVideo2}_{dist}$-B/14 | K-Mash-1.1M 100e | $\text{InternVideo2}_{s2}$-1B |  [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/resolve/main/stage1/S14/S14_dist_1B_stage2/pytorch_model.bin) | [run.sh](./scripts/distillation/S14_dist_1B_stage2.sh) |
+| $\text{InternVideo2}_{dist}$-S/14 | K-Mash-1.1M 100e | $\text{InternVideo2}_{s2}$-1B |  [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/resolve/main/stage1/S14/S14_dist_1B_stage2/pytorch_model.bin) | [run.sh](./scripts/distillation/B14_dist_1B_stage2.sh) |
+| $\text{InternVideo2}_{dist}$-B/14 | K-Mash-1.1M 100e | $\text{InternVideo2}_{s2}$-1B |  [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/resolve/main/stage1/B14/B14_dist_1B_stage2/pytorch_model.bin) | [run.sh](./scripts/distillation/S14_dist_1B_stage2.sh) |
 | $\text{InternVideo2}_{dist}$-L/14 | K-Mash-1.1M 100e | $\text{InternVideo2}_{s2}$-1B |  [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/blob/main/stage1/L14/L14_dist_1B_stage2/pytorch_model.bin) | [run.sh](./scripts/distillation/L14_dist_1B_stage2.sh) |
 
 
