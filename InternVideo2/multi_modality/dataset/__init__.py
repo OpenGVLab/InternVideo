@@ -337,9 +337,9 @@ def create_dataset(dataset_type, config):
                         ann_file=data_cfg,
                         transform=test_transform
                     )
-                    if "hmdb" in name or 'frame' in name: # read image for video
-                        dataset_kwargs["video_reader_type"] = 'img'
                     dataset_kwargs.update(video_only_dataset_kwargs_eval)
+                    if 'frame' in data_cfg['data_root']: # read image for video
+                        dataset_kwargs["video_reader_type"] = 'img'
                 elif media_type == "audio":
                     dataset_kwargs = dict(
                         ann_file=data_cfg,

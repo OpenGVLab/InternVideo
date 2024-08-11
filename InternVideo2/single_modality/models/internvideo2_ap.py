@@ -559,6 +559,39 @@ class InternVideo2(nn.Module):
 
 
 @register_model
+def internvideo2_ap_small_patch14_224(pretrained=False, **kwargs):
+    model = InternVideo2(
+        img_size=224, patch_size=14, embed_dim=384, 
+        depth=12, num_heads=6, mlp_ratio=4, 
+        attn_pool_num_heads=16, clip_embed_dim=768,
+        **kwargs
+    )
+    return model
+
+
+@register_model
+def internvideo2_ap_base_patch14_224(pretrained=False, **kwargs):
+    model = InternVideo2(
+        img_size=224, patch_size=14, embed_dim=768, 
+        depth=12, num_heads=12, mlp_ratio=4, 
+        attn_pool_num_heads=16, clip_embed_dim=768,
+        **kwargs
+    )
+    return model
+
+    
+@register_model
+def internvideo2_ap_large_patch14_224(pretrained=False, **kwargs):
+    model = InternVideo2(
+        img_size=224, patch_size=14, embed_dim=1024, 
+        depth=24, num_heads=16, mlp_ratio=4, 
+        attn_pool_num_heads=16, clip_embed_dim=768,
+        **kwargs
+    )
+    return model
+
+
+@register_model
 def internvideo2_ap_1B_patch14_224(pretrained=False, **kwargs):
     model = InternVideo2(
         img_size=224, patch_size=14, embed_dim=1408, 

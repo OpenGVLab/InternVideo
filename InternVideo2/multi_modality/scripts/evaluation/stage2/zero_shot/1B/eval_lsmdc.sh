@@ -11,7 +11,7 @@ echo "PYTHONPATH: ${PYTHONPATH}"
 JOB_NAME=$(basename $0)_$(date +"%Y%m%d_%H%M%S")
 OUTPUT_DIR="$(dirname $0)/$JOB_NAME"
 LOG_DIR="$(dirname $0)/logs/${JOB_NAME}"
-PARTITION='video5'
+PARTITION='video'
 NNODE=1
 NUM_GPUS=1
 NUM_CPU=16
