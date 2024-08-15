@@ -107,7 +107,7 @@ bash exp/exp_pretrain_ViCLIP/viclip_base/run.sh
 
 |      Model      |   Training Data   |                                               Descriptions                                                |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
-| ViCLIP-L-14 \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP) \| [Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViClip-InternVid-10M-FLT.pth)\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) \| [OpenDataLab](https://opendatalab.com/shepshep/InternVid)\] |   - |
+| ViCLIP-L-14 \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP) \| [🤗](https://huggingface.co/OpenGVLab/ViCLIP/resolve/main/ViClip-InternVid-10M-FLT.pth)\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) \| [OpenDataLab](https://opendatalab.com/shepshep/InternVid)\] |   - |
 | ViCLIP-L-14 \[[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViCLIP-L_InternVid-DIV-10M.pth)\] | InternVid-10M-DIV  |   - |
 | ViCLIP-L-14 \[[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViCLIP-L_WebVid-10M.pth)\] | WebVid-10M  |   - |
 | ViCLIP-L-14 \[[Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViCLIP-L_InternVid-10M.pth)\] | InternVid-10M  |   - |
