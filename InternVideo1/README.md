@@ -35,7 +35,7 @@ This repo gives the official implmentation of '[InternVideo: General Video Found
 
 ## Updates
 - `Jan 16, 2024`: [InternVid](https://github.com/OpenGVLab/InternVideo/tree/main/Data/InternVid) (a video-text dataset for video understanding and generation) has been accepted for spotlight presentation of ICLR 2024.
-- `Sep  7, 2023`: [**ViCLIP**](https://huggingface.co/OpenGVLab/ViCLIP): a simple video CLIP for transferrable video-text representation is available at [Hugging Face](https://huggingface.co/OpenGVLab/ViCLIP) and [Aliyun](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/viclip/ViClip-InternVid-10M-FLT.pth). It delivers strong zero-shot action recognition performance. [Have a try](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb).
+- `Sep  7, 2023`: [**ViCLIP**](https://huggingface.co/OpenGVLab/ViCLIP): a simple video CLIP for transferrable video-text representation is available at [Hugging Face](https://huggingface.co/OpenGVLab/ViCLIP) and [🤗](https://huggingface.co/OpenGVLab/ViCLIP/resolve/main/ViClip-InternVid-10M-FLT.pth). It delivers strong zero-shot action recognition performance. [Have a try](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb).
 - `July 16, 2023`: A **video-text dataset InternVid** is partially released at [here](Data/InternVid) for facilitating multimodal understanding and generation. A subset of this dataset, consisting of 10 million video clips, is available at [Hugging Face](https://huggingface.co/datasets/OpenGVLab/InternVid).
 - `May 11, 2023`: **Video instruction data** are released at [here](Data/instruction_data) for tuning end-to-end video-centric multimodal dialogue systems like [VideoChat](https://github.com/OpenGVLab/Ask-Anything).
 - `Mar  8, 2023`: All pretrained foundation model weights are released. See them from [here](#model-zoo).
@@ -85,10 +85,10 @@ The foundation models have recently shown excellent performance on a variety of 
 
 |      Model      |   Training Data   |                                               download                                                |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
-| InternVideo-MM-L-14 | WebVid10M+Self-collected (14M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/InternVideo-MM-L-14.ckpt) |
-| VideoMAE-B | UnlabeledHybrid (1M) |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e.pth)   |
-| VideoMAE-L | UnlabeledHybrid (1M)|   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e.pth)   |
-| VideoMAE-H | UnlabeledHybrid (1M)|   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_h_hybrid_pt_1200e.pth)  |
+| InternVideo-MM-L-14 | WebVid10M+Self-collected (14M) |   [ckpt](https://huggingface.co/OpenGVLab/InternVideo1.0) |
+| VideoMAE-B | UnlabeledHybrid (1M) |   [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-b/pytorch_model.bin)   |
+| VideoMAE-L | UnlabeledHybrid (1M)|   [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-l/pytorch_model.bin)   |
+| VideoMAE-H | UnlabeledHybrid (1M)|   [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-h/pytorch_model.bin)  |
 </div>
 </details>
 
