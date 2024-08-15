@@ -1,7 +1,7 @@
 # Instruction data for [VideoChat](https://github.com/OpenGVLab/Ask-Anything/tree/main/video_chat)
 
 # :fire: Updates
-- **2023/05/11**: Release the **V1**: [Google Drive](https://drive.google.com/file/d/1C-7xmf42QUEi4ApXTcxBHr5nLvTWXyUi/view?usp=sharing) | [Aliyun OSS](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/data/videochat/videochat_instruct_11k.json)
+- **2023/05/11**: Release the **V1**: [Google Drive](https://drive.google.com/file/d/1C-7xmf42QUEi4ApXTcxBHr5nLvTWXyUi/view?usp=sharing) 
 
 # :speech_balloon: V1: 7K detailed descriptions + 4K multi-turn conversations
 
