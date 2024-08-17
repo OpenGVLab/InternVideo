@@ -26,7 +26,7 @@ srun -p ${PARTITION} \
     --rdzv_backend=c10d \
     tasks_clip/retrieval.py \
     $(dirname $0)/config_k400.py \
-    pretrained_path /mnt/petrelfs/likunchang/code/open_source/internvideo2/multi_modality/scripts/pretraining/clip/large/stage1_freezeProjection_loadMLPS2/ckpt_02.pth/mp_rank_00_model_states.pt \
+    pretrained_path your_model_path/InternVideo2_CLIP_L14.pth
     output_dir ${OUTPUT_DIR}
 
-    # pretrained_path your_model_path/InternVideo2_CLIP_L14.pth
+
