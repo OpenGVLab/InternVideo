@@ -54,7 +54,7 @@ bash scripts/pretraining/clip/1B/run.sh
 3. Download [internvl_c_13b_224px](https://huggingface.co/OpenGVLab/InternVL/blob/main/internvl_c_13b_224px.pth) and set `text_ckpt_path` in `config.py`, you also need to set ,.
 
 :fire: **Updates:**
-- `2024/08/12`: We build smaller [VideoCLIP](./multi_modality/MODEL_ZOO.md) with MobileCLIP. Please download [InternVideo2-stage2-distil](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/tree/main/stage1) and set `vision_ckpt_path` in `config.py`, [mobileclip_b](https://docs-assets.developer.apple.com/ml-research/datasets/mobileclip/mobileclip_b.pt) and set `text_ckpt_path` in `config.py`,
+- `2024/08/12`: We build smaller [VideoCLIP](./multi_modality/MODEL_ZOO.md) with MobileCLIP. Please download [InternVideo2-stage2-distil](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/tree/main/stage1) and set `vision_ckpt_path` in `config.py`, [mobileclip_blt](https://docs-assets.developer.apple.com/ml-research/datasets/mobileclip/mobileclip_blt.pt) and set `text_ckpt_path` in `config.py`,
 
 
 ## Zero-shot Evaluation
