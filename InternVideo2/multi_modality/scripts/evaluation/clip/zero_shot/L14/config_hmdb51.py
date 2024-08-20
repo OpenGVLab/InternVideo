@@ -74,7 +74,7 @@ model = dict(
     open_text_projection=False,
     vision_ckpt_path="your_model_path/L14_dist_1B_stage2.pth",
     load_vision_ckpt_from_internvideo2_stage2=False,
-    text_ckpt_path="your_model_path/mobileclip_b.pt",
+    text_ckpt_path="your_model_path/mobileclip_blt.pt",
 )
 
 criterion = dict(

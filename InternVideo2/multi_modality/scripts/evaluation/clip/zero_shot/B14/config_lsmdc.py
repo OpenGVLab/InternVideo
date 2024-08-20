@@ -73,7 +73,7 @@ model = dict(
     freeze_text=True,
     open_text_projection=False,
     vision_ckpt_path="your_model_path/B14_dist_1B_stage2.pth",
-    text_ckpt_path="your_model_path/mobileclip_b.pt",
+    text_ckpt_path="your_model_path/mobileclip_blt.pt",
 )
 
 criterion = dict(
