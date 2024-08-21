@@ -40,6 +40,7 @@ This repo gives the code and models of '[InternVideo2: Scaling Video Foundation 
 - **Achieved `SOTA` performance on over `60` video/audio-related tasks (including action recognition, temporal localization, retrieval, etc) when released.**
 
 ## Updates
+- `2024/08/21`: [InternVideo2-Stage3-InternLM](https://huggingface.co/OpenGVLab/InternVideo2_Chat_8B_InternLM2_5) is released. Have a longer context window.
 - `2024/08/12`: We provide smaller models, [InternVideo2-S/B/L](./single_modality/MODEL_ZOO.md), which are distilled from InternVideo2-1B. We also build smaller [VideoCLIP](./multi_modality/MODEL_ZOO.md) with MobileCLIP.
 - `2024/08/05`: [InternVideo2-Stage3-8B](https://huggingface.co/OpenGVLab/InternVideo2-Chat-8B) and [InternVideo2-Stage3-8B-HD](https://huggingface.co/OpenGVLab/InternVideo2_chat_8B_HD) are released. 8B indicates the use of InternVideo2-1B and the 7B LLM.
 - `2024/07/10`: The self-annotated audio-visual-speech video-text data and audio-visual video-text data in stage 2 is released.
