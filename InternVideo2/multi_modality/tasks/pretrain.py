@@ -10,7 +10,7 @@ import torch.distributed as dist
 import wandb
 
 from dataset.serialize import local_broadcast_process_authkey
-from dataset import MetaLoader, MetaLoader_rs2, create_dataset, create_loader, create_sampler, create_stateful_sampler
+from dataset import MetaLoader, create_dataset, create_loader, create_sampler, create_stateful_sampler
 from models import *
 from tasks.retrieval_utils import evaluation_wrapper
 from tasks.shared_utils import get_media_types, setup_model
