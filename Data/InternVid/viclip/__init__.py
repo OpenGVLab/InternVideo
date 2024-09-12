@@ -54,6 +54,7 @@ def retrieve_text(frames,
                           'tokenizer':None},
                   topk=5, 
                   device=torch.device('cuda')):
+    print("STARTED")
     # clip, tokenizer = get_clip(name, model_cfg['size'], model_cfg['pretrained'], model_cfg['reload'])
     assert(type(models)==dict and models['viclip'] is not None and models['tokenizer'] is not None)
     clip, tokenizer = models['viclip'], models['tokenizer']
