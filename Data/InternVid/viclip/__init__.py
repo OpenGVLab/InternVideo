@@ -65,7 +65,7 @@ def retrieve_text(frames,
     text_feat_d = get_text_feat_dict(texts, clip, tokenizer, text_feat_d)
     text_feats = [text_feat_d[t] for t in texts]
     text_feats_tensor = torch.cat(text_feats, 0)
-    
+    print("its me")
     probs, idxs = clip.get_predict_label(vid_feat, text_feats_tensor, top=topk)
 
     ret_texts = [texts[i] for i in idxs.numpy()[0].tolist()]
