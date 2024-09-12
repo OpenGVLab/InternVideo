@@ -253,7 +253,7 @@ class ViCLIP(nn.Module):
         return clip_feat
 
     def get_predict_label(self, clip_feature, text_feats_tensor, top=5):
-        label_probs = (100.0 * clip_feature @ text_feats_tensor.T).softmax(dim=-1)
+        label_probs = (100.0 * clip_feature @ text_feats_tensor.T)
         top_probs, top_labels = label_probs.cpu().topk(top, dim=-1)
         return top_probs, top_labels
 
