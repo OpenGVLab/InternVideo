@@ -37,7 +37,7 @@ v_std = np.array([0.229, 0.224, 0.225]).reshape(1,1,3)
 def normalize(data):
     return (data/255.0-v_mean)/v_std
 
-def frames2tensor(vid_list, fnum=4, target_size=(224, 224), device=torch.device('cuda')):
+def frames2tensor(vid_list, fnum=8, target_size=(224, 224), device=torch.device('cuda')):
     assert(len(vid_list) >= fnum)
     step = len(vid_list) // fnum
     vid_list = vid_list[::step][:fnum]
