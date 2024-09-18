@@ -79,13 +79,13 @@ ViCLIP-L | +InternVid-200M+K710 | **88.7** | **98.2** | **74.2** | **95.0**
 
 |      Model      |   Training Data   |                                               Descriptions                                                |
 | :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
-| ViCLIP-L-14 \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP) \ | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) \| [OpenDataLab](https://opendatalab.com/shepshep/InternVid)\] |   - |
+| ViCLIP-L-14 \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP-L-14-hf)\] | InternVid-10M-FLT \[[HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid) \| [OpenDataLab](https://opendatalab.com/shepshep/InternVid)\] |   - |
 | ViCLIP-L-14  | InternVid-10M-DIV  |   - |
 | ViCLIP-L-14  | WebVid-10M  |   - |
 | ViCLIP-L-14 | InternVid-10M  |   - |
 | ViCLIP-L-14 | InternVid-50M  |   - |
 | ViCLIP-L-14 | InternVid-200M  |   - |
-| ViCLIP-B-16 \[[OneDrive](https://pjlab-my.sharepoint.cn/:u:/g/personal/wangyi_pjlab_org_cn/EY6ac22ZVzJLm1-wm_9gPaMBm5MFg36GKTxlkwTemgmKzQ?e=mH6u6A)\] | InternVid-10M-FLT  |   - |
+| ViCLIP-B-16 \[[OneDrive](https://pjlab-my.sharepoint.cn/:u:/g/personal/wangyi_pjlab_org_cn/EY6ac22ZVzJLm1-wm_9gPaMBm5MFg36GKTxlkwTemgmKzQ?e=mH6u6A)\] \| \[[HuggingFace](https://huggingface.co/OpenGVLab/ViCLIP-B-16-hf)\] | InternVid-10M-FLT  |   - |
 | ViCLIP-B-16 \[[OneDrive](https://pjlab-my.sharepoint.cn/:u:/g/personal/wangyi_pjlab_org_cn/EVGBg6kq4M1MjbeSdqiXsaMBaBduhR7CQCT11JR4edmZ8Q?e=ILtTfM)\] | InternVid-200M  |   - |
 </div>
 
