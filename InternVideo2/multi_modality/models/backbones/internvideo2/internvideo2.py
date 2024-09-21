@@ -10,19 +10,6 @@ from functools import partial
 from einops import rearrange
 
 from .pos_embed import get_3d_sincos_pos_embed, get_2d_sincos_pos_embed, get_1d_sincos_pos_embed, interpolate_pos_embed_internvideo2
-from .flash_attention_class import FlashAttention
-
-logger = logging.getLogger(__name__)
-
-try:
-    from flash_attn.modules.mlp import FusedMLP
-except:
-    logger.warn(f'FusedMLP of flash_attn is not installed!!!')
-
-try:
-    from flash_attn.ops.rms_norm import DropoutAddRMSNorm
-except:
-    logger.warn(f'DropoutAddRMSNorm of flash_attn is not installed!!!')
 
 
 class CrossAttention(nn.Module):
