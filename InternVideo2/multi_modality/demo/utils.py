@@ -306,7 +306,6 @@ class InternVideo2_Stage2(nn.Module):
                       clip_feature: torch.Tensor, 
                       text_feats_tensor: torch.Tensor, 
                       top: int=5):
-        print("Its ME")
         clip_feature = 100.0 * clip_feature
         clip_feature /= clip_feature.norm(dim=-1, keepdim=True)
         text_feats_tensor /= text_feats_tensor.norm(dim=-1, keepdim=True)
