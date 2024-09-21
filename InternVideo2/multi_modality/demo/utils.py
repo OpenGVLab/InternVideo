@@ -10,7 +10,7 @@ from models.backbones.internvideo2 import pretrain_internvideo2_1b_patch14_224
 from models.backbones.bert.builder import build_bert
 from models.criterions import get_sim
 from models.backbones.internvideo2.pos_embed import interpolate_pos_embed_internvideo2_new
-from models.backbones.bert.tokenization_bert import BertTokenizer
+from transformers import BertTokenizer
 
 
 def _frame_from_video(video):
