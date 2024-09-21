@@ -303,13 +303,15 @@ class InternVideo2_Stage2(nn.Module):
         return tfeat
     
     def predict_label(self, 
-                      vid_feat: torch.Tensor, 
-                      txt_feat: torch.Tensor, 
+                      clip_feature: torch.Tensor, 
+                      text_feats_tensor: torch.Tensor, 
                       top: int=5):
-        vid_feat = 100.0 * vid_feat
-        vid_feat /= vid_feat.norm(dim=-1, keepdim=True)
-        txt_feat /= txt_feat.norm(dim=-1, keepdim=True)
-        label_probs = (vid_feat @ txt_feat.T)
-                          
-        top_probs, top_labels = label_probs.float().cpu().topk(top, dim=-1)
+        clip_feature = 100.0 * clip_feature
+        clip_feature /= clip_feature.norm(dim=-1, keepdim=True)
+        text_feats_tensor /= text_feats_tensor.norm(dim=-1, keepdim=True)
+    
+        label_probs = (clip_feature @ text_feats_tensor.T)
+    
+        top_probs, top_labels = label_probs.cpu().topk(top, dim=-1)
+        
         return top_probs, top_labels
