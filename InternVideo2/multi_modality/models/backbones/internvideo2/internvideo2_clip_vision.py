@@ -11,7 +11,6 @@ from functools import partial
 from einops import rearrange
 
 from .pos_embed import get_3d_sincos_pos_embed, get_2d_sincos_pos_embed, get_1d_sincos_pos_embed
-logger = logging.getLogger(__name__)
 
 
 class CrossAttention(nn.Module):
