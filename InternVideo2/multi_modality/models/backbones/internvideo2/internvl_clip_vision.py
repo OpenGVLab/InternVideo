@@ -8,7 +8,6 @@ import torch.utils.checkpoint as checkpoint
 from functools import partial
 from einops import rearrange
 
-
 MODEL_PATH = 'your_model_path/internvl'
 _MODELS = {
     # see InternVL

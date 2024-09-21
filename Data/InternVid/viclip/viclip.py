@@ -2,6 +2,7 @@ import os
 import logging
 
 import torch
+import torch.nn.functional as F
 from einops import rearrange
 from torch import nn
 import math
@@ -253,9 +254,16 @@ class ViCLIP(nn.Module):
         return clip_feat
 
     def get_predict_label(self, clip_feature, text_feats_tensor, top=5):
-        label_probs = (100.0 * clip_feature @ text_feats_tensor.T)
+        clip_feature = 100.0 * clip_feature
+        clip_feature /= clip_feature.norm(dim=-1, keepdim=True)
+        text_feats_tensor /= text_feats_tensor.norm(dim=-1, keepdim=True)
+    
+        label_probs = (clip_feature @ text_feats_tensor.T)
+    
         top_probs, top_labels = label_probs.cpu().topk(top, dim=-1)
+        
         return top_probs, top_labels
+
 
     
 if __name__ =="__main__":
