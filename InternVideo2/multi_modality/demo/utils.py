@@ -306,9 +306,10 @@ class InternVideo2_Stage2(nn.Module):
                       vid_feat: torch.Tensor, 
                       txt_feat: torch.Tensor, 
                       top: int=5):
+        vid_feat = 100.0 * vid_feat
         vid_feat /= vid_feat.norm(dim=-1, keepdim=True)
         txt_feat /= txt_feat.norm(dim=-1, keepdim=True)
-        label_probs = (100.0 * vid_feat @ txt_feat.T)
+        label_probs = (vid_feat @ txt_feat.T)
                           
         top_probs, top_labels = label_probs.float().cpu().topk(top, dim=-1)
         return top_probs, top_labels
