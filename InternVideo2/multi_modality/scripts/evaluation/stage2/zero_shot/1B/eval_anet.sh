@@ -1,5 +1,5 @@
 #!/bin/bash
-export MASTER_PORT=$((12000 + $RANDOM % 20000))
+export MASTER_PORT=$((12000 + RANDOM % 20000))
 export OMP_NUM_THREADS=1
 
 echo "PYTHONPATH: ${PYTHONPATH}"
