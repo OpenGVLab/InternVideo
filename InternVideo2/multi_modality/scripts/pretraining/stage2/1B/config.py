@@ -54,9 +54,9 @@ model = dict(
         pretrained='your_model_path/1B_pt.pth',
         use_checkpoint=False,
         checkpoint_num=40,
-        use_flash_attn=True,
-        use_fused_rmsnorm=True,
-        use_fused_mlp=True,
+        use_flash_attn=False,
+        use_fused_rmsnorm=False,
+        use_fused_mlp=False,
         # clip teacher
         clip_teacher=None,
         clip_input_resolution=224,
