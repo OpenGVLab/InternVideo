@@ -379,7 +379,7 @@ class PretrainInternVideo2(nn.Module):
             qk_normalization: bool = True,
             depth: int = 40,
             use_flash_attn: bool = True,
-            use_fused_rmsnorm: bool = True,
+            use_fused_rmsnorm: bool = False,
             use_fused_mlp: bool = True,
             fused_mlp_heuristic: int = 1,
             attn_pool_num_heads: int = 16,
