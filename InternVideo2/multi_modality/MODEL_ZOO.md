@@ -2,9 +2,9 @@
 
 
 ## Pretraining 
-For $\text{InternVideo2}_{s2}$, we load those models of $\text{InternVideo2}_{s1}$ and further pretrain them on multi-modality datasets.
+For $\text{InternVideo2}\_{s2}$, we load those models of $\text{InternVideo2}_{s1}$ and further pretrain them on multi-modality datasets.
 
-For $\text{InternVideo2}_{clip}$, we load those models of $\text{InternVideo2}_{s2}$.
+For $\text{InternVideo2}\_{clip}$, we load those models of $\text{InternVideo2}_{s2}$.
 
 
 | Model    | Setting     | Model  | Pretraining Script  |
