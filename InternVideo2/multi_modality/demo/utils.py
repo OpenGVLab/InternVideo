@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 import os
 import io
-
+import copy
 import torch
 from torch import nn
 
@@ -20,7 +20,7 @@ def _frame_from_video(video):
             yield frame
         else:
             break
-        
+
 v_mean = np.array([0.485, 0.456, 0.406]).reshape(1,1,3)
 v_std = np.array([0.229, 0.224, 0.225]).reshape(1,1,3)
 def normalize(data):
@@ -50,16 +50,16 @@ def get_vid_feat(frames, vlm):
     return vlm.get_vid_features(frames)
 
 
-def retrieve_text(frames, 
-                  texts, 
+def retrieve_text(frames,
+                  texts,
                   model,
                   topk:int=5,
                   config: dict={},
                   device=torch.device('cuda')):
-    
+
     vlm = model
     vlm = vlm.to(device)
-    
+
     fn = config.get('num_frames', 8)
     size_t = config.get('size_t', 224)
     frames_tensor = frames2tensor(frames, fnum=fn, target_size=(size_t, size_t), device=device)
@@ -69,7 +69,7 @@ def retrieve_text(frames,
     text_feat_d = get_text_feat_dict(texts, vlm, text_feat_d)
     text_feats = [text_feat_d[t] for t in texts]
     text_feats_tensor = torch.cat(text_feats, 0)
-    
+
     probs, idxs = vlm.predict_label(vid_feat, text_feats_tensor, top=topk)
 
     ret_texts = [texts[i] for i in idxs.long().numpy()[0].tolist()]
@@ -98,7 +98,7 @@ def setup_internvideo2(config: dict):
                 state_dict = checkpoint["model"]
             else:
                 state_dict = checkpoint["module"] # This is a deepspeed stage 1 model
-        except:  
+        except:
             state_dict = checkpoint
 
         if config.get('origin_num_frames', None) is not None:
@@ -108,14 +108,14 @@ def setup_internvideo2(config: dict):
 
         msg = model_without_ddp.load_state_dict(state_dict, strict=False)
         print(f"load_state_dict: {msg}")
-    
+
     if config.get('use_bf16', False):
         model_without_ddp = model_without_ddp.to(torch.bfloat16)
     elif config.get('use_half_precision', False):
         model_without_ddp = model_without_ddp.to(torch.float16)
     else:
         model_without_ddp = model_without_ddp.to(torch.float32)
-    
+
     model_without_ddp.eval()
     return (model_without_ddp, tokenizer,)
 
@@ -123,9 +123,9 @@ def setup_internvideo2(config: dict):
 class InternVideo2_Stage2(nn.Module):
     """docstring for InternVideo2_Stage2"""
 
-    def __init__(self, 
-                 config, 
-                 tokenizer, 
+    def __init__(self,
+                 config,
+                 tokenizer,
                  is_pretrain: bool=True):
         super(InternVideo2_Stage2, self).__init__()
 
@@ -143,6 +143,7 @@ class InternVideo2_Stage2(nn.Module):
 
         self.text_encoder = self.build_text_encoder()
         self.freeze_text()
+        self.cache_txt = {}
 
         self.vision_proj = nn.Linear(self.vision_width, self.embed_dim)
         self.text_proj = nn.Linear(self.text_width, self.embed_dim)
@@ -161,8 +162,8 @@ class InternVideo2_Stage2(nn.Module):
     def dtype(self):
         return self.vision_encoder.patch_embed.proj.weight.dtype
 
-    def encode_vision(self, 
-                      image: torch.Tensor, 
+    def encode_vision(self,
+                      image: torch.Tensor,
                       test: bool=False):
         """encode image / videos as features.
 
@@ -177,7 +178,7 @@ class InternVideo2_Stage2(nn.Module):
             - clip_output (torch.Tensor): The features of clip. Shape: [K,B,N,C].
 
         """
-        
+
         T = image.shape[1]
         use_image = True if T == 1 else False
         image = image.permute(0, 2, 1, 3, 4).to(self.dtype) # [B,T,C,H,W] -> [B,C,T,H,W]
@@ -188,7 +189,7 @@ class InternVideo2_Stage2(nn.Module):
                 image, None, use_image)
             return vision_embeds, pooled_vision_embeds
         else:
-            mask, targets_clip_middle_vis, targets_clip_final_vis = self.encode_teacher(image) 
+            mask, targets_clip_middle_vis, targets_clip_final_vis = self.encode_teacher(image)
             # if mask is not None and (self.video_mask_type != 'tube' or self.image_mask_type != 'tube'):
             #     keep_temporal = False
             # print(f"\033[31mmask is {type(mask)}\033[0m")
@@ -196,7 +197,7 @@ class InternVideo2_Stage2(nn.Module):
                     image, mask, use_image)
             return vision_embeds, pooled_vision_embeds, student_output, student_output_final, targets_clip_middle_vis, targets_clip_final_vis
 
-    def encode_text(self, 
+    def encode_text(self,
                     text: dict):
         """encode text.
         Args:
@@ -225,7 +226,7 @@ class InternVideo2_Stage2(nn.Module):
 
         """
         encoder_name = self.config.model.vision_encoder.name
-        
+
         if encoder_name == 'pretrain_internvideo2_1b_patch14_224':
             vision_encoder = pretrain_internvideo2_1b_patch14_224(self.config.model)
         else:
@@ -243,7 +244,7 @@ class InternVideo2_Stage2(nn.Module):
         self.image_mask_type = self.config.model.vision_encoder.image_mask_type
         self.image_window_size = (1, img_size // patch_size, img_size // patch_size)
         self.image_mask_ratio = self.config.model.vision_encoder.image_mask_ratio
-        
+
         return vision_encoder
 
     def build_text_encoder(self):
@@ -268,8 +269,8 @@ class InternVideo2_Stage2(nn.Module):
         """get text encoder, used for text and cross-modal encoding"""
         encoder = self.text_encoder
         return encoder.bert if hasattr(encoder, "bert") else encoder
-    
-    def get_vid_feat(self, 
+
+    def get_vid_feat(self,
                      frames: torch.Tensor):
         """get the video features for the given frames.
 
@@ -281,37 +282,35 @@ class InternVideo2_Stage2(nn.Module):
             - pooled_vision_embeds (torch.Tensor): The pooled output features. Shape: [B,1,C].
 
         """
-        with torch.no_grad():  
+        with torch.no_grad():
             _, vfeat = self.encode_vision(frames, test=True)
             vfeat = self.vision_proj(vfeat)
             vfeat /= vfeat.norm(dim=-1, keepdim=True)
         return vfeat
-    
-    def get_txt_feat(self, 
+
+    def get_txt_feat(self,
                      text: str):
         """get the text features for the given text."""
+        if text in self.cache_txt:
+            return self.cache_txt[text]
+        t_original = text
         with torch.no_grad():
             text = self.tokenizer(
-                text, 
-                padding="max_length", 
-                truncation=True, 
-                max_length=self.config.max_txt_l, 
+                text,
+                padding="max_length",
+                truncation=True,
+                max_length=self.config.max_txt_l,
                 return_tensors="pt",).to(self.config.device)
             _, tfeat = self.encode_text(text)
             tfeat = self.text_proj(tfeat)
             tfeat /= tfeat.norm(dim=-1, keepdim=True)
+        self.cache_txt[t_original] = tfeat
         return tfeat
-    
-    def predict_label(self, 
-                      clip_feature: torch.Tensor, 
-                      text_feats_tensor: torch.Tensor, 
+
+    def predict_label(self,
+                      vid_feat: torch.Tensor,
+                      txt_feat: torch.Tensor,
                       top: int=5):
-        clip_feature = 100.0 * clip_feature
-        clip_feature /= clip_feature.norm(dim=-1, keepdim=True)
-        text_feats_tensor /= text_feats_tensor.norm(dim=-1, keepdim=True)
-    
-        label_probs = (clip_feature @ text_feats_tensor.T)
-    
-        top_probs, top_labels = label_probs.cpu().topk(top, dim=-1)
-        
+        label_probs = (100.0 * vid_feat @ txt_feat.T)
+        top_probs, top_labels = label_probs.float().cpu().topk(top, dim=-1)
         return top_probs, top_labels
