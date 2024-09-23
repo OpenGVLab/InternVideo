@@ -35,7 +35,7 @@ class InternVideo2_CLIP_small(nn.Module):
         self.vision_align = nn.Sequential(
             nn.LayerNorm(self.config.model.vision_encoder.clip_embed_dim),
             nn.Linear(
-                self.config.model.vision_encoder.clip_embed_dim,
+                self.config.model.vision_encoder.clip_embed_dim, 
                 self.config.model.vision_encoder.align_dim
             ),
         )
@@ -43,8 +43,7 @@ class InternVideo2_CLIP_small(nn.Module):
         # adopt 1 / 100. as in ViCLIP
         self.temp = nn.parameter.Parameter(torch.ones([]) * config.model.temp)
         self.temp_min = config.model.temp_min
-        self.cache_txt = {}
-
+        
         # freeze model
         if self.config.model.freeze_vision:
             for name, p in self.vision_encoder.named_parameters():
@@ -72,13 +71,13 @@ class InternVideo2_CLIP_small(nn.Module):
                 transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
             ]
         )
-
+        
         # load pretrained models
         self.load_checkpoint(
-            config.model.vision_ckpt_path, config.model.text_ckpt_path,
+            config.model.vision_ckpt_path, config.model.text_ckpt_path, 
             config.model.get("extra_ckpt_path", None)
         )
-
+        
         # criterions
         self.clip_loss = VTC_VTM_Loss(False)
 
@@ -93,7 +92,7 @@ class InternVideo2_CLIP_small(nn.Module):
         )
 
         return ret
-
+    
     @torch.no_grad()
     def clip_contrastive_temperature(self):
         """Seems only used during pre-training"""
@@ -142,13 +141,6 @@ class InternVideo2_CLIP_small(nn.Module):
         vision_embeds = self.vision_align(vision_embeds)
         return vision_embeds
 
-    def get_vid_feat(self, frames: torch.Tensor):
-        with torch.no_grad():
-            vfeat = self.encode_vision(frames, test=True)
-            # vfeat = self.vision_proj(vfeat)
-            vfeat /= vfeat.norm(dim=-1, keepdim=True)
-        return vfeat
-
     def encode_text(self, text):
         """encode text.
         Args:
@@ -162,25 +154,6 @@ class InternVideo2_CLIP_small(nn.Module):
         """
         text_embeds = self.text_encoder(text)
         return text_embeds
-
-    def get_txt_feat(self,
-                     text: str):
-        """get the text features for the given text."""
-        if text in self.cache_txt:
-            return self.cache_txt[text]
-        t_original = text
-        with torch.no_grad():
-            text = self.tokenizer(
-                text,
-                padding="max_length",
-                truncation=True,
-                max_length=self.config.max_txt_l,
-                return_tensors="pt",).to(self.config.device)
-            tfeat = self.encode_text(text)
-            # tfeat = self.text_proj(tfeat)
-            tfeat /= tfeat.norm(dim=-1, keepdim=True)
-        self.cache_txt[t_original] = tfeat
-        return tfeat
 
     def build_vision_encoder(self):
         """build vision encoder
@@ -200,9 +173,9 @@ class InternVideo2_CLIP_small(nn.Module):
             init_values=self.config.model.vision_encoder.init_values,
             qk_normalization=self.config.model.vision_encoder.qk_normalization,
             depth=self.config.model.vision_encoder.depth,
-            use_flash_attn=False,
-            use_fused_rmsnorm=False,
-            use_fused_mlp=False,
+            use_flash_attn=self.config.model.vision_encoder.use_flash_attn,
+            use_fused_rmsnorm=self.config.model.vision_encoder.use_fused_rmsnorm,
+            use_fused_mlp=self.config.model.vision_encoder.use_fused_mlp,
             fused_mlp_heuristic=self.config.model.vision_encoder.fused_mlp_heuristic,
             attn_pool_num_heads=self.config.model.vision_encoder.attn_pool_num_heads,
             clip_embed_dim=self.config.model.vision_encoder.clip_embed_dim,
@@ -279,14 +252,6 @@ class InternVideo2_CLIP_small(nn.Module):
                 extra_ckpt = extra_ckpt['module']
             for k, v in extra_ckpt.items():
                 new_ckpt[k] = v
-
+        
         msg = self.load_state_dict(new_ckpt, strict=False)
         logger.info(msg)
-
-    def predict_label(self,
-                      vid_feat: torch.Tensor,
-                      txt_feat: torch.Tensor,
-                      top: int=5):
-        label_probs = (100.0 * vid_feat @ txt_feat.T)
-        top_probs, top_labels = label_probs.float().cpu().topk(top, dim=-1)
-        return top_probs, top_labels
