@@ -19,7 +19,7 @@ We give a short instructions of accessing and utilizing InternVideo2-stage2 in [
 
 ## Pre-Training
 
-We use [InternVL](https://github.com/OpenGVLab/InternVL/) pretrained model as the teacher by default
+We use [InternVL](https://github.com/OpenGVLab/InternVL/) pretrained model as the teacher by default.
 
 For training, you can simply run the pretraining scripts in `scripts/pretraining` as follows:
 ```shell
@@ -51,7 +51,7 @@ bash scripts/pretraining/clip/1B/run.sh
 :warning: **Notes:**
 1. Download [chinese_alpaca_lora_7b](https://github.com/OpenGVLab/InternVL/tree/main/clip_benchmark/clip_benchmark/models/internvl_c_pytorch/chinese_alpaca_lora_7b) and set the `llama_path` and `tokenizer_path` in `config.py`.
 2. Download [InternVideo2-stage2_1b-224p-f4.pt](https://huggingface.co/OpenGVLab/InternVideo2/blob/main/InternVideo2-stage2_1b-224p-f4.pt) and set `vision_ckpt_path` in `config.py`.
-3. Download [internvl_c_13b_224px](https://huggingface.co/OpenGVLab/InternVL/blob/main/internvl_c_13b_224px.pth) and set `text_ckpt_path` in `config.py`, you also need to set ,.
+3. Download [internvl_c_13b_224px](https://huggingface.co/OpenGVLab/InternVL/blob/main/internvl_c_13b_224px.pth) and set `text_ckpt_path` in `config.py`.
 
 :fire: **Updates:**
 - `2024/08/12`: We build smaller [VideoCLIP](./MODEL_ZOO.md) with MobileCLIP. Please download [InternVideo2-stage2-distil](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/tree/main/stage1) and set `vision_ckpt_path` in `config.py`, [mobileclip_blt](https://docs-assets.developer.apple.com/ml-research/datasets/mobileclip/mobileclip_blt.pt) and set `text_ckpt_path` in `config.py`, and finally, download [InternVideo2-stage2-clip](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/tree/main/clip) and set `extra_ckpt_path` in `config.py`.
