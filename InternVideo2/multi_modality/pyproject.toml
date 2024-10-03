@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "internvideo2_multi_modality"
+version = "0.1.0"
+description = "Multi-modality of InternVideo2"
+readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+
+dependencies = [
+    "apex>=0.9.10dev",
+    "av>=13.0.0",
+    "decord>=0.6.0",
+    "deepspeed>=0.15.1",
+    "einops>=0.8.0",
+    "flash_attn>=2.6.3",
+    "fvcore>=0.1.5.post20221221",
+    "imageio>=2.35.1",
+    "librosa>=0.10.2.post1",
+    "numpy>=1.26.4, <2.0.0",
+    "open-clip-torch>=2.26.1",
+    "opencv_python>=4.10.0.84",
+    "pandas>=2.2.3",
+    "peft>=0.13.0",
+    "Pillow>=10.4.0",
+    "psutil>=6.0.0",
+    "PyYAML>=6.0.2",
+    "scipy>=1.14.1",
+    "soundfile>=0.12.1",
+    "termcolor>=2.4.0",
+    "timm>=1.0.9",
+    "torch>=2.4.1",
+    "torchaudio>=2.4.1",
+    "torchvision>=0.19.1",
+    "tqdm>=4.66.5",
+    "transformers>=4.45.1",
+    "wandb>=0.18.3",
+]
+
+[project.optional-dependencies]
+# These dependencies require building a lot of CUDA files, so it's best to run with many pip workers:
+#   MAX_JOBS=24 pip install internvideo2_multi_modality[extra-git-deps]
+extra-git-deps = [
+    "dropout_layer_norm @ git+https://github.com/Dao-AILab/flash-attention.git@v2.6.3#subdirectory=csrc/layer_norm",
+    "fused_dense_lib @ git+https://github.com/Dao-AILab/flash-attention.git@v2.6.3#subdirectory=csrc/fused_dense_lib/"
+]
+
+# Map the current directory to the package name `internvideo2_multi_modality`
+[tool.setuptools]
+packages = [
+    "internvideo2_multi_modality",
+    "internvideo2_multi_modality.configs",
+    "internvideo2_multi_modality.models",
+    "internvideo2_multi_modality.models.backbones",
+    "internvideo2_multi_modality.models.backbones.beats",
+    "internvideo2_multi_modality.models.backbones.bert",
+    "internvideo2_multi_modality.models.backbones.internvideo2",
+    "internvideo2_multi_modality.models.backbones.internvideo2.mobileclip",
+    "internvideo2_multi_modality.models.backbones.internvideo2.mobileclip.configs",
+    "internvideo2_multi_modality.utils",
+]
+package-dir = { "internvideo2_multi_modality" = "." }
