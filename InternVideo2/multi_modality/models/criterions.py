@@ -5,9 +5,9 @@ import torch
 import torch.nn.functional as F
 from torch import nn
 
-from models.utils import allgather_wgrad
-from utils.distributed import get_rank, get_world_size
-from utils.easydict import EasyDict
+from .utils import allgather_wgrad
+from ..utils.distributed import get_rank, get_world_size
+from ..utils.easydict import EasyDict
 
 logger = logging.getLogger(__name__)
 
