@@ -5,6 +5,8 @@
 \[[中文版本](README_CN.md)\]
 
 # :fire: News
+- We release the search [queries](./queries.jsonl) used in YouTube to retrieve partial video sources.
+
 - We release the full version of the video annotation(230M video-text pairs) for InternVid ([OpenDataLab](https://opendatalab.com/shepshep/InternVidFull) | [HuggingFace](https://huggingface.co/datasets/OpenGVLab/InternVid-Full)). The corresponding clip-text similarities and aesthetics will be updated.
 
 - The implementation of ViCLIP is given [here](https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo1/Pretrain/ViCLIP).
