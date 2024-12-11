@@ -228,12 +228,14 @@ class InternVideo2_CLIP(nn.Module):
 
         # load text_encoder
         logger.info(f"Load text_encoder checkpoint from {text_ckpt_path}")
-        test_ckpt = torch.load(text_ckpt_path, map_location='cpu')
-        if 'module' in test_ckpt.keys():
-            test_ckpt = test_ckpt['module']
-        for k, v in test_ckpt.items():
+        text_ckpt = torch.load(text_ckpt_path, map_location='cpu')
+        if 'module' in text_ckpt.keys():
+            text_ckpt = text_ckpt['module']
+        for k, v in text_ckpt.items():
             if k.startswith('transformer.') or k == 'text_projection':
                 new_k = "text_encoder." + k
+                if ("q_proj" in k or "v_proj" in k) and "lora" not in k:
+                    new_k = new_k.replace("_proj.", "_proj.base_layer.")
             else:
                 continue
             new_ckpt[new_k] = v
