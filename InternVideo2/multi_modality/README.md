@@ -16,8 +16,8 @@ You can find all the models and the scripts in [MODEL_ZOO](./MODEL_ZOO.md).
 
 We primarily have two types of models:
 
-InternVideo2-1B-s2: This model utilizes BERT as the text encoder and supports two retrieval modes: similarity computation and video-text matching. It is limited to **English language support**.
-InternVideo2-1B-clip: This model employs a large language model (LLM) as the text encoder, supporting similarity-based retrieval. It accommodates **both English and Chinese languages**.
+- InternVideo2-1B-s2: This model utilizes BERT as the text encoder and supports two retrieval modes: similarity computation and video-text matching. It is limited to **English language support**.
+- InternVideo2-1B-clip: This model employs a large language model (LLM) as the text encoder, supporting similarity-based retrieval. It accommodates **both English and Chinese languages**.
 
 ## Demo of Using InternVideo2 in Your Work
 We give a short instructions of accessing and utilizing InternVideo2-stage2 in [demo_video_text_retrieval.ipynb](demo_video_text_retrieval.ipynb).
