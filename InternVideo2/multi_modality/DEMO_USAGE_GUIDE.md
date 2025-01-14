@@ -79,7 +79,7 @@ tokenizer = BertTokenizer.from_pretrained('your_model_path', local_files_only=Tr
 #tokenizer = BertTokenizer.from_pretrained(config.model.text_encoder.pretrained, local_files_only=Tru
 ```
 
-### (b) InternVideo2-Stage2_1B-224p-f4
+#### (b) InternVideo2-Stage2_1B-224p-f4
 
 Download link: [https://huggingface.co/OpenGVLab/InternVideo2-Stage2_1B-224p-f4](https://huggingface.co/OpenGVLab/InternVideo2-Stage2_1B-224p-f4)
 
@@ -96,6 +96,8 @@ model = dict(
         ...
     )
 )
+```
+
 ### InternVideo2-CLIP
 
 1. Download [chinese_alpaca_lora_7b](https://github.com/OpenGVLab/InternVL/tree/main/clip_benchmark/clip_benchmark/models/internvl_c_pytorch/chinese_alpaca_lora_7b) and set the `llama_path` and `tokenizer_path` in `config.py`.
@@ -104,12 +106,6 @@ model = dict(
 4. Download [Our lora weight](https://huggingface.co/OpenGVLab/InternVideo2-CLIP-1B-224p-f8) and set `pretrained_path` in `config.py`.
 
 
-```python
-MODEL_PATH = 'your_model_path'
-_MODELS = {
-    "internvl_c_13b_224px": os.path.join(MODEL_PATH, "internvl_c_13b_224px.pth"),
-}
-```
 
 ### 4. Run
 Output example of InternVideo2-Stage2-1B:
@@ -120,8 +116,6 @@ text: A playful dog and its owner wrestle in the snowy yard, chasing each other 
 text: A pet dog excitedly runs through the snowy yard, chasing a toy thrown by its owner. ~ prob: 0.0291
 text: A man in a gray hat and coat walks through the snowy yard, carefully navigating around the trees. ~ prob: 0.0006
 text: A person dressed in a blue jacket shovels the snow-covered pavement outside their house. ~ prob: 0.0003
-```
-
 ```
 
 
