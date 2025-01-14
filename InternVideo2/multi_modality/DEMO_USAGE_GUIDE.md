@@ -63,8 +63,8 @@ from utils.easydict import EasyDict
 ```
 
 ## 3. Model weights that need to be downloaded and configured:
-
-### (a) Bert-Large-Uncased
+### InternVideo2-Stage2
+#### (a) Bert-Large-Uncased (We only use its tokenizer)
 
 This weight is automatically downloaded by default. If it cannot be downloaded properly, you will need to manually download the weights and configure the path.
 
@@ -96,15 +96,13 @@ model = dict(
         ...
     )
 )
-```
+### InternVideo2-CLIP
 
-### (c) InternVL_c_13b_224px
+1. Download [chinese_alpaca_lora_7b](https://github.com/OpenGVLab/InternVL/tree/main/clip_benchmark/clip_benchmark/models/internvl_c_pytorch/chinese_alpaca_lora_7b) and set the `llama_path` and `tokenizer_path` in `config.py`.
+2. Download [InternVideo2-stage2_1b-224p-f4.pt](https://huggingface.co/OpenGVLab/InternVideo2/blob/main/InternVideo2-stage2_1b-224p-f4.pt) and set `vision_ckpt_path` in `config.py`.
+3. Download [internvl_c_13b_224px](https://huggingface.co/OpenGVLab/InternVL/blob/main/internvl_c_13b_224px.pth) and set `text_ckpt_path` in `config.py`.
+4. Download [Our lora weight](https://huggingface.co/OpenGVLab/InternVideo2-CLIP-1B-224p-f8) and set `pretrained_path` in `config.py`.
 
-Download link: [https://huggingface.co/OpenGVLab/InternVL/blob/main/internvl_c_13b_224px.pth](https://huggingface.co/OpenGVLab/InternVL/blob/main/internvl_c_13b_224px.pth)
-
-Download and modify the path in `multi_modality/models/backbones/internvideo2/internvl_clip_vision.py`. Replace `your_model_path` in the following with the path to the weights.
-
-⚠️Note: `your_model_path` should not include the file name, just the folder path.
 
 ```python
 MODEL_PATH = 'your_model_path'
@@ -114,7 +112,7 @@ _MODELS = {
 ```
 
 ### 4. Run
-Output:
+Output example of InternVideo2-Stage2-1B:
 
 ```plaintext
 text: A man in a gray sweater plays fetch with his dog in the snowy yard, throwing a toy and watching it run. ~ prob: 0.7927
@@ -123,4 +121,8 @@ text: A pet dog excitedly runs through the snowy yard, chasing a toy thrown by i
 text: A man in a gray hat and coat walks through the snowy yard, carefully navigating around the trees. ~ prob: 0.0006
 text: A person dressed in a blue jacket shovels the snow-covered pavement outside their house. ~ prob: 0.0003
 ```
+
+```
+
+
 
