@@ -10,6 +10,17 @@ Our experiments demonstrate substantial performance gains on mainstream short an
 - `2025/01/22`: The technical report of InternVideo2.5 is released.
 
 
+
+https://github.com/user-attachments/assets/1672a633-b28e-4223-acfe-bb1f9a9aa869
+
+https://github.com/user-attachments/assets/6658f32e-ee37-4368-a650-7a0710dcfdd1
+
+https://github.com/user-attachments/assets/db31645a-f405-4545-8367-150cda427981
+
+
+https://github.com/user-attachments/assets/4478e5df-cb8c-4ec2-989c-944a9d00b4b1
+
+
 ## Citation
 
 If this work is helpful for your research, please consider citing InternVideo2.5.
