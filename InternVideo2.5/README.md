@@ -25,6 +25,9 @@ https://github.com/user-attachments/assets/4478e5df-cb8c-4ec2-989c-944a9d00b4b1
 | InternVL2.5 + HiCo | [huggingface](https://huggingface.co/OpenGVLab/InternVL_2_5_HiCo_R16) | 74.0 | 71.4 | 59.6 | 71.5 | 64.9 | - | 16 | 8B |
 | InternVL2.5 + HiCo | [huggingface](https://huggingface.co/OpenGVLab/InternVL_2_5_HiCo_R64) | 74.4 | 71.9 | 62.7 | 72.6 | 66.4 | - | 64 | 8B |
 
+## Training
+
+See [Finetuning Code](https://github.com/OpenGVLab/VideoChat-Flash/tree/main/xtuner-train_internvideo2_5).
 ## Citation
 
 If this work is helpful for your research, please consider citing InternVideo2.5.
