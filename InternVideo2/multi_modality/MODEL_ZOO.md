@@ -21,9 +21,9 @@ For $\text{InternVideo2}\_{clip}$, we load those models of $\text{InternVideo2}_
 | $\text{InternVideo2}_{clip}$-L14 | IV-25.5M Distillation |  [:hugs: HF link](https://huggingface.co/OpenGVLab/InternVideo2_distillation_models/resolve/main/clip/L14/pytorch_model.bin) | [script](scripts/pretraining/clip/L14/run.sh) |
 
 
-### Zero-shot Evaluation
+## Zero-shot Evaluation
 
-## Zero-Shot Video-Text Retrieval
+### Zero-Shot Video-Text Retrieval
 
 | Model    | Dataset     |  T2V  | V2T  | Evaluation Script  |
 | -------- | ----------- | ------ | ------- | ------- |
@@ -75,7 +75,7 @@ For $\text{InternVideo2}\_{clip}$, we load those models of $\text{InternVideo2}_
 |                               | VATEX_ch  | 1.6 | 9.8 | [script](scripts/evaluation/clip/zero_shot/L14/eval_vatex_ch.sh) |
 
 
-## Zero-Shot Action Recognition
+### Zero-Shot Action Recognition
 
 | Model    | Dataset     |  top-1  | AVG  | Script  |
 | -------- | ----------- | ------ | ------- | ------- |
