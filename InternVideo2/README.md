@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/c62840c4-9f4f-48bf-b31c-2896a5e6646e)![image](https://github.com/user-attachments/assets/282d3a09-fc80-47b4-a8f3-fe688e3a0a96)# InternVideo2 \[[Paper\]](https://arxiv.org/abs/2403.15377)
+# InternVideo2 \[[Paper\]](https://arxiv.org/abs/2403.15377)
 
 <!-- [中文 README](README_cn.md) -->
 
