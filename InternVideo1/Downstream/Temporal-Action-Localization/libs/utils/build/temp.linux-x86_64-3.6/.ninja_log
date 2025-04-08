@@ -1,6 +1,0 @@
-# ninja log v5
-2	45777	1652892450000000000	/mnt/cache/liuyi1.vendor/code/actionformer/libs/utils/build/temp.linux-x86_64-3.6/csrc/nms_cpu.o	4893a0e4d1d5ce29
-4	41020	1658216087000000000	/mnt/cache/liuyi/code/af_base/libs/utils/build/temp.linux-x86_64-3.6/csrc/nms_cpu.o	a76e449256e9b2bc
-346	44757	1658307921000000000	/mnt/cache/liuyi/code/af_base/libs/utils/build/temp.linux-x86_64-3.6/csrc/nms_cpu.o	9614a295e4a5dc48
-207	31780	1658319734000000000	/mnt/cache/liuyi/code/af_base/libs/utils/build/temp.linux-x86_64-3.6/csrc/nms_cpu.o	cbd2a8e06e6c1852
-47	38716	1658321354000000000	/mnt/cache/liuyi/code/af_base/libs/utils/build/temp.linux-x86_64-3.6/csrc/nms_cpu.o	fb767b58cb7282e7

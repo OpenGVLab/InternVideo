@@ -2,6 +2,7 @@ import logging
 
 import torch
 from torch import nn
+import pickle
 import numpy as np
 from PIL import Image
 import torchvision.transforms as transforms
@@ -29,7 +30,7 @@ class InternVideo2_CLIP(nn.Module):
         # adopt 1 / 100. as in ViCLIP
         self.temp = nn.parameter.Parameter(torch.ones([]) * config.model.temp)
         self.temp_min = config.model.temp_min
-        
+
         # freeze model
         if self.config.model.freeze_vision:
             for name, p in self.vision_encoder.named_parameters():
@@ -59,13 +60,13 @@ class InternVideo2_CLIP(nn.Module):
                 transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225)),
             ]
         )
-        
+
         # load pretrained models
         self.load_checkpoint(
-            config.model.vision_ckpt_path, config.model.text_ckpt_path, 
+            config.model.vision_ckpt_path, config.model.text_ckpt_path,
             config.model.get("extra_ckpt_path", None)
         )
-        
+
         # criterions
         self.clip_loss = VTC_VTM_Loss(False)
 
@@ -80,7 +81,7 @@ class InternVideo2_CLIP(nn.Module):
         )
 
         return ret
-    
+
     @torch.no_grad()
     def clip_contrastive_temperature(self):
         """Seems only used during pre-training"""
@@ -180,12 +181,16 @@ class InternVideo2_CLIP(nn.Module):
         Returns: nn.Module. The text encoder
 
         """
+        print("Building Text Encoder")
         text_encoder = LLaMA(
             use_flash_attn=self.config.model.text_encoder.use_flash_attn,
             transformer_width=self.config.model.text_encoder.transformer_width,
             llama_path=self.config.model.text_encoder.llama_path,
             use_lora=self.config.model.text_encoder.use_lora,
         )
+        with open('built_llama.pkl', 'wb') as file:
+            pickle.dump(text_encoder, file)
+        print("Done Building Text Encoder")
 
         return text_encoder
 
@@ -198,6 +203,7 @@ class InternVideo2_CLIP(nn.Module):
         # load vision_encoder
         logger.info(f"Load vision_encoder checkpoint from {vision_ckpt_path}")
         vision_ckpt = torch.load(vision_ckpt_path, map_location='cpu')
+        print("Vision Encoder Loaded")
         if 'module' in vision_ckpt.keys():
             vision_ckpt = vision_ckpt['module']
         elif 'model' in vision_ckpt.keys():
@@ -229,6 +235,7 @@ class InternVideo2_CLIP(nn.Module):
         # load text_encoder
         logger.info(f"Load text_encoder checkpoint from {text_ckpt_path}")
         test_ckpt = torch.load(text_ckpt_path, map_location='cpu')
+        print("Text Encoder Loaded")
         if 'module' in test_ckpt.keys():
             test_ckpt = test_ckpt['module']
         for k, v in test_ckpt.items():
@@ -241,12 +248,13 @@ class InternVideo2_CLIP(nn.Module):
         # load extra checkpoint
         # often when post-pretrain after previous pretraining, thus the keys are same
         if extra_ckpt_path is not None:
+            print("Loading Extra CKPT")
             logger.info(f"Load extra checkpoint from {extra_ckpt_path}")
             extra_ckpt = torch.load(extra_ckpt_path, map_location='cpu')
             if 'module' in extra_ckpt.keys():
                 extra_ckpt = extra_ckpt['module']
             for k, v in extra_ckpt.items():
                 new_ckpt[k] = v
-        
+
         msg = self.load_state_dict(new_ckpt, strict=False)
         logger.info(msg)

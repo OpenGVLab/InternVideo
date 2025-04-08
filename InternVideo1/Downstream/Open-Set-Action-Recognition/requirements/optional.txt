@@ -1,6 +1,0 @@
-av
-decord >= 0.4.1
-moviepy
-onnx
-onnxruntime
-PyTurboJPEG

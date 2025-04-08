@@ -1,1 +1,0 @@
-python -u ./train_eval.py ./configs/hacs.yaml --output hacs_mae_h 2>&1 | tee hacs_mae_h.log

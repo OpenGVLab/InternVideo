@@ -1,1 +1,0 @@
-from .action_detector import build_detection_model

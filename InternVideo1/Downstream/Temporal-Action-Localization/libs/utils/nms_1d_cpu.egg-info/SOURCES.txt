@@ -1,6 +1,0 @@
-setup.py
-./csrc/nms_cpu.cpp
-nms_1d_cpu.egg-info/PKG-INFO
-nms_1d_cpu.egg-info/SOURCES.txt
-nms_1d_cpu.egg-info/dependency_links.txt
-nms_1d_cpu.egg-info/top_level.txt

@@ -18,8 +18,8 @@ logger = logging.getLogger(__name__)
 class ViCLIP(nn.Module):
     """docstring for ViCLIP"""
 
-    def __init__(self,  
-                 tokenizer=None, 
+    def __init__(self,
+                 tokenizer=None,
                  size='l',
                  pretrain=os.path.join(os.path.dirname(os.path.abspath(__file__)), "ViClip-InternVid-10M-FLT.pth"),
                  freeze_text=True):
@@ -36,7 +36,7 @@ class ViCLIP(nn.Module):
             self.vision_encoder_name = 'vit_b16'
         else:
             raise NotImplementedError(f"Size {size} not implemented")
-    
+
         self.vision_encoder_pretrained = False
         self.inputs_image_res = 224
         self.vision_encoder_kernel_size = 1
@@ -46,22 +46,22 @@ class ViCLIP(nn.Module):
         self.vision_encoder_checkpoint_num = 24
         self.is_pretrain = pretrain
         self.vision_width = 1024
-        self.text_width = 768 
-        self.embed_dim = 768 
+        self.text_width = 768
+        self.embed_dim = 768
         self.masking_prob = 0.9
-        
+
         if size.lower() == 'l':
             self.text_encoder_name = 'vit_l14'
         elif size.lower() == 'b':
             self.text_encoder_name = 'vit_b16'
         else:
             raise NotImplementedError(f"Size {size} not implemented")
-        
+
         self.text_encoder_pretrained = False#'bert-base-uncased'
         self.text_encoder_d_model = 768
 
         self.text_encoder_vocab_size = 49408
-        
+
         # create modules.
         self.vision_encoder = self.build_vision_encoder()
         self.text_encoder = self.build_text_encoder()
@@ -73,7 +73,7 @@ class ViCLIP(nn.Module):
             logger.info(f"Load pretrained weights from {pretrain}")
             state_dict = torch.load(pretrain, map_location='cpu')['model']
             self.load_state_dict(state_dict)
-        
+
         # Freeze weights
         if freeze_text:
             self.freeze_text()
@@ -202,7 +202,7 @@ class ViCLIP(nn.Module):
             )
         else:
             raise NotImplementedError(f"Not implemented: {encoder_name}")
-            
+
         return vision_encoder
 
     def build_text_encoder(self):
@@ -211,7 +211,7 @@ class ViCLIP(nn.Module):
 
         """
         encoder_name = self.text_encoder_name
-        
+
         if encoder_name == "vit_l14":
             text_encoder = clip_text_l14(
                 pretrained=self.text_encoder_pretrained,
@@ -235,7 +235,7 @@ class ViCLIP(nn.Module):
         """get text encoder, used for text and cross-modal encoding"""
         encoder = self.text_encoder
         return encoder.bert if hasattr(encoder, "bert") else encoder
-    
+
     def get_text_features(self, input_text, tokenizer, text_feature_dict={}):
         if input_text in text_feature_dict:
             return text_feature_dict[input_text]
@@ -243,28 +243,28 @@ class ViCLIP(nn.Module):
         with torch.no_grad():
             # text_token = tokenizer.encode(text_template).cuda()
             text_features = self.encode_text(text_template).float()
-            text_features /= text_features.norm(dim=-1, keepdim=True)      
+            text_features /= text_features.norm(dim=-1, keepdim=True)
             text_feature_dict[input_text] = text_features
         return text_features
 
     def get_vid_features(self, input_frames):
         with torch.no_grad():
             clip_feat = self.encode_vision(input_frames,test=True).float()
-            clip_feat /= clip_feat.norm(dim=-1, keepdim=True)    
+            clip_feat /= clip_feat.norm(dim=-1, keepdim=True)
         return clip_feat
 
     def get_predict_label(self, clip_feature, text_feats_tensor, top=5):
-        clip_feature = 100.0 * clip_feature
-        clip_feature /= clip_feature.norm(dim=-1, keepdim=True)
-        text_feats_tensor /= text_feats_tensor.norm(dim=-1, keepdim=True)
-    
-        label_probs = (clip_feature @ text_feats_tensor.T)
-    
+        # clip_feature = 100.0 * clip_feature
+        # clip_feature /= clip_feature.norm(dim=-1, keepdim=True)
+        # text_feats_tensor /= text_feats_tensor.norm(dim=-1, keepdim=True)
+
+        label_probs = (100.0 * clip_feature @ text_feats_tensor.T)
+
         top_probs, top_labels = label_probs.cpu().topk(top, dim=-1)
-        
+
         return top_probs, top_labels
 
 
-    
+
 if __name__ =="__main__":
     tokenizer = _Tokenizer()

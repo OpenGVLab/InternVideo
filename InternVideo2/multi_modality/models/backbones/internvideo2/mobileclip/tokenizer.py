@@ -6,6 +6,7 @@ from typing import Dict
 
 import open_clip
 from torch import Tensor, nn
+import torch
 
 
 class ClipTokenizer(nn.Module):

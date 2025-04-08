@@ -159,3 +159,5 @@ work_dir/
 batchscript-*
 phoenix-slurm-*
 wandb
+InternVideo2/multi_modality/model_b14/
+InternVideo2/multi_modality/model_l14/
