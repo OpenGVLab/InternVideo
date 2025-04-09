@@ -42,7 +42,7 @@ This repo gives the code and models of '[InternVideo2: Scaling Video Foundation 
 ## Updates
 - `2025/02/25`: [InternVideo2-Stage2-6B](https://huggingface.co/OpenGVLab/InternVideo2-Stage2_6B-224p-f4) is released, try it!
 - `2024/08/21`: [InternVideo2-Stage3-InternLM](https://huggingface.co/OpenGVLab/InternVideo2_Chat_8B_InternLM2_5) is released. Have a longer context window.
-- `2024/08/12`: We provide smaller models, [InternVideo2-S/B/L](./single_modality/MODEL_ZOO.md), which are distilled from InternVideo2-1B. We also build smaller [VideoCLIP](./multi_modality/MODEL_ZOO.md) with MobileCLIP.
+- `2024/08/12`: We provide smaller models, [InternVideo2-S/B/L](./single_modality/MODEL_ZOO.md), which are distilled from InternVideo2-1B. We also build smaller [VideoCLIP](./multi_modality/MODEL_ZOO.md) with MobileCLIP. Training code is [here](https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo2/single_modality#distillation).
 - `2024/08/05`: [InternVideo2-Stage3-8B](https://huggingface.co/OpenGVLab/InternVideo2-Chat-8B) and [InternVideo2-Stage3-8B-HD](https://huggingface.co/OpenGVLab/InternVideo2_chat_8B_HD) are released. 8B indicates the use of InternVideo2-1B and the 7B LLM.
 - `2024/07/10`: The self-annotated audio-visual-speech video-text data and audio-visual video-text data from stage 2 are now available [here](https://huggingface.co/datasets/OpenGVLab/InternVideo2_Vid_Text). The training videos from stage 1 can be accessed [here](https://drive.google.com/file/d/1wL7gQwrTEE0CVMz0-8avYxLKY1IabVKH/view).
 - `2024/04/15`: Update the code and scripts for InternVideo2 CLIP.
