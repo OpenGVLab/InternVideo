@@ -38,7 +38,7 @@ class InternVideo2_CLIP_small(nn.Module):
                 self.config.model.vision_encoder.clip_embed_dim,
                 self.config.model.vision_encoder.align_dim
             ),
-        ).to(torch.device("mps"))
+        )
         self.text_encoder = self.build_text_encoder(cfg=text_encoder_cfg['text_cfg'], projection_dim=text_encoder_cfg["embed_dim"])
         # adopt 1 / 100. as in ViCLIP
         self.temp = nn.parameter.Parameter(torch.ones([]) * config.model.temp)
@@ -200,9 +200,9 @@ class InternVideo2_CLIP_small(nn.Module):
             init_values=self.config.model.vision_encoder.init_values,
             qk_normalization=self.config.model.vision_encoder.qk_normalization,
             depth=self.config.model.vision_encoder.depth,
-            use_flash_attn=False,
-            use_fused_rmsnorm=False,
-            use_fused_mlp=False,
+            use_flash_attn=False, # ENABLE FOR INCREASED PERFORMANCE
+            use_fused_rmsnorm=False, # ENABLE FOR INCREASED PERFORMANCE
+            use_fused_mlp=False, # ENABLE FOR INCREASED PERFORMANCE
             fused_mlp_heuristic=self.config.model.vision_encoder.fused_mlp_heuristic,
             attn_pool_num_heads=self.config.model.vision_encoder.attn_pool_num_heads,
             clip_embed_dim=self.config.model.vision_encoder.clip_embed_dim,
@@ -213,14 +213,14 @@ class InternVideo2_CLIP_small(nn.Module):
             use_checkpoint=self.config.model.vision_encoder.use_checkpoint,
             checkpoint_num=self.config.model.vision_encoder.checkpoint_num,
         )
-        return vision_encoder.to(torch.device('mps'))
+        return vision_encoder
 
     def build_text_encoder(self, cfg, projection_dim):
         """build text_encoder and possiblly video-to-text multimodal fusion encoder.
         Returns: nn.Module. The text encoder
 
         """
-        text_encoder = TextTransformer(cfg, projection_dim).to(torch.device("mps"))
+        text_encoder = TextTransformer(cfg, projection_dim)
 
         return text_encoder
 
