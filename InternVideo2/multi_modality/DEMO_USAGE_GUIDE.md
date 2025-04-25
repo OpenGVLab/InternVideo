@@ -81,7 +81,7 @@ tokenizer = BertTokenizer.from_pretrained('your_model_path', local_files_only=Tr
 
 #### (b) InternVideo2-Stage2_1B-224p-f4
 
-Download link: [https://huggingface.co/OpenGVLab/InternVideo2-Stage2_1B-224p-f4](https://huggingface.co/OpenGVLab/InternVideo2-Stage2_1B-224p-f4)
+Download link: [https://huggingface.co/OpenGVLab/InternVideo2-Stage2_1B-224p-f4]()
 
 In the `multi_modality/demo/internvideo2_stage2_config.py` file, configure the InternVideo2 weight. Replace `your_model_path` in the following with the path to the weights.
 
@@ -98,6 +98,7 @@ model = dict(
 )
 ```
 
+**You should assign the path of ckpt (InternVideo2-stage2_1b-224p-f4.pt) to `pretrained_path` in internvideo2_stage2_config.py.**
 ### InternVideo2-CLIP
 
 1. Download [chinese_alpaca_lora_7b](https://github.com/OpenGVLab/InternVL/tree/main/clip_benchmark/clip_benchmark/models/internvl_c_pytorch/chinese_alpaca_lora_7b) and set the `llama_path` and `tokenizer_path` in `config.py`.
