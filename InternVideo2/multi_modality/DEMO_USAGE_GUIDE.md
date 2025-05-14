@@ -1,4 +1,4 @@
-# DEMO_USAGE_GUIDE
+# Demo Usage Guide
 
 ## 1. Environment Configuration
 

@@ -23,7 +23,7 @@ bash ./scripts/pretraining/1B_pt.sh
 
 :warning: **Notes:**
 1. Chage `DATA_PATH` to your data path before running the scripts.
-2. `--sampling_rate` is set to 1 for **sprase sampling**.
+2. `--sampling_rate` is set to 1 for **sparse sampling**.
 3. The latest checkpoint will be automatically saved while training, thus we use a large `--save_ckpt_freq`.
 4. For InternVideo2-1B and 6B, we use InternVL-C-13B and VideoMAEv2-g.
 
@@ -36,8 +36,8 @@ bash ./scripts/finetuning/full_tuning/k400/1B_ft_k710_ft_k400_f8.sh
 ```
 
 :warning: **Notes:**
-1. Chage `DATA_PATH` And `PREFIX` to your data path before running the scripts.
-2. Chage `MODEL_PATH` to your model path.
+1. Change `DATA_PATH` and `PREFIX` to your data path before running the scripts.
+2. Change `MODEL_PATH` to your model path.
 3. Set `--use_checkpoint` and `--checkpoint_num` to save GPU memory.
 4. The best checkpoint will be automatically evaluated with `--test_best`.
 5. Set `--test_num_segment` and `--test_num_crop` for different evaluation strategies.
@@ -54,7 +54,7 @@ bash ./scripts/finetuning/full_tuning/k400/1B_ft_k710_ft_k400_f8.sh
 **We adopt the similar settings as pretraining, but use `MLP_Decoder` for better alignment.**
 
 :warning: **Notes:**
-1. Chage `DATA_PATH` to your data path before running the scripts.
-2. `--sampling_rate` is set to 1 for **sprase sampling**.
+1. Change `DATA_PATH` to your data path before running the scripts.
+2. `--sampling_rate` is set to 1 for **sparse sampling**.
 3. The latest checkpoint will be automatically saved while training, thus we use a large `--save_ckpt_freq`.
 4. For all models, we use InternVideo2-1B as teacher.
