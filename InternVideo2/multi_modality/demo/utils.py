@@ -329,6 +329,6 @@ class InternVideo2_Stage2(nn.Module):
                       vid_feat: torch.Tensor,
                       txt_feat: torch.Tensor,
                       top: int=5):
-        label_probs = (100.0 * vid_feat @ txt_feat.T)
+        label_probs = (100.0 * vid_feat @ txt_feat.T).softmax(dim=-1)
         top_probs, top_labels = label_probs.float().cpu().topk(top, dim=-1)
         return top_probs, top_labels
