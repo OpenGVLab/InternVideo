@@ -266,6 +266,13 @@ class InternVideo2_Stage2(nn.Module):
                     image, mask, use_image)
             return vision_embeds, pooled_vision_embeds, student_output, student_output_final, targets_clip_middle_vis, targets_clip_final_vis
 
+    def get_vid_feat(self, frames: torch.Tensor):
+        with torch.no_grad():
+            vfeat = self.encode_vision(frames, test=True)
+            # vfeat = self.vision_proj(vfeat)
+            print(vfeat)
+            vfeat /= vfeat.norm(dim=-1, keepdim=True)
+        return vfeat
     def encode_text(self, text):
         """encode text.
         Args:
@@ -287,6 +294,25 @@ class InternVideo2_Stage2(nn.Module):
         text_embeds = text_output.last_hidden_state
         pooled_text_embeds = text_embeds[:, 0]
         return text_embeds, pooled_text_embeds
+
+    def get_txt_feat(self,
+                     text: str):
+        """get the text features for the given text."""
+        if text in self.cache_txt:
+            return self.cache_txt[text]
+        t_original = text
+        with torch.no_grad():
+            text = self.tokenizer(
+                text,
+                padding="max_length",
+                truncation=True,
+                max_length=self.config.max_txt_l,
+                return_tensors="pt",).to(self.config.device)
+            tfeat = self.encode_text(text)
+            # tfeat = self.text_proj(tfeat)
+            tfeat /= tfeat.norm(dim=-1, keepdim=True)
+        self.cache_txt[t_original] = tfeat
+        return tfeat
 
     @torch.no_grad()
     def clip_contrastive_temperature(self, min_val=0.001, max_val=0.5):

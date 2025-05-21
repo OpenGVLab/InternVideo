@@ -40,6 +40,7 @@ model = dict(
         # backbone
         name="pretrain_internvideo2_1b_patch14_224",
         img_size=224, 
+        in_chans=3,
         num_frames="${num_frames}",
         tubelet_size=1,
         patch_size=14, 

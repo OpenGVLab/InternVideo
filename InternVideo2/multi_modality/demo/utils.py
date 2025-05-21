@@ -106,7 +106,7 @@ def setup_internvideo2(config: dict):
         torch.set_float32_matmul_precision('high')
         model = torch.compile(model)
 
-    model = model.to(torch.device(config.device))
+    model = model.to_empty(device=config.device)
     model_without_ddp = model
 
     if (config.pretrained_path.strip() and (os.path.isfile(config.pretrained_path)) or "s3://" in config.pretrained_path):
