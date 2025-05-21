@@ -76,6 +76,23 @@ model = dict(
     find_unused_parameters=False
 )
 
+criterion = dict(
+    clip_loss_ratio=[
+      1.0,
+      1.0
+    ],
+    distill_final_features=True,
+    loss_weight=dict(
+      mlm= 1.0,
+      mvm= 0.0,
+      uta= 0.0,
+      vtc= 1.0,
+      vtm= 1.0
+    ),
+    mlm_masking_prob= 0.5,
+    vtm_hard_neg= True,
+)
+
 evaluate = True
 deep_fusion = False
 evaluation = dict(
