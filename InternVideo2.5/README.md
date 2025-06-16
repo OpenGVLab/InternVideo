@@ -7,6 +7,7 @@ This repo will give the code and models of '[InternVideo2.5: Empowering Video ML
 Our experiments demonstrate substantial performance gains on mainstream short and long video understanding benchmarks. InternVideo2.5 can memorize video inputs at least 6x longer than the original model and exhibits specialized vision capabilities like object tracking and segmentation. This work highlights the importance of rich multimodal context (length and detail) for empowering MLLM focus and memory, offering valuable insights for future video MLLM research.
 
 ## Updates
+- `2025/06/11`: [InternVideo2.5 (InternVL2.5 + LRC)](https://huggingface.co/OpenGVLab/InternVideo2_5_Chat_8B) achieves an accuracy of 53.2\% on [VideoEval-Pro (MCQ)](https://huggingface.co/spaces/TIGER-Lab/VideoEval-Pro) (Thanks for their benchmark), one of the top-performing open-sourced MLLMs in 7-8B parameter size.
 - `2025/01/23`: [InternVideo2.5 (InternVL2.5 + LRC)](https://huggingface.co/OpenGVLab/InternVideo2_5_Chat_8B) and [InternVL2.5-HiCo](https://huggingface.co/OpenGVLab/InternVL_2_5_HiCo_R16) have been officially released on HuggingFace.
 - `2025/01/22`: The [technical report](https://arxiv.org/pdf/2501.12386) of InternVideo2.5 is released.
 
