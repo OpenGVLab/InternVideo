@@ -14,11 +14,11 @@ from .mask import (
 logger = logging.getLogger(__name__)
 
 
-class InternVideo2_Stage2(nn.Module):
-    """docstring for InternVideo2_Stage2"""
+class InternVideo2_Stage2_visual(nn.Module):
+    """docstring for InternVideo2_Stage2_visual"""
 
     def __init__(self, config, tokenizer, is_pretrain=True):
-        super(InternVideo2_Stage2, self).__init__()
+        super(InternVideo2_Stage2_visual, self).__init__()
 
         self.config = config
         self.tokenizer = tokenizer

@@ -43,7 +43,7 @@ inputs = dict(
 # ========================= model ==========================
 text_enc = "bert_large"
 model = dict(
-    model_cls="InternVideo2_Stage2_audio",
+    model_cls="InternVideo2_Stage2_audiovisual",
     audio_encoder=dict(
         name='beats',
         d_model=768,
