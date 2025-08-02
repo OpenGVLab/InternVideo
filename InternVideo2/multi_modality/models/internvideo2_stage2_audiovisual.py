@@ -763,14 +763,10 @@ class InternVideo2_Stage2_audiovisual(nn.Module):
         """
         encoder_name = self.config.model.vision_encoder.name
         logger.info(f"Build vision_encoder: {encoder_name}")
-        if encoder_name == 'pretrain_umt2_giant_patch14_224':
-            vision_encoder = pretrain_umt2_giant_patch14_224(self.config.model)
-        elif encoder_name == 'pretrain_umt2_giant_patch14_224_clean':
-            vision_encoder = pretrain_umt2_giant_patch14_224_clean(self.config.model)
-        elif encoder_name == 'pretrain_umt2_6b_patch14_224':
-            vision_encoder = pretrain_umt2_6b_patch14_224(self.config.model)
-        elif encoder_name == 'pretrain_umt2_6b_patch14_224_clean':
-            vision_encoder = pretrain_umt2_6b_patch14_224_clean(self.config.model)
+        if encoder_name == 'pretrain_internvideo2_1b_patch14_224':
+            vision_encoder = pretrain_internvideo2_1b_patch14_224(self.config.model)
+        elif encoder_name == 'pretrain_internvideo2_6b_patch14_224':
+            vision_encoder = pretrain_internvideo2_6b_patch14_224(self.config.model)
         else:
             raise ValueError(f"Not implemented: {encoder_name}")
 
