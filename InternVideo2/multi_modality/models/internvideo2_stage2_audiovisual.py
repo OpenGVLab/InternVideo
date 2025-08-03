@@ -793,11 +793,9 @@ class InternVideo2_Stage2_audiovisual(nn.Module):
         self.video_mask_type = self.config.model.vision_encoder.video_mask_type
         self.video_window_size = (num_frames // tublet_size, img_size // patch_size, img_size // patch_size)
         self.video_mask_ratio = self.config.model.vision_encoder.video_mask_ratio
-        self.video_double_mask_ratio = self.config.model.vision_encoder.video_double_mask_ratio
         self.image_mask_type = self.config.model.vision_encoder.image_mask_type
         self.image_window_size = (1, img_size // patch_size, img_size // patch_size)
         self.image_mask_ratio = self.config.model.vision_encoder.image_mask_ratio
-        self.image_double_mask_ratio = self.config.model.vision_encoder.image_double_mask_ratio
         
         return vision_encoder
 
