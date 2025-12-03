@@ -16,6 +16,7 @@ This repo contains InternVideo series and related works in video foundation mode
 - [InternVid](Data/InternVid): a large-scale video-text dataset for multimodal understanding and generation
 
 ## Updates
+- `2025.12`: The [technical report](https://arxiv.org/pdf/2512.01342) and pretrained model weights of [InternVideo-Next](InternVideo-Next) are released.
 - `2025.01`: [InternVideo2.5](InternVideo2.5) is now released! Check out the [technical report](https://arxiv.org/pdf/2501.12386) for detailed insights, and access the [model](https://huggingface.co/OpenGVLab/InternVL_2_5_HiCo_R16) on HuggingFace.
 - `2024.08.12`: We provide smaller models, [InternVideo2-S/B/L](./InternVideo2/single_modality/MODEL_ZOO.md), which are distilled from InternVideo2-1B. We also build smaller [VideoCLIP](./InternVideo2/multi_modality/MODEL_ZOO.md) with MobileCLIP.
 - `2024.08`: [InternVideo2-Stage3-8B](https://huggingface.co/OpenGVLab/InternVideo2-Chat-8B) and [InternVideo2-Stage3-8B-HD](https://huggingface.co/OpenGVLab/InternVideo2_chat_8B_HD) are released. 8B indicates the use of InternVideo2-1B and the 7B LLM.
