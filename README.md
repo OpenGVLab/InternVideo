@@ -13,6 +13,7 @@ This repo contains InternVideo series and related works in video foundation mode
 - [InternVideo](InternVideo1): general video foundation models via generative and discriminative learning
 - [InternVideo2](InternVideo2): scaling video foundation models for multimodal video understanding
 - [InternVideo2.5](InternVideo2.5): empowering video mllms with long and rich context modeling
+- [InternVideo-Next](InternVideo-Next): general video foundation models for genuine world understanding
 - [InternVid](Data/InternVid): a large-scale video-text dataset for multimodal understanding and generation
 
 ## Updates
