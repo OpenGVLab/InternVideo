@@ -1,6 +1,6 @@
 This repo gives the code and models of '[InternVideo-Next: Towards General Video Foundation Models without Video-Text Supervision](https://arxiv.org/abs/2512.01342)'.
 
-- `2025/12/01`: The technical report of InternVideo-Next and the pretrained models are released.
+- `2025/12/01`: The technical report of InternVideo-Next and the pretrained models are released. See [Huggingface Collection](https://huggingface.co/collections/OpenGVLab/internvideo-next) for more details.
 
 ## Citation
 
