@@ -388,7 +388,8 @@ class VidTxtRetEvalDataset(ImgTxtRetEvalDataset):
 def preprocess_para_retrieval_data(anno_list):
     processed_anno_list = []
     for d in anno_list:
-        d["caption"] = " ".join(d.pop("caption"))
+        if isinstance(d['caption'], list):
+            d["caption"] = " ".join(d.pop("caption"))
         processed_anno_list.append(d)
     return processed_anno_list
 
