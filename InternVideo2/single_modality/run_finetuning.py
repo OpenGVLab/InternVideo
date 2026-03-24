@@ -1,6 +1,7 @@
 import argparse
 import datetime
 import numpy as np
+import random
 import time
 import torch
 import torch.backends.cudnn as cudnn
@@ -23,6 +24,8 @@ from utils import multiple_samples_collate
 import utils
 from models import *
 from models.internvl_clip_vision import inflate_weight
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def get_args():
@@ -226,6 +229,8 @@ def get_args():
     parser.add_argument('--bf16', default=False, action='store_true')
     parser.add_argument('--zero_stage', default=0, type=int,
                         help='ZeRO optimizer stage (default: 0)')
+    parser.add_argument('--deterministic', action='store_true', default=False,
+                        help='Enable deterministic mode (cudnn.benchmark=False, cudnn.deterministic=True)')
 
     known_args, _ = parser.parse_known_args()
 
@@ -235,7 +240,7 @@ def get_args():
             from deepspeed import DeepSpeedConfig
             parser = deepspeed.add_config_arguments(parser)
             ds_init = deepspeed.initialize
-        except:
+        except ImportError:
             print("Please 'pip install deepspeed'")
             exit(0)
     else:
@@ -258,9 +263,13 @@ def main(args, ds_init):
     seed = args.seed + utils.get_rank()
     torch.manual_seed(seed)
     np.random.seed(seed)
-    # random.seed(seed)
+    random.seed(seed)
 
-    cudnn.benchmark = True
+    if getattr(args, 'deterministic', False):
+        cudnn.benchmark = False
+        cudnn.deterministic = True
+    else:
+        cudnn.benchmark = True
 
     dataset_train, args.nb_classes = build_dataset(is_train=True, test_mode=False, args=args)
     if args.disable_eval_during_finetuning:
@@ -392,7 +401,7 @@ def main(args, ds_init):
                     checkpoint_model['head.bias'] = checkpoint_model['head.bias'][:args.nb_classes]
                 elif args.nb_classes in [600, 700]:
                     # download from https://drive.google.com/drive/folders/17cJd2qopv-pEG8NSghPFjZo1UUZ6NLVm
-                    map_path = f'./k710/label_mixto{args.nb_classes}.json'
+                    map_path = os.path.join(_SCRIPT_DIR, 'k710', f'label_mixto{args.nb_classes}.json')
                     print(f'Load label map from {map_path}')
                     with open(map_path) as f:
                         label_map = json.load(f)
@@ -641,12 +650,6 @@ def main(args, ds_init):
             bf16=args.bf16
         )
         if args.output_dir and args.save_ckpt:
-            # if (epoch + 1) % args.save_ckpt_freq == 0 or epoch + 1 == args.epochs:
-            #     utils.save_model(
-            #         args=args, model=model, model_without_ddp=model_without_ddp, optimizer=optimizer,
-            #         loss_scaler=loss_scaler, epoch=epoch, model_ema=model_ema,
-            #         ceph_args=ceph_args,
-            #      )
             utils.save_model(
                 args=args, model=model, model_without_ddp=model_without_ddp, optimizer=optimizer,
                 loss_scaler=loss_scaler, epoch=epoch, model_name='latest', model_ema=model_ema,

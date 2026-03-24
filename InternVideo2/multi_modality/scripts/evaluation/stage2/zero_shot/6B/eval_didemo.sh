@@ -37,4 +37,4 @@ torchrun \
     $(dirname $0)/config_didemo.py \
     output_dir ${OUTPUT_DIR} \
     evaluate True \
-    pretrained_path 'your_model_path/1B_stage2_pt.pth'
+    pretrained_path "${INTERNVIDEO2_MODEL_PATH:-your_model_path}/1B_stage2_pt.pth"

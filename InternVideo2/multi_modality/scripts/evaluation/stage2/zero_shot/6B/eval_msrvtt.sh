@@ -37,4 +37,4 @@ torchrun \
     $(dirname $0)/config_msrvtt.py \
     output_dir ${OUTPUT_DIR} \
     evaluate True \
-    pretrained_path 'your_model_path/6B_stage2.pth'
+    pretrained_path "${INTERNVIDEO2_MODEL_PATH:-your_model_path}/6B_stage2.pth"

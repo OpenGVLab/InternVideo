@@ -17,6 +17,16 @@ from einops import rearrange
 from dataset import MetaLoader, create_dataset, create_loader, create_sampler
 from models.utils import tile
 from models import *
+
+# Model class registry (replaces eval() for safety)
+MODEL_CLS_REGISTRY = {
+    'InternVideo2_CLIP': InternVideo2_CLIP,
+}
+try:
+    MODEL_CLS_REGISTRY['InternVideo2_CLIP_small'] = InternVideo2_CLIP_small
+except NameError:
+    pass
+
 from tasks_clip.shared_utils import get_media_types, setup_model
 from utils.basic_utils import MetricLogger, SmoothedValue, setup_seed, flat_list_of_lists, save_json
 from utils.config import Config
@@ -225,7 +235,7 @@ def main(config):
     config.scheduler.num_training_steps = num_steps_per_epoch * config.scheduler.epochs
     config.scheduler.num_warmup_steps = num_steps_per_epoch * config.scheduler.warmup_epochs
 
-    model_cls = eval(config.model.get('model_cls', 'InternVideo2_CLIP'))
+    model_cls = MODEL_CLS_REGISTRY[config.model.get('model_cls', 'InternVideo2_CLIP')]
     (
         model,
         model_without_ddp,

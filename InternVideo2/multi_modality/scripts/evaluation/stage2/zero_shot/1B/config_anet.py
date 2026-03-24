@@ -1,3 +1,6 @@
+import os
+_MODEL_PATH = os.environ.get("INTERNVIDEO2_MODEL_PATH", "your_model_path")
+
 from configs.data import *
 from configs.model import *
 
@@ -52,7 +55,7 @@ model = dict(
         clip_norm_type='l2',
         clip_return_layer=6,
         clip_student_return_interval=1,
-        pretrained='your_model_path/1B_pt.pth',
+        pretrained=f'{_MODEL_PATH}/1B_pt.pth',
         use_checkpoint=False,
         checkpoint_num=40,
         use_flash_attn=True,

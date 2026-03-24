@@ -13,6 +13,16 @@ from torch.utils.data import ConcatDataset
 from dataset.serialize import local_broadcast_process_authkey
 from dataset import MetaLoader_rs, create_dataset, create_loader, create_sampler, create_stateful_sampler
 from models import *
+
+# Model class registry (replaces eval() for safety)
+MODEL_CLS_REGISTRY = {
+    'InternVideo2_CLIP': InternVideo2_CLIP,
+}
+try:
+    MODEL_CLS_REGISTRY['InternVideo2_CLIP_small'] = InternVideo2_CLIP_small
+except NameError:
+    pass
+
 from tasks_clip.retrieval_utils import evaluation_wrapper
 from tasks_clip.shared_utils import get_media_types, setup_model
 from utils.basic_utils import MetricLogger, SmoothedValue, setup_seed
@@ -202,7 +212,7 @@ def main(config):
     # https://discuss.pytorch.org/t/what-does-torch-backends-cudnn-benchmark-do/5936/3
     cudnn.benchmark = len(train_media_types) == 1
 
-    model_cls = eval(config.model.get('model_cls', 'InternVideo2_CLIP'))
+    model_cls = MODEL_CLS_REGISTRY[config.model.get('model_cls', 'InternVideo2_CLIP')]
     (
         model,
         model_without_ddp,

@@ -4,10 +4,10 @@ export OMP_NUM_THREADS=1
 JOB_NAME='6B_lp_k400_f16_loadStage2'
 OUTPUT_DIR="$(dirname $0)/$JOB_NAME"
 LOG_DIR="./logs/${JOB_NAME}"
-PREFIX='your_data_path/k400'
-DATA_PATH='your_data_path/k400'
-MODEL_PATH='your_model_path/6B_pt.pth'
-EXTRA_MODEL_PATH='your_model_path/6B_pt_stage2.pth'
+PREFIX="${INTERNVIDEO2_DATA_PATH:-your_data_path}/k400"
+DATA_PATH="${INTERNVIDEO2_DATA_PATH:-your_data_path}/k400"
+MODEL_PATH="${INTERNVIDEO2_MODEL_PATH:-your_model_path}/6B_pt.pth"
+EXTRA_MODEL_PATH="${INTERNVIDEO2_MODEL_PATH:-your_model_path}/6B_pt_stage2.pth"
 
 PARTITION='video'
 GPUS=16

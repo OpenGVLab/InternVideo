@@ -1,3 +1,4 @@
+# Requires Python >= 3.8
 apex==0.9.10dev
 av==11.0.0
 decord==0.6.0
@@ -10,7 +11,8 @@ librosa==0.10.1
 numpy==1.24.4
 opencv_python==4.8.0.76
 pandas==2.0.3
-# petrel_oss_sdk==v2.2.1_2_g1505ef3_master
+# Optional: petrel_oss_sdk (only needed for Ceph/S3 storage backends)
+# petrel_oss_sdk>=2.2.0
 Pillow==10.0.0
 psutil==5.9.5
 PyYAML==6.0.1

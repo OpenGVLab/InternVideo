@@ -1,3 +1,6 @@
+import os
+_MODEL_PATH = os.environ.get("INTERNVIDEO2_MODEL_PATH", "your_model_path")
+
 from configs.data import *
 from configs.model import *
 
@@ -72,8 +75,8 @@ model = dict(
     open_vision_clip_projector=True,
     freeze_text=True,
     open_text_projection=False,
-    vision_ckpt_path="your_model_path/B14_dist_1B_stage2.pth",
-    text_ckpt_path="your_model_path/mobileclip_blt.pt",
+    vision_ckpt_path=f"{_MODEL_PATH}/B14_dist_1B_stage2.pth",
+    text_ckpt_path=f"{_MODEL_PATH}/mobileclip_blt.pt",
 )
 
 criterion = dict(

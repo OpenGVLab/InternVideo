@@ -13,6 +13,16 @@ import wandb
 
 from dataset import MetaLoader
 from models import *
+
+# Model class registry (replaces eval() for safety)
+MODEL_CLS_REGISTRY = {
+    'InternVideo2_CLIP': InternVideo2_CLIP,
+}
+try:
+    MODEL_CLS_REGISTRY['InternVideo2_CLIP_small'] = InternVideo2_CLIP_small
+except NameError:
+    pass
+
 from tasks_clip.pretrain import setup_dataloaders
 from tasks_clip.retrieval_utils import evaluation_wrapper
 from tasks_clip.shared_utils import setup_model
@@ -129,7 +139,7 @@ def main(config):
     config.scheduler.num_training_steps = num_steps_per_epoch * config.scheduler.epochs
     config.scheduler.num_warmup_steps = num_steps_per_epoch * config.scheduler.warmup_epochs
 
-    model_cls = eval(config.model.get('model_cls', 'InternVideo2_CLIP'))
+    model_cls = MODEL_CLS_REGISTRY[config.model.get('model_cls', 'InternVideo2_CLIP')]
     (
         model,
         model_without_ddp,

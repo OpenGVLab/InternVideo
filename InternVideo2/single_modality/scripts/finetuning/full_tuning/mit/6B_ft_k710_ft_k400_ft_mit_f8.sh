@@ -4,9 +4,9 @@ export OMP_NUM_THREADS=1
 JOB_NAME='6B_ft_k710_ft_k400_ft_mit_f8'
 OUTPUT_DIR="$(dirname $0)/$JOB_NAME"
 LOG_DIR="./logs/${JOB_NAME}"
-PREFIX='your_data_path/mit'
-DATA_PATH='your_data_path/mit'
-MODEL_PATH='your_model_path/6B_ft_k710_ft_k400_f8.pth'
+PREFIX="${INTERNVIDEO2_DATA_PATH:-your_data_path}/mit"
+DATA_PATH="${INTERNVIDEO2_DATA_PATH:-your_data_path}/mit"
+MODEL_PATH="${INTERNVIDEO2_MODEL_PATH:-your_model_path}/6B_ft_k710_ft_k400_f8.pth"
 
 PARTITION='video'
 GPUS=64

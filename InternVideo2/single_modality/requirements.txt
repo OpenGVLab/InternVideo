@@ -1,3 +1,4 @@
+# Requires Python >= 3.8
 apex==0.9.10dev
 auto_augment==1.0.0
 decord==0.6.0
@@ -10,7 +11,7 @@ opencv_python==4.8.0.76
 pandas==2.0.3
 Pillow==10.0.0
 scipy==1.13.0
-skimage==0.0
+scikit-image>=0.19.0
 tensorboardX==2.6.2
 timm==0.5.4
 torch==1.13.1+cu117

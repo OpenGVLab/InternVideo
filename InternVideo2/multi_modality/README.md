@@ -34,7 +34,7 @@ bash scripts/pretraining/stage2/1B/run.sh
 
 :warning: **Notes:**
 1. Set `data_dir` and `your_data_path` like `your_webvid_path` in [data.py](./configs/data.py) before running the scripts.
-2. Set `vision_encoder.pretrained` in `vision_encoder.pretrained` in the corresponding config files.
+2. Set `vision_encoder.pretrained` in the corresponding config files.
 3. Set `--rdzv_endpoint` to your `MASTER_NODE:MASTER_PORT`. You can also use the following commond to automatically set it:
     ```shell
     MASTER_NODE=$(scontrol show hostnames "$SLURM_JOB_NODELIST" | head -n 1)
@@ -69,7 +69,7 @@ For zero-shot evaluation, you can simply run the pretraining scripts in `scripts
 ```shell
 bash scripts/evaluation/stage2/zero_shot/1B/eval_msrvtt.sh
 ```
-When evaluating, you can choose to turn off deepspeed and the performance will fluctuate slightly from the reported result (around 0.2), modify the value in the corresponding config file (e.g. scripts\evaluation\stage2\zero_shot\1B\config_msrvtt.py):
+When evaluating, you can choose to turn off deepspeed and the performance will fluctuate slightly from the reported result (around 0.2), modify the value in the corresponding config file (e.g. scripts/evaluation/stage2/zero_shot/1B/config_msrvtt.py):
 ```shell
 deepspeed = dict(
     enable=False,

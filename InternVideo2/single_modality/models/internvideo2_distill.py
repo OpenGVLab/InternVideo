@@ -14,6 +14,12 @@ from .flash_attention_class import FlashAttention
 from flash_attn.modules.mlp import FusedMLP
 from flash_attn.ops.rms_norm import DropoutAddRMSNorm
 
+# Decoder registry (replaces eval() for safety)
+DECODER_REGISTRY = {
+    'Linear_Decoder': None,  # populated after class definitions
+    'MLP_Decoder': None,
+}
+
 
 class CrossAttention(nn.Module):
     def __init__(
@@ -401,7 +407,12 @@ class MLP_Decoder(nn.Module):
             raise NotImplementedError
 
         return x
-    
+
+
+# Populate decoder registry now that classes are defined
+DECODER_REGISTRY['Linear_Decoder'] = Linear_Decoder
+DECODER_REGISTRY['MLP_Decoder'] = MLP_Decoder
+
 
 class DistInternVideo2(nn.Module):
     def __init__(
@@ -514,7 +525,7 @@ class DistInternVideo2(nn.Module):
         
         # CLIP decoder
         self.clip_decoder = nn.ModuleList([
-            eval(clip_student_decoder)(
+            DECODER_REGISTRY[clip_student_decoder](
                 in_channels=embed_dim, 
                 out_channels=clip_teacher_embed_dim, 
                 norm_layer=partial(nn.LayerNorm, eps=1e-5), 
@@ -523,7 +534,7 @@ class DistInternVideo2(nn.Module):
         ])
         self.final_clip_decoder = nn.Identity()
         if clip_teacher_final_dim > 0:
-            self.final_clip_decoder = eval(clip_student_decoder)(
+            self.final_clip_decoder = DECODER_REGISTRY[clip_student_decoder](
                 in_channels=clip_embed_dim, 
                 out_channels=clip_teacher_final_dim, 
                 norm_layer=partial(nn.LayerNorm, eps=1e-5), 

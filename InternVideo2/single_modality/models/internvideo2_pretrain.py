@@ -454,14 +454,14 @@ class PretrainInternVideo2(nn.Module):
         for i in range(clip_return_layer):
             self.clip_return_index.append(depth - int(i * clip_student_return_interval) - 1)
         print(f'CLIP Normalization Type: {clip_norm_type}')
-        print(f'CLIP Strudent Return Index: {self.clip_return_index}')
+        print(f'CLIP Student Return Index: {self.clip_return_index}')
 
         self.mae_norm_type = mae_norm_type
         self.mae_return_index = []
         for i in range(mae_return_layer):
             self.mae_return_index.append(depth - int(i * mae_student_return_interval) - 1)
         print(f'MAE Normalization Type: {mae_norm_type}')
-        print(f'MAE Strudent Return Index: {self.mae_return_index}')
+        print(f'MAE Student Return Index: {self.mae_return_index}')
         
         if use_fused_rmsnorm:
             norm_layer_for_blocks = partial(DropoutAddRMSNorm, eps=1e-6, prenorm=True)

@@ -1,3 +1,6 @@
+import os
+_MODEL_PATH = os.environ.get("INTERNVIDEO2_MODEL_PATH", "your_model_path")
+
 from configs.data import *
 from configs.model import *
 
@@ -47,7 +50,7 @@ model = dict(
     audio_encoder=dict(
         name='beats',
         d_model=768,
-        audio_model_path="your_model_path/beats.pth",
+        audio_model_path=f"{_MODEL_PATH}/beats.pth",
     ),
     vision_encoder=dict(
         # backbone
@@ -63,7 +66,7 @@ model = dict(
         clip_norm_type='l2',
         clip_return_layer=6,
         clip_student_return_interval=1,
-        pretrained='your_model_path/6B_stage1.pth',
+        pretrained=f'{_MODEL_PATH}/6B_stage1.pth',
         use_checkpoint=True,
         checkpoint_num=48,
         use_flash_attn=True,

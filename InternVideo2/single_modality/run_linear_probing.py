@@ -1,6 +1,7 @@
 import argparse
 import datetime
 import numpy as np
+import random
 import time
 import torch
 import torch.backends.cudnn as cudnn
@@ -231,6 +232,8 @@ def get_args():
     parser.add_argument('--dist_url', default='env://',
                         help='url used to set up distributed training')
 
+    parser.add_argument('--deterministic', action='store_true', default=False,
+                        help='Enable deterministic mode (cudnn.benchmark=False, cudnn.deterministic=True)')
     parser.add_argument('--enable_deepspeed', action='store_true', default=False)
     parser.add_argument('--bf16', default=False, action='store_true')
     parser.add_argument('--zero_stage', default=0, type=int,
@@ -244,7 +247,7 @@ def get_args():
             from deepspeed import DeepSpeedConfig
             parser = deepspeed.add_config_arguments(parser)
             ds_init = deepspeed.initialize
-        except:
+        except ImportError:
             print("Please 'pip install deepspeed'")
             exit(0)
     else:
@@ -267,9 +270,13 @@ def main(args, ds_init):
     seed = args.seed + utils.get_rank()
     torch.manual_seed(seed)
     np.random.seed(seed)
-    # random.seed(seed)
+    random.seed(seed)
 
-    cudnn.benchmark = True
+    if getattr(args, 'deterministic', False):
+        cudnn.benchmark = False
+        cudnn.deterministic = True
+    else:
+        cudnn.benchmark = True
 
     dataset_train, args.nb_classes = build_dataset(is_train=True, test_mode=False, args=args)
     if args.disable_eval_during_finetuning:
@@ -421,7 +428,7 @@ def main(args, ds_init):
                     checkpoint_model['head.bias'] = checkpoint_model['head.bias'][:args.nb_classes]
                 elif args.nb_classes in [600, 700]:
                     # download from https://drive.google.com/drive/folders/17cJd2qopv-pEG8NSghPFjZo1UUZ6NLVm
-                    map_path = f'./k710/label_mixto{args.nb_classes}.json'
+                    map_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'k710', f'label_mixto{args.nb_classes}.json')
                     print(f'Load label map from {map_path}')
                     with open(map_path) as f:
                         label_map = json.load(f)

@@ -1,3 +1,6 @@
+import os
+_MODEL_PATH = os.environ.get("INTERNVIDEO2_MODEL_PATH", "your_model_path")
+
 from configs.data import *
 from configs.model import *
 
@@ -67,7 +70,7 @@ model = dict(
     text_encoder=dict(
         use_flash_attn=True,
         transformer_width=4096,
-        llama_path="your_model_path/chinese_alpaca_lora_7b",
+        llama_path=f"{_MODEL_PATH}/chinese_alpaca_lora_7b",
         use_lora=True,
     ),
     temp=1 / 100.0,
@@ -77,10 +80,10 @@ model = dict(
     freeze_text=True,
     open_text_projection=False,
     open_text_lora=False,
-    tokenizer_path="your_model_path/chinese_alpaca_lora_7b",
-    vision_ckpt_path="your_model_path/InternVideo2_Stage2_6B.pth",
+    tokenizer_path=f"{_MODEL_PATH}/chinese_alpaca_lora_7b",
+    vision_ckpt_path=f"{_MODEL_PATH}/InternVideo2_Stage2_6B.pth",
     load_vision_ckpt_from_internvideo2_stage2=True,
-    text_ckpt_path="your_model_path/internvl/internvl_c_13b_224px.pth",
+    text_ckpt_path=f"{_MODEL_PATH}/internvl/internvl_c_13b_224px.pth",
 )
 
 criterion = dict(

@@ -22,7 +22,7 @@ bash ./scripts/pretraining/1B_pt.sh
 ```
 
 :warning: **Notes:**
-1. Chage `DATA_PATH` to your data path before running the scripts.
+1. Change `DATA_PATH` to your data path before running the scripts. You can also set the `INTERNVIDEO2_DATA_PATH` and `INTERNVIDEO2_MODEL_PATH` environment variables.
 2. `--sampling_rate` is set to 1 for **sparse sampling**.
 3. The latest checkpoint will be automatically saved while training, thus we use a large `--save_ckpt_freq`.
 4. For InternVideo2-1B and 6B, we use InternVL-C-13B and VideoMAEv2-g.
@@ -48,7 +48,7 @@ bash ./scripts/finetuning/full_tuning/k400/1B_ft_k710_ft_k400_f8.sh
 
 For distillation, you can simply run the pretraining scripts in `scripts/distillation` as follows:
 ```shell
-bash ./scripts/finetuning/full_tuning/k400/1B_ft_k710_ft_k400_f8.sh
+bash ./scripts/distillation/B14_dist_1B_stage2.sh
 ```
 
 **We adopt the similar settings as pretraining, but use `MLP_Decoder` for better alignment.**

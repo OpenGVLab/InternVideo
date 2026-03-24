@@ -1,6 +1,7 @@
 import argparse
 import datetime
 import numpy as np
+import random
 import time
 import torch
 import torch.backends.cudnn as cudnn
@@ -20,6 +21,18 @@ from utils import NativeScalerWithGradNormCount as NativeScaler
 from utils import multiple_pretrain_samples_collate
 import utils
 from models import *
+
+# Teacher model registry (replaces eval() for safety)
+CLIP_TEACHER_REGISTRY = {}
+MAE_TEACHER_REGISTRY = {}
+try:
+    CLIP_TEACHER_REGISTRY['internvl_clip_6b'] = internvl_clip_6b
+except NameError:
+    pass
+try:
+    MAE_TEACHER_REGISTRY['mae_g14_hybrid'] = mae_g14_hybrid
+except NameError:
+    pass
 
 
 def get_args():
@@ -52,6 +65,8 @@ def get_args():
                         help='Drop path rate (default: 0.0)')
     parser.add_argument('--normlize_target', default=True, type=bool,
                         help='normalized the target patch pixels')
+    parser.add_argument('--normalize_target', dest='normlize_target', type=bool,
+                        help='Normalized the target patch pixels (corrected spelling, same as --normlize_target)')
     parser.add_argument('--tubelet_size', default=1, type=int,
                         help='temporal tube size for the patch embedding')
     parser.add_argument('--layer_scale_init_value', default=1e-5, type=float, 
@@ -193,6 +208,8 @@ def get_args():
     parser.add_argument('--enable_deepspeed',
                         action='store_true', default=False)
     parser.add_argument('--bf16', default=False, action='store_true')
+    parser.add_argument('--deterministic', action='store_true', default=False,
+                        help='Enable deterministic mode (cudnn.benchmark=False, cudnn.deterministic=True)')
     parser.add_argument('--zero_stage', default=0, type=int,
                         help='ZeRO optimizer stage (default: 0)')
     
@@ -203,7 +220,7 @@ def get_args():
             import deepspeed
             parser = deepspeed.add_config_arguments(parser)
             ds_init = deepspeed.initialize
-        except:
+        except ImportError:
             print("Please install DeepSpeed")
             exit(0)
     else:
@@ -252,8 +269,13 @@ def main(args, ds_init):
     seed = args.seed + utils.get_rank()
     torch.manual_seed(seed)
     np.random.seed(seed)
+    random.seed(seed)
 
-    cudnn.benchmark = True
+    if getattr(args, 'deterministic', False):
+        cudnn.benchmark = False
+        cudnn.deterministic = True
+    else:
+        cudnn.benchmark = True
 
     model = get_model(args)
     patch_size = model.patch_embed.patch_size
@@ -264,7 +286,7 @@ def main(args, ds_init):
 
     # CLIP teacher model
     print(f'CLIP Teacher model: {args.clip_teacher}')
-    clip_teacher_model = eval(args.clip_teacher)(
+    clip_teacher_model = CLIP_TEACHER_REGISTRY[args.clip_teacher](
         img_size=args.clip_input_resolution,
         clip_norm_type=args.clip_norm_type,
         return_attn=args.clip_return_attn,
@@ -274,7 +296,7 @@ def main(args, ds_init):
 
     # MAE teacher model
     print(f'MAE Teacher model: {args.mae_teacher}')
-    mae_teacher_model = eval(args.mae_teacher)(
+    mae_teacher_model = MAE_TEACHER_REGISTRY[args.mae_teacher](
         img_size=args.mae_input_resolution,
         tubelet_size=args.mae_tubelet_size,
         mae_norm_type=args.mae_norm_type,

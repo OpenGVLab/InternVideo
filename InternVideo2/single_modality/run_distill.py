@@ -1,6 +1,7 @@
 import argparse
 import datetime
 import numpy as np
+import random
 import time
 import torch
 import torch.backends.cudnn as cudnn
@@ -20,6 +21,14 @@ from utils import NativeScalerWithGradNormCount as NativeScaler
 from utils import multiple_pretrain_samples_collate
 import utils
 from models import *
+
+# Teacher model registry (replaces eval() for safety)
+CLIP_TEACHER_REGISTRY = {}
+for _name in ['teacher_internvideo2_1B', 'teacher_internvideo2_stage2_1B', 'teacher_internvideo2_6B']:
+    try:
+        CLIP_TEACHER_REGISTRY[_name] = globals()[_name]
+    except KeyError:
+        pass
 
 
 def get_args():
@@ -176,6 +185,8 @@ def get_args():
     parser.add_argument('--dist_on_itp', action='store_true')
     parser.add_argument('--dist_url', default='env://', help='url used to set up distributed training')
     
+    parser.add_argument('--deterministic', action='store_true', default=False,
+                        help='Enable deterministic mode (cudnn.benchmark=False, cudnn.deterministic=True)')
     parser.add_argument('--enable_deepspeed',
                         action='store_true', default=False)
     parser.add_argument('--bf16', default=False, action='store_true')
@@ -189,7 +200,7 @@ def get_args():
             import deepspeed
             parser = deepspeed.add_config_arguments(parser)
             ds_init = deepspeed.initialize
-        except:
+        except ImportError:
             print("Please install DeepSpeed")
             exit(0)
     else:
@@ -236,8 +247,13 @@ def main(args, ds_init):
     seed = args.seed + utils.get_rank()
     torch.manual_seed(seed)
     np.random.seed(seed)
+    random.seed(seed)
 
-    cudnn.benchmark = True
+    if getattr(args, 'deterministic', False):
+        cudnn.benchmark = False
+        cudnn.deterministic = True
+    else:
+        cudnn.benchmark = True
 
     model = get_model(args)
     patch_size = model.patch_embed.patch_size
@@ -248,7 +264,7 @@ def main(args, ds_init):
 
     # CLIP teacher model
     print(f'CLIP Teacher model: {args.clip_teacher}')
-    clip_teacher_model = eval(args.clip_teacher)(
+    clip_teacher_model = CLIP_TEACHER_REGISTRY[args.clip_teacher](
         clip_norm_type=args.clip_norm_type,
         return_attn=args.clip_return_attn,
         clip_return_layer=args.clip_return_layer,

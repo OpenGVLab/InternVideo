@@ -34,4 +34,4 @@ torchrun \
     tasks/pretrain.py \
     $(dirname $0)/config.py \
     output_dir ${OUTPUT_DIR} \
-    pretrained_path 'your_model_path/1B_stage2_pt.pth'
+    pretrained_path "${INTERNVIDEO2_MODEL_PATH:-your_model_path}/1B_stage2_pt.pth"

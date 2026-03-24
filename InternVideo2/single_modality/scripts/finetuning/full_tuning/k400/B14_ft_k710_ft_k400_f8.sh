@@ -4,9 +4,9 @@ export OMP_NUM_THREADS=1
 JOB_NAME='B14_ft_k710_ft_k400_f8'
 OUTPUT_DIR="$(dirname $0)/$JOB_NAME"
 LOG_DIR="./logs/${JOB_NAME}"
-PREFIX='your_data_path/k400'
-DATA_PATH='your_data_path/k400'
-MODEL_PATH='your_model_path/B14_ft_k710_f8.pth'
+PREFIX="${INTERNVIDEO2_DATA_PATH:-your_data_path}/k400"
+DATA_PATH="${INTERNVIDEO2_DATA_PATH:-your_data_path}/k400"
+MODEL_PATH="${INTERNVIDEO2_MODEL_PATH:-your_model_path}/B14_ft_k710_f8.pth"
 
 PARTITION='video'
 GPUS=32

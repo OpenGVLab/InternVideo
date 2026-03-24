@@ -91,10 +91,12 @@ class InternVideo2_CLIP(nn.Module):
 
         Args:
             image (torch.Tensor): The input images. Shape: [B,T,C,H,W].
-            text (dict): TODO
-            idx (torch.Tensor): TODO
+            text (dict): Tokenized text inputs with keys 'input_ids' and 'attention_mask'.
+            idx (torch.Tensor): Sample indices for contrastive learning, used to
+                identify positive pairs. Shape: [B].
 
-        Returns: TODO
+        Returns:
+            dict: A dictionary containing loss values, e.g., {'loss_vtc': tensor}.
 
         """
         self.clip_contrastive_temperature()

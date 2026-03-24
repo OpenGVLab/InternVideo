@@ -4,9 +4,9 @@ export OMP_NUM_THREADS=1
 JOB_NAME='S14_ft_ssv2_f8'
 OUTPUT_DIR="$(dirname $0)/$JOB_NAME"
 LOG_DIR="./logs/${JOB_NAME}"
-PREFIX='your_data_path/ssv2_frame'
-DATA_PATH='your_data_path/ssv2_frame'
-MODEL_PATH='your_model_path/S14_dist_1B_stage2.pth'
+PREFIX="${INTERNVIDEO2_DATA_PATH:-your_data_path}/ssv2_frame"
+DATA_PATH="${INTERNVIDEO2_DATA_PATH:-your_data_path}/ssv2_frame"
+MODEL_PATH="${INTERNVIDEO2_MODEL_PATH:-your_model_path}/S14_dist_1B_stage2.pth"
 
 PARTITION='video'
 GPUS=16

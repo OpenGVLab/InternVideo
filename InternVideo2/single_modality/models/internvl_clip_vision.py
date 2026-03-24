@@ -13,7 +13,7 @@ from flash_attn.modules.mlp import FusedMLP
 from flash_attn.ops.rms_norm import DropoutAddRMSNorm
 
 
-MODEL_PATH = 'your_model_path/internvl'
+MODEL_PATH = os.environ.get('INTERNVIDEO2_MODEL_PATH', 'your_model_path') + '/internvl'
 _MODELS = {
     # see InternVL
     "internvl_c_13b_224px": os.path.join(MODEL_PATH, "internvl_c_13b_224px.pth"),

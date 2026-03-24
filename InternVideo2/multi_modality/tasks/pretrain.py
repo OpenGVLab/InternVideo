@@ -14,6 +14,20 @@ from dataset import MetaLoader, create_dataset, create_loader, create_sampler, c
 from models import *
 from tasks.retrieval_utils import evaluation_wrapper
 from tasks.shared_utils import get_media_types, setup_model
+
+# Model class registry (replaces eval() for safety)
+MODEL_CLS_REGISTRY = {
+    'InternVideo2_CLIP': InternVideo2_CLIP,
+    'InternVideo2_Stage2_visual': InternVideo2_Stage2_visual,
+}
+try:
+    MODEL_CLS_REGISTRY['InternVideo2_CLIP_small'] = InternVideo2_CLIP_small
+except NameError:
+    pass
+try:
+    MODEL_CLS_REGISTRY['InternVideo2_Stage2_audiovisual'] = InternVideo2_Stage2_audiovisual
+except NameError:
+    pass
 from utils.basic_utils import (MetricLogger, SmoothedValue,
                                remove_files_if_exist, setup_seed)
 from utils.config_utils import setup_main
@@ -21,7 +35,7 @@ from utils.distributed import get_rank, get_world_size, is_main_process
 from utils.logger import log_dict_to_wandb, setup_wandb
 try:
     from petrel_client.client import Client
-except:
+except ImportError:
     Client = None
 import io
 import os
@@ -29,7 +43,7 @@ import shutil
 
 logger = logging.getLogger(__name__)
 
-ceph_ckpt_bucket = "shdd:s3://avp_ckpt"
+ceph_ckpt_bucket = os.environ.get('INTERNVIDEO2_CEPH_BUCKET', "shdd:s3://avp_ckpt")
 
 
 def train(
@@ -46,12 +60,13 @@ def train(
     skip_num=0
 ):
 
+    client_ckpt = None
+    ceph_ckpt_path = None
     try:
         ceph_ckpt_path = f"{ceph_ckpt_bucket}/{config.output_dir.split('/')[-3]}/{config.output_dir.split('/')[-2]}/{config.output_dir.split('/')[-1]}"
         client_ckpt = Client(conf_path='~/petreloss.conf')
     except Exception as e:
-        print(e)
-        logger.info("Ceph is not working!!!")
+        logger.warning("Ceph is not available: %s", e)
 
 
     if config.use_half_precision: 
@@ -130,15 +145,19 @@ def train(
                         "local_step": local_step,
                         "global_step": global_step,
                     }
-                    try:
-                        with io.BytesIO() as buffer:
-                            torch.save(save_obj, buffer)
-                            client_ckpt.put(f"{ceph_ckpt_path}/ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth", buffer.getvalue())
-                            logger.info(f"Save to ceph ({ceph_ckpt_path}/ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth)!!!")
-                    except Exception as e:
-                        print(e)
+                    if client_ckpt is not None:
+                        try:
+                            with io.BytesIO() as buffer:
+                                torch.save(save_obj, buffer)
+                                client_ckpt.put(f"{ceph_ckpt_path}/ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth", buffer.getvalue())
+                                logger.info(f"Save to ceph ({ceph_ckpt_path}/ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth)!!!")
+                        except Exception as e:
+                            logger.warning("Ceph save failed, saving locally: %s", e)
+                            torch.save(save_obj, join(config.output_dir, f"ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth"))
+                            logger.info(f"Saved to local ({join(config.output_dir, f'ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth')})")
+                    else:
                         torch.save(save_obj, join(config.output_dir, f"ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth"))
-                        logger.warn(f"Ceph is not working, save to local ({join(config.output_dir, f'ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth')})!!!")
+                        logger.info(f"Saved to local ({join(config.output_dir, f'ckpt_{epoch:02d}_local{local_step}_global{global_step}.pth')})")
 
         if media_type == 'audio_video':
             if type(media[0]) is list:
@@ -290,13 +309,14 @@ def main(config):
     elif config.get('use_mem_efficient_sdp', False):
         torch.backends.cuda.enable_mem_efficient_sdp(enabled=True)
 
+    client_ckpt = None
+    ceph_ckpt_path = None
     try:
         ceph_ckpt_path = f"{ceph_ckpt_bucket}/{config.output_dir.split('/')[-3]}/{config.output_dir.split('/')[-2]}/{config.output_dir.split('/')[-1]}"
         client_ckpt = Client(conf_path='~/petreloss.conf')
     except Exception as e:
-        print(e)
-        logger.info("Ceph is not working!!!")
-        
+        logger.warning("Ceph is not available: %s", e)
+
     if is_main_process() and config.wandb.enable:
         try:
             run = setup_wandb(config)
@@ -322,12 +342,12 @@ def main(config):
     # https://discuss.pytorch.org/t/what-does-torch-backends-cudnn-benchmark-do/5936/3
     cudnn.benchmark = len(train_media_types) == 1
 
-    print(f"\033[31m CURRENT NODE NAME: {os.environ['SLURMD_NODENAME']} dataloader is OK {datetime.datetime.now().strftime('%Y-%m-%d-%H_%M_%S')}!!! \033[0m")
+    logger.info(f"CURRENT NODE NAME: {os.environ.get('SLURMD_NODENAME', 'unknown')} dataloader is OK {datetime.datetime.now().strftime('%Y-%m-%d-%H_%M_%S')}!!!")
 
     find_unused_parameters = config.model.get('find_unused_parameters', False)
     logger.info(f"find_unused_parameters={find_unused_parameters}")
 
-    model_cls = eval(config.model.get('model_cls'))
+    model_cls = MODEL_CLS_REGISTRY[config.model.get('model_cls')]
     (
         model,
         model_without_ddp,
@@ -437,23 +457,31 @@ def main(config):
                         "epoch": epoch,
                         "global_step": global_step,
                     }
-                    try:
-                        with io.BytesIO() as buffer:
-                            torch.save(save_obj, buffer)
+                    if client_ckpt is not None:
+                        try:
+                            with io.BytesIO() as buffer:
+                                torch.save(save_obj, buffer)
+                                if config.get("save_latest", False):
+                                    client_ckpt.put(f"{ceph_ckpt_path}/ckpt_latest.pth", buffer.getvalue())
+                                    logger.info(f"Save to ceph ({ceph_ckpt_path}/ckpt_latest.pth)!!!")
+                                else:
+                                    client_ckpt.put(f"{ceph_ckpt_path}/ckpt_{epoch:02d}.pth", buffer.getvalue())
+                                    logger.info(f"Save to ceph ({ceph_ckpt_path}/ckpt_{epoch:02d}.pth)!!!")
+                        except Exception as e:
+                            logger.warning("Ceph save failed, saving locally: %s", e)
                             if config.get("save_latest", False):
-                                client_ckpt.put(f"{ceph_ckpt_path}/ckpt_latest.pth", buffer.getvalue())
-                                logger.info(f"Save to ceph ({ceph_ckpt_path}/ckpt_latest.pth)!!!")
+                                torch.save(save_obj, join(config.output_dir, "ckpt_latest.pth"))
+                                logger.info(f"Saved to local ({join(config.output_dir, 'ckpt_latest.pth')})")
                             else:
-                                client_ckpt.put(f"{ceph_ckpt_path}/ckpt_{epoch:02d}.pth", buffer.getvalue())
-                                logger.info(f"Save to ceph ({ceph_ckpt_path}/ckpt_{epoch:02d}.pth)!!!")
-                    except Exception as e:
-                        print(e)
+                                torch.save(save_obj, join(config.output_dir, f"ckpt_{epoch:02d}.pth"))
+                                logger.info(f"Saved to local ({join(config.output_dir, f'ckpt_{epoch:02d}.pth')})")
+                    else:
                         if config.get("save_latest", False):
                             torch.save(save_obj, join(config.output_dir, "ckpt_latest.pth"))
-                            logger.warn(f"Ceph is not working, save to local ({join(config.output_dir, 'ckpt_latest.pth')})!!!")
+                            logger.info(f"Saved to local ({join(config.output_dir, 'ckpt_latest.pth')})")
                         else:
                             torch.save(save_obj, join(config.output_dir, f"ckpt_{epoch:02d}.pth"))
-                            logger.warn(f"Ceph is not working, save to local ({join(config.output_dir, f'ckpt_{epoch:02d}.pth')})!!!")
+                            logger.info(f"Saved to local ({join(config.output_dir, f'ckpt_{epoch:02d}.pth')})")
 
 
 
@@ -507,15 +535,19 @@ def main(config):
 
                     if not config.evaluate and cur_recall > best:
                         if not (hasattr(config, "deepspeed") and config.deepspeed.enable):
-                            try:
-                                with io.BytesIO() as buffer:
-                                    torch.save(save_obj, buffer)
-                                    client_ckpt.put(f"{ceph_ckpt_path}/ckpt_best_{best_ckpt_id}.pth", buffer.getvalue())
-                                    logger.info(f"Save to ceph ({f'{ceph_ckpt_path}/ckpt_best_{best_ckpt_id}.pth'})!!!")
-                            except Exception as e:
-                                print(e)
+                            if client_ckpt is not None:
+                                try:
+                                    with io.BytesIO() as buffer:
+                                        torch.save(save_obj, buffer)
+                                        client_ckpt.put(f"{ceph_ckpt_path}/ckpt_best_{best_ckpt_id}.pth", buffer.getvalue())
+                                        logger.info(f"Save to ceph ({f'{ceph_ckpt_path}/ckpt_best_{best_ckpt_id}.pth'})!!!")
+                                except Exception as e:
+                                    logger.warning("Ceph save failed, saving locally: %s", e)
+                                    torch.save(save_obj, join(config.output_dir, f"ckpt_best_{best_ckpt_id}.pth"))
+                                    logger.info(f"Saved to local ({join(config.output_dir, f'ckpt_best_{best_ckpt_id}.pth')})")
+                            else:
                                 torch.save(save_obj, join(config.output_dir, f"ckpt_best_{best_ckpt_id}.pth"))
-                                logger.warn(f"Ceph is not working, save to local ({join(config.output_dir, f'ckpt_best_{best_ckpt_id}.pth')})!!!")
+                                logger.info(f"Saved to local ({join(config.output_dir, f'ckpt_best_{best_ckpt_id}.pth')})")
                         else:
                             
                             now_ckpt_path = f"{config.output_dir}/{tag}/mp_rank_00_model_states.pt"
@@ -560,8 +592,8 @@ def main(config):
 
 
 if __name__ == "__main__":
-    print(f"\033[31m NODE LIST: {os.environ['SLURM_NODELIST']} \033[0m")
-    logger.info(f"NODE LIST: {os.environ['SLURM_NODELIST']}")
+    logger.info(f"NODE LIST: {os.environ.get('SLURM_NODELIST', 'unknown')}")
+    logger.info(f"NODE LIST: {os.environ.get('SLURM_NODELIST', 'unknown')}")
     cfg = setup_main()
     local_broadcast_process_authkey()
     main(cfg)

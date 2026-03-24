@@ -3,7 +3,7 @@ import os
 import random
 try:
     from petrel_client.client import Client
-except:
+except ImportError:
     Client = None
 from torch.utils.data import Dataset
 from .utils import load_image_from_path

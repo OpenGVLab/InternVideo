@@ -8,7 +8,7 @@ from timm.models.layers import drop_path, to_2tuple, trunc_normal_
 from flash_attn import flash_attn_func
 
 
-MODEL_PATH = 'your_model_path/videomae'
+MODEL_PATH = os.environ.get('INTERNVIDEO2_MODEL_PATH', 'your_model_path') + '/videomae'
 _MODELS = {
     # see videomaev2
     "vit_g14_hybrid": os.path.join(MODEL_PATH, "vit_g_hybrid_1200e_pre.pth"),
