@@ -1,6 +1,9 @@
-# InternVideo \[[Paper\]](https://arxiv.org/pdf/2212.03191.pdf)
+# InternVideo [[Paper]](https://arxiv.org/pdf/2212.03191.pdf)
 
 [中文 README](README_cn.md)
+
+<details>
+<summary>Benchmarks (Papers With Code)</summary>
 
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-classification-on-kinetics-400)](https://paperswithcode.com/sota/action-classification-on-kinetics-400?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/action-classification-on-kinetics-600)](https://paperswithcode.com/sota/action-classification-on-kinetics-600?p=internvideo-general-video-foundation-models)
@@ -12,7 +15,7 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-activitynet)](https://paperswithcode.com/sota/video-retrieval-on-activitynet?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-didemo)](https://paperswithcode.com/sota/video-retrieval-on-didemo?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-msr-vtt)](https://paperswithcode.com/sota/video-retrieval-on-msr-vtt?p=internvideo-general-video-foundation-models)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-lsmdc)](https://paperswithcode.com/sota/video-retrieval-on-lsmdc?p=internvideo-general-video-foundation-models) 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-lsmdc)](https://paperswithcode.com/sota/video-retrieval-on-lsmdc?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-msvd)](https://paperswithcode.com/sota/video-retrieval-on-msvd?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/video-retrieval-on-vatex)](https://paperswithcode.com/sota/video-retrieval-on-vatex?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/zero-shot-video-retrieval-on-activitynet)](https://paperswithcode.com/sota/zero-shot-video-retrieval-on-activitynet?p=internvideo-general-video-foundation-models)
@@ -23,166 +26,140 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/zero-shot-video-retrieval-on-vatex)](https://paperswithcode.com/sota/zero-shot-video-retrieval-on-vatex?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-msrvtt-qa-1)](https://paperswithcode.com/sota/visual-question-answering-on-msrvtt-qa-1?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-msvd-qa-1)](https://paperswithcode.com/sota/visual-question-answering-on-msvd-qa-1?p=internvideo-general-video-foundation-models)
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-tgif-qa)](https://paperswithcode.com/sota/visual-question-answering-on-tgif-qa?p=internvideo-general-video-foundation-models) 
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/visual-question-answering-on-tgif-qa)](https://paperswithcode.com/sota/visual-question-answering-on-tgif-qa?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf101-mitv2)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf101-mitv2?p=internvideo-general-video-foundation-models)
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/internvideo-general-video-foundation-models/open-set-action-recognition-on-ucf-hmdb)](https://paperswithcode.com/sota/open-set-action-recognition-on-ucf-hmdb?p=internvideo-general-video-foundation-models)
 
-This repo gives the official implmentation of '[InternVideo: General Video Foundation Models via Generative and Discriminative Learning](https://arxiv.org/abs/2212.03191)'
+</details>
 
-- **Achieved `91.1%` Top1 accuracy in Kinetics 400, surpassing the `90%` milestone for `the first time`.**
-- **Achieved `77.2%` Top1 accuracy in Something-Something V2.**
-- **Achieved `SOTA` performance on `39` video datasets (including action recognition, temporal localization, retrieval, etc) when released in 2022.**
+This repo provides the official implementation of [InternVideo: General Video Foundation Models via Generative and Discriminative Learning](https://arxiv.org/abs/2212.03191).
 
-## Updates
-- `Jan 16, 2024`: [InternVid](https://github.com/OpenGVLab/InternVideo/tree/main/Data/InternVid) (a video-text dataset for video understanding and generation) has been accepted for spotlight presentation of ICLR 2024.
-- `Sep  7, 2023`: [**ViCLIP**](https://huggingface.co/OpenGVLab/ViCLIP): a simple video CLIP for transferrable video-text representation is available at [Hugging Face](https://huggingface.co/OpenGVLab/ViCLIP) and [🤗](https://huggingface.co/OpenGVLab/ViCLIP/resolve/main/ViClip-InternVid-10M-FLT.pth). It delivers strong zero-shot action recognition performance. [Have a try](https://github.com/OpenGVLab/InternVideo/blob/main/Data/InternVid/demo.ipynb).
-- `July 16, 2023`: A **video-text dataset InternVid** is partially released at [here](Data/InternVid) for facilitating multimodal understanding and generation. A subset of this dataset, consisting of 10 million video clips, is available at [Hugging Face](https://huggingface.co/datasets/OpenGVLab/InternVid).
-- `May 11, 2023`: **Video instruction data** are released at [here](Data/instruction_data) for tuning end-to-end video-centric multimodal dialogue systems like [VideoChat](https://github.com/OpenGVLab/Ask-Anything).
-- `Mar  8, 2023`: All pretrained foundation model weights are released. See them from [here](#model-zoo).
-- `Feb 19, 2023`: Some pretrained foundation model weights (-L) are released.
-- `Feb  5, 2023`: The code & model of multimodal learning are released.
-- `Jan 18, 2023`: The code of vision-language navigation is released.
-- `Jan 16, 2023`: The code of video question answering, zero-shot action recognition, and zero-shot multiple choice is released.
-- `Jan  1, 2023`: The code & model of spatio-temporal action localiztion are released.
-- `Dec 27, 2022`: The code & model of partial pretraining (VideoMAE) and downstream applications (video-text retrieval, temporal action localization, open-set action recognition, and ego4d related tasks) are released.
-- `Dec  6, 2022`: The technical report of InternVideo is released.
-- `Sep  2, 2022`: Press releases ([official](https://www.shlab.org.cn/news/5443279) | [163 news](https://www.163.com/dy/article/HG939TNR0530QRMB.html) | [qq news](https://new.qq.com/rain/a/20220902A053JP00)).
+**Highlights:**
+- **91.1%** Top-1 accuracy on Kinetics-400, surpassing the 90% milestone for the first time
+- **77.2%** Top-1 accuracy on Something-Something V2
+- **SOTA** on 39 video benchmarks (action recognition, temporal localization, retrieval, etc.) at release (2022)
+
+## Project Structure
+
+```
+InternVideo1/
+├── Pretrain/                          # Pretraining models
+│   ├── VideoMAE/                      # Video masked autoencoder pretraining
+│   ├── Multi-Modalities-Pretraining/  # Video-language contrastive learning (demo/inference only)
+│   ├── ViCLIP/                        # Video CLIP for transferable video-text representation
+│   └── UniFormerV2/                   # Spatiotemporal learning with image ViTs (git submodule)
+│
+├── Downstream/                        # Downstream task implementations
+│   ├── Video-Text-Retrieval/          # Video-text retrieval on 6 benchmarks
+│   ├── Open-Set-Action-Recognition/   # Open-set action recognition (MMAction-based)
+│   ├── Spatial-Temporal-Action-Localization/  # Spatio-temporal action localization (AVA)
+│   ├── Temporal-Action-Localization/  # Temporal action localization (ActivityNet, THUMOS14)
+│   ├── Visual-Language-Navigation/    # Vision-language navigation (VLN-CE)
+│   └── multi-modalities-downstream/   # VQA, zero-shot action recognition, zero-shot multiple choice
+│
+└── Media/                             # Images for documentation
+```
+
+Each sub-project is self-contained with its own README, dependencies, and training scripts. See individual READMEs for setup and usage instructions.
 
 ## Introduction
-*We present the first video foundation model to achieve high-performance on both video and video-text tasks*.
 
-The foundation models have recently shown excellent performance on a variety of downstream tasks in computer vision. However, most existing vision foundation models simply focus on image-level pretraining and adpation, which are limited for dynamic and complex video-level understanding tasks. To fill the gap, we present general video foundation models, *InternVideo*, by taking advantage of both generative and discriminative self-supervised video learning. Specifically, InternVideo efficiently explores masked video modeling and video-language contrastive learning as the pretraining objectives, and selectively coordinates video representations of these two complementary frameworks in a learnable manner to boost various video applications. Without bells and whistles, InternVideo achieves state-of-the-art performance on 39 video datasets from extensive tasks including video action recognition/detection, video-language alignment, and open-world video applications. Especially, our methods can obtain 91.1% and 77.2% top-1 accuracy on the challenging Kinetics-400 and Something-Something V2 benchmarks, respectively.
+The foundation models have recently shown excellent performance on a variety of downstream tasks in computer vision. However, most existing vision foundation models simply focus on image-level pretraining and adaptation, which are limited for dynamic and complex video-level understanding tasks. To fill the gap, we present general video foundation models, *InternVideo*, by taking advantage of both generative and discriminative self-supervised video learning. Specifically, InternVideo efficiently explores masked video modeling and video-language contrastive learning as the pretraining objectives, and selectively coordinates video representations of these two complementary frameworks in a learnable manner to boost various video applications. Without bells and whistles, InternVideo achieves state-of-the-art performance on 39 video datasets from extensive tasks including video action recognition/detection, video-language alignment, and open-world video applications.
 
-## Code & model
-- [ ] Video foundation model Pretraining.
-    - [x] [video masked modeling](Pretrain/VideoMAE).
-    - [x] [video-language contrastive learning modeling](Pretrain/Multi-Modalities-Pretraining).
-    - [x] Supervised training of [ViT (from video masked modeling)](Pretrain/VideoMAE#finetune) and [UniformerV2 (from multimodal learning)](https://github.com/OpenGVLab/UniFormerV2/blob/main/INSTRUCTIONS.md#training).
-    - [ ] Model interaction.
-- [ ] Downstream tasks.
-    - [ ] Action recognition.
-    - [x] [Temporal action localization](Downstream/Temporal-Action-Localization).
-    - [x] [Spatio-temporal action localization](Downstream/Spatial-Temporal-Action-Localization).
-    - [x] [Video-text retrieval](Downstream/Video-Text-Retrieval).
-    - [x] [Video question answering](Downstream/multi-modalities-downstream#video-question-answering).
-    - [x] [Visual-language navigation](Downstream/Visual-Language-Navigation).
-    - [x] [Open-set action recognition](Downstream/Open-Set-Action-Recognition).
-    - [x] [Zero-shot action recognition](Downstream/multi-modalities-downstream#zero-shot-action-recognition).
-    - [x] [Zero-shot multiple choice](Downstream/multi-modalities-downstream#zero-shot-multiple-choice).
-    - [x] [Ego4D related tasks](https://github.com/OpenGVLab/ego4d-eccv2022-solutions).
-- [x] [Pretrained foundation model weights](https://github.com/OpenGVLab/InternVideo#model-zoo).
-- [ ] Demos for training usages and evaluations.
+## Pretraining
 
-## Performance
-- [Video Retrieval](Downstream/Video-Text-Retrieval#our-results)
+| Component | Description | Link |
+|-----------|-------------|------|
+| VideoMAE | Video masked autoencoder pretraining & supervised finetuning | [Pretrain/VideoMAE](Pretrain/VideoMAE) |
+| Multi-Modalities | Video-language contrastive learning (inference demo) | [Pretrain/Multi-Modalities-Pretraining](Pretrain/Multi-Modalities-Pretraining) |
+| ViCLIP | Video CLIP trained on InternVid-10M | [Pretrain/ViCLIP](Pretrain/ViCLIP) |
+| UniFormerV2 | Spatiotemporal learning by arming image ViTs with video UniFormer | [Pretrain/UniFormerV2](Pretrain/UniFormerV2) |
+
+## Downstream Tasks
+
+| Task | Description | Link |
+|------|-------------|------|
+| Video-Text Retrieval | Finetuned retrieval on MSR-VTT, DiDeMo, LSMDC, MSVD, VATEX, ActivityNet | [Downstream/Video-Text-Retrieval](Downstream/Video-Text-Retrieval) |
+| Open-Set Action Recognition | Open-set recognition on UCF101, HMDB51 | [Downstream/Open-Set-Action-Recognition](Downstream/Open-Set-Action-Recognition) |
+| Spatio-Temporal Action Localization | Action localization on AVA, AVA-Kinetics | [Downstream/Spatial-Temporal-Action-Localization](Downstream/Spatial-Temporal-Action-Localization) |
+| Temporal Action Localization | Temporal localization on ActivityNet, THUMOS14, HACS, FineAction | [Downstream/Temporal-Action-Localization](Downstream/Temporal-Action-Localization) |
+| Visual-Language Navigation | VLN-CE navigation task | [Downstream/Visual-Language-Navigation](Downstream/Visual-Language-Navigation) |
+| VQA & Zero-Shot Tasks | Video QA, zero-shot action recognition, zero-shot multiple choice | [Downstream/multi-modalities-downstream](Downstream/multi-modalities-downstream) |
+| Ego4D Tasks | Ego-centric video understanding | [External repo](https://github.com/OpenGVLab/ego4d-eccv2022-solutions) |
 
 ## Model Zoo
 
 <details>
-<summary> Pretrained Models </summary>
+<summary>Pretrained Models</summary>
 <br>
-<div>
 
-|      Model      |   Training Data   |                                               download                                                |
-| :-----------------: | :----------------------: | :---------------------------------------------------------------------------------------------------: |
-| InternVideo-MM-L-14 | WebVid10M+Self-collected (14M) |   [ckpt](https://huggingface.co/OpenGVLab/InternVideo1.0) |
-| VideoMAE-B | UnlabeledHybrid (1M) |   [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-b/pytorch_model.bin)   |
-| VideoMAE-L | UnlabeledHybrid (1M)|   [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-l/pytorch_model.bin)   |
-| VideoMAE-H | UnlabeledHybrid (1M)|   [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-h/pytorch_model.bin)  |
-</div>
+|      Model      |   Training Data   |  Download  |
+| :-----------------: | :----------------------: | :---: |
+| InternVideo-MM-L-14 | WebVid10M+Self-collected (14M) | [ckpt](https://huggingface.co/OpenGVLab/InternVideo1.0) |
+| VideoMAE-B | UnlabeledHybrid (1M) | [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-b/pytorch_model.bin) |
+| VideoMAE-L | UnlabeledHybrid (1M) | [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-l/pytorch_model.bin) |
+| VideoMAE-H | UnlabeledHybrid (1M) | [ckpt](https://huggingface.co/OpenGVLab/InternVideoMAE_models/resolve/main/mae-h/pytorch_model.bin) |
+
 </details>
 
 <details>
-<summary> Downstream Tasks</summary>
+<summary>Downstream Task Models</summary>
 <br>
-<div>
 
 **Classification**
-|      Model      |   Finetuning Data   |                                               download                                                |
-| :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
-| VideoMAE-B | K400 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k400_ft.pth) |
-| VideoMAE-B | K710 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k710_ft.pth)   |
-| VideoMAE-B | SSv2 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_ssv2_ft.pth)   |
-| VideoMAE-L | K400 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_k400_ft.pth) |
-| VideoMAE-L | K700 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_k700_ft.pth)   |
-| VideoMAE-L | SSv2 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_ssv2_ft.pth)   |
-| VideoMAE-H | K400 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/K400/VideoMAE/ViT-H_f32_res384_89.54.pth) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/K400/VideoMAE/ViT-H_f32_res384_89.54.log)|
-| VideoMAE-H | SSv1 |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/SSV1/VideoMAE/ViT-H.pth) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/SSV1/VideoMAE/log.txt)|
-| VideoMAE-H | HMDB51 |   [ckpt_split1](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split1_89.64/ViT-H.pth) | [ckpt_split2](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split2_89.92/ViT-H.pth) | [ckpt_split3](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/HMDB51/VideoMAE/split3_88.35/ViT-H.pth)|
+
+|      Model      |   Finetuning Data   |  Download  |
+| :-----------------: | :----------------: | :---: |
+| VideoMAE-B | K400 | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k400_ft.pth) |
+| VideoMAE-B | K710 | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_k710_ft.pth) |
+| VideoMAE-B | SSv2 | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_b_hybrid_pt_800e_ssv2_ft.pth) |
+| VideoMAE-L | K400 | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_k400_ft.pth) |
+| VideoMAE-L | K700 | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_k700_ft.pth) |
+| VideoMAE-L | SSv2 | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/pretrain/videomae/vit_l_hybrid_pt_800e_ssv2_ft.pth) |
+| VideoMAE-H | K400 | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/K400/VideoMAE/ViT-H_f32_res384_89.54.pth) |
+| VideoMAE-H | SSv1 | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/action_recognition/SSV1/VideoMAE/ViT-H.pth) |
 
 **Retrieval**
-|      Model      |   Training Data   |                                               download                                                |
-| :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
-| InternVideo-MM-L-14 | ActivityNet |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/log.txt)|
-| InternVideo-MM-L-14 | DiDeMo |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/log.txt)|
-| InternVideo-MM-L-14 | LSMDC |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/log.txt)|
-| InternVideo-MM-L-14 | MSR-VTT |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msrvtt/kc4_finetune_1e-32e-3_77words_12frames_128_16_bothdsl/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msrvtt/kc4_finetune_1e-32e-3_77words_12frames_128_16_bothdsl/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msrvtt/kc4_finetune_1e-32e-3_77words_12frames_128_16_bothdsl/log.txt)|
-| InternVideo-MM-L-14 | MSVD |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/log.txt)|
-| InternVideo-MM-L-14 | VATEX |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/kc4_1e-35e-3_128_8frame/pytorch_model.bin) [opt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/kc4_1e-35e-3_128_8frame/pytorch_opt.bin) [log](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/kc4_1e-35e-3_128_8frame/log.txt)|
 
-**VideoQA**
-|      Model      |   Finetuning Data   |                                               download                                                |
-| :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
-| InternVideo-MM-L-14 | MSR-VTT |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msrvtt.ckpt) |
-| InternVideo-MM-L-14 | MSVD |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msvd.ckpt)   |
-| InternVideo-MM-L-14 | TGIFQA |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/tqifqa.ckpt)   |
+|      Model      |   Training Data   |  Download  |
+| :-----------------: | :----------------: | :---: |
+| InternVideo-MM-L-14 | ActivityNet | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/activitynet/kc4_1e-3_2e-3_bs64_77words_64frame_dsl/pytorch_model.bin) |
+| InternVideo-MM-L-14 | DiDeMo | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/didemo/pytorch_model.bin) |
+| InternVideo-MM-L-14 | LSMDC | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/lsmdc/pytorch_model.bin) |
+| InternVideo-MM-L-14 | MSR-VTT | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msrvtt/kc4_finetune_1e-32e-3_77words_12frames_128_16_bothdsl/pytorch_model.bin) |
+| InternVideo-MM-L-14 | MSVD | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/msvd/pytorch_model.bin) |
+| InternVideo-MM-L-14 | VATEX | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/retrieval/vatex/kc4_1e-35e-3_128_8frame/pytorch_model.bin) |
+
+**Video QA**
+
+|      Model      |   Finetuning Data   |  Download  |
+| :-----------------: | :----------------: | :---: |
+| InternVideo-MM-L-14 | MSR-VTT | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msrvtt.ckpt) |
+| InternVideo-MM-L-14 | MSVD | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/msvd.ckpt) |
+| InternVideo-MM-L-14 | TGIFQA | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/vqa/tqifqa.ckpt) |
 
 **Spatio-Temporal Action Localization**
-|      Model      |   Finetuning Data   |                                               download                                                |
-| :-----------------: | :----------------: | :---------------------------------------------------------------------------------------------------: |
-| VideoMAE-H | AVA-Kinetics |   [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/stal/vit_h_hybrid_pt_k710_ft_ak_ft.sh) |
-</div>
+
+|      Model      |   Finetuning Data   |  Download  |
+| :-----------------: | :----------------: | :---: |
+| VideoMAE-H | AVA-Kinetics | [ckpt](https://pjlab-gvm-data.oss-cn-shanghai.aliyuncs.com/internvideo/stal/vit_h_hybrid_pt_k710_ft_ak_ft.sh) |
+
 </details>
 
-To further improve our work, please fill out the [form](https://wenjuan.feishu.cn/m?t=syQjww7QWNJi-jk5u) (or scan the below QR code) if you had time.
+## Updates
 
-<img src="Media/download.png" width="200" height="260" alt="survey_icon"/>
-<!--![survey_icon](Media/download.png){:height="50%" width="50%"}-->
-
-<!--
-## 🚀🚀 Pretraining
-
-We present the code of video masked modeling ([VideoMAE](Pretrain/VideoMAE/README.md)), video-language contrastive learning modeling (to be updated), and model interaction (to be updated). Partial supervised video post-pretraining are given in both [VideoMAE](Pretrain/VideoMAE/README.md) and [UniformerV2](https://github.com/OpenGVLab/UniFormerV2/blob/d390105e588665af5029bfcceed5b9975d4b13bb/README.md).
-
-
-## 🚢🚢 Downstram Tasks
-
-* The instruction of video-text retrieval is in the [Retrieval.md](Downstream/Video-Text-Retrieval/README.md)
-* The instruction of temporal action localization is in the [TAL.md](Downstream/Temporal-Action-Localization/README.md)
-* The instruction of open-set action recognition is in the [OAR.md](Downstream/Open-Set-Action-Recognition/README.md)
-* The instruction of ego-tasks is in the [EGO.md](https://github.com/OpenGVLab/ego4d-eccv2022-solutions/blob/main/readme.md)
--->
-
-<!--
-
-## News
-
-- `Nov 24, 2022`: 🚀🚀 InternVideo .
-
-## Coming soon
-- [ ] 
-
-## Introduction
-
-**InternVideo**
-
-## Main Results on Downstream Tasks
-
-**Action Recognition**
-
-**Temporal Action Localization**
-
-**Spatio-Temporal Action Localization**
-
-
-## Acknowledgment
--->
+- `Jan 16, 2024`: [InternVid](https://github.com/OpenGVLab/InternVideo/tree/main/Data/InternVid) accepted for spotlight at ICLR 2024.
+- `Sep 7, 2023`: [ViCLIP](https://huggingface.co/OpenGVLab/ViCLIP) released on Hugging Face with strong zero-shot action recognition.
+- `Jul 16, 2023`: [InternVid](https://huggingface.co/datasets/OpenGVLab/InternVid) video-text dataset (10M clip subset) released.
+- `May 11, 2023`: Video instruction data released for tuning video dialogue systems like [VideoChat](https://github.com/OpenGVLab/Ask-Anything).
+- `Mar 8, 2023`: All pretrained foundation model weights released.
+- `Dec 6, 2022`: Technical report released.
 
 ## Citation
 
 If this work is helpful for your research, please consider citing InternVideo.
 
-```
+```bibtex
 @article{wang2022internvideo,
   title={InternVideo: General Video Foundation Models via Generative and Discriminative Learning},
   author={Wang, Yi and Li, Kunchang and Li, Yizhuo and He, Yinan and Huang, Bingkun and Zhao, Zhiyu and Zhang, Hongjie and Xu, Jilan and Liu, Yi and Wang, Zun and Xing, Sen and Chen, Guo and Pan, Junting and Yu, Jiashuo and Wang, Yali and Wang, Limin and Qiao, Yu},

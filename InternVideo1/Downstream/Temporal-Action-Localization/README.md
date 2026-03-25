@@ -1,7 +1,7 @@
 # Temporal-Action-Localization
 The codebase  of  one downstream task (Temporal Action Localization ) based on our InternVideo.
 
- [**InternVideo: General Video Foundation Models via Generative and Discriminative Learning**]https://arxiv.org/abs/2212.03191) 
+[**InternVideo: General Video Foundation Models via Generative and Discriminative Learning**](https://arxiv.org/abs/2212.03191)
 
 We use ViT-H from our InternVideo as backbones for feature extraction. In our experiment, ViT-H models are pretrained from Hybrid datasets. 
 As shown in Table, our InternVideo outperforms best than all the preview methods on these four TAL datasets. 

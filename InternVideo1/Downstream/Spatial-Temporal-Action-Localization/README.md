@@ -1,4 +1,4 @@
-# VideoMAE Installation
+# Spatio-Temporal Action Localization
 
 ## Environment Configuration
 
