@@ -763,7 +763,7 @@ class InternVideo2(nn.Module):
         max_seqlen = N_bert
         cu_seqlens = torch.arange(B_bert + 1, dtype=torch.int32, device=forward_bert_mask_token.device) * N_bert
 
-        for layer in self.bert_decoder.layers[-9:]:
+        for layer in self.bert_decoder.layers:
             forward_bert_mask_token = layer(
                 hidden_states=forward_bert_mask_token,
                 attention_mask=attn_mask,
