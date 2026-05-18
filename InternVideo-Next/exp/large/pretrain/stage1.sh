@@ -24,7 +24,7 @@ srun -p $PARTITION \
     --num_sample 1 \
     --flip \
     --mask_type 'attention' \
-    --mask_ratio 0.7 \
+    --mask_ratio 0.75 \
     --reconstruction_ratio 0.0 \
     --model 'internvideo_next_stage1_base' \
     --clip_teacher 'teacher_siglip2_1b_once4all_mm_umt_res256' \
