@@ -25,7 +25,7 @@ InternVideo3 is a multimodal large language model designed for long-horizon vide
 
 | Model | HuggingFace |
 |-------|-------------|
-| InternVideo3-8B-Instruct | [OpenGVLab/InternVideo3-8B-Instruct](https://huggingface.co/OpenGVLab/InternVideo3-8B-Instruct) |
+| InternVideo3-8B-Instruct | [yanziang/InternVideo3-8B-Instruct](https://huggingface.co/yanziang/InternVideo3-8B-Instruct) |
 
 ## Quickstart
 
