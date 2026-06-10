@@ -4,6 +4,8 @@ InternVideo3 is an open multimodal model for long-horizon video understanding an
 
 Project page: https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo3
 
+![InternVideo3 architecture](assets/InternVideo3_arch.png)
+
 ## Highlights
 
 - **Multimodal Contextual Reasoning (MCR):** represents observations, instructions, intermediate reasoning, tool actions, feedback, and memory in a shared evolving context.
@@ -153,6 +155,16 @@ InternVideo3 uses a staged recipe for long-horizon multimodal reasoning:
 4. **On-policy distillation:** reasoning-heavy video QA and long-form description examples where a stronger teacher provides more complete or better-grounded behavior.
 
 The long-video supervision emphasizes perception and recognition, spatial-temporal understanding, event and action reasoning, and holistic semantics.
+
+## Dataset
+
+The InternVideo3 long-video supervised fine-tuning data is available on Hugging Face:
+
+| Dataset | Rows | Format |
+| --- | ---: | --- |
+| [yanziang/InternVideo3_Dataset](https://huggingface.co/datasets/yanziang/InternVideo3_Dataset) | 380K | JSON / Parquet |
+
+Each sample contains a YouTube video id and QA annotations for detailed long-video description and reasoning.
 
 ## Evaluation
 
