@@ -1,30 +1,29 @@
-# InternVideo3: Multimodal Contextual Reasoning via Efficient Long-Horizon Agents
+# InternVideo3: Agentify Foundation Models with Multimodal Contextual Reasoning
 
-## Introduction
+InternVideo3 is an open multimodal model for long-horizon video understanding and visually grounded agentic reasoning. It studies how to move multimodal foundation models beyond single-pass video QA by treating video understanding as a closed-loop process of evidence accumulation, belief update, tool interaction, and verification.
 
-InternVideo3 is a multimodal large language model designed for long-horizon video understanding and agentic reasoning. It introduces **Multimodal Contextual Reasoning (MCR)**, an efficient formulation that unifies perception, planning, tool use, self-reflection, and memory within a single shared context, enabling recursive multi-step reasoning over long videos.
+Project page: https://github.com/OpenGVLab/InternVideo/tree/main/InternVideo3
 
-### Key Features
+## Highlights
 
-- **M²LA (Multimodal Multi-head Latent Attention):** A KV-cache-efficient attention architecture that reduces memory footprint via low-rank latent factorization, enabling long-context reasoning (up to 256K tokens) without dropping tokens.
-- **Long-Video Understanding:** Trained with a short-to-long curriculum (up to 2048 frames at 4fps), supporting hour-long video comprehension.
-- **Agentic Video Reasoning:** Built-in support for recursive perception-action loops with tool use (temporal grounding, ASR, web search, video segmentation) and self-verification.
-- **Advanced Post-Training:** Combines rule-based group sequence policy optimization (R-GSPO) and on-policy distillation from Qwen3-235B for improved temporal reasoning.
+- **Multimodal Contextual Reasoning (MCR):** represents observations, instructions, intermediate reasoning, tool actions, feedback, and memory in a shared evolving context.
+- **Multimodal Multi-head Latent Attention (M^2LA):** compresses KV-cache states while preserving the full multimodal token stream, making longer multimodal rollouts practical.
+- **Long-video training recipe:** combines continued pretraining after M^2LA conversion, short-to-long supervised fine-tuning, rule-based reinforcement learning, and on-policy distillation.
+- **Agentic video exploration:** supports recursive evidence gathering with tools such as segmentation, ASR, temporal grounding, search, summarization, and verification.
+- **Strong open-weight performance:** achieves competitive results across long-video, short-video, temporal grounding, and spatial reasoning benchmarks.
 
-### Architecture
+## Method Overview
 
-| Component | Details |
-|-----------|---------|
-| Vision Encoder | 27-layer ViT, hidden_size=1152, patch_size=16, temporal_patch_size=2 |
-| Language Model | 36-layer, hidden_size=4096, 32 attention heads |
-| KV Latent Rank | 896 per layer |
-| Max Context | 262,144 tokens |
-| Precision | BFloat16 |
+InternVideo3 is built around three complementary components:
+
+1. **MCR:** a formulation for long-horizon multimodal reasoning where the model repeatedly observes, reasons, acts, receives feedback, and updates its contextual state.
+2. **M^2LA:** a token-preserving attention reparameterization that reduces the KV-cache footprint for long multimodal contexts by storing compact latent states and reconstructing head-specific keys and values on the fly.
+3. **Staged training:** a practical recipe that restores general capability after attention conversion and then specializes the model for dense video evidence and extended temporal dependencies.
 
 ## Model Zoo
 
-| Model | HuggingFace |
-|-------|-------------|
+| Model | Hugging Face |
+| --- | --- |
 | InternVideo3-8B-Instruct | [yanziang/InternVideo3-8B-Instruct](https://huggingface.co/yanziang/InternVideo3-8B-Instruct) |
 
 ## Quickstart
@@ -32,16 +31,16 @@ InternVideo3 is a multimodal large language model designed for long-horizon vide
 ### Requirements
 
 ```bash
-pip install transformers>=4.57.3 torch qwen-vl-utils
+pip install "transformers>=4.57.3" torch qwen-vl-utils
 ```
 
-### Basic Usage
+### Load Model
 
 ```python
 import torch
 from transformers import AutoModelForCausalLM, AutoProcessor
 
-model_path = "OpenGVLab/InternVideo3-8B-Instruct"
+model_path = "yanziang/InternVideo3-8B-Instruct"
 
 model = AutoModelForCausalLM.from_pretrained(
     model_path,
@@ -57,7 +56,7 @@ processor = AutoProcessor.from_pretrained(
 )
 ```
 
-### Text-only Conversation
+### Text Conversation
 
 ```python
 messages = [
@@ -67,11 +66,13 @@ messages = [
     }
 ]
 
-text = processor.apply_chat_template(
-    messages, tokenize=False, add_generation_prompt=True, enable_thinking=True
-)
-inputs = processor(text=text, images=None, videos=None, do_resize=False, return_tensors="pt")
-inputs = inputs.to(model.device)
+inputs = processor.apply_chat_template(
+    messages,
+    tokenize=True,
+    add_generation_prompt=True,
+    return_dict=True,
+    return_tensors="pt",
+).to(model.device)
 
 output = model.generate(**inputs, max_new_tokens=1024, use_cache=True)
 generated_ids = [o[len(i):] for i, o in zip(inputs.input_ids, output)]
@@ -82,25 +83,25 @@ print(processor.batch_decode(generated_ids, skip_special_tokens=True)[0])
 
 ```python
 video_path = "your_video.mp4"
-
-fps = 1
-min_pixels = 128 * 32 * 32
-max_pixels = 128 * 32 * 32
+fps = 4
+min_pixels = 128 * 2 * 32 * 32
+max_pixels = 256 * 2 * 32 * 32
 
 messages = [
     {
         "role": "user",
         "content": [
-            {"type": "video", "video": video_path, "fps": fps},
+            {
+                "type": "video",
+                "video": video_path,
+                "fps": fps,
+                "min_pixels": min_pixels,
+                "max_pixels": max_pixels,
+            },
             {"type": "text", "text": "Please describe this video in detail."},
         ],
     }
 ]
-
-processor.video_processor.size = {
-    "longest_edge": max_pixels * max_frames,
-    "shortest_edge": min_pixels * min_frames,
-}
 
 inputs = processor.apply_chat_template(
     messages,
@@ -109,8 +110,7 @@ inputs = processor.apply_chat_template(
     return_dict=True,
     fps=fps,
     return_tensors="pt",
-)
-inputs = inputs.to(model.device)
+).to(model.device)
 
 output = model.generate(**inputs, max_new_tokens=1024, use_cache=True)
 generated_ids = [o[len(i):] for i, o in zip(inputs.input_ids, output)]
@@ -130,33 +130,53 @@ messages = [
     }
 ]
 
-text = processor.apply_chat_template(
-    messages, tokenize=False, add_generation_prompt=True, enable_thinking=True
-)
-inputs = processor(text=text, images=images, videos=None, do_resize=False, return_tensors="pt")
-inputs = inputs.to(model.device)
+inputs = processor.apply_chat_template(
+    messages,
+    tokenize=True,
+    add_generation_prompt=True,
+    return_dict=True,
+    return_tensors="pt",
+).to(model.device)
 
 output = model.generate(**inputs, max_new_tokens=1024, use_cache=True)
 generated_ids = [o[len(i):] for i, o in zip(inputs.input_ids, output)]
 print(processor.batch_decode(generated_ids, skip_special_tokens=True)[0])
 ```
 
-## Training Pipeline
+## Training Recipe
 
-1. **Continued Pretraining (CPT):** Recovers language ability and aligns vision features after M²LA conversion, using a mixture of text, image-text pairs, and video captions.
-2. **Short-to-Long SFT:** Two-stage curriculum — Stage 1 at 2fps/512 frames (32K tokens), Stage 2 at 4fps/2048 frames (256K tokens).
-3. **R-GSPO:** Rule-based reinforcement learning on temporal grounding (IoU reward) and video QA (correctness reward) to improve temporal reasoning.
-4. **On-Policy Distillation:** Transfers capabilities from Qwen3-235B on samples where the student underperforms, using reverse-KL on student-sampled trajectories.
+InternVideo3 uses a staged recipe for long-horizon multimodal reasoning:
+
+1. **Continued pretraining (CPT):** 16M multimodal samples, about 13.5B tokens, to re-stabilize the M^2LA-converted backbone and recover language and multimodal capability.
+2. **Short-to-long SFT:** about 7.2M multimodal samples, including a curated long-video component with 379K videos, a mean duration of 15.8 minutes, and over 1M synthesized QA pairs.
+3. **Rule-based reinforcement learning:** verifiable temporal grounding and multiple-choice video QA data with IoU/correctness rewards.
+4. **On-policy distillation:** reasoning-heavy video QA and long-form description examples where a stronger teacher provides more complete or better-grounded behavior.
+
+The long-video supervision emphasizes perception and recognition, spatial-temporal understanding, event and action reasoning, and holistic semantics.
 
 ## Evaluation
 
-See the [InternVideo3_eval](InternVideo3_eval) directory for evaluation scripts and benchmarks.
+Evaluation scripts are provided in [InternVideo3_eval](InternVideo3_eval).
+
+The benchmark comparison below is generated from the paper tables using `scripts/gen_card.py`.
+
+![InternVideo3 benchmark comparison](assets/benchmark_comparison_card.png)
+
+InternVideo3 achieves strong open-weight performance across long-video understanding, short-video understanding, and spatiotemporal intelligence benchmarks. In the paper, it obtains the best open-weight results on representative long-horizon tasks including Video-MME, MLVU, VRBench, and EgoSchema, while also reaching the strongest short-video QA average among the listed open-weight models.
+
+## Inference Efficiency
+
+M^2LA improves long-context decoding efficiency by compressing cached KV states. In the paper's single-H200 evaluation, the M^2LA-converted model improves decode throughput by 1.84x at 32K prefill tokens, 4.12x at 128K, 4.77x at 256K, and 5.01x at 384K. The original Qwen3-VL backbone runs out of memory at 512K prefill tokens, while the M^2LA variant remains executable and completes a 16K-token decode.
+
+## Agentic Video Exploration
+
+Using MCR at inference time, InternVideo3 can perform iterative video exploration with segmentation, ASR, temporal grounding, search, summarization, and verification tools. Qualitative examples in the paper show event attribution, logical linkage across distant scenes, relational reasoning about battle equipment, and implicit emotion inference from narrative context.
 
 ## Citation
 
 ```bibtex
 @article{internvideo3,
-  title={InternVideo3: Multimodal Contextual Reasoning via Efficient Long-Horizon Agents},
+  title={InternVideo3: Agentify Foundation Models with Multimodal Contextual Reasoning},
   author={InternVideo Team},
   year={2025}
 }
