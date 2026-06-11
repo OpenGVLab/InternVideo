@@ -187,10 +187,14 @@ Using MCR at inference time, InternVideo3 can perform iterative video exploratio
 ## Citation
 
 ```bibtex
-@article{internvideo3,
-  title={InternVideo3: Agentify Foundation Models with Multimodal Contextual Reasoning},
-  author={InternVideo Team},
-  year={2025}
+@misc{yan2026internvideo3agentifyfoundationmodels,
+      title={InternVideo3: Agentify Foundation Models with Multimodal Contextual Reasoning}, 
+      author={Ziang Yan and Sheng Xia and Jiashuo Yu and Yue Wu and Tianxiang Jiang and Songze Li and Kanghui Tian and Yicheng Xu and Yinan He and Kai Chen and Limin Wang and Yu Qiao and Yi Wang},
+      year={2026},
+      eprint={2606.12195},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2606.12195}, 
 }
 ```
 
