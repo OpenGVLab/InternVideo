@@ -184,17 +184,16 @@ M^2LA improves long-context decoding efficiency by compressing cached KV states.
 
 Using MCR at inference time, InternVideo3 can perform iterative video exploration with segmentation, ASR, temporal grounding, search, summarization, and verification tools. Qualitative examples in the paper show event attribution, logical linkage across distant scenes, relational reasoning about battle equipment, and implicit emotion inference from narrative context.
 
+An initial video-agent implementation is available at [Vidify](https://github.com/shepnerd/vidify). Our evaluation version in the paper will be released soon.
+
 ## Citation
 
 ```bibtex
-@misc{yan2026internvideo3agentifyfoundationmodels,
-      title={InternVideo3: Agentify Foundation Models with Multimodal Contextual Reasoning}, 
-      author={Ziang Yan and Sheng Xia and Jiashuo Yu and Yue Wu and Tianxiang Jiang and Songze Li and Kanghui Tian and Yicheng Xu and Yinan He and Kai Chen and Limin Wang and Yu Qiao and Yi Wang},
-      year={2026},
-      eprint={2606.12195},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2606.12195}, 
+@article{yan2026internvideo3,
+  title={InternVideo3: Agentify Foundation Models with Multimodal Contextual Reasoning},
+  author={Yan, Ziang and Xia, Sheng and Yu, Jiashuo and Wu, Yue and Jiang, Tianxiang and Li, Songze and Tian, Kanghui and Xu, Yicheng and He, Yinan and Chen, Kai and others},
+  journal={arXiv preprint arXiv:2606.12195},
+  year={2026}
 }
 ```
 
