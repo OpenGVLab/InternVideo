@@ -68,11 +68,10 @@ class InternVideo3VisionPatchEmbed(nn.Module):
 
     def forward(self, hidden_states: torch.Tensor) -> torch.Tensor:
         target_dtype = self.proj.weight.dtype
-        hidden_states = hidden_states.view(
-            -1, self.in_channels, self.temporal_patch_size, self.patch_size, self.patch_size
-        )
-        hidden_states = self.proj(hidden_states.to(dtype=target_dtype)).view(-1, self.embed_dim)
-        return hidden_states
+        # Each input patch spans exactly one convolution kernel, so this is
+        # a linear projection. Keep Conv3d parameters for checkpoint compatibility.
+        patches = hidden_states.reshape(-1, self.proj.weight[0].numel()).to(dtype=target_dtype)
+        return F.linear(patches, self.proj.weight.flatten(1), self.proj.bias)
 
 
 class InternVideo3VisionRotaryEmbedding(nn.Module):
